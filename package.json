@@ -1,0 +1,62 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "rm -rf dist && tsdx build && tsc --emitDeclarationOnly",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "ts-patch install -s && yarn build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "generate:test": "rm -rf directory-test && npx create-next-app@latest directory-test --use-yarn --example 'https://github.com/vercel/next-learn/tree/master/basics/learn-starter'"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "@kanvas/core",
+  "author": "Rogelio Morey",
+  "module": "dist/kanvas-core.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/kanvas-core.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/kanvas-core.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^8.2.4",
+    "husky": "^8.0.3",
+    "size-limit": "^8.2.4",
+    "ts-patch": "^2.1.0",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.10",
+    "graphql": "^16.6.0",
+    "typescript-transform-paths": "^3.4.6"
+  }
+}
