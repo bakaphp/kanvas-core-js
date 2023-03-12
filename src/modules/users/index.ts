@@ -1,5 +1,5 @@
 import { ClientType } from '../../index';
-import { REGISTER_MUTATTION } from '../../mutations';
+import { REGISTER_MUTATTION, FORGOT_PASSWORD_MUTATION } from '../../mutations';
 import { UserInterface, CreateUserParams, CreatedUser } from '../../types';
 
 export class Users {
@@ -10,5 +10,11 @@ export class Users {
       mutation: REGISTER_MUTATTION, variables: { data: userData }
     });
     return response.data as CreatedUser;
+  }
+
+  public async forgotPassword(email: string): Promise<void> {
+    await this.client.mutate({
+      mutation: FORGOT_PASSWORD_MUTATION, variables: { data: email }
+    });
   }
 }

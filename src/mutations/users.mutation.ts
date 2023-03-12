@@ -18,3 +18,9 @@ export const REGISTER_MUTATTION = gql`
     }
   }
 `;
+
+export const FORGOT_PASSWORD_MUTATION = gql`
+  mutation forgotPassword($data: ForgotPasswordInput!){
+    forgotPassword(data: $data)
+  }
+`;
