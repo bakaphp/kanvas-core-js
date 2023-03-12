@@ -7,3 +7,7 @@ export interface AuthenticationInterface {
   time: string;
   timezone: string;
 }
+
+export interface LogoutInterface {
+  logout: boolean;
+}

@@ -1,6 +1,6 @@
 import { ClientType } from '../../index';
-import { LOGIN_MUTATION } from '../../mutations'
-import { AuthenticationInterface } from '../../types'
+import { LOGIN_MUTATION, LOGOUT_MUTATION } from '../../mutations';
+import { AuthenticationInterface, LogoutInterface } from '../../types';
 
 export class Auth {
   constructor(protected client: ClientType) {}
@@ -11,5 +11,12 @@ export class Auth {
       mutation: LOGIN_MUTATION, variables: { data }
     });
     return response.data.login as AuthenticationInterface;
+  }
+
+  public async logout(): Promise<LogoutInterface> {
+    const response = await this.client.mutate({
+      mutation: LOGOUT_MUTATION
+    });
+    return response.data as LogoutInterface;
   }
 }
