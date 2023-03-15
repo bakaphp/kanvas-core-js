@@ -1,7 +1,8 @@
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, RequestHandler, NormalizedCacheObject } from "@apollo/client/core";
 import { setContext } from '@apollo/client/link/context';
-
 import { Auth, Users } from './modules';
+
+export * from './types';
 
 type Middleware = ApolloLink | RequestHandler;
 export type ClientType = ApolloClient<NormalizedCacheObject>;
@@ -27,7 +28,6 @@ export function genericAuthMiddleware(fn: () => Promise<string | null | undefine
 
 export default class KanvasCore {
   public client: ClientType;
-
   public auth: Auth;
   public users: Users;
   
