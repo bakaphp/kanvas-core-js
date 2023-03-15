@@ -71,9 +71,13 @@ export interface UserInterface {
   // social_links: SocialLinkInterface[];
 }
 
-export interface CreateUserParams extends Pick<UserInterface, 'email'> {
+export interface CreateUserParams {
+  email: string;
+  firstname: string;
+  lastname: string;
+  displayname: string;
   password: string;
-  verify_password: string;
+  password_confirmation: string;
 }
 
 export interface CreatedUser {

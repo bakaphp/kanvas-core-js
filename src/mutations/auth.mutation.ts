@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from "@apollo/client/core";
 
 export const LOGIN_MUTATION = gql`
   mutation login($data: LoginInput!) {
