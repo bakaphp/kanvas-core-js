@@ -1,6 +1,6 @@
 import { ClientType } from '../../index';
-import { SET_CUSTOM_FIELD, GET_CUSTOM_FIELD, DELETE_CUSTOM_FIELD } from '../../mutations';
-import { CustomFieldParams, CreatedCustomField, FetchedCustomField, DeletedCustomField } from '../../types';
+import { SET_CUSTOM_FIELD, GET_CUSTOM_FIELD, GET_ALL_CUSTOM_FIELDS, DELETE_CUSTOM_FIELD } from '../../mutations';
+import { CustomFieldParams, CreatedCustomField, FetchedCustomField, FetchedAllCustomFields, DeletedCustomField } from '../../types';
 
 export class CustomFields {
   constructor(protected client: ClientType) {}
@@ -17,6 +17,13 @@ export class CustomFields {
       mutation: GET_CUSTOM_FIELD, variables: { input: data }
     });
     return response.data as FetchedCustomField;
+  }
+
+  public async getAllCustomFields(data: CustomFieldParams): Promise<FetchedAllCustomFields> {
+    const response = await this.client.mutate({
+      mutation: GET_ALL_CUSTOM_FIELDS, variables: { input: data }
+    });
+    return response.data as FetchedAllCustomFields;
   }
 
   public async deleteCustomField(data: CustomFieldParams): Promise<DeletedCustomField> {

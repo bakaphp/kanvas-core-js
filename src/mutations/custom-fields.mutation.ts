@@ -12,6 +12,12 @@ export const GET_CUSTOM_FIELD = gql`
   }
 `;
 
+export const GET_ALL_CUSTOM_FIELDS = gql`
+  mutation getAllCustomField($input: CustomFieldInput!) {
+    getAllCustomField(input: $input)   
+  }
+`;
+
 export const DELETE_CUSTOM_FIELD = gql`
   mutation deleteCustomField($input: CustomFieldInput!) {
     deleteCustomField(input: $input)   

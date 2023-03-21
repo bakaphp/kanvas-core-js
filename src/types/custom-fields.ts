@@ -13,6 +13,10 @@ export interface FetchedCustomField {
   getCustomField: any;
 }
 
+export interface FetchedAllCustomFields {
+  getAllCustomField: any;
+}
+
 export interface DeletedCustomField {
   deleteCustomField: boolean;
 }
