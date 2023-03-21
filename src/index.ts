@@ -1,6 +1,6 @@
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, RequestHandler, NormalizedCacheObject } from "@apollo/client/core";
 import { setContext } from '@apollo/client/link/context';
-import { Auth, Users } from './modules';
+import { Auth, Users, CustomFields } from './modules';
 
 export * from './types';
 
@@ -30,6 +30,7 @@ export default class KanvasCore {
   public client: ClientType;
   public auth: Auth;
   public users: Users;
+  public customFields: CustomFields;
   
   constructor(protected options: Options) {
     this.client = new ApolloClient({
@@ -39,6 +40,7 @@ export default class KanvasCore {
 
     this.auth = new Auth(this.client);
     this.users = new Users(this.client);
+    this.customFields = new CustomFields(this.client);
   }
 
   protected generateURL() {
