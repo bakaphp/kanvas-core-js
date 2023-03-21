@@ -4,6 +4,7 @@ export const LOGIN_MUTATION = gql`
   mutation login($data: LoginInput!) {
     login(data: $data) {
       id
+      uuid
       token
       refresh_token
       token_expires
