@@ -5,7 +5,8 @@ export const REGISTER_MUTATTION = gql`
     register(data: $data) {
       user{
         id,
-        displayname
+        displayname,
+        uuid
       }
       token{
         token
