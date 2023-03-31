@@ -14,7 +14,7 @@ export class Users {
 
   public async forgotPassword(email: string): Promise<void> {
     await this.client.mutate({
-      mutation: FORGOT_PASSWORD_MUTATION, variables: { data: email }
+      mutation: FORGOT_PASSWORD_MUTATION, variables: { data: { email } }
     });
   }
 }
