@@ -1,7 +1,7 @@
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, RequestHandler, NormalizedCacheObject } from "@apollo/client/core";
+import { App, Auth, Users, CustomFields } from './modules';
 import { setContext } from '@apollo/client/link/context';
 import Settings from "modules/settings";
-import { Auth, Users, CustomFields } from './modules';
 
 export * from './types';
 export * from './queries';
@@ -15,6 +15,7 @@ interface Options {
   url: string;
   key: string;
   middlewares?: Middleware[];
+  adminKey?: string;
 }
 
 export function genericAuthMiddleware(fn: () => Promise<string | null | undefined>) {
@@ -35,14 +36,16 @@ export default class KanvasCore {
   public auth: Auth;
   public users: Users;
   public customFields: CustomFields;
+  public app: App;
   public settings: Settings;
-  
+
   constructor(protected options: Options) {
     this.client = new ApolloClient({
       link: this.generateLink(),
       cache: new InMemoryCache(),
     });
 
+    this.app = new App(this.client, options.adminKey);
     this.auth = new Auth(this.client);
     this.users = new Users(this.client);
     this.customFields = new CustomFields(this.client);
@@ -58,6 +61,7 @@ export default class KanvasCore {
       const headers = {
         ...context.headers,
         'X-Kanvas-App': this.options.key,
+        ...(this.options.adminKey && { 'X-Kanvas-Key': this.options.adminKey }),
       }
       return { headers }
     })
