@@ -38,14 +38,14 @@ export default class KanvasCore {
   public customFields: CustomFields;
   public app: App;
   public settings: Settings;
-  
+
   constructor(protected options: Options) {
     this.client = new ApolloClient({
       link: this.generateLink(),
       cache: new InMemoryCache(),
     });
 
-    this.app = new App(this.client);
+    this.app = new App(this.client, options.adminKey);
     this.auth = new Auth(this.client);
     this.users = new Users(this.client);
     this.customFields = new CustomFields(this.client);
@@ -61,9 +61,7 @@ export default class KanvasCore {
       const headers = {
         ...context.headers,
         'X-Kanvas-App': this.options.key,
-      }
-      if (this.options.adminKey) {
-        headers['X-Kanvas-Key'] = this.options.adminKey;
+        ...(this.options.adminKey && { 'X-Kanvas-Key': this.options.adminKey }),
       }
       return { headers }
     })
