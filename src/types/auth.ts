@@ -11,3 +11,7 @@ export interface AuthenticationInterface {
 export interface LogoutInterface {
   logout: boolean;
 }
+
+export interface RefreshTokenInterface {
+  token: string;
+}

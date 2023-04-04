@@ -20,3 +20,11 @@ export const LOGOUT_MUTATION = gql`
     logout
   }
 `;
+
+export const REFRESH_TOKEN_MUTATION = gql`
+  mutation refreshToken($refresh_token: String!) {
+    refreshToken(refresh_token: $refresh_token) {
+      token
+    }
+  }
+`;

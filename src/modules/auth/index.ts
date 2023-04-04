@@ -1,6 +1,6 @@
 import { ClientType } from '../../index';
-import { LOGIN_MUTATION, LOGOUT_MUTATION } from '../../mutations';
-import { AuthenticationInterface, LogoutInterface } from '../../types';
+import { LOGIN_MUTATION, LOGOUT_MUTATION, REFRESH_TOKEN_MUTATION } from '../../mutations';
+import { AuthenticationInterface, LogoutInterface, RefreshTokenInterface } from '../../types';
 
 export class Auth {
   constructor(protected client: ClientType) {}
@@ -18,5 +18,15 @@ export class Auth {
       mutation: LOGOUT_MUTATION
     });
     return response.data as LogoutInterface;
+  }
+
+  public async refreshToken(token: string): Promise<RefreshTokenInterface> {
+    const response = await this.client.mutate({
+      mutation: REFRESH_TOKEN_MUTATION,
+      variables: {
+        refresh_token: token,
+      },
+    });
+    return response.data;
   }
 }
