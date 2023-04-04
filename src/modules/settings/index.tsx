@@ -1,4 +1,4 @@
-import { AppSettingsQuery, CompanySettingsQuery } from "queries";
+import { AppSettingsQuery, CompanySettingsQuery } from "../../queries";
 import { AppSettingsResponse, ClientType, CompanySettingsResponse, SettingsResponse } from "../../index";
 
 export default class Settings {
