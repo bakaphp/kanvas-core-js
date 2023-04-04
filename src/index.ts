@@ -1,7 +1,7 @@
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, RequestHandler, NormalizedCacheObject } from "@apollo/client/core";
 import { App, Auth, Users, CustomFields } from './modules';
 import { setContext } from '@apollo/client/link/context';
-import Settings from "modules/settings";
+import Settings from "./modules/settings";
 
 export * from './types';
 export * from './queries';
