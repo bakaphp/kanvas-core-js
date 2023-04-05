@@ -32,6 +32,7 @@ export function genericAuthMiddleware(fn: () => Promise<string | null | undefine
 }
 
 export default class KanvasCore {
+  public adminClient: ClientType;
   public client: ClientType;
   public auth: Auth;
   public users: Users;
@@ -40,12 +41,16 @@ export default class KanvasCore {
   public settings: Settings;
 
   constructor(protected options: Options) {
+    this.adminClient = new ApolloClient({
+      link: this.generateAdminMiddleware().concat(this.generateLink()),
+      cache: new InMemoryCache(),
+    });
     this.client = new ApolloClient({
       link: this.generateLink(),
       cache: new InMemoryCache(),
     });
 
-    this.app = new App(this.client, options.adminKey);
+    this.app = new App(this.adminClient, options.adminKey);
     this.auth = new Auth(this.client);
     this.users = new Users(this.client);
     this.customFields = new CustomFields(this.client);
@@ -56,12 +61,20 @@ export default class KanvasCore {
     return new HttpLink({ uri: this.options.url });
   }
 
+  protected generateAdminMiddleware() {
+    return setContext(() => {
+      const headers = {
+        'X-Kanvas-Key': this.options.adminKey,
+      }
+      return { headers }
+    })
+  }
+
   protected generateMiddleware() {
     return setContext(async (_, context) => {
       const headers = {
         ...context.headers,
         'X-Kanvas-App': this.options.key,
-        ...(this.options.adminKey && { 'X-Kanvas-Key': this.options.adminKey }),
       }
       return { headers }
     })
