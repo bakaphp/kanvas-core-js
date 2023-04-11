@@ -45,7 +45,7 @@ export default class KanvasCore {
       cache: new InMemoryCache(),
     });
 
-    this.app = new App(this.client, options.adminKey);
+    this.app = new App(this.client);
     this.auth = new Auth(this.client);
     this.users = new Users(this.client);
     this.customFields = new CustomFields(this.client);
