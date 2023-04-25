@@ -9,7 +9,7 @@ export class Locations {
     const response = await this.client.query({
       query: COUNTRIES_QUERY,
     });
-    return response.data as CountriesResponse;
+    return response.data;
   }
 
   public async getStatesByCountry(id: number): Promise<StateResponse> {
@@ -24,6 +24,6 @@ export class Locations {
         },
       },
     });
-    return response.data.countries as StateResponse;
+    return response.data.countries;
   }
 }
