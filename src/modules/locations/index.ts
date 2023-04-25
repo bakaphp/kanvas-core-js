@@ -1,3 +1,4 @@
+import { countriesResponse, stateResponse } from 'types/locations';
 import { ClientType } from '../../index';
 import { COUNTRIES_QUERY, GET_STATES_BY_COUNTRY_QUERY } from '../../queries';
 
@@ -8,7 +9,7 @@ export class Locations {
     const response = await this.client.query({
       query: COUNTRIES_QUERY,
     });
-    return response.data.countries;
+    return response.data.countries as countriesResponse;
   }
 
   public async getStatesByCountry(id: number) {
@@ -23,6 +24,6 @@ export class Locations {
         },
       },
     });
-    return response.data.countries.data;
+    return response.data.countries as stateResponse;
   }
 }
