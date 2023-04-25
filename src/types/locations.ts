@@ -1,6 +1,7 @@
 interface Location {
   id: number;
   name: string;
+  code: string;
 }
 
 interface Country extends Location {
@@ -11,14 +12,15 @@ interface State extends Location {
   cities: Array<City>;
 }
 
-interface City extends Location {
+interface City extends Omit<Location, 'code'> {
   country_id: number;
 }
 
-export interface countriesResponse {
+export interface CountriesResponse {
   data: Array<Country>;
+  paginatorInfo: Record<string, number>;
 }
 
-export interface stateResponse {
+export interface StateResponse {
   data: Array<State>;
 }

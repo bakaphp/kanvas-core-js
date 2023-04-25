@@ -6,6 +6,7 @@ export const COUNTRIES_QUERY = gql`
       data {
         id
         name
+        code
       }
       paginatorInfo {
         currentPage
@@ -29,7 +30,7 @@ export const GET_STATES_BY_COUNTRY_QUERY = gql`
           code
           cities {
             name
-            latitude
+            countries_id
           }
         }
       }
