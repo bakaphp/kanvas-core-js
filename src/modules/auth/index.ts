@@ -1,10 +1,8 @@
-import { ClientType } from '../../index';
+import { Base } from 'modules/base';
 import { LOGIN_MUTATION, LOGOUT_MUTATION, REFRESH_TOKEN_MUTATION } from '../../mutations';
 import { AuthenticationInterface, LogoutInterface, RefreshTokenInterface } from '../../types';
 
-export class Auth {
-  constructor(protected client: ClientType) {}
-
+export class Auth extends Base {
   public async login(email: string, password: string): Promise<AuthenticationInterface> {
     const data = { email, password };
     const response = await this.client.mutate({

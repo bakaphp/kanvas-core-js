@@ -1,12 +1,10 @@
 import { StateResponse, CountriesResponse } from 'types/locations';
-import { ClientType } from '../../index';
 import { COUNTRIES_QUERY, GET_STATES_BY_COUNTRY_QUERY } from '../../queries';
+import { Base } from 'modules/base';
 
-export class Locations {
-  constructor(protected client: ClientType) {}
-
+export class Locations extends Base {
   public async getAllCountries(): Promise<CountriesResponse> {
-    const response = await this.client.query({
+    const response = await this.client.query<CountriesResponse>({
       query: COUNTRIES_QUERY,
     });
     return response.data;

@@ -1,10 +1,8 @@
-import { ClientType } from '../../index';
+import { Base } from 'modules/base';
 import { REGISTER_MUTATTION, FORGOT_PASSWORD_MUTATION } from '../../mutations';
 import { UserInterface, CreateUserParams, CreatedUser } from '../../types';
 
-export class Users {
-  constructor(protected client: ClientType) {}
-
+export class Users extends Base {
   public async register(userData: UserInterface | CreateUserParams): Promise<CreatedUser> {
     const response = await this.client.mutate({
       mutation: REGISTER_MUTATTION, variables: { data: userData }

@@ -1,10 +1,8 @@
-import { ClientType } from '../../index';
+import { Base } from 'modules/base';
 import { SET_CUSTOM_FIELD, GET_CUSTOM_FIELD, GET_ALL_CUSTOM_FIELDS, DELETE_CUSTOM_FIELD } from '../../mutations';
 import { CustomFieldParams, CreatedCustomField, FetchedCustomField, FetchedAllCustomFields, DeletedCustomField } from '../../types';
 
-export class CustomFields {
-  constructor(protected client: ClientType) {}
-
+export class CustomFields extends Base {
   public async setCustomField(data: CustomFieldParams): Promise<CreatedCustomField> {
     const response = await this.client.mutate({
       mutation: SET_CUSTOM_FIELD, variables: { input: data }

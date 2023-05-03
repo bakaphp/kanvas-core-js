@@ -2,10 +2,9 @@ import type { AppUserInterface, AppUpdatePasswordInterface } from '../../types';
 import { USER_UPDATE_PASSWORD_MUTATION } from '../../mutations';
 import { APP_USERS_QUERY } from '../../queries';
 import type { ClientType } from '../../index';
+import { Base } from 'modules/base';
 
-class Users {
-  constructor(protected client: ClientType) {}
-
+class Users extends Base {
   /**
    * Update user password as admin
    * @param uuid user uuid
@@ -51,10 +50,11 @@ class Users {
   }
 }
 
-export class App {
+export class App extends Base {
   public users: Users;
 
   constructor(protected client: ClientType) {
+    super(client);
     this.users = new Users(this.client);
   }
 }

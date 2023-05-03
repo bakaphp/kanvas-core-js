@@ -1,8 +1,11 @@
 import { AppSettingsQuery, CompanySettingsQuery } from "../../queries";
 import { AppSettingsResponse, ClientType, CompanySettingsResponse, SettingsResponse } from "../../index";
+import { Base } from "modules/base";
 
-export default class Settings {
-  constructor(protected client: ClientType, protected key: string) {}
+export default class Settings extends Base {
+  constructor(client: ClientType, protected key: string) {
+    super(client);
+  }
 
   async getAppSettings(): Promise<SettingsResponse | undefined> {
     try {
