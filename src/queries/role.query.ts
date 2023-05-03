@@ -9,3 +9,9 @@ export const roleQuery = gql`
     }
   } 
 `;
+
+export const hasRoleQuery = gql`
+  query($userId: Int! $role: String!){
+    hasRole(userId: $userId, role: $role)
+  }
+`;

@@ -12,7 +12,7 @@ interface Options {
   remove: DocumentNode;
 }
 
-export class BaseCrud<TBase, TMutate, TDelete> extends Base {
+export class BaseCrud<TBase, TCreate, TDelete> extends Base {
   constructor(protected client: ClientType, protected options: Options) {
     super(client);
   }
@@ -26,7 +26,7 @@ export class BaseCrud<TBase, TMutate, TDelete> extends Base {
     return response.data;
   }
 
-  async create(data: Omit<TMutate, 'id'>): Promise<TBase> {
+  async create(data: Omit<TCreate, 'id'>): Promise<TBase> {
     const response = await this.client.mutate<TBase>({
       mutation: this.options.create,
       variables: { ...data },
@@ -35,7 +35,7 @@ export class BaseCrud<TBase, TMutate, TDelete> extends Base {
     return response.data!;
   }
 
-  async update(data: TMutate): Promise<TBase> {
+  async update(data: TBase): Promise<TBase> {
     const response = await this.client.mutate<TBase>({
       mutation: this.options.create,
       variables: { ...data as any },
