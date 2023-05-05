@@ -4,7 +4,7 @@ export interface RoleInterface {
   title: string;
 }
 
-export interface AssignRoleInterface {
+export interface UserRoleInterface {
   userId: number;
   role: string;
 }

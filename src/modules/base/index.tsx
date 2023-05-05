@@ -5,49 +5,36 @@ export abstract class Base {
   constructor(protected client: ClientType) {}
 }
 
-interface Options {
-  get: DocumentNode;
-  create: DocumentNode;
-  update: DocumentNode;
-  remove: DocumentNode;
-}
-
-export class BaseCrud<TBase, TCreate, TDelete> extends Base {
-  constructor(protected client: ClientType, protected options: Options) {
+export class ComposableCrud extends Base {
+  constructor(protected client: ClientType) {
     super(client);
   }
 
-  async all(): Promise<TBase[]> {
-    const response = await this.client.query<TBase[]>({
-      query: this.options.get,
+  async all<TResponse>(query: DocumentNode): Promise<TResponse[]> {
+    const response = await this.client.query<TResponse[]>({
+      query: query,
       fetchPolicy: 'no-cache',
     });
 
     return response.data;
   }
 
-  async create(data: Omit<TCreate, 'id'>): Promise<TBase> {
-    const response = await this.client.mutate<TBase>({
-      mutation: this.options.create,
-      variables: { ...data },
+  async update<TData>(variables: TData, mutation: DocumentNode): Promise<TData> {
+    const response = await this.client.mutate<TData>({
+      mutation,
+      variables: variables as any,
     });
 
     return response.data!;
   }
 
-  async update(data: TBase): Promise<TBase> {
-    const response = await this.client.mutate<TBase>({
-      mutation: this.options.create,
-      variables: { ...data as any },
+  async handle<TResponse, TData>(variables: TData, mutation: DocumentNode): Promise<TResponse> {
+    const response = await this.client.mutate<TResponse>({
+      mutation,
+      variables: variables as any,
     });
 
     return response.data!;
   }
-
-  async remove(data: TDelete) {
-    await this.client.mutate({
-      mutation: this.options.remove,
-      variables: { ...data as any }
-    })
-  }
+  
 }

@@ -1,6 +1,6 @@
 import { AppSettingsQuery, CompanySettingsQuery } from "../../queries";
 import { AppSettingsResponse, ClientType, CompanySettingsResponse, SettingsResponse } from "../../index";
-import { Base } from "modules/base";
+import { Base } from '../base';
 
 export default class Settings extends Base {
   constructor(client: ClientType, protected key: string) {

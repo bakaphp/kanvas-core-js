@@ -1,4 +1,4 @@
-import { Base } from 'modules/base';
+import { Base } from '../base';
 import { SET_CUSTOM_FIELD, GET_CUSTOM_FIELD, GET_ALL_CUSTOM_FIELDS, DELETE_CUSTOM_FIELD } from '../../mutations';
 import { CustomFieldParams, CreatedCustomField, FetchedCustomField, FetchedAllCustomFields, DeletedCustomField } from '../../types';
 

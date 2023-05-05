@@ -1,4 +1,4 @@
-import { Base } from 'modules/base';
+import { Base } from '../base';
 import { REGISTER_MUTATTION, FORGOT_PASSWORD_MUTATION } from '../../mutations';
 import { UserInterface, CreateUserParams, CreatedUser } from '../../types';
 

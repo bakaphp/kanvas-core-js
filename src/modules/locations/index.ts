@@ -1,6 +1,6 @@
 import { StateResponse, CountriesResponse } from 'types/locations';
 import { COUNTRIES_QUERY, GET_STATES_BY_COUNTRY_QUERY } from '../../queries';
-import { Base } from 'modules/base';
+import { Base } from '../base';
 
 export class Locations extends Base {
   public async getAllCountries(): Promise<CountriesResponse> {

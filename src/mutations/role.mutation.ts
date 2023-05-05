@@ -20,9 +20,9 @@ export const updateRoleMutation = gql`
   }
 `;
 
-export const removeRoleMutation = gql`
-  mutation($id: Int!, $name: String!, $title: String!) {
-    removeRole(id: $id, name: $name, title: $title)
+export const removeUserRolMutation = gql`
+  mutation($userId: Int!, $name: String!) {
+    removeRole(userId: $userId, name: $name)
   }
 `;
 

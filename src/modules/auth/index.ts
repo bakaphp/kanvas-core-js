@@ -1,4 +1,4 @@
-import { Base } from 'modules/base';
+import { Base } from '../base';
 import { LOGIN_MUTATION, LOGOUT_MUTATION, REFRESH_TOKEN_MUTATION } from '../../mutations';
 import { AuthenticationInterface, LogoutInterface, RefreshTokenInterface } from '../../types';
 

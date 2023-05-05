@@ -2,7 +2,7 @@ import type { AppUserInterface, AppUpdatePasswordInterface } from '../../types';
 import { USER_UPDATE_PASSWORD_MUTATION } from '../../mutations';
 import { APP_USERS_QUERY } from '../../queries';
 import type { ClientType } from '../../index';
-import { Base } from 'modules/base';
+import { Base } from '../base';
 
 class Users extends Base {
   /**

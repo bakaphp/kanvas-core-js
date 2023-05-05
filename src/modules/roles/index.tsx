@@ -1,34 +1,60 @@
+import { Base, ComposableCrud } from '../base';
 import { ClientType } from '../../index';
-import { BaseCrud } from "modules/base";
-import { createRoleMutation, removeRoleMutation, updateRoleMutation, assignRoleMutation } from "mutations";
-import { hasRoleQuery, roleQuery } from "queries";
-import { AssignRoleInterface, RoleInterface } from "types";
+import { removeUserRolMutation, assignRoleMutation, createRoleMutation } from "../../mutations";
+import { hasRoleQuery, roleQuery } from "../../queries";
+import { RoleInterface, UserRoleInterface } from "../../types";
 
 type CreateRole = Omit<RoleInterface, 'id'>;
-type DeleteRole = Omit<RoleInterface, 'title'>;
-export class Roles extends BaseCrud<RoleInterface, CreateRole, DeleteRole> {
+
+export class Roles extends Base {
+  private crud: ComposableCrud;
+  
   constructor(protected client: ClientType) {
-    super(client, {
-      get: roleQuery,
-      create: createRoleMutation,
-      update: updateRoleMutation,
-      remove: removeRoleMutation,
-    })
+    super(client);
+    this.crud = new ComposableCrud(client);
   }
 
-  async assignRole(data: AssignRoleInterface): Promise<boolean> {
+  async all(): Promise<RoleInterface[]> {
+    const response = await this.crud.all<RoleInterface>(roleQuery);
+    return response;
+  }
+
+  async create(variables: CreateRole): Promise<RoleInterface> {
+    const response = await this.crud.handle<RoleInterface, CreateRole>(
+      variables, createRoleMutation,
+    );
+    return response;
+  }
+
+  async update(variables: RoleInterface): Promise<RoleInterface> {
+    const response = await this.crud.update<RoleInterface>(
+      variables, createRoleMutation,
+    );
+    return response;
+  }
+  
+  async removeUserRole(variables: UserRoleInterface): Promise<boolean>{
+    const response = await this.client.mutate<{ removeRole: boolean }>({
+      variables,
+      mutation: removeUserRolMutation,
+    });
+
+    return response.data!.removeRole;
+  }
+
+  async assignRole(variables: UserRoleInterface): Promise<boolean> {
     const response = await this.client.mutate<{ assignRoleToUser: boolean }>({
+      variables,
       mutation: assignRoleMutation,
-      variables: { ...data },
     });
 
     return response.data!.assignRoleToUser;
   }
 
-  async hasRole(data: AssignRoleInterface): Promise<boolean> {
+  async hasRole(variables: UserRoleInterface): Promise<boolean> {
     const response = await this.client.query<{ hasRole: boolean }>({
+      variables,
       query: hasRoleQuery,
-      variables: { ...data },
     });
 
     return response.data.hasRole;
