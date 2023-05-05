@@ -45,22 +45,7 @@ export function useAuth() {
 export default function Home() {
   useAuth();
 
-  const addRole = async () => {
-    await core.roles.remove({
-      id: 5,
-      name: "NewRole2"
-    });
-
-    core.roles.all()
-      .then(roles => console.log(roles))
-  };
-
-  useEffect(() => {
-    core.roles.all()
-      .then(roles => console.log(roles))
-  }, []);
-
   return (
-    <h1 onClick={addRole}>Hola</h1>
+    <h1>Hola</h1>
   );
 }
