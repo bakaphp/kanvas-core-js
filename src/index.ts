@@ -31,6 +31,7 @@ export function genericAuthMiddleware(fn: () => Promise<string | null | undefine
   })
 }
 
+// TODO: the admin feature should be refactor from the core 
 export default class KanvasCore {
   public client: ClientType;
   public auth: Auth;

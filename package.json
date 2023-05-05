@@ -17,8 +17,7 @@
     "lint": "tsdx lint",
     "prepare": "ts-patch install -s && yarn build",
     "size": "size-limit",
-    "analyze": "size-limit --why",
-    "generate:test": "rm -rf directory-test && npx create-next-app@latest directory-test --use-yarn --example 'https://github.com/vercel/next-learn/tree/master/basics/learn-starter'"
+    "analyze": "size-limit --why"
   },
   "husky": {
     "hooks": {
