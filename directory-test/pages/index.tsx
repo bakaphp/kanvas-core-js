@@ -27,7 +27,7 @@ export function useAuth() {
     if (!!current) return;
 
     const response = await core.auth.login(
-      'develeads@salesassist.io',
+      'demo@dealerappcenter.com',
       'nosenose'
     );
 
@@ -44,6 +44,15 @@ export function useAuth() {
 
 export default function Home() {
   useAuth();
+
+  useEffect(() => {
+    core.companies.all({ 
+      first: 10,
+      page: 1, 
+      where: { column: 'ID', operator: 'EQ', value: '104' } 
+    })
+    .then((value) => console.log(value))
+  }, []);
 
   return (
     <h1>Hola</h1>

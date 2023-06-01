@@ -5,3 +5,4 @@ export * from './custom-fields';
 export * from './locations';
 export * from './roles';
 export * from './permissions';
+export * from './companies';
