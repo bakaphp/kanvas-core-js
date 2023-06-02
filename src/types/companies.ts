@@ -1,3 +1,5 @@
+import { BaseInterface } from "./base";
+
 export interface CreateCompanyInterface {
   name: string;
   website: string;
@@ -7,12 +9,17 @@ export interface CreateCompanyInterface {
   language: string;
 }
 
-export interface CompanyInterface extends CreateCompanyInterface {
-  id: number;
+export interface CompanyInterface extends CreateCompanyInterface, BaseInterface {
   timezone: string;
   phone: string;
   country_code: string;
-  created_at: string;
-  updated_at: string;
 }
 
+export interface CompanyBranchInterface extends BaseInterface {
+  name: string;
+  companies_id: number;
+  email: string;
+  phone: string;
+  is_default: boolean;
+  zipcode: string;
+}

@@ -18,3 +18,9 @@ export interface Query {
 export interface QueryWithPagination extends Query {
   page?: number;
 }
+
+export interface BaseInterface {
+  id: number;
+  created_at: string;
+  updated_at: string;
+}

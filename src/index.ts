@@ -1,5 +1,5 @@
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, RequestHandler, NormalizedCacheObject } from "@apollo/client/core";
-import { App, Auth, Users, CustomFields, Locations, Roles, Permisions, Companies } from './modules';
+import { App, Auth, Users, CustomFields, Locations, Roles, Permisions, Companies, CompanyBranches } from './modules';
 import { setContext } from '@apollo/client/link/context';
 import Settings from "./modules/settings";
 
@@ -43,6 +43,7 @@ export default class KanvasCore {
   public roles: Roles;
   public permisions: Permisions; 
   public companies: Companies;
+  public companyBranches: CompanyBranches;
   
   constructor(protected options: Options) {
     this.client = new ApolloClient({
@@ -59,6 +60,7 @@ export default class KanvasCore {
     this.roles = new Roles(this.client);
     this.permisions = new Permisions(this.client);
     this.companies = new Companies(this.client);
+    this.companyBranches = new CompanyBranches(this.client);
   }
 
   protected generateURL() {
