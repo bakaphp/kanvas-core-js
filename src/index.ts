@@ -1,5 +1,5 @@
 import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, RequestHandler, NormalizedCacheObject } from "@apollo/client/core";
-import { App, Auth, Users, CustomFields, Locations } from './modules';
+import { App, Auth, Users, CustomFields, Locations, Roles, Permisions, Companies, CompanyBranches } from './modules';
 import { setContext } from '@apollo/client/link/context';
 import Settings from "./modules/settings";
 
@@ -31,6 +31,7 @@ export function genericAuthMiddleware(fn: () => Promise<string | null | undefine
   })
 }
 
+// TODO: the admin feature should be refactor from the core 
 export default class KanvasCore {
   public client: ClientType;
   public auth: Auth;
@@ -39,7 +40,11 @@ export default class KanvasCore {
   public app: App;
   public settings: Settings;
   public locations: Locations;
-
+  public roles: Roles;
+  public permisions: Permisions; 
+  public companies: Companies;
+  public companyBranches: CompanyBranches;
+  
   constructor(protected options: Options) {
     this.client = new ApolloClient({
       link: this.generateLink(),
@@ -51,7 +56,11 @@ export default class KanvasCore {
     this.users = new Users(this.client);
     this.customFields = new CustomFields(this.client);
     this.settings = new Settings(this.client, this.options.key);
-    this.locations = new Locations(this.client)
+    this.locations = new Locations(this.client);
+    this.roles = new Roles(this.client);
+    this.permisions = new Permisions(this.client);
+    this.companies = new Companies(this.client);
+    this.companyBranches = new CompanyBranches(this.client);
   }
 
   protected generateURL() {

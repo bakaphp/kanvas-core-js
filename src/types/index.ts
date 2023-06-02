@@ -3,3 +3,8 @@ export * from './auth';
 export * from './users';
 export * from './custom-fields';
 export * from './settings';
+export * from './role';
+export * from './permissions';
+export * from './pagination';
+export * from './companies';
+export * from './base';

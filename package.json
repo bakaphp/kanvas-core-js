@@ -1,5 +1,5 @@
 {
-  "version": "0.0.10",
+  "version": "0.0.13",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -12,13 +12,12 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "rm -rf dist && tsdx build",
+    "build": "rm -rf dist && ts-patch install -s && tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
     "prepare": "ts-patch install -s && yarn build",
     "size": "size-limit",
-    "analyze": "size-limit --why",
-    "generate:test": "rm -rf directory-test && npx create-next-app@latest directory-test --use-yarn --example 'https://github.com/vercel/next-learn/tree/master/basics/learn-starter'"
+    "analyze": "size-limit --why"
   },
   "husky": {
     "hooks": {

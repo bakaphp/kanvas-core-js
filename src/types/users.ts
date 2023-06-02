@@ -35,10 +35,10 @@ export interface UserInterface {
   profile_image: string;
   profile_image_mobile: string;
   profile_image_thumb: string;
-  profile_privacy: 0;
+  profile_privacy: number;
   profile_remote_image: string;
   registered: string;
-  roles_id: 8;
+  roles_id: number;
   session_id: string;
   session_key: string;
   session_page: number;
