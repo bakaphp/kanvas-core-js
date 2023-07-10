@@ -17,5 +17,5 @@ export interface RefreshTokenInterface {
 }
 
 export interface ResetPasswordInterface {
-  reset_password: boolean;
+  resetPassword: boolean;
 }
