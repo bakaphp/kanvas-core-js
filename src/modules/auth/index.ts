@@ -29,4 +29,21 @@ export class Auth {
     });
     return response.data;
   }
+
+  public async resetPassword(
+    hash_key: string,
+    new_password: string,
+    verify_password: string
+  ): Promise<ResetPasswordInterface> {
+    const response = await this.client.mutate({
+      mutation: RESET_PASSWORD_MUTATION,
+      variables: {
+        hash_key,
+        new_password,
+        verify_password,
+      },
+    });
+
+    return response.data as ResetPasswordInterface;
+  }
 }

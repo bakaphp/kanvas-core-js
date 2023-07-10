@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client/core";
+import { gql } from '@apollo/client/core';
 
 export const LOGIN_MUTATION = gql`
   mutation login($data: LoginInput!) {
@@ -25,6 +25,16 @@ export const REFRESH_TOKEN_MUTATION = gql`
   mutation refreshToken($refresh_token: String!) {
     refreshToken(refresh_token: $refresh_token) {
       token
+    }
+  }
+`;
+
+export const RESET_PASSWORD_MUTATION = gql`
+  mutation resetPassword($data: ResetPasswordInput!) {
+    resetPassword(data: $data) {
+      hash_key
+      new_password
+      verify_password
     }
   }
 `;
