@@ -3,26 +3,22 @@ import { gql } from '@apollo/client/core';
 export const GET_USER_DATA_QUERY = gql`
   query {
     me {
-      id
-      uuid
-      firstname
-      lastname
-      displayname
+      id,
+      uuid,
+      firstname,
+      lastname,
+      displayname,
       branches {
-        id
-        name
-        companies_id
+        id,
+        name,
+        companies_id,
         phone
-        company {
-          name
-          id
-        }
-      }
+      },
       companies {
-        id
+        id,
         name
-      }
-      roles
+      },
+      roles,
       abilities
     }
   }
