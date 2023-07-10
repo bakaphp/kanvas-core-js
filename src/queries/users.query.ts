@@ -2,8 +2,9 @@ import { gql } from '@apollo/client/core';
 
 export const GET_USER_DATA_QUERY = gql`
   query {
-		me {
+    me {
       id
+      uuid
       firstname
       lastname
       displayname
@@ -23,6 +24,6 @@ export const GET_USER_DATA_QUERY = gql`
       }
       roles
       abilities
-		}
-	}
+    }
+  }
 `;
