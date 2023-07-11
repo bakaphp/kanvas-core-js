@@ -85,7 +85,8 @@ export interface CreatedUser {
 }
 
 export interface UserData {
-  id: string;
+  id: number;
+  uuid: string;
   firstname: string;
   lastname: string;
   displayname: string;
@@ -94,15 +95,11 @@ export interface UserData {
     name: string;
     companies_id: string;
     phone: string;
-    company: {
-      name: string;
-      id: string;
-    };
-  };
+  }[];
   companies: {
     id: string;
     name: string;
-  };
-  roles: string;
-  abilities: string;
+  }[];
+  roles: string[];
+  abilities: string[];
 }
