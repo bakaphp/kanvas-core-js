@@ -1,6 +1,16 @@
 import { ClientType } from '../../index';
-import { LOGIN_MUTATION, LOGOUT_MUTATION, REFRESH_TOKEN_MUTATION } from '../../mutations';
-import { AuthenticationInterface, LogoutInterface, RefreshTokenInterface } from '../../types';
+import {
+  LOGIN_MUTATION,
+  LOGOUT_MUTATION,
+  REFRESH_TOKEN_MUTATION,
+  RESET_PASSWORD_MUTATION,
+} from '../../mutations';
+import {
+  AuthenticationInterface,
+  LogoutInterface,
+  RefreshTokenInterface,
+  ResetPasswordInterface,
+} from '../../types';
 
 export class Auth {
   constructor(protected client: ClientType) {}
@@ -28,5 +38,22 @@ export class Auth {
       },
     });
     return response.data;
+  }
+
+  public async resetPassword(
+    hash_key: string,
+    new_password: string,
+    verify_password: string
+  ): Promise<ResetPasswordInterface> {
+    const data = { hash_key, new_password, verify_password };
+
+    const response = await this.client.mutate({
+      mutation: RESET_PASSWORD_MUTATION,
+      variables: {
+        data,
+      },
+    });
+
+    return response.data as ResetPasswordInterface;
   }
 }

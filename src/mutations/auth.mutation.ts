@@ -28,3 +28,9 @@ export const REFRESH_TOKEN_MUTATION = gql`
     }
   }
 `;
+
+export const RESET_PASSWORD_MUTATION = gql`
+  mutation resetPassword($data: ResetPasswordInput!) {
+    resetPassword(data: $data)
+  }
+`;
