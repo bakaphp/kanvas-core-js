@@ -1,6 +1,11 @@
-import { ClientType } from '../../index';
+import { ClientType, GET_USER_DATA_QUERY } from '../../index';
 import { REGISTER_MUTATTION, FORGOT_PASSWORD_MUTATION } from '../../mutations';
-import { UserInterface, CreateUserParams, CreatedUser } from '../../types';
+import {
+  UserInterface,
+  CreateUserParams,
+  CreatedUser,
+  UserData,
+} from '../../types';
 
 export class Users {
   constructor(protected client: ClientType) {}
@@ -16,5 +21,13 @@ export class Users {
     await this.client.mutate({
       mutation: FORGOT_PASSWORD_MUTATION, variables: { data: { email } }
     });
+  }
+
+  public async getUserData(): Promise<UserData> {
+    const response = await this.client.query({
+      query: GET_USER_DATA_QUERY,
+    });
+
+    return response.data.me;
   }
 }

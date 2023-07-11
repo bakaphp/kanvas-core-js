@@ -83,3 +83,23 @@ export interface CreateUserParams {
 export interface CreatedUser {
   user: UserInterface;
 }
+
+export interface UserData {
+  id: number;
+  uuid: string;
+  firstname: string;
+  lastname: string;
+  displayname: string;
+  branches: {
+    id: string;
+    name: string;
+    companies_id: string;
+    phone: string;
+  }[];
+  companies: {
+    id: string;
+    name: string;
+  }[];
+  roles: string[];
+  abilities: string[];
+}
