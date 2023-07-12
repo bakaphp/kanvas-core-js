@@ -90,6 +90,7 @@ export interface UserData {
   firstname: string;
   lastname: string;
   displayname: string;
+  email: string;
   branches: {
     id: string;
     name: string;
