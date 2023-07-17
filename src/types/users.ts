@@ -94,13 +94,16 @@ export interface UserData {
   branches: {
     id: string;
     name: string;
-    companies_id: string;
     phone: string;
   }[];
   companies: {
     id: string;
     name: string;
   }[];
+  contact: {
+    phone_number: string;
+    cell_phone_number: string;
+  };
   roles: string[];
   abilities: string[];
 }
