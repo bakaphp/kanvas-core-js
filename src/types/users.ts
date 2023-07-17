@@ -100,6 +100,10 @@ export interface UserData {
     id: string;
     name: string;
   }[];
+  contact: {
+    phone_number: string;
+    cell_phone_number: string;
+  };
   roles: string[];
   abilities: string[];
 }
