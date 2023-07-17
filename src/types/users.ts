@@ -106,4 +106,10 @@ export interface UserData {
   };
   roles: string[];
   abilities: string[];
+  custom_fields: {
+    data: {
+      name: string;
+      value: any;
+    }[];
+  };
 }
