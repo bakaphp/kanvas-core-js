@@ -8,6 +8,10 @@ export const GET_USER_DATA_QUERY = gql`
       firstname
       lastname
       displayname
+      contact {
+        phone_number
+        cell_phone_number
+      }
       email
       branches {
         id
