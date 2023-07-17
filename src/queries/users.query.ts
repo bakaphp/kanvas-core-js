@@ -12,7 +12,6 @@ export const GET_USER_DATA_QUERY = gql`
       branches {
         id
         name
-        companies_id
         phone
       }
       companies {
@@ -21,6 +20,12 @@ export const GET_USER_DATA_QUERY = gql`
       }
       roles
       abilities
+      custom_fields {
+        data {
+          name
+          value
+        }
+      }
     }
   }
 `;
