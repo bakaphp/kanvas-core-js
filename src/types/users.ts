@@ -94,7 +94,6 @@ export interface UserData {
   branches: {
     id: string;
     name: string;
-    companies_id: string;
     phone: string;
   }[];
   companies: {
