@@ -69,7 +69,7 @@ export class Auth {
     new_password_confirmation: string
   ): Promise<ChangePasswordInterface> {
     const data = {
-      old_password: current_password,
+      current_password,
       new_password,
       new_password_confirmation,
     };

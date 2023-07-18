@@ -37,10 +37,12 @@ export const RESET_PASSWORD_MUTATION = gql`
 
 export const CHANGE_PASSWORD_MUTATION = gql`
   mutation changePassword(
+    $current_password: String!
     $new_password: String!
     $new_password_confirmation: String!
   ) {
     changePassword(
+      current_password: $current_password
       new_password: $new_password
       new_password_confirmation: $new_password_confirmation
     )
