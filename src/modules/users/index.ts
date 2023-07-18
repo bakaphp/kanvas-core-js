@@ -44,11 +44,6 @@ export class Users {
     id: string,
     updatedUser: UpdateUserParams
   ): Promise<UserData> {
-    console.log({
-      id,
-      data: updatedUser,
-    });
-		
     const response = await this.client.mutate({
       mutation: UPDATE_USER_MUTATION,
       variables: {
@@ -57,6 +52,6 @@ export class Users {
       },
     });
 
-    return response.data.updatedUser;
+    return response.data.updateUser;
   }
 }
