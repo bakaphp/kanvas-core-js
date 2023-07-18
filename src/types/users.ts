@@ -118,7 +118,6 @@ export interface UpdateUserParams {
   firstname: string;
   lastname: string;
   displayname: string;
-  email: string;
   phone_number: string;
   cell_phone_number: string;
   custom_fields: {
