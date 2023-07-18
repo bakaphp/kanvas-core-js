@@ -15,17 +15,21 @@ import {
 export class Auth {
   constructor(protected client: ClientType) {}
 
-  public async login(email: string, password: string): Promise<AuthenticationInterface> {
+  public async login(
+    email: string,
+    password: string
+  ): Promise<AuthenticationInterface> {
     const data = { email, password };
     const response = await this.client.mutate({
-      mutation: LOGIN_MUTATION, variables: { data }
+      mutation: LOGIN_MUTATION,
+      variables: { data },
     });
     return response.data.login as AuthenticationInterface;
   }
 
   public async logout(): Promise<LogoutInterface> {
     const response = await this.client.mutate({
-      mutation: LOGOUT_MUTATION
+      mutation: LOGOUT_MUTATION,
     });
     return response.data as LogoutInterface;
   }
@@ -46,6 +50,27 @@ export class Auth {
     verify_password: string
   ): Promise<ResetPasswordInterface> {
     const data = { hash_key, new_password, verify_password };
+
+    const response = await this.client.mutate({
+      mutation: RESET_PASSWORD_MUTATION,
+      variables: {
+        data,
+      },
+    });
+
+    return response.data as ResetPasswordInterface;
+  }
+
+  public async changePassword(
+    current_password: string,
+    new_password: string,
+    new_password_confirmation: string
+  ): Promise<ResetPasswordInterface> {
+    const data = {
+      old_password: current_password,
+      new_password,
+      new_password_confirmation,
+    };
 
     const response = await this.client.mutate({
       mutation: RESET_PASSWORD_MUTATION,
