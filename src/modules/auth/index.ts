@@ -1,5 +1,6 @@
 import { ClientType } from '../../index';
 import {
+  CHANGE_PASSWORD_MUTATION,
   LOGIN_MUTATION,
   LOGOUT_MUTATION,
   REFRESH_TOKEN_MUTATION,
@@ -74,9 +75,9 @@ export class Auth {
     };
 
     const response = await this.client.mutate({
-      mutation: RESET_PASSWORD_MUTATION,
+      mutation: CHANGE_PASSWORD_MUTATION,
       variables: {
-        data,
+        ...data,
       },
     });
 
