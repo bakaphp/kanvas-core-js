@@ -7,6 +7,7 @@ import {
 } from '../../mutations';
 import {
   AuthenticationInterface,
+  ChangePasswordInterface,
   LogoutInterface,
   RefreshTokenInterface,
   ResetPasswordInterface,
@@ -65,7 +66,7 @@ export class Auth {
     current_password: string,
     new_password: string,
     new_password_confirmation: string
-  ): Promise<ResetPasswordInterface> {
+  ): Promise<ChangePasswordInterface> {
     const data = {
       old_password: current_password,
       new_password,
@@ -79,6 +80,6 @@ export class Auth {
       },
     });
 
-    return response.data as ResetPasswordInterface;
+    return response.data as ChangePasswordInterface;
   }
 }
