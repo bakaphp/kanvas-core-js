@@ -41,7 +41,7 @@ export class Users {
   }
 
   public async updateUserData(
-    id: string,
+    id: number,
     updatedUser: UpdateUserParams
   ): Promise<UserData> {
     const response = await this.client.mutate({
