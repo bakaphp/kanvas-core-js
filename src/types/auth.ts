@@ -19,3 +19,7 @@ export interface RefreshTokenInterface {
 export interface ResetPasswordInterface {
   resetPassword: boolean;
 }
+
+export interface ChangePasswordInterface {
+  changePassword: boolean;
+}

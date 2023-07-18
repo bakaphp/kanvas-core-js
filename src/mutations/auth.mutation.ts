@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client/core";
+import { gql } from '@apollo/client/core';
 
 export const LOGIN_MUTATION = gql`
   mutation login($data: LoginInput!) {
@@ -32,5 +32,19 @@ export const REFRESH_TOKEN_MUTATION = gql`
 export const RESET_PASSWORD_MUTATION = gql`
   mutation resetPassword($data: ResetPasswordInput!) {
     resetPassword(data: $data)
+  }
+`;
+
+export const CHANGE_PASSWORD_MUTATION = gql`
+  mutation changePassword(
+    $current_password: String!
+    $new_password: String!
+    $new_password_confirmation: String!
+  ) {
+    changePassword(
+      current_password: $current_password
+      new_password: $new_password
+      new_password_confirmation: $new_password_confirmation
+    )
   }
 `;
