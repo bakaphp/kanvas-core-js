@@ -117,7 +117,7 @@ export interface UserData {
 export interface UpdateUserParams {
   firstname: string;
   lastname: string;
-  displayname: string;
+  displayname?: string;
   phone_number: string;
   cell_phone_number: string;
   custom_fields: {
