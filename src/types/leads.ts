@@ -14,17 +14,19 @@ interface Address {
   city: string;
 }
 
+interface CustomField {
+  data: {
+    name: string;
+    value: any;
+  }[]
+}
+
 interface People {
   firstname: string;
   lastname: string;
   contacts: Contact[];
   address: Address[];
-  custom_fields: {
-    data: {
-      name: string;
-      value: any;
-    }[];
-  }; 
+  custom_fields: CustomField; 
 }
 
 interface Organization {
@@ -37,12 +39,7 @@ export interface CreateLeadParams{
   pipeline_stage_id: number;
   people: People;
   organization: Organization;
-  custom_fields: {
-    data: {
-      name: string;
-      value: any;
-    }[];
-  };
+  custom_fields: CustomField;
 }
 
 
@@ -50,11 +47,5 @@ export interface CreateLeadData {
   id: number;
   uuid: string;
   title: string;
-  custom_fields: {
-    data: {
-      name: string;
-      value: any;
-    }[];
-  };
-  
+  custom_fields: CustomField;
 }
