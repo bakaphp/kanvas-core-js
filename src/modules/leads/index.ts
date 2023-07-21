@@ -20,7 +20,6 @@ export class Leads {
       variables: { input: leadData },
     });
 
-    console.log(response)
     return response.data as CreateLeadData;
  }
 
