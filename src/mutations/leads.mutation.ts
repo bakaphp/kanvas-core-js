@@ -7,8 +7,10 @@ export const CREATE_LEAD_MUTATION = gql`
       uuid
       title
       custom_fields {
-        name
-        value
+        data {
+          name
+          value
+        }
       }
     }
   }
