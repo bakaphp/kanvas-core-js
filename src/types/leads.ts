@@ -36,12 +36,6 @@ interface User {
   lastname: string;
 }
 
-interface Owner {
-  id: number;
-  firstname: string;
-  lastname: string;
-}
-
 interface Status {
   id: number;
   name: string;
@@ -75,7 +69,7 @@ export interface CreateLeadData {
   description: string;
   created_at: string;
   user: User;
-  owner: Owner;
+  owner: User;
   company: Company;
   status: Status;
   custom_fields: CustomField;
