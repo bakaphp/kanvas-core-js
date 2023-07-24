@@ -26,7 +26,6 @@ export interface CreateProductVariant extends ProductVariant {
 }
 
 export interface CreateProductParams {
-  id:number;
   products_types_id: number;
   name: string;
   description: string;
