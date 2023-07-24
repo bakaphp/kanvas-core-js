@@ -29,6 +29,28 @@ interface People {
   custom_fields: CustomField; 
 }
 
+
+interface User {
+  id: number;
+  firstname: string;
+  lastname: string;
+}
+
+interface Owner {
+  id: number;
+  firstname: string;
+  lastname: string;
+}
+
+interface Status {
+  id: number;
+  name: string;
+  is_default: string;
+}
+interface Company {
+  id: number;
+  name: string;
+}
 interface Organization {
   name: string;
 }
@@ -47,5 +69,31 @@ export interface CreateLeadData {
   id: number;
   uuid: string;
   title: string;
+  firstname: string;
+  lastname: string;
+  reason_lost: string; 
+  description: string;
+  created_at: string;
+  user: User;
+  owner: Owner;
+  company: Company;
+  status: Status;
+  custom_fields: CustomField;
+}
+
+
+export interface LeadInput {
+  branch_id: number;
+  title: string;
+  people: People;
+  organization: Organization
+  leads_owner_id: number;
+  receiver_id: number;
+  status_id: number;
+  type_id: number;
+  source_id: number;
+  description: string;
+  reason_lost: string;
+  pipeline_stage_id: number;
   custom_fields: CustomField;
 }
