@@ -5,13 +5,14 @@ import {
 import {
   CreateLeadData,
   CreateLeadParams,
+  LeadInput,
 } from '../../types';
 
 export class Leads {
   constructor(protected client: ClientType) {}
 
   public async createLead(
-    leadData: CreateLeadParams
+    leadData: CreateLeadParams | LeadInput
   ): Promise<CreateLeadData> {
 
   
