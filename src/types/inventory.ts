@@ -17,6 +17,7 @@ export interface ProductInterface {
   description: string;
   short_description: string;
   slug: string;
+  is_published: boolean;
   variants: ProductVariant[];
 }
 
@@ -25,10 +26,16 @@ export interface CreateProductVariant extends ProductVariant {
 }
 
 export interface CreateProductParams {
+  products_types_id: number;
   name: string;
   description: string;
   short_description: string;
   slug: string;
+  is_published: boolean;
+  warranty_terms: string;
+  upc: string;
+  warehouses: number[];
+  categories: number[];
   variants: CreateProductVariant[];
 }
 
