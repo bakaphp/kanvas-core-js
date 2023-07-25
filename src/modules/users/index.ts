@@ -1,4 +1,5 @@
-import { ClientType, GET_USER_DATA_QUERY } from '../../index';
+import { ClientType } from '../../index';
+import { GET_USER_DATA_QUERY } from '../../queries';
 import {
   REGISTER_MUTATTION,
   FORGOT_PASSWORD_MUTATION,
