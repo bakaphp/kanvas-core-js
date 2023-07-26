@@ -8,6 +8,8 @@ export const GET_USER_DATA_QUERY = gql`
       firstname
       lastname
       displayname
+      default_company_branch
+      default_company
       contact {
         phone_number
         cell_phone_number
