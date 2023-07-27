@@ -31,7 +31,7 @@ interface People {
   lastname: string;
   contacts: Contact[];
   address: Address[];
-  custom_fields: CustomFieldInput; 
+  custom_fields: CustomFieldInput[]; 
 }
 
 
@@ -60,7 +60,7 @@ export interface CreateLeadParams{
   pipeline_stage_id: number;
   people: People;
   organization: Organization;
-  custom_fields: CustomFieldInput;
+  custom_fields: CustomFieldInput[];
 }
 
 
@@ -94,5 +94,5 @@ export interface LeadInput {
   description: string;
   reason_lost: string;
   pipeline_stage_id: number;
-  custom_fields: CustomFieldInput;
+  custom_fields: CustomFieldInput[];
 }
