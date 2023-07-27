@@ -90,6 +90,8 @@ export interface UserData {
   firstname: string;
   lastname: string;
   displayname: string;
+  default_company: number;
+  default_company_branch: number;
   email: string;
   branches: {
     id: string;
