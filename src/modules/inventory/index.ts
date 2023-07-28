@@ -1,4 +1,4 @@
-import { ClientType } from '../../index';
+import { ClientType, GET_ALL_PRODUCT } from '../../index';
 import { CREATE_PRODUCT } from '../../mutations';
 import {
   CreateProductParams,
@@ -7,7 +7,7 @@ import {
 } from '../../types';
 
 export class Inventory {
-  constructor(protected client: ClientType) {}
+  constructor(protected client: ClientType) { }
 
   public async createProduct(
     data: ProductInterface | CreateProductParams
@@ -16,6 +16,14 @@ export class Inventory {
       mutation: CREATE_PRODUCT,
       variables: { input: data },
     });
+    return response.data;
+  }
+
+  public async getAllProduct(): Promise<CreatedProduct> {
+    const response = await this.client.query({
+      query: GET_ALL_PRODUCT,
+    });
+
     return response.data;
   }
 }

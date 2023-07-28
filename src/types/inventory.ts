@@ -8,6 +8,15 @@ export interface ProductCompany {
   name: string;
 }
 
+export interface ProductWarehouse {
+  id: number;
+  name: string;
+  regions: {
+    id: number;
+    name: string;
+  };
+}
+
 export interface ProductVariant {
   name: string;
   description: string;
@@ -16,15 +25,14 @@ export interface ProductVariant {
   attributes: ProductAttributes[];
 }
 
-
 export interface AttributesInterface {
   id: number;
   uuid: string;
   name: string;
   created_at: string;
   updated_at: string;
-  companies: ProductCompany[]
-  values:{
+  companies: ProductCompany[];
+  values: {
     id: string;
     value: string | number; //Mixed
   }[];
@@ -55,7 +63,6 @@ export interface WarehouseInterface {
   is_published: number;
 }
 
-
 export interface ProductTypeInterface {
   id: number;
   companies_id: number;
@@ -66,8 +73,6 @@ export interface ProductTypeInterface {
   weight: number;
   companies: ProductCompany;
 }
-
-
 
 export interface ProductInterface {
   id: number;
@@ -85,11 +90,11 @@ export interface ProductInterface {
   updated_at: string;
   files: []; // Filesystem[];
   categories: CategoryInterface[];
-  warehouses: WarehouseInterface[];
+  warehouses: ProductWarehouse[];
   variants: ProductVariant[];
   attributes: AttributesInterface[];
   productsTypes: ProductTypeInterface;
-  companies: ProductCompany
+  companies: ProductCompany;
 }
 
 export interface CreateProductVariant extends ProductVariant {
