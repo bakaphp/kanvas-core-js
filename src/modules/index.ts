@@ -5,4 +5,5 @@ export * from './custom-fields';
 export * from './locations';
 export * from './leads';
 export * from './inventory';
+export * from './sponsors';
 

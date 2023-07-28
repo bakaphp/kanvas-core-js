@@ -3,7 +3,7 @@
 // import { Location } from 'types/location.interface';
 // import { RoleInterface } from './role.interface';
 
-export interface CreateSponsorParams {
+export interface InviteSponsorParams {
     email: string;
     firstname: string;
     lastname: string;
@@ -11,7 +11,7 @@ export interface CreateSponsorParams {
     company_branches_id: number;
 }
 
-export interface SponsorData {
+export interface InviteSponsorData {
     id: number;
     email: string;
     invite_hash: string;

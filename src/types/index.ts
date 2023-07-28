@@ -5,4 +5,4 @@ export * from './custom-fields';
 export * from './settings';
 export * from './leads';
 export * from './inventory';
-
+export * from './sponsors';
