@@ -12,7 +12,6 @@ export const CREATE_PRODUCT = gql`
       warranty_terms
       upc
       is_published
-      price
       categories {
         id
       }
@@ -22,7 +21,6 @@ export const CREATE_PRODUCT = gql`
       variants {
         id
         name
-        price
         attributes {
           name
           value
