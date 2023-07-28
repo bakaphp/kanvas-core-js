@@ -1,5 +1,4 @@
-import { ClientType } from './../../index';
-import { GET_ALL_PRODUCTS } from 'queries/inventory.query';
+import { ClientType, GET_ALL_PRODUCT } from '../../index';
 import { CREATE_PRODUCT } from '../../mutations';
 import {
   CreateProductParams,
@@ -22,7 +21,7 @@ export class Inventory {
 
   public async getAllProduct(): Promise<CreatedProduct> {
     const response = await this.client.query({
-      query: GET_ALL_PRODUCTS,
+      query: GET_ALL_PRODUCT,
     });
 
     return response.data;
