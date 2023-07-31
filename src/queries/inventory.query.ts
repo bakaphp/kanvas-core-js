@@ -85,7 +85,6 @@ export const GET_ALL_PRODUCT_TYPES = gql`
     productTypes {
       data {
         id
-        companies_id
         uuid
         name
         description
