@@ -21,7 +21,6 @@ export interface ProductVariant {
   name: string;
   description: string;
   slug: string;
-  number: number;
   attributes: ProductAttributes[];
 }
 
@@ -117,5 +116,9 @@ export interface CreateProductParams {
 }
 
 export interface CreatedProduct {
-  product: ProductInterface;
+  products: ProductInterface;
+}
+
+export interface CreatedProductTypes {
+  productTypes: ProductTypeInterface;
 }
