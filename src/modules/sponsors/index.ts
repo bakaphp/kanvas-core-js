@@ -1,16 +1,16 @@
 import { ClientType } from '../../index';
-import { INVITE_SPONSOR_MUTATION } from '../../mutations';
-import { InviteSponsorData, InviteSponsorParams } from '../../types';
+import { INVITE_USER_MUTATION } from '../../mutations';
+import { InviteUserData, InviteUserParams } from '../../types';
 
 export class Sponsors {
     constructor(protected client: ClientType) {}
 
     public async inviteSponsor(
-        sponsorInput: InviteSponsorParams 
-    ): Promise<InviteSponsorData> {
+        inviteInput: InviteUserParams 
+    ): Promise<InviteUserData> {
         const response = await this.client.mutate({
-            mutation: INVITE_SPONSOR_MUTATION,
-            variables: { input: sponsorInput },
+            mutation: INVITE_USER_MUTATION,
+            variables: { input: inviteInput },
         });
 
         return response.data 
