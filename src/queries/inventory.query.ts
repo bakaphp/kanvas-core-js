@@ -79,3 +79,18 @@ export const GET_ALL_PRODUCTS = gql`
     }
   }
 `;
+
+export const GET_ALL_PRODUCT_TYPES = gql`
+  query {
+    productTypes {
+      data {
+        id
+        uuid
+        name
+        description
+        slug
+        weight
+      }
+    }
+  }
+`;
