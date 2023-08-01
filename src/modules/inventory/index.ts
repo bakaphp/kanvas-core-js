@@ -1,5 +1,5 @@
 import { ClientType } from './../../index';
-import { GET_ALL_PRODUCTS } from 'queries/inventory.query';
+import { GET_ALL_PRODUCTS } from '../../queries/inventory.query';
 import { CREATE_PRODUCT } from '../../mutations';
 import {
   CreateProductParams,
