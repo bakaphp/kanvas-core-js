@@ -20,3 +20,16 @@ export interface FetchedAllCustomFields {
 export interface DeletedCustomField {
   deleteCustomField: boolean;
 }
+
+
+export interface CustomFieldInput {
+  name: string;
+  data: any;
+}
+
+export interface CustomFieldData {
+  data: {
+    name: string;
+    value: any;
+  }[]
+}
