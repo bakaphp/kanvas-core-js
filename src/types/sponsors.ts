@@ -15,9 +15,9 @@ export interface InviteSponsorParams {
     lastname: string;
     role_id: number;
     company_branches_id: number;
-    //description: string;
-    //email_template: string;
-    custom_fields: CustomFieldInput[]
+    custom_fields: CustomFieldInput[];
+    description?: string;
+    email_template?: string;
 }
 
 export interface InviteSponsorData {
