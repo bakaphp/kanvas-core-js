@@ -3,6 +3,8 @@
 // import { Location } from 'types/location.interface';
 // import { RoleInterface } from './role.interface';
 
+import {  CustomFieldInput } from "./custom-fields";
+
 export interface UserInterface {
   id: number;
   uuid: string;
@@ -126,4 +128,23 @@ export interface UpdateUserParams {
     name: string;
     data: any;
   }[];
+}
+
+
+
+export interface InviteUserParams {
+    email: string;
+    firstname: string;
+    lastname: string;
+    role_id: number;
+    company_branches_id: number;
+    custom_fields: CustomFieldInput[];
+    description?: string;
+    email_template?: string;
+}
+
+export interface InviteUserData {
+    id: number;
+    email: string;
+    invite_hash: string;
 }
