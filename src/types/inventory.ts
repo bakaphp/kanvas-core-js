@@ -122,3 +122,7 @@ export interface CreatedProduct {
 export interface CreatedProductTypes {
   productTypes: ProductTypeInterface;
 }
+
+export interface DeleteProduct {
+  id: boolean;
+}
