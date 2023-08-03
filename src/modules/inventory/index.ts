@@ -1,15 +1,19 @@
 import { ClientType } from './../../index';
-import { GET_ALL_PRODUCTS, GET_ALL_PRODUCT_TYPES } from '../../queries/inventory.query';
-import { CREATE_PRODUCT } from '../../mutations';
+import {
+  GET_ALL_PRODUCTS,
+  GET_ALL_PRODUCT_TYPES,
+} from '../../queries/inventory.query';
+import { CREATE_PRODUCT, DELETE_PRODUCT } from '../../mutations';
 import {
   CreateProductParams,
   CreatedProduct,
   CreatedProductTypes,
+  DeleteProduct,
   ProductInterface,
 } from '../../types';
 
 export class Inventory {
-  constructor(protected client: ClientType) { }
+  constructor(protected client: ClientType) {}
 
   public async createProduct(
     data: ProductInterface | CreateProductParams
@@ -31,6 +35,15 @@ export class Inventory {
   public async getAllProductTypes(): Promise<CreatedProductTypes> {
     const response = await this.client.query({
       query: GET_ALL_PRODUCT_TYPES,
+    });
+
+    return response.data;
+  }
+
+  public async deleteProduct(id: number): Promise<DeleteProduct> {
+    const response = await this.client.mutate({
+      mutation: DELETE_PRODUCT,
+      variables: { id: id },
     });
 
     return response.data;

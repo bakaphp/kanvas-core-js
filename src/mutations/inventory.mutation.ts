@@ -32,3 +32,9 @@ export const CREATE_PRODUCT = gql`
     }
   }
 `;
+
+export const DELETE_PRODUCT = gql`
+  mutation($id: Int!) {
+    deleteProduct(id: $id)
+  }
+`;
