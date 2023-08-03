@@ -124,5 +124,5 @@ export interface CreatedProductTypes {
 }
 
 export interface DeleteProduct {
-  id: boolean;
+  deleteProduct: boolean;
 }
