@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// import { File } from 'types/file.interface';
-// import { Location } from 'types/location.interface';
-// import { RoleInterface } from './role.interface';
+
+import { CustomFieldInput, CustomFieldData } from "./custom-fields";
 
 interface Contact {
   value: string;
@@ -12,18 +11,6 @@ interface Contact {
 interface Address {
   address: string;
   city: string;
-}
-
-interface CustomFieldData {
-  data: {
-    name: string;
-    value: any;
-  }[]
-}
-
-interface CustomFieldInput {
-  name: string;
-  data: any;
 }
 
 interface People {
