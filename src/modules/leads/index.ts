@@ -1,7 +1,13 @@
-import { GET_ALL_LEADS_QUERY } from '../../queries';
+import { GET_ALL_LEADS_QUERY, GET_LEADS_DASHBOARD_QUERY } from '../../queries';
 import { ClientType } from '../../index';
 import { CREATE_LEAD_MUTATION } from '../../mutations';
-import { CreateLeadData, CreateLeadParams, LeadInput } from '../../types';
+import { 
+  CreateLeadData, 
+  CreateLeadParams, 
+  LeadInput, 
+  LeadsDashboardInput, 
+  LeadsDashboardData 
+} from '../../types';
 
 export class Leads {
   constructor(protected client: ClientType) {}
@@ -24,4 +30,16 @@ export class Leads {
 
     return response.data;
   }
+
+  public async getLeadsDashboard(
+    leadDashboardInput: LeadsDashboardInput
+  ): Promise<LeadsDashboardData> {
+    const response = await this.client.mutate({
+      mutation: GET_LEADS_DASHBOARD_QUERY,
+      variables: { ...leadDashboardInput  },
+    });
+
+    return response.data 
+  }
+
 }
