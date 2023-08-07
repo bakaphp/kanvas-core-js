@@ -83,3 +83,25 @@ export interface LeadInput {
   pipeline_stage_id: number;
   custom_fields: CustomFieldInput[];
 }
+
+
+interface WhereConditions {
+  column: string;
+  operator: string;
+  value: number;
+}
+
+export interface LeadsDashboardInput {
+  first: number;
+  where: WhereConditions;
+}
+
+interface LeadsAmounts {
+  total_active_leads: number;
+  total_closed_leads: number;
+  total_agents: number;
+}
+
+export interface LeadsDashboardData {
+  leadsDashboard: { data: LeadsAmounts[] }
+}
