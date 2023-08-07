@@ -65,3 +65,52 @@ query GetLeadsDashboard (
   }
 }
 `
+
+export const GET_LEAD_BY_UUID_QUERY = gql`
+query GetLeadsByUUID($where: QueryLeadsWhereWhereConditions!){
+  leads(where: $where) {
+      data {
+          id,
+          uuid,
+          title,
+          company{
+              id
+          }
+          people{
+              name
+              contacts {
+                  type {
+                      name
+                  }
+                  value
+              }
+          },
+          receiver{
+              name
+              uuid
+          },
+          status {
+              name
+          },
+          type {
+              name
+          },
+          source{
+              name
+          },
+          pipeline {
+              name
+          },
+          stage {
+              name
+          },
+          custom_fields{
+              data {
+                  name, 
+                  value
+              }
+          }
+      }
+  }
+}
+`
