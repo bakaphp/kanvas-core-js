@@ -49,7 +49,7 @@ export const GET_ALL_LEADS_QUERY = gql`
   }
 `;
 
-export const GET_LEADS_DASHBOARD = gql`
+export const GET_LEADS_DASHBOARD_QUERY = gql`
 query GetLeadsDashboard (
   $first: Int!, 
   $where: QueryLeadsDashboardWhereWhereConditions!){
