@@ -85,15 +85,15 @@ export interface LeadInput {
 }
 
 
-interface WhereConditions {
+export interface WhereCondition {
   column: string;
   operator: string;
-  value: number;
+  value: number | string;
 }
 
 export interface LeadsDashboardInput {
   first: number;
-  where: WhereConditions;
+  where: WhereCondition;
 }
 
 interface LeadsAmounts {
