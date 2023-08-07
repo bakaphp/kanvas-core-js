@@ -50,8 +50,12 @@ export const GET_ALL_LEADS_QUERY = gql`
 `;
 
 export const GET_LEADS_DASHBOARD = gql`
-query LeadsDashboard ($first: Int!, $where: QueryLeadsDashboardWhereWhereConditions!){
-  leadsDashboard(first: $first,where: $where) {
+query GetLeadsDashboard (
+  $first: Int!, 
+  $where: QueryLeadsDashboardWhereWhereConditions!){
+  leadsDashboard(
+    first: $first, 
+    where: $where ) {
       data {
           total_active_leads
           total_closed_leads
