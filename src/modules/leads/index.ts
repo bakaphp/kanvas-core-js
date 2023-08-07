@@ -1,4 +1,8 @@
-import { GET_ALL_LEADS_QUERY, GET_LEADS_DASHBOARD_QUERY } from '../../queries';
+import { 
+  GET_ALL_LEADS_QUERY, 
+  GET_LEADS_DASHBOARD_QUERY,
+  GET_LEAD_BY_UUID_QUERY, 
+} from '../../queries';
 import { ClientType } from '../../index';
 import { CREATE_LEAD_MUTATION } from '../../mutations';
 import { 
@@ -6,7 +10,8 @@ import {
   CreateLeadParams, 
   LeadInput, 
   LeadsDashboardInput, 
-  LeadsDashboardData 
+  LeadsDashboardData,
+  WhereCondition,  
 } from '../../types';
 
 export class Leads {
@@ -37,6 +42,17 @@ export class Leads {
     const response = await this.client.mutate({
       mutation: GET_LEADS_DASHBOARD_QUERY,
       variables: { ...leadDashboardInput  },
+    });
+
+    return response.data 
+  }
+
+  public async getLeadByUUID(
+    whereInput: WhereCondition
+  ): Promise<CreateLeadData> {
+    const response = await this.client.mutate({
+      mutation: GET_LEAD_BY_UUID_QUERY,
+      variables: { "where": whereInput  },
     });
 
     return response.data 
