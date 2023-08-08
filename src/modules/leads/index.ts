@@ -9,7 +9,6 @@ import {
   CreateLeadData, 
   CreateLeadParams, 
   LeadInput, 
-  LeadsDashboardInput, 
   LeadsDashboardData,
   WhereCondition,  
 } from '../../types';
@@ -36,23 +35,32 @@ export class Leads {
     return response.data;
   }
 
-  public async getLeadsDashboard(
-    leadDashboardInput: LeadsDashboardInput
-  ): Promise<LeadsDashboardData> {
+  public async getLeadsDashboard( userID: number ): Promise<LeadsDashboardData> {
+    const first: number = 1;
+    const where: WhereCondition = {  
+      column: "USERS_ID", 
+      operator: "EQ", 
+      value: userID
+    };
+
     const response = await this.client.mutate({
       mutation: GET_LEADS_DASHBOARD_QUERY,
-      variables: { ...leadDashboardInput  },
+      variables: { first, where  },
     });
 
     return response.data 
   }
 
-  public async getLeadByUUID(
-    whereInput: WhereCondition
-  ): Promise<CreateLeadData> {
+  public async getLeadByUUID( uuid: string ): Promise<CreateLeadData> {
+    const where: WhereCondition = {
+      column: "UUID", 
+      operator: "EQ", 
+      value: uuid
+    };
+
     const response = await this.client.mutate({
       mutation: GET_LEAD_BY_UUID_QUERY,
-      variables: { "where": whereInput  },
+      variables: { where },
     });
 
     return response.data 
