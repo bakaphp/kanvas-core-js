@@ -135,10 +135,7 @@ export interface InviteUserParams {
     firstname: string;
     lastname: string;
     role_id: number;
-    company_branches_id: number;
     custom_fields: CustomFieldInput[];
-    description?: string;
-    email_template?: string;
 }
 
 export interface InviteUserData {
