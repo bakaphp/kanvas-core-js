@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { CustomFieldInput, CustomFieldData } from "./custom-fields";
+import { CustomFieldInput, CustomFieldData } from './custom-fields';
 
 interface Contact {
   value: string;
@@ -18,9 +18,8 @@ interface People {
   lastname: string;
   contacts: Contact[];
   address: Address[];
-  custom_fields: CustomFieldInput[]; 
+  custom_fields: CustomFieldInput[];
 }
-
 
 interface User {
   id: number;
@@ -41,7 +40,7 @@ interface Organization {
   name: string;
 }
 
-export interface CreateLeadParams{
+export interface CreateLeadParams {
   branch_id: number;
   title: string;
   pipeline_stage_id: number;
@@ -50,14 +49,13 @@ export interface CreateLeadParams{
   custom_fields: CustomFieldInput[];
 }
 
-
 export interface CreateLeadData {
   id: number;
   uuid: string;
   title: string;
   firstname: string;
   lastname: string;
-  reason_lost: string; 
+  reason_lost: string;
   description: string;
   created_at: string;
   user: User;
@@ -67,12 +65,11 @@ export interface CreateLeadData {
   custom_fields: CustomFieldData;
 }
 
-
 export interface LeadInput {
   branch_id: number;
   title: string;
   people: People;
-  organization: Organization
+  organization: Organization;
   leads_owner_id: number;
   receiver_id: number;
   status_id: number;
@@ -83,7 +80,6 @@ export interface LeadInput {
   pipeline_stage_id: number;
   custom_fields: CustomFieldInput[];
 }
-
 
 export interface WhereCondition {
   column: string;
@@ -103,5 +99,5 @@ interface LeadsAmounts {
 }
 
 export interface LeadsDashboardData {
-  leadsDashboard: { data: LeadsAmounts[] }
+  leadsDashboard: { data: LeadsAmounts[] };
 }

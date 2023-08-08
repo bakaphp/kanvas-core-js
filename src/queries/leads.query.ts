@@ -50,67 +50,65 @@ export const GET_ALL_LEADS_QUERY = gql`
 `;
 
 export const GET_LEADS_DASHBOARD_QUERY = gql`
-query GetLeadsDashboard (
-  $first: Int!, 
-  $where: QueryLeadsDashboardWhereWhereConditions!){
-  leadsDashboard(
-    first: $first, 
-    where: $where ) {
+  query GetLeadsDashboard(
+    $first: Int!
+    $where: QueryLeadsDashboardWhereWhereConditions!
+  ) {
+    leadsDashboard(first: $first, where: $where) {
       data {
-          total_active_leads
-          total_closed_leads
-          total_agents
+        total_active_leads
+        total_closed_leads
+        total_agents
       }
-      
+    }
   }
-}
-`
+`;
 
 export const GET_LEAD_BY_UUID_QUERY = gql`
-query GetLeadsByUUID($where: QueryLeadsWhereWhereConditions!){
-  leads(where: $where) {
+  query GetLeadsByUUID($where: QueryLeadsWhereWhereConditions!) {
+    leads(where: $where) {
       data {
-          id,
-          uuid,
-          title,
-          company{
-              id
+        id
+        uuid
+        title
+        company {
+          id
+        }
+        people {
+          name
+          contacts {
+            type {
+              name
+            }
+            value
           }
-          people{
-              name
-              contacts {
-                  type {
-                      name
-                  }
-                  value
-              }
-          },
-          receiver{
-              name
-              uuid
-          },
-          status {
-              name
-          },
-          type {
-              name
-          },
-          source{
-              name
-          },
-          pipeline {
-              name
-          },
-          stage {
-              name
-          },
-          custom_fields{
-              data {
-                  name, 
-                  value
-              }
+        }
+        receiver {
+          name
+          uuid
+        }
+        status {
+          name
+        }
+        type {
+          name
+        }
+        source {
+          name
+        }
+        pipeline {
+          name
+        }
+        stage {
+          name
+        }
+        custom_fields {
+          data {
+            name
+            value
           }
+        }
       }
+    }
   }
-}
-`
+`;
