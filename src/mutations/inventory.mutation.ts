@@ -21,6 +21,9 @@ export const CREATE_PRODUCT = gql`
       variants {
         id
         name
+        status {
+          id
+        }
         attributes {
           name
           value
