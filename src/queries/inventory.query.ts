@@ -48,6 +48,17 @@ export const GET_ALL_PRODUCTS = gql`
           slug
           description
           products_id
+          status {
+            id
+            name
+          }
+          warehouses {
+            id
+            warehouseinfo {
+              id
+              name
+            }
+          }
           attributes {
             name
             value
