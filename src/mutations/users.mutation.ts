@@ -59,3 +59,14 @@ export const UPDATE_USER_MUTATION = gql`
     }
   }
 `;
+
+
+export const INVITE_USER_MUTATION = gql`
+ mutation( $input: InviteInput!){
+    inviteUser(input: $input){
+        id
+        email,
+        invite_hash
+    }
+}
+`;

@@ -4,6 +4,7 @@ import {
   REGISTER_MUTATTION,
   FORGOT_PASSWORD_MUTATION,
   UPDATE_USER_MUTATION,
+  INVITE_USER_MUTATION
 } from '../../mutations';
 import {
   UserInterface,
@@ -11,6 +12,8 @@ import {
   CreatedUser,
   UserData,
   UpdateUserParams,
+  InviteUserData, 
+  InviteUserParams
 } from '../../types';
 
 export class Users {
@@ -55,4 +58,16 @@ export class Users {
 
     return response.data.updateUser;
   }
+
+public async invite(
+    inviteInput: InviteUserParams 
+  ): Promise<InviteUserData> {
+    const response = await this.client.mutate({
+        mutation: INVITE_USER_MUTATION,
+        variables: { input: inviteInput },
+    });
+
+    return response.data 
+  }
+  
 }
