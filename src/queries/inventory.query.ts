@@ -105,3 +105,14 @@ export const GET_ALL_PRODUCT_TYPES = gql`
     }
   }
 `;
+
+export const GET_ALL_STATUS = gql`
+  query getStatus {
+    getStatus {
+      data {
+        id
+        name
+      }
+    }
+  }
+`;

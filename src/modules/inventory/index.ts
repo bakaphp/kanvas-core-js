@@ -2,12 +2,14 @@ import { ClientType } from './../../index';
 import {
   GET_ALL_PRODUCTS,
   GET_ALL_PRODUCT_TYPES,
+  GET_ALL_STATUS,
 } from '../../queries/inventory.query';
 import { CREATE_PRODUCT, DELETE_PRODUCT } from '../../mutations';
 import {
   CreateProductParams,
   CreatedProduct,
   CreatedProductTypes,
+  CreatedStatus,
   DeleteProduct,
   ProductInterface,
 } from '../../types';
@@ -46,6 +48,12 @@ export class Inventory {
       variables: { id: id },
     });
 
+    return response.data;
+  }
+  public async getAllStatus(): Promise<CreatedStatus> {
+    const response = await this.client.query({
+      query: GET_ALL_STATUS,
+    });
     return response.data;
   }
 }
