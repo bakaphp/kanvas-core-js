@@ -130,10 +130,9 @@ export interface CreateProductParams {
 
 export interface CreatedProduct {
   products: {
-  data:ProductInterface[]
+    data: ProductInterface[];
   };
 }
-
 
 export interface CreatedProductTypes {
   productTypes: ProductTypeInterface;
