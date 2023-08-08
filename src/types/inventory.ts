@@ -129,7 +129,9 @@ export interface CreateProductParams {
 }
 
 export interface CreatedProduct {
-  products: ProductInterface;
+  products: {
+    data: ProductInterface[];
+  };
 }
 
 export interface CreatedProductTypes {
@@ -138,4 +140,13 @@ export interface CreatedProductTypes {
 
 export interface DeleteProduct {
   deleteProduct: boolean;
+}
+
+export interface CreatedStatus {
+  getStatus: {
+    data: {
+      id: number;
+      name: string;
+    }[];
+  };
 }
