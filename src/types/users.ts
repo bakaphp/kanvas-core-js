@@ -143,3 +143,8 @@ export interface InviteUserData {
     email: string;
     invite_hash: string;
 }
+
+
+export interface RoleData {
+  roles: {name: string, value: number} [];
+}

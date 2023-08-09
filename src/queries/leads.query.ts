@@ -102,6 +102,14 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
         stage {
           name
         }
+        followers {
+          data {
+            id
+            firstname
+            lastname
+            email
+          }
+        }
         custom_fields {
           data {
             name
