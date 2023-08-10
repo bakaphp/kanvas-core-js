@@ -55,7 +55,7 @@ export class Users {
     };
 
     const response = await this.client.query({
-      query: GET_USER_DATA_QUERY,
+      query: GET_ROLE_ID_BY_NAME_QUERY,
       variables: { where },
     });
 
