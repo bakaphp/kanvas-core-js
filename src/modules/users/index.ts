@@ -4,7 +4,7 @@ import {
   REGISTER_MUTATTION,
   FORGOT_PASSWORD_MUTATION,
   UPDATE_USER_MUTATION,
-  INVITE_USER_MUTATION
+  INVITE_USER_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -12,7 +12,7 @@ import {
   CreatedUser,
   UserData,
   UpdateUserParams,
-  InviteUserData, 
+  InviteUserData,
   InviteUserParams,
   WhereCondition,
   RoleData,
@@ -47,7 +47,6 @@ export class Users {
   }
 
   public async getRoleIdByName(name: string): Promise<RoleData> {
-
     const where: WhereCondition = {
       column: 'NAME',
       operator: 'EQ',
@@ -77,15 +76,12 @@ export class Users {
     return response.data.updateUser;
   }
 
-public async invite(
-    inviteInput: InviteUserParams 
-  ): Promise<InviteUserData> {
+  public async invite(inviteInput: InviteUserParams): Promise<InviteUserData> {
     const response = await this.client.mutate({
-        mutation: INVITE_USER_MUTATION,
-        variables: { input: inviteInput },
+      mutation: INVITE_USER_MUTATION,
+      variables: { input: inviteInput },
     });
 
-    return response.data 
+    return response.data;
   }
-  
 }

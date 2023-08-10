@@ -65,8 +65,6 @@ export interface CreateLeadData {
   custom_fields: CustomFieldData;
 }
 
-
-
 export interface LeadInput {
   branch_id: number;
   title: string;
@@ -112,6 +110,5 @@ export interface LeadsDashboardData {
 }
 
 export interface LeadFollowersData extends CreateLeadData {
-  followers: { data: Followers[] }
+  followers: { data: Followers[] };
 }
-
