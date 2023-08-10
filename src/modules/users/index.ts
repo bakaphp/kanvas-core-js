@@ -1,10 +1,10 @@
 import { ClientType } from '../../index';
-import { GET_USER_DATA_QUERY } from '../../queries';
+import { GET_USER_DATA_QUERY, GET_ROLE_ID_BY_NAME_QUERY } from '../../queries';
 import {
   REGISTER_MUTATTION,
   FORGOT_PASSWORD_MUTATION,
   UPDATE_USER_MUTATION,
-  INVITE_USER_MUTATION
+  INVITE_USER_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -12,8 +12,10 @@ import {
   CreatedUser,
   UserData,
   UpdateUserParams,
-  InviteUserData, 
-  InviteUserParams
+  InviteUserData,
+  InviteUserParams,
+  WhereCondition,
+  RoleData,
 } from '../../types';
 
 export class Users {
@@ -44,6 +46,21 @@ export class Users {
     return response.data.me;
   }
 
+  public async getRoleIdByName(name: string): Promise<RoleData> {
+    const where: WhereCondition = {
+      column: 'NAME',
+      operator: 'EQ',
+      value: name,
+    };
+
+    const response = await this.client.query({
+      query: GET_ROLE_ID_BY_NAME_QUERY,
+      variables: { where },
+    });
+
+    return response.data;
+  }
+
   public async updateUserData(
     id: number,
     updatedUser: UpdateUserParams
@@ -59,15 +76,12 @@ export class Users {
     return response.data.updateUser;
   }
 
-public async invite(
-    inviteInput: InviteUserParams 
-  ): Promise<InviteUserData> {
+  public async invite(inviteInput: InviteUserParams): Promise<InviteUserData> {
     const response = await this.client.mutate({
-        mutation: INVITE_USER_MUTATION,
-        variables: { input: inviteInput },
+      mutation: INVITE_USER_MUTATION,
+      variables: { input: inviteInput },
     });
 
-    return response.data 
+    return response.data;
   }
-  
 }

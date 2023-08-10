@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-
-import {  CustomFieldInput } from "./custom-fields";
+import { CustomFieldInput } from './custom-fields';
 
 export interface UserInterface {
   id: number;
@@ -128,21 +127,20 @@ export interface UpdateUserParams {
   }[];
 }
 
-
-
 export interface InviteUserParams {
-    email: string;
-    firstname: string;
-    lastname: string;
-    role_id: number;
-    company_branches_id: number;
-    custom_fields: CustomFieldInput[];
-    description?: string;
-    email_template?: string;
+  email: string;
+  firstname: string;
+  lastname: string;
+  role_id: number;
+  custom_fields: CustomFieldInput[];
 }
 
 export interface InviteUserData {
-    id: number;
-    email: string;
-    invite_hash: string;
+  id: number;
+  email: string;
+  invite_hash: string;
+}
+
+export interface RoleData {
+  roles: { name: string; value: number }[];
 }

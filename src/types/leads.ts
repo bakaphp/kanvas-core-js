@@ -98,6 +98,17 @@ interface LeadsAmounts {
   total_agents: number;
 }
 
+interface Followers {
+  id: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+}
+
 export interface LeadsDashboardData {
   leadsDashboard: { data: LeadsAmounts[] };
+}
+
+export interface LeadFollowersData extends CreateLeadData {
+  followers: { data: Followers[] };
 }

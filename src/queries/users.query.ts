@@ -35,3 +35,13 @@ export const GET_USER_DATA_QUERY = gql`
     }
   }
 `;
+
+export const GET_ROLE_ID_BY_NAME_QUERY = gql`
+  query GetRolesByName($where: QueryRolesWhereWhereConditions!) {
+    roles(where: $where) {
+      data {
+        id
+      }
+    }
+  }
+`;
