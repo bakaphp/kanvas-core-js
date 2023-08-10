@@ -20,8 +20,18 @@ export interface ProductWarehouse {
 export interface ProductVariant {
   name: string;
   description: string;
-  slug: string;
-  attributes: ProductAttributes[];
+  status?: {
+    id: string;
+    name?: string;
+  };
+  warehouses: {
+    id: string;
+    warehouseinfo: {
+      id: number;
+      name: string;
+    };
+  };
+  attributes?: ProductAttributes[];
 }
 
 export interface AttributesInterface {
@@ -96,8 +106,11 @@ export interface ProductInterface {
   companies: ProductCompany;
 }
 
-export interface CreateProductVariant extends ProductVariant {
-  warehouse_id: number;
+export interface CreateProductVariant
+  extends Omit<ProductVariant, 'warehouses'> {
+  warehouse: {
+    id: number;
+  };
 }
 
 export interface CreateProductParams {
@@ -116,7 +129,9 @@ export interface CreateProductParams {
 }
 
 export interface CreatedProduct {
-  products: ProductInterface;
+  products: {
+    data: ProductInterface[];
+  };
 }
 
 export interface CreatedProductTypes {
@@ -125,4 +140,13 @@ export interface CreatedProductTypes {
 
 export interface DeleteProduct {
   deleteProduct: boolean;
+}
+
+export interface CreatedStatus {
+  getStatus: {
+    data: {
+      id: number;
+      name: string;
+    }[];
+  };
 }

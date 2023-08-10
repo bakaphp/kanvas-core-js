@@ -48,6 +48,17 @@ export const GET_ALL_PRODUCTS = gql`
           slug
           description
           products_id
+          status {
+            id
+            name
+          }
+          warehouses {
+            id
+            warehouseinfo {
+              id
+              name
+            }
+          }
           attributes {
             name
             value
@@ -90,6 +101,17 @@ export const GET_ALL_PRODUCT_TYPES = gql`
         description
         slug
         weight
+      }
+    }
+  }
+`;
+
+export const GET_ALL_STATUS = gql`
+  query getStatus {
+    getStatus {
+      data {
+        id
+        name
       }
     }
   }
