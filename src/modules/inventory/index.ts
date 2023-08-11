@@ -2,7 +2,7 @@ import { ClientType } from './../../index';
 import {
   GET_ALL_PRODUCTS,
   GET_PRODUCT_TYPES,
-  GET_ALL_STATUS,
+  GET_STATUS,
 } from '../../queries/inventory.query';
 import { CREATE_PRODUCT, DELETE_PRODUCT } from '../../mutations';
 import {
@@ -54,9 +54,12 @@ export class Inventory {
 
     return response.data;
   }
-  public async getAllStatus(): Promise<CreatedStatus> {
+  public async getStatus(
+    whereCondition?: WhereCondition
+  ): Promise<CreatedStatus> {
     const response = await this.client.query({
-      query: GET_ALL_STATUS,
+      query: GET_STATUS,
+      variables: { whereCondition },
     });
     return response.data;
   }

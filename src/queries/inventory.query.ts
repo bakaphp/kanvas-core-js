@@ -107,12 +107,12 @@ export const GET_PRODUCT_TYPES = gql`
   }
 `;
 
-export const GET_ALL_STATUS = gql`
-  query getStatus {
-    getStatus {
+export const GET_STATUS = gql`
+  query getStatus($whereCondition: QueryGetStatusWhereWhereConditions) {
+    getStatus(where: $whereCondition) {
       data {
-        id
         name
+        id
       }
     }
   }
