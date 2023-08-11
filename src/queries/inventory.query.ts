@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client/core';
 
-export const GET_ALL_PRODUCTS = gql`
-  query {
-    products {
+export const GET_PRODUCTS = gql`
+  query($whereCondition: QueryProductsWhereWhereConditions) {
+    products(where: $whereCondition) {
       data {
         id
         products_types_id

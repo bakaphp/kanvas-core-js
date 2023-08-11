@@ -1,6 +1,6 @@
 import { ClientType } from './../../index';
 import {
-  GET_ALL_PRODUCTS,
+  GET_PRODUCTS,
   GET_PRODUCT_TYPES,
   GET_STATUS,
 } from '../../queries/inventory.query';
@@ -28,9 +28,12 @@ export class Inventory {
     return response.data;
   }
 
-  public async getAllProduct(): Promise<CreatedProduct> {
+  public async getProduct(
+    whereCondition?: WhereCondition
+  ): Promise<CreatedProduct> {
     const response = await this.client.query({
-      query: GET_ALL_PRODUCTS,
+      query: GET_PRODUCTS,
+      variables: { whereCondition },
     });
 
     return response.data;
