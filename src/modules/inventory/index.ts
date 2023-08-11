@@ -1,7 +1,7 @@
 import { ClientType } from './../../index';
 import {
   GET_ALL_PRODUCTS,
-  GET_ALL_PRODUCT_TYPES,
+  GET_PRODUCT_TYPES,
   GET_ALL_STATUS,
 } from '../../queries/inventory.query';
 import { CREATE_PRODUCT, DELETE_PRODUCT } from '../../mutations';
@@ -12,6 +12,7 @@ import {
   CreatedStatus,
   DeleteProduct,
   ProductInterface,
+  WhereCondition,
 } from '../../types';
 
 export class Inventory {
@@ -34,9 +35,12 @@ export class Inventory {
 
     return response.data;
   }
-  public async getAllProductTypes(): Promise<CreatedProductTypes> {
+  public async getProductTypes(
+    whereCondition?: WhereCondition
+  ): Promise<CreatedProductTypes> {
     const response = await this.client.query({
-      query: GET_ALL_PRODUCT_TYPES,
+      query: GET_PRODUCT_TYPES,
+      variables: { whereCondition },
     });
 
     return response.data;

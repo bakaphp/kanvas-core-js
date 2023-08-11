@@ -29,7 +29,7 @@ export interface ProductVariant {
     warehouseinfo: {
       id: number;
       name: string;
-    };
+    }[];
   };
   attributes?: ProductAttributes[];
 }
@@ -114,7 +114,7 @@ export interface CreateProductVariant
 }
 
 export interface CreateProductParams {
-  products_types_id?: number;
+  products_types_id?: number | null ;
   name: string;
   description: string;
   short_description?: string;
@@ -135,7 +135,9 @@ export interface CreatedProduct {
 }
 
 export interface CreatedProductTypes {
-  productTypes: ProductTypeInterface;
+  productTypes: {
+    data: ProductTypeInterface[];
+  };
 }
 
 export interface DeleteProduct {

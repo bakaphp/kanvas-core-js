@@ -91,11 +91,12 @@ export const GET_ALL_PRODUCTS = gql`
   }
 `;
 
-export const GET_ALL_PRODUCT_TYPES = gql`
-  query {
-    productTypes {
+export const GET_PRODUCT_TYPES = gql`
+  query($whereCondition: QueryProductTypesWhereWhereConditions) {
+    productTypes(where: $whereCondition) {
       data {
         id
+        companies_id
         uuid
         name
         description
