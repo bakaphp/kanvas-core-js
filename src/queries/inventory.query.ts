@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client/core';
 
-export const GET_ALL_PRODUCTS = gql`
-  query {
-    products {
+export const GET_PRODUCTS = gql`
+  query($whereCondition: QueryProductsWhereWhereConditions) {
+    products(where: $whereCondition) {
       data {
         id
         products_types_id
@@ -107,12 +107,12 @@ export const GET_PRODUCT_TYPES = gql`
   }
 `;
 
-export const GET_ALL_STATUS = gql`
-  query getStatus {
-    getStatus {
+export const GET_STATUS = gql`
+  query getStatus($whereCondition: QueryGetStatusWhereWhereConditions) {
+    getStatus(where: $whereCondition) {
       data {
-        id
         name
+        id
       }
     }
   }
