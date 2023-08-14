@@ -109,6 +109,15 @@ export interface LeadsDashboardData {
   leadsDashboard: { data: LeadsAmounts[] };
 }
 
-export interface LeadFollowersData extends CreateLeadData {
+interface LeadFollowersData extends CreateLeadData {
   followers: { data: Followers[] };
+}
+
+
+export interface AllLeadsData {
+  leads: { data: CreateLeadData[] },
+}
+
+export interface LeadData {
+  leads: { data: LeadFollowersData[] },
 }

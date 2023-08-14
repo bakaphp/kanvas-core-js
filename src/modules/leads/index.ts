@@ -11,7 +11,8 @@ import {
   LeadInput,
   LeadsDashboardData,
   WhereCondition,
-  LeadFollowersData,
+  LeadData,
+  AllLeadsData
 } from '../../types';
 
 export class Leads {
@@ -28,7 +29,7 @@ export class Leads {
     return response.data as CreateLeadData;
   }
 
-  public async getAllLeads(): Promise<CreateLeadData> {
+  public async getAllLeads(): Promise<AllLeadsData> {
     const response = await this.client.query({
       query: GET_ALL_LEADS_QUERY,
     });
@@ -52,7 +53,7 @@ export class Leads {
     return response.data;
   }
 
-  public async getLeadByUUID(uuid: string): Promise<LeadFollowersData> {
+  public async getLeadByUUID(uuid: string): Promise<LeadData> {
     const where: WhereCondition = {
       column: 'UUID',
       operator: 'EQ',
