@@ -109,15 +109,27 @@ export interface LeadsDashboardData {
   leadsDashboard: { data: LeadsAmounts[] };
 }
 
-interface LeadFollowersData extends CreateLeadData {
+interface LeadFollowersData {
+  id: number;
+  uuid: string;
+  title: string;
+  firstname: string;
+  lastname: string;
+  reason_lost: string;
+  description: string;
+  created_at: string;
+  user: User;
+  owner: User;
+  company: { id: number };
+  status: { name: string };
+  custom_fields: CustomFieldData;
   followers: { data: Followers[] };
 }
 
-
 export interface AllLeadsData {
-  leads: { data: CreateLeadData[] },
+  leads: { data: CreateLeadData[] };
 }
 
 export interface LeadData {
-  leads: { data: LeadFollowersData[] },
+  leads: { data: LeadFollowersData[] };
 }
