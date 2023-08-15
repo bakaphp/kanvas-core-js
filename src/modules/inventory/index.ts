@@ -2,6 +2,7 @@ import { ClientType } from './../../index';
 import {
   GET_PRODUCTS,
   GET_PRODUCT_TYPES,
+  GET_REGIONS,
   GET_STATUS,
 } from '../../queries/inventory.query';
 import { CREATE_PRODUCT, DELETE_PRODUCT } from '../../mutations';
@@ -10,6 +11,7 @@ import {
   CreatedProduct,
   CreatedProductTypes,
   CreatedStatus,
+  CreatedrRegions,
   DeleteProduct,
   ProductInterface,
   WhereCondition,
@@ -62,6 +64,16 @@ export class Inventory {
   ): Promise<CreatedStatus> {
     const response = await this.client.query({
       query: GET_STATUS,
+      variables: { whereCondition },
+    });
+    return response.data;
+  }
+
+  public async getRegions(
+    whereCondition?: WhereCondition
+  ): Promise<CreatedrRegions> {
+    const response = await this.client.query({
+      query: GET_REGIONS,
       variables: { whereCondition },
     });
     return response.data;

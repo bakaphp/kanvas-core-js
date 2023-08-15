@@ -43,11 +43,15 @@ export const GET_PRODUCTS = gql`
         }
         variants {
           id
+          products_id
           uuid
           name
           slug
           description
-          products_id
+          short_description
+          html_description
+          sku
+          ean
           status {
             id
             name
@@ -113,6 +117,24 @@ export const GET_STATUS = gql`
       data {
         name
         id
+      }
+    }
+  }
+`;
+
+export const GET_REGIONS = gql`
+  query getRegions($whereCondition: QueryRegionsWhereWhereConditions) {
+    regions(where: $whereCondition) {
+      data {
+        id
+        currency_id
+        companies_id
+        uuid
+        name
+        settings
+        slug
+        short_slug
+        is_default
       }
     }
   }

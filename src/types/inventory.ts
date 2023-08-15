@@ -60,6 +60,18 @@ export interface CategoryInterface {
   companies: ProductCompany;
 }
 
+export interface RegionsInterface {
+  id: number;
+  companies_id: number;
+  currency_id: number;
+  uuid: string;
+  name: string;
+  slug: string;
+  short_slug: string;
+  settings: string;
+  is_default: boolean;
+}
+
 export interface WarehouseInterface {
   id: number;
   apps_id: number;
@@ -114,7 +126,7 @@ export interface CreateProductVariant
 }
 
 export interface CreateProductParams {
-  products_types_id?: number | null ;
+  products_types_id?: number | null;
   name: string;
   description: string;
   short_description?: string;
@@ -140,15 +152,21 @@ export interface CreatedProductTypes {
   };
 }
 
-export interface DeleteProduct {
-  deleteProduct: boolean;
-}
-
 export interface CreatedStatus {
   getStatus: {
     data: {
-      id: number;
+      id: string;
       name: string;
     }[];
   };
+}
+
+export interface CreatedrRegions {
+  regions: {
+    data: RegionsInterface[];
+  };
+}
+
+export interface DeleteProduct {
+  deleteProduct: boolean;
 }
