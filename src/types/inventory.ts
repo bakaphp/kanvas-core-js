@@ -126,47 +126,44 @@ export interface ProductInterface {
   companies: ProductCompany;
 }
 
-export interface CreateProductVariant
-  extends Omit<VariantInterface, 'warehouses'> {
-  warehouse: {
-    id: number;
+export interface InputVariantParams {
+  id: number;
+  input: {
+    products_types_id: number;
+    name?: string;
+    description?: string;
+    short_description?: string;
+    files?: []; // Filesystem[];
+    status?: StatusReferenceInput;
+    sku?: string;
+    ean?: string;
+    barcode?: string;
+    attributes?: {
+      id: string;
+      value?: string | number; //Mixed
+    }[];
+    warehouse: {
+      id: number;
+    };
+    serial_number?: string;
+    is_published?: boolean;
   };
 }
 
 export interface CreateProductParams {
-  products_types_id?: number;
-  name?: string;
-  description?: string;
+  products_types_id: number | null;
+  name: string;
+  description: string;
   short_description?: string;
-  files?: []; // Filesystem[];
-  status?: StatusReferenceInput;
-  sku?: string;
-  ean?: string;
-  barcode?: string;
-  attributes?: {
-    id: string;
-    value?: string | number; //Mixed
-  }[];
-  serial_number?: string;
+  html_description?: string;
+  slug?: string;
   is_published?: boolean;
-}
-
-export interface UpdateVariantParams {
-  id: number;
-  input: {
-    products_types_id?: number | null;
-    name: string;
-    description: string;
-    short_description?: string;
-    slug?: string;
-    is_published?: boolean;
-    warranty_terms?: string;
-    upc?: string;
-    warehouses?: number[];
-    categories?: number[];
-    variants?: CreateProductVariant[];
-    price?: number;
-  };
+  warranty_terms?: string;
+  upc?: string;
+  warehouses?: number[];
+  categories?: number[];
+  variants?: InputVariantParams[];
+  price?: number;
 }
 
 export interface CreatedProduct {

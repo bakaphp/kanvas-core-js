@@ -19,7 +19,7 @@ import {
   DeleteProduct,
   ProductInterface,
   UpdatedVariant,
-  UpdateVariantParams,
+  InputVariantParams,
   WhereCondition,
 } from '../../types';
 
@@ -87,7 +87,7 @@ export class Inventory {
   public async updateVariant({
     id,
     input,
-  }: UpdateVariantParams): Promise<UpdatedVariant> {
+  }: InputVariantParams): Promise<UpdatedVariant> {
     const response = await this.client.mutate({
       mutation: UPDATE_VARIANT,
       variables: { id: id, input: input },
