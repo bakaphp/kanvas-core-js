@@ -7,6 +7,10 @@ export interface ProductCompany {
   id: string;
   name: string;
 }
+export interface StatusReferenceInput {
+  id: string;
+  name?: string;
+}
 
 export interface ProductWarehouse {
   id: number;
@@ -15,23 +19,6 @@ export interface ProductWarehouse {
     id: number;
     name: string;
   };
-}
-
-export interface ProductVariant {
-  name: string;
-  description: string;
-  status?: {
-    id: string;
-    name?: string;
-  };
-  warehouses: {
-    id: string;
-    warehouseinfo: {
-      id: number;
-      name: string;
-    }[];
-  };
-  attributes?: ProductAttributes[];
 }
 
 export interface AttributesInterface {
@@ -83,6 +70,27 @@ export interface WarehouseInterface {
   is_default: boolean;
   is_published: number;
 }
+export interface VariantInterface {
+  id?: string;
+  products_id: number;
+  slug: string;
+  name: string;
+  description?: string;
+  short_description: string;
+  html_description: string;
+  status?: StatusReferenceInput;
+  sku: string;
+  ean: string;
+  files?: []; // Filesystem[];
+  warehouses: {
+    id: string;
+    warehouseinfo: {
+      id: number;
+      name: string;
+    }[];
+  };
+  attributes?: ProductAttributes[];
+}
 
 export interface ProductTypeInterface {
   id: number;
@@ -112,32 +120,53 @@ export interface ProductInterface {
   files: []; // Filesystem[];
   categories: CategoryInterface[];
   warehouses: ProductWarehouse[];
-  variants: ProductVariant[];
+  variants: VariantInterface[];
   attributes: AttributesInterface[];
   productsTypes: ProductTypeInterface;
   companies: ProductCompany;
 }
 
 export interface CreateProductVariant
-  extends Omit<ProductVariant, 'warehouses'> {
+  extends Omit<VariantInterface, 'warehouses'> {
   warehouse: {
     id: number;
   };
 }
 
 export interface CreateProductParams {
-  products_types_id?: number | null;
-  name: string;
-  description: string;
+  products_types_id?: number;
+  name?: string;
+  description?: string;
   short_description?: string;
-  slug?: string;
+  files?: []; // Filesystem[];
+  status?: StatusReferenceInput;
+  sku?: string;
+  ean?: string;
+  barcode?: string;
+  attributes?: {
+    id: string;
+    value?: string | number; //Mixed
+  }[];
+  serial_number?: string;
   is_published?: boolean;
-  warranty_terms?: string;
-  upc?: string;
-  warehouses?: number[];
-  categories?: number[];
-  variants?: CreateProductVariant[];
-  price?: number;
+}
+
+export interface UpdateVariantParams {
+  id: number;
+  input: {
+    products_types_id?: number | null;
+    name: string;
+    description: string;
+    short_description?: string;
+    slug?: string;
+    is_published?: boolean;
+    warranty_terms?: string;
+    upc?: string;
+    warehouses?: number[];
+    categories?: number[];
+    variants?: CreateProductVariant[];
+    price?: number;
+  };
 }
 
 export interface CreatedProduct {
@@ -149,6 +178,12 @@ export interface CreatedProduct {
 export interface CreatedProductTypes {
   productTypes: {
     data: ProductTypeInterface[];
+  };
+}
+
+export interface UpdatedVariant {
+  products: {
+    updateVariant: VariantInterface;
   };
 }
 
