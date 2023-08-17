@@ -98,7 +98,7 @@ interface LeadsAmounts {
   total_agents: number;
 }
 
-interface Followers {
+interface Follower {
   id: string;
   firstname: string;
   lastname: string;
@@ -109,21 +109,8 @@ export interface LeadsDashboardData {
   leadsDashboard: { data: LeadsAmounts[] };
 }
 
-interface LeadFollowersData {
-  id: number;
-  uuid: string;
-  title: string;
-  firstname: string;
-  lastname: string;
-  reason_lost: string;
-  description: string;
-  created_at: string;
-  user: User;
-  owner: User;
-  company: { id: number };
-  status: { name: string };
-  custom_fields: CustomFieldData;
-  followers: { data: Followers[] };
+interface FollowersData extends CreateLeadData {
+  followers: { data: Follower[] };
 }
 
 export interface AllLeadsData {
@@ -131,5 +118,5 @@ export interface AllLeadsData {
 }
 
 export interface LeadData {
-  leads: { data: LeadFollowersData[] };
+  leads: { data: FollowersData[] };
 }
