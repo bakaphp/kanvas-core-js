@@ -71,8 +71,14 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
         id
         uuid
         title
+        firstname
+        lastname
+        created_at
+        description
+        reason_lost
         company {
           id
+          name
         }
         people {
           name
@@ -89,6 +95,8 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
         }
         status {
           name
+          id
+          is_default
         }
         type {
           name
