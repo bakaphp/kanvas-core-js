@@ -79,6 +79,7 @@ export interface LeadInput {
   reason_lost: string;
   pipeline_stage_id: number;
   custom_fields: CustomFieldInput[];
+  followers?: { data: Follower[] };
 }
 
 export interface WhereCondition {
@@ -109,14 +110,6 @@ export interface LeadsDashboardData {
   leadsDashboard: { data: LeadsAmounts[] };
 }
 
-interface FollowersData extends CreateLeadData {
-  followers: { data: Follower[] };
-}
-
-export interface AllLeadsData {
+export interface LeadsData {
   leads: { data: CreateLeadData[] };
-}
-
-export interface LeadData {
-  leads: { data: FollowersData[] };
 }
