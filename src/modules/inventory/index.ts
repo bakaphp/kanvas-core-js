@@ -5,7 +5,11 @@ import {
   GET_REGIONS,
   GET_STATUS,
 } from '../../queries/inventory.query';
-import { CREATE_PRODUCT, DELETE_PRODUCT } from '../../mutations';
+import {
+  CREATE_PRODUCT,
+  DELETE_PRODUCT,
+  UPDATE_VARIANT,
+} from '../../mutations';
 import {
   CreateProductParams,
   CreatedProduct,
@@ -14,6 +18,8 @@ import {
   CreatedrRegions,
   DeleteProduct,
   ProductInterface,
+  UpdatedVariant,
+  InputVariantParams,
   WhereCondition,
 } from '../../types';
 
@@ -75,6 +81,16 @@ export class Inventory {
     const response = await this.client.query({
       query: GET_REGIONS,
       variables: { whereCondition },
+    });
+    return response.data;
+  }
+  public async updateVariant({
+    id,
+    input,
+  }: InputVariantParams): Promise<UpdatedVariant> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_VARIANT,
+      variables: { id: id, input: input },
     });
     return response.data;
   }

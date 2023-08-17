@@ -41,3 +41,32 @@ export const DELETE_PRODUCT = gql`
     deleteProduct(id: $id)
   }
 `;
+
+export const UPDATE_VARIANT = gql`
+  mutation($id: ID!, $input: VariantsUpdateInput!) {
+    updateVariant(id: $id, input: $input) {
+      id
+      products_id
+      name
+      description
+      short_description
+      html_description
+      status {
+        id
+      }
+      attributes {
+        name
+        value
+      }
+      warehouses {
+        id
+        warehouseinfo {
+          id
+          name
+        }
+      }
+      sku
+      ean
+    }
+  }
+`;
