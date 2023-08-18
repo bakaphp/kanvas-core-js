@@ -142,5 +142,5 @@ export interface InviteUserData {
 }
 
 export interface RoleData {
-  roles: { data: { id: string | number }[] };
+  roles: { data: { id: number }[] };
 }
