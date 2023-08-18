@@ -150,6 +150,22 @@ export interface InputVariantParams {
   };
 }
 
+export interface ProductVariant {
+  name: string;
+  description: string;
+  status?: {
+    id: string;
+    name?: string;
+  };
+  sku?: string;
+  ean?: string;
+  barcode?: string;
+  warehouse: {
+    id: number;
+  };
+  attributes?: ProductAttributes[];
+}
+
 export interface CreateProductParams {
   products_types_id: number | null;
   name: string;
@@ -162,7 +178,7 @@ export interface CreateProductParams {
   upc?: string;
   warehouses?: number[];
   categories?: number[];
-  variants?: InputVariantParams[];
+  variants?: ProductVariant[];
   price?: number;
 }
 
