@@ -30,7 +30,7 @@ interface User {
 interface Status {
   id: number;
   name: string;
-  is_default: string;
+  is_default: boolean;
 }
 interface Company {
   id: number;
