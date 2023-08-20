@@ -4,8 +4,9 @@ import { CustomFieldInput, CustomFieldData } from './custom-fields';
 
 interface Contact {
   value: string;
-  contacts_types_id: number;
-  weight: number;
+  contacts_types_id?: number;
+  weight?: number;
+  type?: Type;
 }
 
 interface Address {
@@ -14,11 +15,12 @@ interface Address {
 }
 
 interface People {
-  firstname: string;
-  lastname: string;
+  name?: string;
+  firstname?: string;
+  lastname?: string;
   contacts: Contact[];
-  address: Address[];
-  custom_fields: CustomFieldInput[];
+  address?: Address[];
+  custom_fields?: CustomFieldInput[];
 }
 
 interface User {
@@ -40,6 +42,24 @@ interface Organization {
   name: string;
 }
 
+interface Receiver {
+  name: string;
+  uuid: string;
+}
+
+
+interface Type {
+  name: string;
+}
+interface Source {
+  name: string;
+}
+interface Pipeline {
+  name: string;
+}
+interface Stage {
+  name: string;
+}
 export interface CreateLeadParams {
   branch_id: number;
   title: string;
@@ -55,14 +75,21 @@ export interface CreateLeadData {
   title: string;
   firstname: string;
   lastname: string;
-  reason_lost: string;
-  description: string;
+  reason_lost: string | null;
+  description: string | null;
   created_at: string;
-  user: User;
-  owner: User;
+  user?: User;
+  owner?: User;
   company: Company;
   status: Status;
   custom_fields: CustomFieldData;
+  receiver?: Receiver | null;
+  type?: Type | null;
+  source?: Source | null;
+  stage?: Stage | null;
+  pipeline?: Pipeline | null;
+  people?: People;
+  followers?: { data: Follower[] };
 }
 
 export interface LeadInput {
@@ -79,7 +106,6 @@ export interface LeadInput {
   reason_lost: string;
   pipeline_stage_id: number;
   custom_fields: CustomFieldInput[];
-  followers?: { data: Follower[] };
 }
 
 export interface WhereCondition {
@@ -100,7 +126,7 @@ interface LeadsAmounts {
 }
 
 interface Follower {
-  id: string;
+  id: number;
   firstname: string;
   lastname: string;
   email: string;
