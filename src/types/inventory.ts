@@ -154,7 +154,7 @@ export interface ProductVariant {
   name: string;
   description: string;
   status?: {
-    id: string;
+    id: number;
     name?: string;
   };
   sku?: string;
