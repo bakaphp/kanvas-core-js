@@ -44,8 +44,8 @@ export class Leads {
       value: userID,
     };
 
-    const response = await this.client.mutate({
-      mutation: GET_LEADS_DASHBOARD_QUERY,
+    const response = await this.client.query({
+      query: GET_LEADS_DASHBOARD_QUERY,
       variables: { first, where },
     });
 
@@ -59,8 +59,8 @@ export class Leads {
       value: uuid,
     };
 
-    const response = await this.client.mutate({
-      mutation: GET_LEAD_BY_UUID_QUERY,
+    const response = await this.client.query({
+      query: GET_LEAD_BY_UUID_QUERY,
       variables: { where },
     });
 
