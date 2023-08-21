@@ -32,6 +32,21 @@ export function genericAuthMiddleware(fn: () => Promise<string | null | undefine
   })
 }
 
+export function locationMiddleware(
+  fn: () => Promise<string | null | undefined>
+) {
+  return setContext(async (_, context) => {
+    const key = await fn();
+
+    const headers = {
+      ...context.headers,
+      'X-Kanvas-Location': key ? key : '',
+    };
+
+    return { headers };
+  });
+}
+
 export default class KanvasCore {
   public client: ClientType;
   public auth: Auth;
