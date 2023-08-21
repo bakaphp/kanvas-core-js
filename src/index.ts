@@ -40,7 +40,7 @@ export function locationMiddleware(
 
     const headers = {
       ...context.headers,
-      'X-Kanvas-Location': key ? key : '',
+      ...(key && { 'X-Kanvas-Location': key }),
     };
 
     return { headers };
