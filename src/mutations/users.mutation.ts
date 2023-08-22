@@ -69,3 +69,9 @@ export const INVITE_USER_MUTATION = gql`
     }
   }
 `;
+
+export const SWITCH_COMPANY_BRANCH_MUTATION = gql`
+  mutation switchCompanyBranch($company_branch_id: Int!) {
+    switchCompanyBranch(company_branch_id: $company_branch_id)
+  }
+`;

@@ -5,6 +5,7 @@ import {
   FORGOT_PASSWORD_MUTATION,
   UPDATE_USER_MUTATION,
   INVITE_USER_MUTATION,
+  SWITCH_COMPANY_BRANCH_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -83,5 +84,16 @@ export class Users {
     });
 
     return response.data;
+  }
+
+  public async switchCompany(id: number) {
+    const response = await this.client.mutate({
+      mutation: SWITCH_COMPANY_BRANCH_MUTATION,
+      variables: {
+        company_branch_id: id
+      }
+    })
+
+    return response.data
   }
 }

@@ -17,11 +17,18 @@ export const GET_USER_DATA_QUERY = gql`
       email
       branches {
         id
+        uuid
         name
         phone
+        company {
+          name
+          uuid
+          id
+        }
       }
       companies {
         id
+        uuid
         name
       }
       roles
