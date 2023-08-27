@@ -7,8 +7,14 @@ export const GET_ALL_LEADS_QUERY = gql`
         id
         uuid
         title
+        firstname
+        lastname
+        created_at
+        description
+        reason_lost
         company {
           id
+          name
         }
         people {
           name
