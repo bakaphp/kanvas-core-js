@@ -1,14 +1,20 @@
 import { gql } from '@apollo/client/core';
 
 export const GET_ALL_LEADS_QUERY = gql`
-  query {
-    leads {
+  query GetLeads($first: Int!, $page: Int!) {
+    leads(first: $first, page: $page) {
       data {
         id
         uuid
         title
+        firstname
+        lastname
+        created_at
+        description
+        reason_lost
         company {
           id
+          name
         }
         people {
           name
@@ -44,6 +50,16 @@ export const GET_ALL_LEADS_QUERY = gql`
             value
           }
         }
+      }
+      paginatorInfo {
+        currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
+        lastPage
+        hasMorePages
       }
     }
   }
