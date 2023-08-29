@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { CustomFieldInput, CustomFieldData } from './custom-fields';
+import { PaginatorInfo } from './paginator';
 
 interface Contact {
   value: string;
@@ -47,7 +48,6 @@ interface Receiver {
   uuid: string;
 }
 
-
 interface Type {
   name: string;
 }
@@ -90,6 +90,7 @@ export interface CreateLeadData {
   pipeline?: Pipeline | null;
   people?: People;
   followers?: { data: Follower[] };
+  paginatorInfo?: PaginatorInfo;
 }
 
 export interface LeadInput {

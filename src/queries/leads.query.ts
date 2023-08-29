@@ -51,6 +51,16 @@ export const GET_ALL_LEADS_QUERY = gql`
           }
         }
       }
+      paginatorInfo {
+        currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
+        lastPage
+        hasMorePages
+      }
     }
   }
 `;
