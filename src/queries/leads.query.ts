@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client/core';
 
 export const GET_ALL_LEADS_QUERY = gql`
-  query {
-    leads {
+  query GetLeads($first: Int!, $page: Int!) {
+    leads(first: $first, page: $page) {
       data {
         id
         uuid

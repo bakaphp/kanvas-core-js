@@ -11,7 +11,7 @@ import {
   LeadInput,
   LeadsDashboardData,
   WhereCondition,
-  LeadsData
+  LeadsData,
 } from '../../types';
 
 export class Leads {
@@ -28,9 +28,10 @@ export class Leads {
     return response.data as CreateLeadData;
   }
 
-  public async getAllLeads(): Promise<LeadsData> {
+  public async getAllLeads(first: number, page: number): Promise<LeadsData> {
     const response = await this.client.query({
       query: GET_ALL_LEADS_QUERY,
+      variables: { first, page },
     });
 
     return response.data;
