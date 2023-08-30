@@ -20,6 +20,10 @@ export interface ProductWarehouse {
     name: string;
   };
 }
+export interface StatusInterface {
+  id: string;
+  name: string;
+}
 
 export interface AttributesInterface {
   id: number;
@@ -78,7 +82,7 @@ export interface VariantInterface {
   description?: string;
   short_description: string;
   html_description: string;
-  status?: StatusReferenceInput;
+  status: StatusInterface;
   sku: string;
   ean: string;
   files?: []; // Filesystem[];
@@ -87,8 +91,8 @@ export interface VariantInterface {
     warehouseinfo: {
       id: number;
       name: string;
-    }[];
-  };
+    }
+  }[];
   attributes?: ProductAttributes[];
 }
 
@@ -129,7 +133,7 @@ export interface ProductInterface {
 export interface InputVariantParams {
   id: number;
   input: {
-    products_types_id: number;
+    products_id: number;
     name?: string;
     description?: string;
     short_description?: string;
@@ -202,10 +206,7 @@ export interface UpdatedVariant {
 
 export interface CreatedStatus {
   getStatus: {
-    data: {
-      id: string;
-      name: string;
-    }[];
+    data: StatusInterface[];
   };
 }
 
