@@ -28,7 +28,7 @@ interface User {
   id: number;
   firstname: string;
   lastname: string;
-  displayName?: string;
+  displayname?: string;
 }
 
 interface Status {
