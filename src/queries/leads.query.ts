@@ -12,8 +12,15 @@ export const GET_ALL_LEADS_QUERY = gql`
         created_at
         description
         reason_lost
-        user { firstname, lastname}
-        owner { firstname, lastname, displayname}
+        user {
+          firstname
+          lastname
+        }
+        owner {
+          firstname
+          lastname
+          displayname
+        }
         company {
           id
           name
@@ -94,6 +101,15 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
         created_at
         description
         reason_lost
+        user {
+          firstname
+          lastname
+        }
+        owner {
+          firstname
+          lastname
+          displayname
+        }
         company {
           id
           name
