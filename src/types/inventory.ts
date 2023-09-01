@@ -133,7 +133,7 @@ export interface ProductInterface {
 export interface InputProductParams {
   id: number;
   input: {
-    products_types_id: number;
+    products_types_id?: number;
     name?: string;
     description?: string;
     short_description?: string;
