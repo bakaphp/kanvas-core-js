@@ -75,7 +75,7 @@ export interface WarehouseInterface {
   is_published: number;
 }
 export interface VariantInterface {
-  id?: string;
+  id: string;
   products_id: number;
   slug: string;
   name: string;
@@ -91,7 +91,7 @@ export interface VariantInterface {
     warehouseinfo: {
       id: number;
       name: string;
-    }
+    };
   }[];
   attributes?: ProductAttributes[];
 }
@@ -130,8 +130,22 @@ export interface ProductInterface {
   companies: ProductCompany;
 }
 
-export interface InputVariantParams {
+export interface InputProductParams {
   id: number;
+  input: {
+    products_types_id?: number;
+    name?: string;
+    description?: string;
+    short_description?: string;
+    html_description?: string;
+    warranty_terms?: string;
+    upc?: string;
+    is_published?: boolean;
+  };
+}
+
+export interface InputVariantParams {
+  id: string | number;
   input: {
     products_id: number;
     name?: string;
@@ -143,10 +157,10 @@ export interface InputVariantParams {
     ean?: string;
     barcode?: string;
     attributes?: {
-      id: string;
+      name: string;
       value?: string | number; //Mixed
     }[];
-    warehouse: {
+    warehouse?: {
       id: number;
     };
     serial_number?: string;
@@ -201,6 +215,12 @@ export interface CreatedProductTypes {
 export interface UpdatedVariant {
   products: {
     updateVariant: VariantInterface;
+  };
+}
+
+export interface UpdatedProduct {
+  data: {
+    updateProduct: ProductInterface;
   };
 }
 

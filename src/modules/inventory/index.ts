@@ -8,6 +8,7 @@ import {
 import {
   CREATE_PRODUCT,
   DELETE_PRODUCT,
+  UPDATE_PRODUCT,
   UPDATE_VARIANT,
 } from '../../mutations';
 import {
@@ -21,6 +22,8 @@ import {
   UpdatedVariant,
   InputVariantParams,
   WhereCondition,
+  UpdatedProduct,
+  InputProductParams,
 } from '../../types';
 
 export class Inventory {
@@ -90,6 +93,17 @@ export class Inventory {
   }: InputVariantParams): Promise<UpdatedVariant> {
     const response = await this.client.mutate({
       mutation: UPDATE_VARIANT,
+      variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
+  public async updateProduct({
+    id,
+    input,
+  }: InputProductParams): Promise<UpdatedProduct> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_PRODUCT,
       variables: { id: id, input: input },
     });
     return response.data;
