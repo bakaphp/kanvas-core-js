@@ -42,6 +42,25 @@ export const DELETE_PRODUCT = gql`
   }
 `;
 
+export const UPDATE_PRODUCT = gql`
+  mutation($input: ProductInputUpdate, $id: Int!) {
+    updateProduct(id: $id, input: $input) {
+      products_types_id
+      name
+      description
+      productsTypes {
+        id
+        name
+      }
+      short_description
+      html_description
+      warranty_terms
+      upc
+      is_published
+    }
+  }
+`;
+
 export const UPDATE_VARIANT = gql`
   mutation($id: ID!, $input: VariantsUpdateInput!) {
     updateVariant(id: $id, input: $input) {
