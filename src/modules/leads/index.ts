@@ -28,7 +28,7 @@ export class Leads {
     return response.data as CreateLeadData;
   }
 
-  public async getAllLeads(first: number, page: number): Promise<LeadsData> {
+  public async getAllLeads(first?: number, page?: number): Promise<LeadsData> {
     const response = await this.client.query({
       query: GET_ALL_LEADS_QUERY,
       variables: { first, page },
