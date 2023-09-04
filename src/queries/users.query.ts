@@ -33,7 +33,7 @@ export const GET_USER_DATA_QUERY = gql`
       }
       roles
       abilities
-      custom_fields {
+      custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }],) {
         data {
           name
           value
