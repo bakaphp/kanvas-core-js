@@ -1,3 +1,5 @@
+import { PaginatorInfo } from './paginator';
+
 export interface ProductAttributes {
   name: string;
   value: string;
@@ -203,7 +205,9 @@ export interface CreateProductParams {
 export interface CreatedProduct {
   products: {
     data: ProductInterface[];
+    paginatorInfo?: PaginatorInfo;
   };
+
 }
 
 export interface CreatedProductTypes {

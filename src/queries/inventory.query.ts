@@ -1,8 +1,12 @@
 import { gql } from '@apollo/client/core';
 
 export const GET_PRODUCTS = gql`
-  query($whereCondition: QueryProductsWhereWhereConditions) {
-    products(where: $whereCondition) {
+  query(
+    $first: Int
+    $page: Int
+    $whereCondition: QueryProductsWhereWhereConditions
+  ) {
+    products(first: $first, page: $page, where: $whereCondition) {
       data {
         id
         products_types_id
@@ -58,6 +62,11 @@ export const GET_PRODUCTS = gql`
           }
           warehouses {
             id
+            status_history {
+              id
+              name
+              from_date
+            }
             warehouseinfo {
               id
               name
@@ -89,7 +98,21 @@ export const GET_PRODUCTS = gql`
         companies {
           id
           name
+          user {
+            firstname
+            lastname
+          }
         }
+      },
+      paginatorInfo {
+        currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
+        lastPage
+        hasMorePages
       }
     }
   }

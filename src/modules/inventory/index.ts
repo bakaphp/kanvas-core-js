@@ -40,11 +40,13 @@ export class Inventory {
   }
 
   public async getProduct(
+    first?: number,
+    page?: number,
     whereCondition?: WhereCondition
   ): Promise<CreatedProduct> {
     const response = await this.client.query({
       query: GET_PRODUCTS,
-      variables: { whereCondition },
+      variables: { first, page, whereCondition },
     });
 
     return response.data;
