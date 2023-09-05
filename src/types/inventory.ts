@@ -90,6 +90,11 @@ export interface VariantInterface {
   files?: []; // Filesystem[];
   warehouses: {
     id: string;
+    status_history?: {
+      id: string | number;
+      name: string;
+      from_date: string;
+    }[];
     warehouseinfo: {
       id: number;
       name: string;
@@ -170,6 +175,19 @@ export interface InputVariantParams {
   };
 }
 
+export interface InputVariantWarehouseParams {
+  id: string | number;
+  input: {
+    warehouse_id: string | number;
+    status?: {
+      id: string;
+    };
+    quantity?: number;
+    price?: number;
+    sku?: string;
+  };
+}
+
 export interface ProductVariant {
   name: string;
   description: string;
@@ -207,7 +225,6 @@ export interface CreatedProduct {
     data: ProductInterface[];
     paginatorInfo?: PaginatorInfo;
   };
-
 }
 
 export interface CreatedProductTypes {
@@ -220,6 +237,10 @@ export interface UpdatedVariant {
   products: {
     updateVariant: VariantInterface;
   };
+}
+
+export interface UpdatedVariantWarehouse {
+  updateVariantInWarehouse: VariantInterface;
 }
 
 export interface UpdatedProduct {

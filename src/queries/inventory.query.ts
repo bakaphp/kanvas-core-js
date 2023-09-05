@@ -103,7 +103,7 @@ export const GET_PRODUCTS = gql`
             lastname
           }
         }
-      },
+      }
       paginatorInfo {
         currentPage
         perPage
