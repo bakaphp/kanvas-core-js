@@ -10,6 +10,7 @@ import {
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
   UPDATE_VARIANT,
+  UPDATE_VARIANT_IN_WAREHOUSE,
 } from '../../mutations';
 import {
   CreateProductParams,
@@ -24,6 +25,8 @@ import {
   WhereCondition,
   UpdatedProduct,
   InputProductParams,
+  InputVariantWarehouseParams,
+  UpdatedVariantWarehouse,
 } from '../../types';
 
 export class Inventory {
@@ -89,6 +92,16 @@ export class Inventory {
     });
     return response.data;
   }
+  public async updateProduct({
+    id,
+    input,
+  }: InputProductParams): Promise<UpdatedProduct> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_PRODUCT,
+      variables: { id: id, input: input },
+    });
+    return response.data;
+  }
   public async updateVariant({
     id,
     input,
@@ -100,12 +113,12 @@ export class Inventory {
     return response.data;
   }
 
-  public async updateProduct({
+  public async updateVariantWarehouse({
     id,
     input,
-  }: InputProductParams): Promise<UpdatedProduct> {
+  }: InputVariantWarehouseParams): Promise<UpdatedVariantWarehouse> {
     const response = await this.client.mutate({
-      mutation: UPDATE_PRODUCT,
+      mutation: UPDATE_VARIANT_IN_WAREHOUSE,
       variables: { id: id, input: input },
     });
     return response.data;

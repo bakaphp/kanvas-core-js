@@ -79,6 +79,45 @@ export const UPDATE_VARIANT = gql`
       }
       warehouses {
         id
+        status_history {
+          id
+          name
+          from_date
+        }
+        warehouseinfo {
+          id
+          name
+        }
+      }
+      sku
+      ean
+    }
+  }
+`;
+
+export const UPDATE_VARIANT_IN_WAREHOUSE = gql`
+  mutation($id: ID!, $input: VariantsWarehousesInput!) {
+    updateVariantInWarehouse(id: $id, input: $input) {
+      id
+      products_id
+      name
+      description
+      short_description
+      html_description
+      status {
+        id
+      }
+      attributes {
+        name
+        value
+      }
+      warehouses {
+        id
+        status_history {
+          id
+          name
+          from_date
+        }
         warehouseinfo {
           id
           name
