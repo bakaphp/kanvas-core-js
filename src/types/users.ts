@@ -113,6 +113,9 @@ export interface UserData {
       value: any;
     }[];
   };
+  photo?: {
+    url: string;
+  };
 }
 
 export interface UpdateUserParams {

@@ -30,26 +30,29 @@ export const UPDATE_USER_MUTATION = gql`
   mutation updateUser($id: ID!, $data: UpdateUserInput!) {
     updateUser(id: $id, data: $data) {
       id
-      description
-      displayname
+      uuid
       firstname
       lastname
-      default_company_branch
+      displayname
       default_company
-      address {
-        address_1
-        city {
-          name
-        }
-        state {
-          name
-        }
-        zip_code
-        country {
-          name
-        }
+      default_company_branch
+      email
+      branches {
+        id
+        name
+        phone
       }
-      custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }],) {
+      companies {
+        id
+        name
+      }
+      contact {
+        phone_number
+        cell_phone_number
+      }
+      roles
+      abilities
+      custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }]) {
         data {
           name
           value
