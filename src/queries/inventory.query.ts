@@ -62,6 +62,11 @@ export const GET_PRODUCTS = gql`
           }
           warehouses {
             id
+            status_history {
+              id
+              name
+              from_date
+            }
             warehouseinfo {
               id
               name
@@ -93,8 +98,12 @@ export const GET_PRODUCTS = gql`
         companies {
           id
           name
+          user {
+            firstname
+            lastname
+          }
         }
-      }
+      },
       paginatorInfo {
         currentPage
         perPage
