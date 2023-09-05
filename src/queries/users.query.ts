@@ -8,36 +8,32 @@ export const GET_USER_DATA_QUERY = gql`
       firstname
       lastname
       displayname
-      default_company_branch
       default_company
+      default_company_branch
+      email
+      branches {
+        id
+        name
+        phone
+      }
+      companies {
+        id
+        name
+      }
       contact {
         phone_number
         cell_phone_number
       }
-      email
-      branches {
-        id
-        uuid
-        name
-        phone
-        company {
-          name
-          uuid
-          id
-        }
-      }
-      companies {
-        id
-        uuid
-        name
-      }
       roles
       abilities
-      custom_fields {
+      custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }]) {
         data {
           name
           value
         }
+      }
+      photo {
+        url
       }
     }
   }

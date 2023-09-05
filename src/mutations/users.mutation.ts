@@ -27,17 +27,15 @@ export const FORGOT_PASSWORD_MUTATION = gql`
 `;
 
 export const UPDATE_USER_MUTATION = gql`
-  mutation UpdateUser($id: ID!, $data: UpdateUserInput!) {
+  mutation updateUser($id: ID!, $data: UpdateUserInput!) {
     updateUser(id: $id, data: $data) {
       id
       uuid
       firstname
       lastname
       displayname
-      contact {
-        phone_number
-        cell_phone_number
-      }
+      default_company
+      default_company_branch
       email
       branches {
         id
@@ -48,13 +46,20 @@ export const UPDATE_USER_MUTATION = gql`
         id
         name
       }
+      contact {
+        phone_number
+        cell_phone_number
+      }
       roles
       abilities
-      custom_fields {
+      custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }]) {
         data {
           name
           value
         }
+      }
+      photo {
+        url
       }
     }
   }
