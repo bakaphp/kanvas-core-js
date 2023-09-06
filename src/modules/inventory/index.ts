@@ -27,6 +27,7 @@ import {
   InputProductParams,
   InputVariantWarehouseParams,
   UpdatedVariantWarehouse,
+  AllCreatedProducts,
 } from '../../types';
 
 export class Inventory {
@@ -46,7 +47,7 @@ export class Inventory {
     first?: number,
     page?: number,
     whereCondition?: WhereCondition
-  ): Promise<CreatedProduct> {
+  ): Promise<AllCreatedProducts> {
     const response = await this.client.query({
       query: GET_PRODUCTS,
       variables: { first, page, whereCondition },
