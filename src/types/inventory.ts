@@ -200,6 +200,9 @@ export interface ProductVariant {
   barcode?: string;
   warehouse: {
     id: number;
+    status?: {
+      id: number;
+    };
   };
   attributes?: ProductAttributes[];
 }
@@ -220,13 +223,16 @@ export interface CreateProductParams {
   price?: number;
 }
 
-export interface CreatedProduct {
+export interface AllCreatedProducts {
   products: {
     data: ProductInterface[];
     paginatorInfo?: PaginatorInfo;
   };
 }
 
+export interface CreatedProduct {
+  createProduct: ProductInterface;
+}
 export interface CreatedProductTypes {
   productTypes: {
     data: ProductTypeInterface[];

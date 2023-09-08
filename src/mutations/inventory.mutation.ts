@@ -30,6 +30,11 @@ export const CREATE_PRODUCT = gql`
         }
         warehouses {
           id
+          status_history {
+            id
+            name
+            from_date
+          }
         }
       }
     }
