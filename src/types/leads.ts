@@ -139,5 +139,5 @@ export interface LeadsDashboardData {
 }
 
 export interface LeadsData {
-  leads: { data: CreateLeadData[] };
+  leads: { data: CreateLeadData[]; paginatorInfo?: PaginatorInfo };
 }
