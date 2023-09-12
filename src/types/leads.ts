@@ -95,7 +95,6 @@ export interface CreateLeadData {
   pipeline?: Pipeline | null;
   people?: People;
   followers?: { data: Follower[] };
-  paginatorInfo?: PaginatorInfo;
   files?: File[];
 }
 
@@ -145,5 +144,5 @@ export interface LeadsDashboardData {
 }
 
 export interface LeadsData {
-  leads: { data: CreateLeadData[] };
+  leads: { data: CreateLeadData[],  paginatorInfo?: PaginatorInfo };
 }
