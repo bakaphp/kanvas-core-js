@@ -61,3 +61,13 @@ interface BranchInterface {
   name: string;
   companies_id: number;
 }
+
+interface FileUpload {
+  id: number;
+  name: string;
+  url: string;
+}
+
+export interface MultiUpload {
+  multiUpload: FileUpload[];
+}

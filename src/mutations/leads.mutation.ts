@@ -7,21 +7,21 @@ export const CREATE_LEAD_MUTATION = gql`
       uuid
       title
       firstname
-      lastname 
+      lastname
       created_at
       description
       reason_lost
       owner {
         id
-        firstname 
+        firstname
         lastname
       }
       user {
         id
-        firstname 
+        firstname
         lastname
       }
-      company{
+      company {
         id
         name
       }
@@ -34,6 +34,12 @@ export const CREATE_LEAD_MUTATION = gql`
         data {
           name
           value
+        }
+      }
+      files {
+        data {
+          name
+          url
         }
       }
     }

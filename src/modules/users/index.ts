@@ -6,6 +6,7 @@ import {
   UPDATE_USER_MUTATION,
   INVITE_USER_MUTATION,
   SWITCH_COMPANY_BRANCH_MUTATION,
+  MULTIPLE_UPLOAD_FILES,
 } from '../../mutations';
 import {
   UserInterface,
@@ -17,6 +18,7 @@ import {
   InviteUserParams,
   WhereCondition,
   RoleData,
+  MultiUpload,
 } from '../../types';
 
 export class Users {
@@ -90,10 +92,21 @@ export class Users {
     const response = await this.client.mutate({
       mutation: SWITCH_COMPANY_BRANCH_MUTATION,
       variables: {
-        company_branch_id: id
-      }
-    })
+        company_branch_id: id,
+      },
+    });
 
-    return response.data
+    return response.data;
+  }
+
+  public async multiUpload(files: []): Promise<MultiUpload> {
+    const response = await this.client.mutate({
+      mutation: MULTIPLE_UPLOAD_FILES,
+      variables: {
+        files,
+      },
+    });
+
+    return response.data;
   }
 }

@@ -1,8 +1,24 @@
-import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, RequestHandler, NormalizedCacheObject } from "@apollo/client/core";
-import { App, Auth, Users, CustomFields, Locations, Leads, Inventory } from './modules';
+import {
+  ApolloClient,
+  ApolloLink,
+  HttpLink,
+  InMemoryCache,
+  RequestHandler,
+  NormalizedCacheObject,
+} from '@apollo/client/core';
+import {
+  App,
+  Auth,
+  Users,
+  CustomFields,
+  Locations,
+  Leads,
+  Inventory,
+  Agents,
+} from './modules';
 
 import { setContext } from '@apollo/client/link/context';
-import Settings from "./modules/settings";
+import Settings from './modules/settings';
 
 export * from './types';
 export * from './queries';
@@ -19,17 +35,19 @@ interface Options {
   adminKey?: string;
 }
 
-export function genericAuthMiddleware(fn: () => Promise<string | null | undefined>) {
+export function genericAuthMiddleware(
+  fn: () => Promise<string | null | undefined>
+) {
   return setContext(async (_, context) => {
     const key = await fn();
 
     const headers = {
       ...context.headers,
-      'Authorization': key ? `Bearer ${key}` : '',
-    }
+      Authorization: key ? `Bearer ${key}` : '',
+    };
 
     return { headers };
-  })
+  });
 }
 
 export function locationMiddleware(
@@ -57,7 +75,7 @@ export default class KanvasCore {
   public locations: Locations;
   public leads: Leads;
   public inventory: Inventory;
-
+  public agents: Agents;
 
   constructor(protected options: Options) {
     this.client = new ApolloClient({
@@ -70,10 +88,10 @@ export default class KanvasCore {
     this.users = new Users(this.client);
     this.customFields = new CustomFields(this.client);
     this.settings = new Settings(this.client, this.options.key);
-    this.locations = new Locations(this.client)
+    this.locations = new Locations(this.client);
     this.leads = new Leads(this.client);
-    this.inventory = new Inventory(this.client)
-
+    this.inventory = new Inventory(this.client);
+    this.agents = new Agents(this.client);
   }
 
   protected generateURL() {
@@ -86,9 +104,9 @@ export default class KanvasCore {
         ...context.headers,
         'X-Kanvas-App': this.options.key,
         ...(this.options.adminKey && { 'X-Kanvas-Key': this.options.adminKey }),
-      }
-      return { headers }
-    })
+      };
+      return { headers };
+    });
   }
 
   protected generateLink(): ApolloLink {
@@ -96,6 +114,6 @@ export default class KanvasCore {
       ...(this.options.middlewares || []),
       this.generateMiddleware(),
       this.generateURL(),
-    ])
+    ]);
   }
 }
