@@ -14,8 +14,15 @@ export const GET_ALL_AGENTS_QUERY = gql`
       data {
         member_id
         name
+        status_id
+        total_leads
         user {
           displayname
+          created_at
+          contact{
+            phone_number
+            cell_phone_number
+           }
         }
       }
     }

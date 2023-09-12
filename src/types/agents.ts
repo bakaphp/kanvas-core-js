@@ -2,16 +2,21 @@ import { PaginatorInfo } from './paginator';
 
 interface User {
   displayname?: string;
+  create_at?: string;
+  contacts?: {
+    phone_number: string;
+    cell_phone_number: string;
+  };
 }
 
 export interface Agent {
   member_id: number;
   name: string;
-  created_at: string;
+  status_id?: number;
+  total_leads?: number;
   user?: User;
-  paginatorInfo?: PaginatorInfo;
 }
 
-export interface AgentsData { 
-  agents: { data: AgentsData[] };
+export interface AgentsData {
+  agents: { data: AgentsData[]; paginatorInfo?: PaginatorInfo };
 }
