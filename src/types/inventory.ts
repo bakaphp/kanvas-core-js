@@ -233,6 +233,11 @@ export interface AllCreatedProducts {
 export interface CreatedProduct {
   createProduct: ProductInterface;
 }
+
+export interface CreatedStatus {
+  createStatus: StatusInterface;
+}
+
 export interface CreatedProductTypes {
   productTypes: {
     data: ProductTypeInterface[];

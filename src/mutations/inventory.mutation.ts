@@ -133,3 +133,12 @@ export const UPDATE_VARIANT_IN_WAREHOUSE = gql`
     }
   }
 `;
+export const CREATE_STATUS = gql`
+mutation createStatus($input: StatusInput!){
+  createStatus(input: $input) {
+      id,
+      name
+  }
+}
+`;
+
