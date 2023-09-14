@@ -29,6 +29,9 @@ export const GET_ALL_LEADS_QUERY = gql`
           id
           name
         }
+        organization {
+          name
+        }
         people {
           name
           contacts {
@@ -116,6 +119,9 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
         }
         company {
           id
+          name
+        }
+        organization {
           name
         }
         people {
