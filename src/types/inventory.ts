@@ -8,6 +8,10 @@ export interface ProductAttributes {
 export interface ProductCompany {
   id: string;
   name: string;
+  user: {
+    firstname: string;
+    lastname: string;
+  };
 }
 export interface StatusReferenceInput {
   id: string;
