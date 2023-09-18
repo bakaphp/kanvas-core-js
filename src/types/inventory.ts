@@ -67,14 +67,15 @@ export interface RegionsInterface {
 
 export interface WarehouseInterface {
   id: number;
-  apps_id: number;
-  regions_id: number;
-  companies_id: number;
   uuid: string;
   name: string;
   location: string;
   is_default: boolean;
   is_published: number;
+  regions: {
+    id: number;
+    name: string;
+  };
 }
 export interface VariantInterface {
   id: string;
@@ -201,7 +202,7 @@ export interface ProductVariant {
   warehouse: {
     id: number;
     status?: {
-      id: number;
+      id: number | string;
     };
   };
   attributes?: ProductAttributes[];
@@ -269,6 +270,12 @@ export interface CreatedStatus {
 export interface CreatedrRegions {
   regions: {
     data: RegionsInterface[];
+  };
+}
+
+export interface CreatedWarehouses {
+  getWarehouses: {
+    data: WarehouseInterface[];
   };
 }
 
