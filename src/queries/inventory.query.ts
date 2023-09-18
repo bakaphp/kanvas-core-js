@@ -162,3 +162,21 @@ export const GET_REGIONS = gql`
     }
   }
 `;
+
+export const GET_WAREHOUSES = gql`
+  query getWarehouses($whereCondition: QueryGetWarehousesWhereWhereConditions) {
+    getWarehouses(where: $whereCondition) {
+      data {
+        name
+        id
+        uuid
+        location
+        is_default
+        regions {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
