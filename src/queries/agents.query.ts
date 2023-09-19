@@ -10,7 +10,9 @@ export const GET_ALL_AGENTS_QUERY = gql`
       data {
         member_id
         name
-        status_id
+        status {
+          name
+        }
         total_leads
         created_at
         user {

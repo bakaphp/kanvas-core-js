@@ -12,7 +12,7 @@ interface User {
 export interface Agent {
   member_id: number;
   name: string;
-  status_id?: number;
+  status?: { name: string };
   total_leads?: number;
   user?: User;
 }
