@@ -4,9 +4,11 @@ import {
   GET_PRODUCT_TYPES,
   GET_REGIONS,
   GET_STATUS,
+  GET_WAREHOUSES,
 } from '../../queries/inventory.query';
 import {
   CREATE_PRODUCT,
+  CREATE_STATUS,
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
   UPDATE_VARIANT,
@@ -28,6 +30,7 @@ import {
   InputVariantWarehouseParams,
   UpdatedVariantWarehouse,
   AllCreatedProducts,
+  CreatedWarehouses,
 } from '../../types';
 
 export class Inventory {
@@ -39,6 +42,18 @@ export class Inventory {
     const response = await this.client.mutate({
       mutation: CREATE_PRODUCT,
       variables: { input: data },
+    });
+    return response.data;
+  }
+
+  public async createStatus(name: string): Promise<CreatedStatus> {
+    const response = await this.client.mutate({
+      mutation: CREATE_STATUS,
+      variables: {
+        input: {
+          name: name,
+        },
+      },
     });
     return response.data;
   }
@@ -121,6 +136,16 @@ export class Inventory {
     const response = await this.client.mutate({
       mutation: UPDATE_VARIANT_IN_WAREHOUSE,
       variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
+  public async getWareHouses(
+    whereCondition?: WhereCondition
+  ): Promise<CreatedWarehouses> {
+    const response = await this.client.query({
+      query: GET_WAREHOUSES,
+      variables: { whereCondition },
     });
     return response.data;
   }

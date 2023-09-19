@@ -86,6 +86,7 @@ export interface CreateLeadData {
   user?: User;
   owner?: User;
   company: Company;
+  organization?: Organization;
   status: Status;
   custom_fields: CustomFieldData;
   receiver?: Receiver | null;
