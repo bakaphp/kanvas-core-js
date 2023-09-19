@@ -180,3 +180,18 @@ export const GET_WAREHOUSES = gql`
     }
   }
 `;
+
+export const GET_ATTRIBUTES = gql`
+  query getAttributes($whereCondition: QueryAttributesWhereWhereConditions) {
+    attributes(where: $whereCondition) {
+      data {
+        id
+        name
+        values {
+          id
+          value
+        }
+      }
+    }
+  }
+`;
