@@ -1,5 +1,6 @@
 import { ClientType } from './../../index';
 import {
+  GET_ATTRIBUTES,
   GET_PRODUCTS,
   GET_PRODUCT_TYPES,
   GET_REGIONS,
@@ -31,6 +32,7 @@ import {
   UpdatedVariantWarehouse,
   AllCreatedProducts,
   CreatedWarehouses,
+  CreatedAttributes,
 } from '../../types';
 
 export class Inventory {
@@ -145,6 +147,16 @@ export class Inventory {
   ): Promise<CreatedWarehouses> {
     const response = await this.client.query({
       query: GET_WAREHOUSES,
+      variables: { whereCondition },
+    });
+    return response.data;
+  }
+
+  public async getAttributes(
+    whereCondition?: WhereCondition
+  ): Promise<CreatedAttributes> {
+    const response = await this.client.query({
+      query: GET_ATTRIBUTES,
       variables: { whereCondition },
     });
     return response.data;

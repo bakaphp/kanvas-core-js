@@ -283,6 +283,12 @@ export interface CreatedWarehouses {
   };
 }
 
+export interface CreatedAttributes {
+  attributes: {
+    data: AttributesInterface[];
+  };
+}
+
 export interface DeleteProduct {
   deleteProduct: boolean;
 }
