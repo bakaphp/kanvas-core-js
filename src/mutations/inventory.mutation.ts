@@ -17,14 +17,16 @@ export const CREATE_PRODUCT = gql`
       created_at
       updated_at
       files {
-        id
-        uuid
-        name
-        url
-        type
-        size
-        field_name
-        attributes
+        data {
+          id
+          uuid
+          name
+          url
+          size
+          field_name
+          type
+          attributes
+        }
       }
       categories {
         id
@@ -96,6 +98,7 @@ export const CREATE_PRODUCT = gql`
         user {
           firstname
           lastname
+          displayname
         }
       }
     }

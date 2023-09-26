@@ -119,6 +119,17 @@ export interface ProductTypeInterface {
   companies: ProductCompany;
 }
 
+export interface FilesystemInterface {
+  id: number | string;
+  uuid: string;
+  name: string;
+  url: string;
+  type: string;
+  size: number;
+  field_name: string;
+  attributes: any;
+}
+
 export interface ProductInterface {
   id: number;
   products_types_id: number;
@@ -133,7 +144,9 @@ export interface ProductInterface {
   is_published: boolean;
   created_at: string;
   updated_at: string;
-  files: []; // Filesystem[];
+  files: {
+    data: FilesystemInterface[];
+  };
   categories: CategoryInterface[];
   warehouses: ProductWarehouse[];
   variants: VariantInterface[];
