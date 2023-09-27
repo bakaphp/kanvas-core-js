@@ -31,6 +31,11 @@ export interface StatusInterface {
   name: string;
 }
 
+export interface OrderBy {
+  column: string;
+  order: 'ASC' | 'DESC';
+}
+
 export interface AttributesInterface {
   id: number;
   uuid: string;

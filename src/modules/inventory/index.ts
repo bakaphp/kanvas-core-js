@@ -33,6 +33,7 @@ import {
   AllCreatedProducts,
   CreatedWarehouses,
   CreatedAttributes,
+  OrderBy,
 } from '../../types';
 
 export class Inventory {
@@ -63,11 +64,12 @@ export class Inventory {
   public async getProduct(
     first?: number,
     page?: number,
-    whereCondition?: WhereCondition
+    whereCondition?: WhereCondition,
+    orderByCondition?: OrderBy[]
   ): Promise<AllCreatedProducts> {
     const response = await this.client.query({
       query: GET_PRODUCTS,
-      variables: { first, page, whereCondition },
+      variables: { first, page, whereCondition, orderByCondition },
     });
 
     return response.data;
