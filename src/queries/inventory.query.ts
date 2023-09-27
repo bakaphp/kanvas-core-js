@@ -5,8 +5,14 @@ export const GET_PRODUCTS = gql`
     $first: Int
     $page: Int
     $whereCondition: QueryProductsWhereWhereConditions
+    $orderByCondition: [QueryProductsOrderByOrderByClause!]
   ) {
-    products(first: $first, page: $page, where: $whereCondition) {
+    products(
+      first: $first
+      page: $page
+      where: $whereCondition
+      orderBy: $orderByCondition
+    ) {
       data {
         id
         products_types_id
