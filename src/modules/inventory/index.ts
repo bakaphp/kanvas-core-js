@@ -62,14 +62,34 @@ export class Inventory {
   }
 
   public async getProduct(
-    first?: number,
-    page?: number,
-    whereCondition?: WhereCondition,
-    orderByCondition?: OrderBy[]
+    options: {
+      first?: number;
+      page?: number;
+      whereCondition?: WhereCondition;
+      orderByCondition?: OrderBy[];
+      hasCategoriesCondition?: WhereCondition;
+    } = {}
   ): Promise<AllCreatedProducts> {
+    const {
+      first,
+      page,
+      whereCondition,
+      orderByCondition,
+      hasCategoriesCondition,
+    } = options;
+
     const response = await this.client.query({
       query: GET_PRODUCTS,
-      variables: { first, page, whereCondition, orderByCondition },
+
+      variables: {
+        first,
+        page,
+        whereCondition,
+        orderByCondition,
+        hasCategoriesCondition,
+      },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
 
     return response.data;
