@@ -79,6 +79,11 @@ export const GET_PRODUCTS = gql`
               name
               from_date
             }
+            channels {
+              name
+              price
+              is_published
+            }
             warehouseinfo {
               id
               name

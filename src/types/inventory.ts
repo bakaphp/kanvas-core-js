@@ -105,6 +105,11 @@ export interface VariantInterface {
       name: string;
       from_date: string;
     }[];
+    channels: {
+      name: string;
+      price: number;
+      is_published: boolean;
+    }[];
     warehouseinfo: {
       id: number;
       name: string;
