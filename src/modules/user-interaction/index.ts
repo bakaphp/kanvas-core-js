@@ -1,16 +1,18 @@
 import {
-    userLikeEntity,
-    userUnLikeEntity,
-    userDislikeEntity
-} from '../../mutations/user-interaction';
+    USER_LIKE_ENTITY,
+    USER_UN_lIKE_ENTITY,
+    USER_DIS_LIKE_ENTITY
+} from '../../mutations/';
 import {
     UserInteractionInput,
     ResponseUserLikeEntity,
     ResponseUserUnLikeEntity,
-    ResponseUserDislikeEntity
-} from '../../types/user-interaction';
+    ResponseUserDislikeEntity,
+    UserInteraction,
+    EntityInteraction
+} from '../../types/';
 import { ClientType } from '../../index';
-
+import { GET_USERS_INTERACTIONS_QUERY, GET_USER_INTERACTION_QUERY } from '../../queries';
 export class UsersInteractions {
 
     constructor(protected client: ClientType) {}
@@ -19,7 +21,7 @@ export class UsersInteractions {
         input: UserInteractionInput
     ): Promise<ResponseUserLikeEntity> {
         const response = await this.client.mutate({
-            mutation: userLikeEntity,
+            mutation: USER_LIKE_ENTITY,
             variables: { input: input }
         });
 
@@ -30,7 +32,7 @@ export class UsersInteractions {
         input: UserInteractionInput
     ): Promise<ResponseUserUnLikeEntity> {
         const response = await this.client.mutate({
-            mutation: userUnLikeEntity,
+            mutation: USER_UN_lIKE_ENTITY,
             variables: { input: input }
         });
 
@@ -41,10 +43,29 @@ export class UsersInteractions {
         input: UserInteractionInput
     ): Promise<ResponseUserDislikeEntity> {
         const response = await this.client.mutate({
-            mutation: userDislikeEntity,
+            mutation: USER_DIS_LIKE_ENTITY,
             variables: { input: input }
         });
 
         return response.data;
     }
+
+    public async getUsersInteractions(): Promise<UserInteraction> {
+        const response = await this.client.query({
+            query: GET_USERS_INTERACTIONS_QUERY
+        });
+        return response.data.getUsersInteractions;
+    }
+
+    public async getUserInteraction(
+        entity_id: string,
+        entity_namespace: string): Promise<EntityInteraction> {
+        
+        const response = await this.client.query({
+            query: GET_USER_INTERACTION_QUERY,
+            variables: { entity_id: entity_id, entity_namespace: entity_namespace }
+        });
+        return response.data.getUserInteraction;
+    }
+
 }

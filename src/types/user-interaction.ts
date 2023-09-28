@@ -14,7 +14,11 @@ export interface UserInteraction {
     entity_namespace: string;
     interactions_id: string;
 }
-
+export interface EntityInteraction {
+    entity_id: string;
+    entity_namespace: string;
+    interactions: string;
+}
 export interface UserInteractionInput {
     entity_id: string;
     entity_namespace: string;
