@@ -7,6 +7,7 @@ export const GET_PRODUCTS = gql`
     $whereCondition: QueryProductsWhereWhereConditions
     $orderByCondition: [QueryProductsOrderByOrderByClause!]
     $hasCategoriesCondition: QueryProductsHasCategoriesWhereHasConditions
+    $hasAttributesCondition: QueryProductsHasAttributesWhereHasConditions
   ) {
     products(
       first: $first
@@ -14,6 +15,7 @@ export const GET_PRODUCTS = gql`
       where: $whereCondition
       orderBy: $orderByCondition
       hasCategories: $hasCategoriesCondition
+      hasAttributes: $hasAttributesCondition
     ) {
       data {
         id
