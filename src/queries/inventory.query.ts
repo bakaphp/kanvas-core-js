@@ -82,7 +82,6 @@ export const GET_PRODUCTS = gql`
             channels {
               name
               price
-              discounted_price
               is_published
             }
             warehouseinfo {
