@@ -15,3 +15,28 @@ export interface CartItemData {
     }[];
   };
 }
+
+export interface OrderItemInput {
+  input: {
+    cartId: 'default';
+    payment: {
+      name: string;
+      number: string;
+      exp_month: number;
+      exp_year: number;
+      cvv: number;
+    };
+  };
+}
+
+export interface OrderItemData {
+  data: {
+    createOrder: {
+      transaction_id: string;
+      response_code: string | number;
+      message_code: string;
+      auth_code: string;
+      description: string;
+    };
+  };
+}

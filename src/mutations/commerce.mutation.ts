@@ -10,3 +10,9 @@ export const ADD_TO_CART_MUTATION = gql`
     }
   }
 `;
+
+export const CREATE_ORDER_MUTATION = gql`
+  mutation($input: OrderInput!) {
+    createOrder(input: $input)
+  }
+`;
