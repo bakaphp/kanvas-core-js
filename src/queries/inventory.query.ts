@@ -95,13 +95,8 @@ export const GET_PRODUCTS = gql`
           }
         }
         attributes {
-          id
-          uuid
           name
-          values {
-            id
-            value
-          }
+          value
         }
         productsTypes {
           id
