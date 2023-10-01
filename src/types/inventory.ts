@@ -91,6 +91,7 @@ export interface VariantInterface {
   products_id: number;
   slug: string;
   name: string;
+  user_interactions: any
   description?: string;
   short_description: string;
   html_description: string;

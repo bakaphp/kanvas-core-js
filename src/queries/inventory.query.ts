@@ -63,6 +63,7 @@ export const GET_PRODUCTS = gql`
           uuid
           name
           slug
+          user_interactions
           description
           short_description
           html_description
