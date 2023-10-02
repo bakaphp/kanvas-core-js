@@ -5,31 +5,100 @@ export const CREATE_PRODUCT = gql`
     createProduct(input: $input) {
       id
       products_types_id
+      uuid
       name
       slug
       description
       short_description
+      html_description
       warranty_terms
       upc
       is_published
+      created_at
+      updated_at
+      files {
+        data {
+          id
+          uuid
+          name
+          url
+          size
+          field_name
+          type
+          attributes
+        }
+      }
       categories {
         id
+        uuid
+        name
+        slug
       }
       warehouses {
         id
+        name
+        regions {
+          id
+          name
+        }
       }
       variants {
         id
+        products_id
+        uuid
         name
+        slug
+        description
+        short_description
+        html_description
+        sku
+        ean
         status {
           id
+          name
+        }
+        warehouses {
+          id
+          status_history {
+            id
+            name
+            from_date
+          }
+          warehouseinfo {
+            id
+            name
+          }
         }
         attributes {
           name
           value
         }
-        warehouses {
+      }
+      attributes {
+        id
+        uuid
+        name
+        values {
           id
+          value
+        }
+      }
+      productsTypes {
+        id
+        companies_id
+        uuid
+        name
+        description
+        slug
+        weight
+      }
+      companies {
+        id
+        name
+        user {
+          firstname
+          lastname
+          displayname
         }
       }
     }
@@ -125,6 +194,14 @@ export const UPDATE_VARIANT_IN_WAREHOUSE = gql`
       }
       sku
       ean
+    }
+  }
+`;
+export const CREATE_STATUS = gql`
+  mutation createStatus($input: StatusInput!) {
+    createStatus(input: $input) {
+      id
+      name
     }
   }
 `;

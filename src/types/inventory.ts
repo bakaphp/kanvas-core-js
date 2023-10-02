@@ -8,6 +8,10 @@ export interface ProductAttributes {
 export interface ProductCompany {
   id: string;
   name: string;
+  user: {
+    firstname: string;
+    lastname: string;
+  };
 }
 export interface StatusReferenceInput {
   id: string;
@@ -25,6 +29,11 @@ export interface ProductWarehouse {
 export interface StatusInterface {
   id: string;
   name: string;
+}
+
+export interface OrderBy {
+  column: string;
+  order: 'ASC' | 'DESC';
 }
 
 export interface AttributesInterface {
@@ -67,20 +76,22 @@ export interface RegionsInterface {
 
 export interface WarehouseInterface {
   id: number;
-  apps_id: number;
-  regions_id: number;
-  companies_id: number;
   uuid: string;
   name: string;
   location: string;
   is_default: boolean;
   is_published: number;
+  regions: {
+    id: number;
+    name: string;
+  };
 }
 export interface VariantInterface {
   id: string;
   products_id: number;
   slug: string;
   name: string;
+  user_interactions: any
   description?: string;
   short_description: string;
   html_description: string;
@@ -94,6 +105,11 @@ export interface VariantInterface {
       id: string | number;
       name: string;
       from_date: string;
+    }[];
+    channels: {
+      name: string;
+      price: number;
+      is_published: boolean;
     }[];
     warehouseinfo: {
       id: number;
@@ -114,6 +130,17 @@ export interface ProductTypeInterface {
   companies: ProductCompany;
 }
 
+export interface FilesystemInterface {
+  id: number | string;
+  uuid: string;
+  name: string;
+  url: string;
+  type: string;
+  size: number;
+  field_name: string;
+  attributes: any;
+}
+
 export interface ProductInterface {
   id: number;
   products_types_id: number;
@@ -128,7 +155,9 @@ export interface ProductInterface {
   is_published: boolean;
   created_at: string;
   updated_at: string;
-  files: []; // Filesystem[];
+  files: {
+    data: FilesystemInterface[];
+  };
   categories: CategoryInterface[];
   warehouses: ProductWarehouse[];
   variants: VariantInterface[];
@@ -200,6 +229,9 @@ export interface ProductVariant {
   barcode?: string;
   warehouse: {
     id: number;
+    status?: {
+      id: number | string;
+    };
   };
   attributes?: ProductAttributes[];
 }
@@ -220,11 +252,19 @@ export interface CreateProductParams {
   price?: number;
 }
 
-export interface CreatedProduct {
+export interface AllCreatedProducts {
   products: {
     data: ProductInterface[];
     paginatorInfo?: PaginatorInfo;
   };
+}
+
+export interface CreatedProduct {
+  createProduct: ProductInterface;
+}
+
+export interface CreatedStatus {
+  createStatus: StatusInterface;
 }
 
 export interface CreatedProductTypes {
@@ -258,6 +298,18 @@ export interface CreatedStatus {
 export interface CreatedrRegions {
   regions: {
     data: RegionsInterface[];
+  };
+}
+
+export interface CreatedWarehouses {
+  getWarehouses: {
+    data: WarehouseInterface[];
+  };
+}
+
+export interface CreatedAttributes {
+  attributes: {
+    data: AttributesInterface[];
   };
 }
 

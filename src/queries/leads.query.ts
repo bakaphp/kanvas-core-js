@@ -2,7 +2,11 @@ import { gql } from '@apollo/client/core';
 
 export const GET_ALL_LEADS_QUERY = gql`
   query GetLeads($first: Int, $page: Int) {
-    leads(first: $first, page: $page) {
+    leads(
+      first: $first
+      page: $page
+      orderBy: { column: CREATED_AT, order: DESC }
+    ) {
       data {
         id
         uuid
@@ -23,6 +27,9 @@ export const GET_ALL_LEADS_QUERY = gql`
         }
         company {
           id
+          name
+        }
+        organization {
           name
         }
         people {
@@ -112,6 +119,9 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
         }
         company {
           id
+          name
+        }
+        organization {
           name
         }
         people {

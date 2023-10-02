@@ -7,33 +7,68 @@ export const CREATE_LEAD_MUTATION = gql`
       uuid
       title
       firstname
-      lastname 
+      lastname
       created_at
       description
       reason_lost
-      owner {
-        id
-        firstname 
-        lastname
-      }
       user {
         id
-        firstname 
+        firstname
         lastname
       }
-      company{
+      owner {
+        id
+        firstname
+        lastname
+        displayname
+      }
+      company {
         id
         name
+      }
+      organization {
+        name
+      }
+      people {
+        name
+        contacts {
+          type {
+            name
+          }
+          value
+        }
+      }
+      receiver {
+        name
+        uuid
       }
       status {
         id
         name
         is_default
       }
+      type {
+        name
+      }
+      source {
+        name
+      }
+      pipeline {
+        name
+      }
+      stage {
+        name
+      }
       custom_fields {
         data {
           name
           value
+        }
+      }
+      files {
+        data {
+          name
+          url
         }
       }
     }

@@ -49,6 +49,10 @@ interface Receiver {
   uuid: string;
 }
 
+interface File {
+  name: string;
+  url: string;
+}
 interface Type {
   name: string;
 }
@@ -82,6 +86,7 @@ export interface CreateLeadData {
   user?: User;
   owner?: User;
   company: Company;
+  organization?: Organization;
   status: Status;
   custom_fields: CustomFieldData;
   receiver?: Receiver | null;
@@ -92,6 +97,7 @@ export interface CreateLeadData {
   people?: People;
   followers?: { data: Follower[] };
   paginatorInfo?: PaginatorInfo;
+  files?: File[];
 }
 
 export interface LeadInput {
@@ -108,6 +114,7 @@ export interface LeadInput {
   reason_lost: string;
   pipeline_stage_id: number;
   custom_fields: CustomFieldInput[];
+  files?: File[];
 }
 
 export interface WhereCondition {
@@ -139,5 +146,5 @@ export interface LeadsDashboardData {
 }
 
 export interface LeadsData {
-  leads: { data: CreateLeadData[] };
+  leads: { data: CreateLeadData[]; paginatorInfo?: PaginatorInfo };
 }

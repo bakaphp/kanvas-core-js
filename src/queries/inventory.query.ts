@@ -5,8 +5,18 @@ export const GET_PRODUCTS = gql`
     $first: Int
     $page: Int
     $whereCondition: QueryProductsWhereWhereConditions
+    $orderByCondition: [QueryProductsOrderByOrderByClause!]
+    $hasCategoriesCondition: QueryProductsHasCategoriesWhereHasConditions
+    $hasAttributesCondition: QueryProductsHasAttributesWhereHasConditions
   ) {
-    products(first: $first, page: $page, where: $whereCondition) {
+    products(
+      first: $first
+      page: $page
+      where: $whereCondition
+      orderBy: $orderByCondition
+      hasCategories: $hasCategoriesCondition
+      hasAttributes: $hasAttributesCondition
+    ) {
       data {
         id
         products_types_id
@@ -22,14 +32,16 @@ export const GET_PRODUCTS = gql`
         created_at
         updated_at
         files {
-          id
-          uuid
-          name
-          url
-          type
-          size
-          field_name
-          attributes
+          data {
+            id
+            uuid
+            name
+            url
+            size
+            field_name
+            type
+            attributes
+          }
         }
         categories {
           id
@@ -51,6 +63,7 @@ export const GET_PRODUCTS = gql`
           uuid
           name
           slug
+          user_interactions
           description
           short_description
           html_description
@@ -67,6 +80,11 @@ export const GET_PRODUCTS = gql`
               name
               from_date
             }
+            channels {
+              name
+              price
+              is_published
+            }
             warehouseinfo {
               id
               name
@@ -78,13 +96,8 @@ export const GET_PRODUCTS = gql`
           }
         }
         attributes {
-          id
-          uuid
           name
-          values {
-            id
-            value
-          }
+          value
         }
         productsTypes {
           id
@@ -101,6 +114,7 @@ export const GET_PRODUCTS = gql`
           user {
             firstname
             lastname
+            displayname
           }
         }
       }
@@ -158,6 +172,39 @@ export const GET_REGIONS = gql`
         slug
         short_slug
         is_default
+      }
+    }
+  }
+`;
+
+export const GET_WAREHOUSES = gql`
+  query getWarehouses($whereCondition: QueryGetWarehousesWhereWhereConditions) {
+    getWarehouses(where: $whereCondition) {
+      data {
+        name
+        id
+        uuid
+        location
+        is_default
+        regions {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const GET_ATTRIBUTES = gql`
+  query getAttributes($whereCondition: QueryAttributesWhereWhereConditions) {
+    attributes(where: $whereCondition) {
+      data {
+        id
+        name
+        values {
+          id
+          value
+        }
       }
     }
   }

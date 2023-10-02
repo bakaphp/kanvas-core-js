@@ -1,12 +1,15 @@
 import { ClientType } from './../../index';
 import {
+  GET_ATTRIBUTES,
   GET_PRODUCTS,
   GET_PRODUCT_TYPES,
   GET_REGIONS,
   GET_STATUS,
+  GET_WAREHOUSES,
 } from '../../queries/inventory.query';
 import {
   CREATE_PRODUCT,
+  CREATE_STATUS,
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
   UPDATE_VARIANT,
@@ -27,6 +30,10 @@ import {
   InputProductParams,
   InputVariantWarehouseParams,
   UpdatedVariantWarehouse,
+  AllCreatedProducts,
+  CreatedWarehouses,
+  CreatedAttributes,
+  OrderBy,
 } from '../../types';
 
 export class Inventory {
@@ -42,14 +49,50 @@ export class Inventory {
     return response.data;
   }
 
+  public async createStatus(name: string): Promise<CreatedStatus> {
+    const response = await this.client.mutate({
+      mutation: CREATE_STATUS,
+      variables: {
+        input: {
+          name: name,
+        },
+      },
+    });
+    return response.data;
+  }
+
   public async getProduct(
-    first?: number,
-    page?: number,
-    whereCondition?: WhereCondition
-  ): Promise<CreatedProduct> {
+    options: {
+      first?: number;
+      page?: number;
+      whereCondition?: WhereCondition;
+      orderByCondition?: OrderBy[];
+      hasCategoriesCondition?: WhereCondition;
+      hasAttributesCondition?: WhereCondition;
+    } = {}
+  ): Promise<AllCreatedProducts> {
+    const {
+      first,
+      page,
+      whereCondition,
+      orderByCondition,
+      hasCategoriesCondition,
+      hasAttributesCondition
+    } = options;
+
     const response = await this.client.query({
       query: GET_PRODUCTS,
-      variables: { first, page, whereCondition },
+
+      variables: {
+        first,
+        page,
+        whereCondition,
+        orderByCondition,
+        hasCategoriesCondition,
+        hasAttributesCondition
+      },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
 
     return response.data;
@@ -120,6 +163,26 @@ export class Inventory {
     const response = await this.client.mutate({
       mutation: UPDATE_VARIANT_IN_WAREHOUSE,
       variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
+  public async getWareHouses(
+    whereCondition?: WhereCondition
+  ): Promise<CreatedWarehouses> {
+    const response = await this.client.query({
+      query: GET_WAREHOUSES,
+      variables: { whereCondition },
+    });
+    return response.data;
+  }
+
+  public async getAttributes(
+    whereCondition?: WhereCondition
+  ): Promise<CreatedAttributes> {
+    const response = await this.client.query({
+      query: GET_ATTRIBUTES,
+      variables: { whereCondition },
     });
     return response.data;
   }
