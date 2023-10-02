@@ -48,6 +48,7 @@ export const CREATE_PRODUCT = gql`
         uuid
         name
         slug
+        user_interactions
         description
         short_description
         html_description
@@ -64,6 +65,11 @@ export const CREATE_PRODUCT = gql`
             name
             from_date
           }
+          channels {
+            name
+            price
+            is_published
+          }
           warehouseinfo {
             id
             name
@@ -75,13 +81,8 @@ export const CREATE_PRODUCT = gql`
         }
       }
       attributes {
-        id
-        uuid
         name
-        values {
-          id
-          value
-        }
+        value
       }
       productsTypes {
         id

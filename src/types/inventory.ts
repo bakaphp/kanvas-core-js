@@ -91,7 +91,7 @@ export interface VariantInterface {
   products_id: number;
   slug: string;
   name: string;
-  user_interactions: any
+  user_interactions: any;
   description?: string;
   short_description: string;
   html_description: string;
@@ -161,7 +161,7 @@ export interface ProductInterface {
   categories: CategoryInterface[];
   warehouses: ProductWarehouse[];
   variants: VariantInterface[];
-  attributes: AttributesInterface[];
+  attributes: ProductAttributes[];
   productsTypes: ProductTypeInterface;
   companies: ProductCompany;
 }
@@ -250,6 +250,7 @@ export interface CreateProductParams {
   categories?: number[];
   variants?: ProductVariant[];
   price?: number;
+  attributes?: ProductAttributes;
 }
 
 export interface AllCreatedProducts {
