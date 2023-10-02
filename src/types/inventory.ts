@@ -250,7 +250,7 @@ export interface CreateProductParams {
   categories?: number[];
   variants?: ProductVariant[];
   price?: number;
-  attributes?: ProductAttributes;
+  attributes?: ProductAttributes[];
 }
 
 export interface AllCreatedProducts {
