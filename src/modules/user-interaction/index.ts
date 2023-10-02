@@ -1,7 +1,7 @@
 import {
     USER_LIKE_ENTITY,
-    USER_UN_lIKE_ENTITY,
-    USER_DIS_LIKE_ENTITY
+    USER_UNlIKE_ENTITY,
+    USER_DISLIKE_ENTITY
 } from '../../mutations/';
 import {
     UserInteractionInput,
@@ -32,7 +32,7 @@ export class UsersInteractions {
         input: UserInteractionInput
     ): Promise<ResponseUserUnLikeEntity> {
         const response = await this.client.mutate({
-            mutation: USER_UN_lIKE_ENTITY,
+            mutation: USER_UNlIKE_ENTITY,
             variables: { input: input }
         });
 
@@ -43,7 +43,7 @@ export class UsersInteractions {
         input: UserInteractionInput
     ): Promise<ResponseUserDislikeEntity> {
         const response = await this.client.mutate({
-            mutation: USER_DIS_LIKE_ENTITY,
+            mutation: USER_DISLIKE_ENTITY,
             variables: { input: input }
         });
 
