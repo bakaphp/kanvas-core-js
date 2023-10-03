@@ -69,6 +69,7 @@ export class Inventory {
       orderByCondition?: OrderBy[];
       hasCategoriesCondition?: WhereCondition;
       hasAttributesCondition?: WhereCondition;
+      search?: string;
     } = {}
   ): Promise<AllCreatedProducts> {
     const {
@@ -77,7 +78,8 @@ export class Inventory {
       whereCondition,
       orderByCondition,
       hasCategoriesCondition,
-      hasAttributesCondition
+      hasAttributesCondition,
+      search,
     } = options;
 
     const response = await this.client.query({
@@ -89,7 +91,8 @@ export class Inventory {
         whereCondition,
         orderByCondition,
         hasCategoriesCondition,
-        hasAttributesCondition
+        hasAttributesCondition,
+        search,
       },
       fetchPolicy: 'network-only',
       partialRefetch: true,
