@@ -5,6 +5,7 @@ export * from './custom-fields';
 export * from './locations';
 export * from './leads';
 export * from './inventory';
+export * from './user-interaction';
 export * from './agents';
 export * from "./commerce"
 export * from './usersLists';

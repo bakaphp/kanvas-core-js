@@ -17,7 +17,8 @@ import {
   Agents,
   Cart,
   Order,
-  UsersLists
+  UsersLists,
+  UsersInteractions
 } from './modules';
 
 import { setContext } from '@apollo/client/link/context';
@@ -78,6 +79,7 @@ export default class KanvasCore {
   public locations: Locations;
   public leads: Leads;
   public inventory: Inventory;
+  public userInteraction: UsersInteractions;
   public agents: Agents;
   public cart: Cart;
   public order: Order
@@ -95,6 +97,8 @@ export default class KanvasCore {
     this.settings = new Settings(this.client, this.options.key);
     this.locations = new Locations(this.client);
     this.leads = new Leads(this.client);
+    this.inventory = new Inventory(this.client)
+    this.userInteraction = new UsersInteractions(this.client);
     this.inventory = new Inventory(this.client);
     this.agents = new Agents(this.client);
     this.cart = new Cart(this.client);
