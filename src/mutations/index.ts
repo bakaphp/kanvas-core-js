@@ -6,3 +6,4 @@ export * from './leads.mutation';
 export * from './inventory.mutation';
 export * from './user-interaction.mutation';
 export * from './commerce.mutation';
+export * from './messages.mutation';

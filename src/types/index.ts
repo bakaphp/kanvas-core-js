@@ -7,3 +7,4 @@ export * from './leads';
 export * from './inventory';
 export * from './user-interaction';
 export * from './agents';
+export * from './messages';
