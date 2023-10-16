@@ -216,6 +216,7 @@ export const PRODUCT_DASHBOARD = gql`
   query {
     productDashboard {
       total_products
+      total_variants
       product_status
     }
   }
