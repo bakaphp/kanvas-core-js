@@ -317,3 +317,10 @@ export interface CreatedAttributes {
 export interface DeleteProduct {
   deleteProduct: boolean;
 }
+
+export interface ProductDashboardInterface {
+  productDashboard: {
+    total_products: number;
+    product_status: string | number[];
+  };
+}

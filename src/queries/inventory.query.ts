@@ -211,3 +211,12 @@ export const GET_ATTRIBUTES = gql`
     }
   }
 `;
+
+export const PRODUCT_DASHBOARD = gql`
+  query {
+    productDashboard {
+      total_products
+      product_status
+    }
+  }
+`;
