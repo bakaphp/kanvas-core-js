@@ -322,6 +322,6 @@ export interface ProductDashboardInterface {
   productDashboard: {
     total_products: number;
     total_variants: number;
-    product_status: string | number[];
+    product_status: any
   };
 }
