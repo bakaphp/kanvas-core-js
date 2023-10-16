@@ -195,6 +195,8 @@ export class Inventory {
   public async productDashboard(): Promise<ProductDashboardInterface> {
     const response = await this.client.query({
       query: PRODUCT_DASHBOARD,
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
 
     return response.data;
