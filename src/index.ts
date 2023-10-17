@@ -17,6 +17,7 @@ import {
   Agents,
   Cart,
   Order,
+  UsersLists,
   UsersInteractions
 } from './modules';
 
@@ -82,7 +83,7 @@ export default class KanvasCore {
   public agents: Agents;
   public cart: Cart;
   public order: Order
-
+  public usersLists: UsersLists;
   constructor(protected options: Options) {
     this.client = new ApolloClient({
       link: this.generateLink(),
@@ -101,7 +102,8 @@ export default class KanvasCore {
     this.inventory = new Inventory(this.client);
     this.agents = new Agents(this.client);
     this.cart = new Cart(this.client);
-    this.order = new Order(this.client)
+    this.order = new Order(this.client);
+    this.usersLists = new UsersLists(this.client);
   }
 
   protected generateURL() {

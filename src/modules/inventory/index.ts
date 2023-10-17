@@ -6,6 +6,7 @@ import {
   GET_REGIONS,
   GET_STATUS,
   GET_WAREHOUSES,
+  PRODUCT_DASHBOARD,
 } from '../../queries/inventory.query';
 import {
   CREATE_PRODUCT,
@@ -34,6 +35,7 @@ import {
   CreatedWarehouses,
   CreatedAttributes,
   OrderBy,
+  ProductDashboardInterface,
 } from '../../types';
 
 export class Inventory {
@@ -187,6 +189,16 @@ export class Inventory {
       query: GET_ATTRIBUTES,
       variables: { whereCondition },
     });
+    return response.data;
+  }
+
+  public async productDashboard(): Promise<ProductDashboardInterface> {
+    const response = await this.client.query({
+      query: PRODUCT_DASHBOARD,
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
+    });
+
     return response.data;
   }
 }
