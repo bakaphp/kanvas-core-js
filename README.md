@@ -5,17 +5,18 @@ Welcome to the documentation for the Kanvas SDK, a TypeScript SDK designed exclu
 
 ## Table of Contents
 
-1.  [Getting Started]()
-    -   [Installation]()
-    -   [Initializate the sdk]()
-2.  [Modules]()
-    -   [Ecosystem]()
-    -   [Inventory]()
-    -   [Social]()
-3.  [Usage Examples]()
-4.  [API Reference]()
-5.  [Contribution Guidelines]()
-6.  [Contact and Support]()
+1.  [Getting Started](#getting-started)
+    -   [Installation](#installation)
+    -   [Initializate the sdk](#initializate-the-sdk)
+2.  [Modules](#modules)
+    -   [Ecosystem](#ecosystem)
+    -   [Inventory](#inventory)
+    -   [Social](#social)
+3.  [Usage Examples](#usage-examples)
+4.  [API Reference](#api-reference)
+5.  [Contribution Guidelines](#contribution-guidelines)
+6.  [Contact and Support](#contact-and-support)
+
 
 ## Getting Started
 
@@ -104,7 +105,7 @@ console.log(leads);
 
 ## API Reference
 
-For a comprehensive list of available methods and their descriptions, refer to the [API Reference](). TBD
+For a comprehensive list of available methods and their descriptions, refer to the [API Reference](https://documenter.getpostman.com/view/15472655/2s93CKNtdP). 
 
 ## Contribution Guidelines
 
