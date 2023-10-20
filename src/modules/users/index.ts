@@ -44,6 +44,8 @@ export class Users {
   public async getUserData(): Promise<UserData> {
     const response = await this.client.query({
       query: GET_USER_DATA_QUERY,
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
 
     return response.data.me;
