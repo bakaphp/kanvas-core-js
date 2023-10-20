@@ -1,16 +1,63 @@
 import { ClientType } from '../../index';
 
-import { MessageInput, MessagesInterface } from '../../types';
-import { CREATE_MESSAGE_MUTATION } from '../../mutations';
+import {
+  MessageInputInterface,
+  MessagesInterface,
+  InteractionTypeInput,
+  MessageWhereConditions,
+  HasAppModuleMessageWhereConditions,
+  OrderByMessage,
+} from '../../types';
+import {
+  CREATE_MESSAGE_MUTATION,
+  INTERACTION_MESSAGE_MUTATION,
+} from '../../mutations';
 
-export default class Messages {
+import { GET_MESSAGES_QUERY } from '../../queries';
+
+export class Messages {
   constructor(protected client: ClientType) {}
 
-  public async createMessage(input: MessageInput): Promise<MessagesInterface> {
+  public async createMessage(
+    input: MessageInputInterface
+  ): Promise<MessagesInterface> {
     const response = this.client.mutate({
       mutation: CREATE_MESSAGE_MUTATION,
       variables: { input: input },
     });
     return (await response).data.createMessage as MessagesInterface;
+  }
+
+  public async interactionMessage(
+    id: string,
+    type: InteractionTypeInput
+  ): Promise<MessagesInterface> {
+    const response = this.client.mutate({
+      mutation: INTERACTION_MESSAGE_MUTATION,
+      variables: { id: id, type: type },
+    });
+    return (await response).data.interactionMessage as MessagesInterface;
+  }
+
+  public async getMessages(
+    where: MessageWhereConditions,
+    hasAppModuleMessageWhere: HasAppModuleMessageWhereConditions,
+    orderBy: Array<OrderByMessage>,
+    search: string,
+    first: number,
+    page: number
+  ): Promise<MessagesInterface[]> {
+    const response = await this.client.query({
+      query: GET_MESSAGES_QUERY,
+      variables: {
+        where,
+        hasAppModuleMessageWhere,
+        orderBy,
+        search,
+        first,
+        page,
+      },
+    });
+    return response.data.getMessages as MessagesInterface[];
   }
 }
