@@ -1,6 +1,6 @@
-import type { AppUserInterface, AppUpdatePasswordInterface } from '../../types';
+import type { AppUserInterface, AppUpdatePasswordInterface, WhereCondition, AllAppUsersInterface } from '../../types';
 import { USER_UPDATE_PASSWORD_MUTATION } from '../../mutations';
-import { APP_USERS_QUERY } from '../../queries';
+import { APP_USERS_QUERY, GET_ALL_APP_USERS } from '../../queries';
 import type { ClientType } from '../../index';
 
 class Users {
@@ -50,7 +50,15 @@ class Users {
     return response.data.appUsers.data[0];
   }
 
-  
+  public async getAllAppUsers(
+    whereCondition?: WhereCondition
+  ): Promise<AllAppUsersInterface> {
+    const response = await this.client.query({
+      query: GET_ALL_APP_USERS,
+      variables: { whereCondition },
+    });
+    return response.data;
+  }
   
 }
 
