@@ -13,6 +13,7 @@ import {
   CREATE_PRODUCT,
   CREATE_STATUS,
   DELETE_PRODUCT,
+  DELETE_VARIANT,
   UPDATE_PRODUCT,
   UPDATE_VARIANT,
   UPDATE_VARIANT_IN_WAREHOUSE,
@@ -227,6 +228,15 @@ export class Inventory {
       },
       fetchPolicy: 'network-only',
       partialRefetch: true,
+    });
+
+    return response.data;
+  }
+
+  public async deleteVariant(id: number | string): Promise<DeleteProduct> {
+    const response = await this.client.mutate({
+      mutation: DELETE_VARIANT,
+      variables: { id: id },
     });
 
     return response.data;

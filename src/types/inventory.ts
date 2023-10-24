@@ -338,3 +338,7 @@ export interface ProductDashboardInterface {
     }[];
   };
 }
+
+export interface DeleteProduct {
+  deleteVariant: boolean;
+}

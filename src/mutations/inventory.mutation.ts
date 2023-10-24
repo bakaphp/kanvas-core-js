@@ -206,3 +206,9 @@ export const CREATE_STATUS = gql`
     }
   }
 `;
+
+export const DELETE_VARIANT = gql`
+  mutation($id: ID!) {
+    deleteVariant(id: $id)
+  }
+`;
