@@ -39,6 +39,7 @@ import {
   OrderBy,
   ProductDashboardInterface,
   AllCreatedVariants,
+  deleteVariant,
 } from '../../types';
 
 export class Inventory {
@@ -233,7 +234,7 @@ export class Inventory {
     return response.data;
   }
 
-  public async deleteVariant(id: number | string): Promise<DeleteProduct> {
+  public async deleteVariant(id: number | string): Promise<deleteVariant> {
     const response = await this.client.mutate({
       mutation: DELETE_VARIANT,
       variables: { id: id },

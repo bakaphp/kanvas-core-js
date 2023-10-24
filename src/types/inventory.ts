@@ -339,6 +339,6 @@ export interface ProductDashboardInterface {
   };
 }
 
-export interface DeleteProduct {
+export interface deleteVariant {
   deleteVariant: boolean;
 }
