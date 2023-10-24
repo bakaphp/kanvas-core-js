@@ -98,7 +98,6 @@ export interface VariantInterface {
   status: StatusInterface;
   sku: string;
   ean: string;
-  files?: []; // Filesystem[];
   warehouses: {
     id: string;
     status_history?: {
@@ -117,6 +116,7 @@ export interface VariantInterface {
     };
   }[];
   attributes?: ProductAttributes[];
+  product: ProductInterface;
 }
 
 export interface ProductTypeInterface {
@@ -255,7 +255,14 @@ export interface CreateProductParams {
 
 export interface AllCreatedProducts {
   products: {
-    data: ProductInterface[];
+    variants: ProductInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
+}
+
+export interface AllCreatedVariants {
+  variants: {
+    data: VariantInterface[];
     paginatorInfo?: PaginatorInfo;
   };
 }

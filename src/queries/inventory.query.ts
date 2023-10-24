@@ -228,12 +228,90 @@ export const PRODUCT_DASHBOARD = gql`
   }
 `;
 
-export const PRODUCTS_PRODUCT = gql`
-  query {
-    productDashboard {
-      total_products
-      total_variants
-      product_status
+export const GET_VARIANTS = gql`
+  query getVariants(
+    $first: Int
+    $page: Int
+    $whereCondition: QueryVariantsWhereWhereConditions
+    $orderByCondition: [QueryVariantsOrderByOrderByClause!]
+    $search: String
+  ) {
+    variants(
+      first: $first
+      page: $page
+      where: $whereCondition
+      orderBy: $orderByCondition
+      search: $search
+    ) {
+      data {
+        id
+        products_id
+        uuid
+        name
+        slug
+        user_interactions
+        description
+        short_description
+        html_description
+        sku
+        ean
+        status {
+          id
+          name
+        }
+        warehouses {
+          id
+          status_history {
+            id
+            name
+            from_date
+          }
+          channels {
+            name
+            price
+            is_published
+          }
+          warehouseinfo {
+            id
+            name
+          }
+        }
+        attributes {
+          name
+          value
+        }
+
+        product {
+          id
+          slug
+
+          name
+          description
+          created_at
+          updated_at
+          companies {
+            id
+            name
+
+            user {
+              firstname
+              lastname
+              displayname
+            }
+          }
+        }
+      }
+
+      paginatorInfo {
+        currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
+        lastPage
+        hasMorePages
+      }
     }
   }
 `;
