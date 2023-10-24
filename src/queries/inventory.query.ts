@@ -227,13 +227,3 @@ export const PRODUCT_DASHBOARD = gql`
     }
   }
 `;
-
-export const PRODUCTS_PRODUCT = gql`
-  query {
-    productDashboard {
-      total_products
-      total_variants
-      product_status
-    }
-  }
-`;
