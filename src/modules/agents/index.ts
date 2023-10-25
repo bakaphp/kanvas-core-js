@@ -1,7 +1,10 @@
-import { GET_ALL_AGENTS_QUERY } from '../../queries';
+import {
+  GET_ALL_AGENTS_QUERY,
+  GET_AGENTS_BY_USER_ID_QUERY,
+} from '../../queries';
 import { ClientType } from '../../index';
 
-import { AgentsData } from '../../types';
+import { AgentsData, WhereCondition } from '../../types';
 
 export class Agents {
   constructor(protected client: ClientType) {}
@@ -13,6 +16,21 @@ export class Agents {
     const response = await this.client.query({
       query: GET_ALL_AGENTS_QUERY,
       variables: { first, page },
+    });
+
+    return response.data;
+  }
+
+  public async getAgentsByUserID(id: string): Promise<AgentsData> {
+    const where: WhereCondition = {
+      column: 'USERS_ID',
+      operator: 'EQ',
+      value: id,
+    };
+
+    const response = await this.client.query({
+      query: GET_AGENTS_BY_USER_ID_QUERY,
+      variables: { where },
     });
 
     return response.data;
