@@ -71,3 +71,18 @@ interface FileUpload {
 export interface MultiUpload {
   multiUpload: FileUpload[];
 }
+
+export interface AllAppUsersInterface {
+  appUsers: {
+    data: {
+      id: string | number;
+      uuid: string;
+      firstname: string;
+      lastname: string;
+      displayname: string;
+      user_active: boolean;
+      created_at: string;
+      updated_at: string;
+    }[]
+  };
+}

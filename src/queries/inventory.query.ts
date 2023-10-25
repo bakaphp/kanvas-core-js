@@ -213,11 +213,17 @@ export const GET_ATTRIBUTES = gql`
 `;
 
 export const PRODUCT_DASHBOARD = gql`
-  query {
+  query getproductDashboard {
     productDashboard {
       total_products
       total_variants
-      product_status
+      product_status {
+        status_id
+        status_name
+        warehouses_name
+        warehouses_id
+        total_amount
+      }
     }
   }
 `;

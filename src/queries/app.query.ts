@@ -61,3 +61,21 @@ export const APP_USERS_QUERY = gql`
     }
   }
 `;
+
+export const GET_ALL_APP_USERS = gql`
+  query getAllAppUser($where: QueryAppUsersWhereWhereConditions) {
+    appUsers(where: $where) {
+      data {
+        id
+        uuid
+        firstname
+        lastname
+        displayname
+        email
+        user_active
+        created_at
+        updated_at
+      }
+    }
+  }
+`;

@@ -227,7 +227,7 @@ export interface ProductVariant {
   sku?: string;
   ean?: string;
   barcode?: string;
-  warehouse: {
+  warehouse?: {
     id: number;
     status?: {
       id: number | string;
@@ -322,6 +322,12 @@ export interface ProductDashboardInterface {
   productDashboard: {
     total_products: number;
     total_variants: number;
-    product_status: any
+    product_status: {
+      status_id: number | string;
+      status_name: string;
+      warehouses_name: string;
+      warehouses_id: number | string;
+      total_amount: number;
+    }[];
   };
 }
