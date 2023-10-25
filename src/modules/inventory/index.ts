@@ -5,6 +5,7 @@ import {
   GET_PRODUCT_TYPES,
   GET_REGIONS,
   GET_STATUS,
+  GET_VARIANTS,
   GET_WAREHOUSES,
   PRODUCT_DASHBOARD,
 } from '../../queries/inventory.query';
@@ -12,6 +13,7 @@ import {
   CREATE_PRODUCT,
   CREATE_STATUS,
   DELETE_PRODUCT,
+  DELETE_VARIANT,
   UPDATE_PRODUCT,
   UPDATE_VARIANT,
   UPDATE_VARIANT_IN_WAREHOUSE,
@@ -36,6 +38,8 @@ import {
   CreatedAttributes,
   OrderBy,
   ProductDashboardInterface,
+  AllCreatedVariants,
+  deleteVariant,
 } from '../../types';
 
 export class Inventory {
@@ -197,6 +201,43 @@ export class Inventory {
       query: PRODUCT_DASHBOARD,
       fetchPolicy: 'network-only',
       partialRefetch: true,
+    });
+
+    return response.data;
+  }
+
+  public async getVariants(
+    options: {
+      first?: number;
+      page?: number;
+      whereCondition?: WhereCondition;
+      orderByCondition?: OrderBy[];
+      search?: string;
+    } = {}
+  ): Promise<AllCreatedVariants> {
+    const { first, page, whereCondition, orderByCondition, search } = options;
+
+    const response = await this.client.query({
+      query: GET_VARIANTS,
+
+      variables: {
+        first,
+        page,
+        whereCondition,
+        orderByCondition,
+        search,
+      },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
+    });
+
+    return response.data;
+  }
+
+  public async deleteVariant(id: number | string): Promise<deleteVariant> {
+    const response = await this.client.mutate({
+      mutation: DELETE_VARIANT,
+      variables: { id: id },
     });
 
     return response.data;
