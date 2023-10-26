@@ -59,7 +59,7 @@ export const CREATE_PRODUCT = gql`
           name
         }
         warehouses {
-          id
+          warehouses_id
           status_history {
             id
             name
@@ -148,7 +148,7 @@ export const UPDATE_VARIANT = gql`
         value
       }
       warehouses {
-        id
+        warehouses_id
         status_history {
           id
           name
@@ -182,7 +182,7 @@ export const UPDATE_VARIANT_IN_WAREHOUSE = gql`
         value
       }
       warehouses {
-        id
+        warehouses_id
         status_history {
           id
           name

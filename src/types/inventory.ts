@@ -99,7 +99,7 @@ export interface VariantInterface {
   sku: string;
   ean: string;
   warehouses: {
-    id: string;
+    warehouses_id: string;
     status_history?: {
       id: string | number;
       name: string;
@@ -197,7 +197,10 @@ export interface InputVariantParams {
       value?: string | number; //Mixed
     }[];
     warehouse?: {
-      id: number;
+      warehouses_id: number;
+      status?: {
+        id: number | string;
+      };
     };
     serial_number?: string;
     is_published?: boolean;
@@ -207,7 +210,7 @@ export interface InputVariantParams {
 export interface InputVariantWarehouseParams {
   id: string | number;
   input: {
-    warehouse_id: string | number;
+    warehouses_id: string | number;
     status?: {
       id: string;
     };
@@ -228,7 +231,7 @@ export interface ProductVariant {
   ean?: string;
   barcode?: string;
   warehouse?: {
-    id: number;
+    warehouses_id: number;
     status?: {
       id: number | string;
     };
@@ -262,6 +265,13 @@ export interface AllCreatedProducts {
 
 export interface AllCreatedVariants {
   variants: {
+    data: VariantInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
+}
+
+export interface AllCreatedVariantsbyStatus {
+  variantsByStatus: {
     data: VariantInterface[];
     paginatorInfo?: PaginatorInfo;
   };
