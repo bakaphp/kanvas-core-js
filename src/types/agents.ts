@@ -9,7 +9,7 @@ interface User {
   };
 }
 
-interface Owner {
+export interface Owner {
   firstname: string;
   lastname: string;
   email: string;
@@ -28,5 +28,5 @@ export interface Agent {
 }
 
 export interface AgentsData {
-  agents: { data: AgentsData[]; paginatorInfo?: PaginatorInfo };
+  agents: { data: Agent[]; paginatorInfo?: PaginatorInfo };
 }
