@@ -76,7 +76,7 @@ export const GET_PRODUCTS = gql`
             name
           }
           warehouses {
-            id
+            warehouses_id
             status_history {
               id
               name
@@ -260,7 +260,7 @@ export const GET_VARIANTS = gql`
           name
         }
         warehouses {
-          id
+          warehouses_id
           status_history {
             id
             name
@@ -284,7 +284,6 @@ export const GET_VARIANTS = gql`
         product {
           id
           slug
-
           name
           description
           created_at
@@ -302,6 +301,93 @@ export const GET_VARIANTS = gql`
         }
       }
 
+      paginatorInfo {
+        currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
+        lastPage
+        hasMorePages
+      }
+    }
+  }
+`;
+
+export const GET_VARIANTS_BY_STATUS = gql`
+  query getVariantsByStatus(
+    $warehouse_id: ID!
+    $status_id: ID!
+    $first: Int
+    $page: Int
+    $whereCondition: QueryVariantsByStatusWhereWhereConditions
+    $search: String
+  ) {
+    variantsByStatus(
+      warehouse_id: $warehouse_id
+      status_id: $status_id
+      first: $first
+      page: $page
+      where: $whereCondition
+      search: $search
+    ) {
+      data {
+        id
+        products_id
+        uuid
+        name
+        slug
+        user_interactions
+        description
+        short_description
+        html_description
+        sku
+        ean
+        status {
+          id
+          name
+        }
+        warehouses {
+          warehouses_id
+          status_history {
+            id
+            name
+            from_date
+          }
+          channels {
+            name
+            price
+            is_published
+          }
+          warehouseinfo {
+            id
+            name
+          }
+        }
+        attributes {
+          name
+          value
+        }
+
+        product {
+          id
+          slug
+          name
+          description
+          created_at
+          updated_at
+          companies {
+            id
+            name
+            user {
+              firstname
+              lastname
+              displayname
+            }
+          }
+        }
+      }
       paginatorInfo {
         currentPage
         perPage
