@@ -6,6 +6,7 @@ import {
   GET_REGIONS,
   GET_STATUS,
   GET_VARIANTS,
+  GET_VARIANTS_BY_STATUS,
   GET_WAREHOUSES,
   PRODUCT_DASHBOARD,
 } from '../../queries/inventory.query';
@@ -40,6 +41,7 @@ import {
   ProductDashboardInterface,
   AllCreatedVariants,
   deleteVariant,
+  AllCreatedVariantsbyStatus,
 } from '../../types';
 
 export class Inventory {
@@ -238,6 +240,46 @@ export class Inventory {
     const response = await this.client.mutate({
       mutation: DELETE_VARIANT,
       variables: { id: id },
+    });
+
+    return response.data;
+  }
+
+  public async getVariantsByStatus(
+    options: {
+      warehouse_id: number | string;
+      status_id: number | string;
+      first?: number;
+      page?: number;
+      whereCondition?: WhereCondition;
+      search?: string;
+    } = {
+      warehouse_id: 0,
+      status_id: '',
+    }
+  ): Promise<AllCreatedVariantsbyStatus> {
+    const {
+      warehouse_id,
+      status_id,
+      first,
+      page,
+      whereCondition,
+      search,
+    } = options;
+
+    const response = await this.client.query({
+      query: GET_VARIANTS_BY_STATUS,
+
+      variables: {
+        warehouse_id,
+        status_id,
+        first,
+        page,
+        whereCondition,
+        search,
+      },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
 
     return response.data;
