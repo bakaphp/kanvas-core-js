@@ -255,7 +255,7 @@ export interface CreateProductParams {
 
 export interface AllCreatedProducts {
   products: {
-    variants: ProductInterface[];
+    data: ProductInterface[];
     paginatorInfo?: PaginatorInfo;
   };
 }
