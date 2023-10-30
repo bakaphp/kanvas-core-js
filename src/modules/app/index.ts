@@ -4,7 +4,7 @@ import { APP_USERS_QUERY, GET_ALL_APP_USERS } from '../../queries';
 import type { ClientType } from '../../index';
 
 class Users {
-  constructor(protected client: ClientType) {}
+  constructor(protected client: ClientType) { }
 
   /**
    * Update user password as admin
@@ -63,15 +63,19 @@ class Users {
 
     const response = await this.client.query({
       query: GET_ALL_APP_USERS,
-      variables: {         first,
+      variables: {
+        first,
         page,
         whereCondition,
         orderByCondition,
-        search, },
+        search
+      },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
     return response.data;
   }
-  
+
 }
 
 export class App {
