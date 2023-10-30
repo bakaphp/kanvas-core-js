@@ -76,6 +76,16 @@ export const GET_ALL_APP_USERS = gql`
         created_at
         updated_at
       }
+      paginatorInfo {
+        currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
+        lastPage
+        hasMorePages
+      }
     }
   }
 `;
