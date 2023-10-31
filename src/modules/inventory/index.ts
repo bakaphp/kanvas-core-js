@@ -253,6 +253,7 @@ export class Inventory {
       page?: number;
       whereCondition?: WhereCondition;
       search?: string;
+      orderByCondition?: OrderBy[];
     } = {
       warehouse_id: 0,
       status_id: '',
@@ -265,6 +266,7 @@ export class Inventory {
       page,
       whereCondition,
       search,
+      orderByCondition
     } = options;
 
     const response = await this.client.query({
@@ -277,6 +279,7 @@ export class Inventory {
         page,
         whereCondition,
         search,
+        orderByCondition
       },
       fetchPolicy: 'network-only',
       partialRefetch: true,

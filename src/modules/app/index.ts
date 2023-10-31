@@ -1,10 +1,10 @@
-import type { AppUserInterface, AppUpdatePasswordInterface, WhereCondition, AllAppUsersInterface } from '../../types';
+import type { AppUserInterface, AppUpdatePasswordInterface, WhereCondition, AllAppUsersInterface, OrderBy } from '../../types';
 import { USER_UPDATE_PASSWORD_MUTATION } from '../../mutations';
 import { APP_USERS_QUERY, GET_ALL_APP_USERS } from '../../queries';
 import type { ClientType } from '../../index';
 
 class Users {
-  constructor(protected client: ClientType) {}
+  constructor(protected client: ClientType) { }
 
   /**
    * Update user password as admin
@@ -51,15 +51,31 @@ class Users {
   }
 
   public async getAllAppUsers(
-    whereCondition?: WhereCondition
+    options: {
+      first?: number;
+      page?: number;
+      whereCondition?: WhereCondition;
+      orderByCondition?: OrderBy[];
+      search?: string;
+    } = {}
   ): Promise<AllAppUsersInterface> {
+    const { first, page, whereCondition, orderByCondition, search } = options;
+
     const response = await this.client.query({
       query: GET_ALL_APP_USERS,
-      variables: { whereCondition },
+      variables: {
+        first,
+        page,
+        whereCondition,
+        orderByCondition,
+        search
+      },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
     return response.data;
   }
-  
+
 }
 
 export class App {

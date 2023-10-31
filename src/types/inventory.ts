@@ -197,7 +197,7 @@ export interface InputVariantParams {
       value?: string | number; //Mixed
     }[];
     warehouse?: {
-      warehouses_id: number;
+      warehouse_id: number;
       status?: {
         id: number | string;
       };
@@ -231,7 +231,7 @@ export interface ProductVariant {
   ean?: string;
   barcode?: string;
   warehouse?: {
-    warehouses_id: number;
+    id: number;
     status?: {
       id: number | string;
     };

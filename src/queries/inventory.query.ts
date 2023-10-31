@@ -323,6 +323,7 @@ export const GET_VARIANTS_BY_STATUS = gql`
     $page: Int
     $whereCondition: QueryVariantsByStatusWhereWhereConditions
     $search: String
+    $orderByCondition: [QueryVariantsByStatusOrderByOrderByClause!]
   ) {
     variantsByStatus(
       warehouse_id: $warehouse_id
@@ -331,6 +332,7 @@ export const GET_VARIANTS_BY_STATUS = gql`
       page: $page
       where: $whereCondition
       search: $search
+      orderBy: $orderByCondition
     ) {
       data {
         id
