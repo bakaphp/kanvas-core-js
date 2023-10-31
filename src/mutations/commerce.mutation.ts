@@ -16,3 +16,9 @@ export const CREATE_ORDER_MUTATION = gql`
     createOrder(input: $input)
   }
 `;
+
+export const CLEAR_CART_MUTATION = gql`
+  mutation {
+    clearCart
+  }
+`;

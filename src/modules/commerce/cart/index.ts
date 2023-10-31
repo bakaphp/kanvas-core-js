@@ -1,5 +1,5 @@
 import { ClientType } from '../../../index';
-import { ADD_TO_CART_MUTATION } from '../../../mutations';
+import { ADD_TO_CART_MUTATION, CLEAR_CART_MUTATION } from '../../../mutations';
 import { CartItemData, CartItemInput } from '../../../types/commerce';
 
 export class Cart {
@@ -11,6 +11,14 @@ export class Cart {
       variables: { input },
     });
 
-    return response.data
+    return response.data;
+  }
+
+  public async clearCart() {
+    const response = await this.client.mutate({
+      mutation: CLEAR_CART_MUTATION,
+    });
+
+    return response.data;
   }
 }
