@@ -21,6 +21,8 @@ import {
   MultiUpload,
 } from '../../types';
 
+const ADMIN_ROLE = 'Admin';
+
 export class Users {
   constructor(protected client: ClientType) {}
 
@@ -109,5 +111,26 @@ export class Users {
     });
 
     return response.data;
+  }
+
+  public async isAdmin(): Promise<boolean> {
+    try {
+      const response = await this.client.query({
+        query: GET_USER_DATA_QUERY,
+        fetchPolicy: 'network-only',
+      });
+
+      const roles = response?.data?.me?.roles;
+      if (Array.isArray(roles)) {
+        return roles
+          .map(role => role.toLowerCase())
+          .includes(ADMIN_ROLE.toLowerCase());
+      }
+
+      return false;
+    } catch (error) {
+      console.error('An error occurred while checking the admin role:', error);
+      return false;
+    }
   }
 }
