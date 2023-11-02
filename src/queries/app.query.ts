@@ -87,6 +87,7 @@ export const GET_ALL_APP_USERS = gql`
         sex
         description
         user_active
+        roles
         address {
           address_1
           address_2

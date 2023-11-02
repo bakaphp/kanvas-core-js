@@ -19,6 +19,7 @@ import {
   WhereCondition,
   RoleData,
   MultiUpload,
+  Roles,
 } from '../../types';
 
 export class Users {
@@ -109,5 +110,15 @@ export class Users {
     });
 
     return response.data;
+  }
+
+  public isAdmin(user: UserData): boolean {
+    const roles = user.roles;
+    if (Array.isArray(roles)) {
+      return roles
+        .map(role => role.toLowerCase())
+        .includes(Roles.ADMIN.toLowerCase());
+    }
+    return false;
   }
 }
