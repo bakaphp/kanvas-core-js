@@ -3,17 +3,30 @@ import { GET_ROLES } from '../../queries';
 import {
   AssignRoleUser,
   CreatedRoles,
+  OrderBy,
   RemoveRoleUser,
   UserRoleParams,
+  WhereCondition,
 } from '../../types';
 import { ASSIGN_ROLE_USER, REMOVE_ROLE_USER } from '../../mutations';
 
 export class Roles {
   constructor(protected client: ClientType) {}
 
-  public async getRoles(): Promise<CreatedRoles> {
+  public async getRoles(
+    options: {
+      whereCondition?: WhereCondition;
+      orderByCondition?: OrderBy[];
+    } = {}
+  ): Promise<CreatedRoles> {
+    const { whereCondition, orderByCondition } = options;
+
     const response = await this.client.query({
       query: GET_ROLES,
+      variables: {
+        whereCondition,
+        orderByCondition,
+      },
     });
     return response.data;
   }
