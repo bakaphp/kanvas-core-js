@@ -16,7 +16,7 @@ export const MULTIPLE_UPLOAD_FILES = gql`
   }
 `;
 
-export const APP_CRTEATE_USER = gql`
+export const APP_CREATE_USER = gql`
   mutation appCreateUser($data: CreateUserInput!) {
     appCreateUser(data: $data) {
       id

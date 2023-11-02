@@ -1,5 +1,5 @@
 import type { AppUserInterface, AppUpdatePasswordInterface, WhereCondition, AllAppUsersInterface, OrderBy, AppCreateUserParams, CreatedAppCreateUser } from '../../types';
-import { APP_CRTEATE_USER, USER_UPDATE_PASSWORD_MUTATION } from '../../mutations';
+import { APP_CREATE_USER, USER_UPDATE_PASSWORD_MUTATION } from '../../mutations';
 import { APP_USERS_QUERY, GET_ALL_APP_USERS } from '../../queries';
 import type { ClientType } from '../../index';
 
@@ -85,7 +85,7 @@ class Admin {
 
   public async appCreateUser(data: AppCreateUserParams): Promise<CreatedAppCreateUser> {
     const response = await this.client.mutate({
-      mutation: APP_CRTEATE_USER,
+      mutation: APP_CREATE_USER,
       variables: { data: data },
     });
 
