@@ -71,3 +71,9 @@ interface FileUpload {
 export interface MultiUpload {
   multiUpload: FileUpload[];
 }
+
+export interface AllAppUsersInterface {
+  appUsers: {
+    data: AppUserInterface[];
+  };
+}
