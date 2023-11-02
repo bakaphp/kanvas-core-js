@@ -19,7 +19,7 @@ import {
   WhereCondition,
   RoleData,
   MultiUpload,
-  Roles,
+  RolesEnum,
 } from '../../types';
 
 export class Users {
@@ -117,7 +117,7 @@ export class Users {
     if (Array.isArray(roles)) {
       return roles
         .map(role => role.toLowerCase())
-        .includes(Roles.ADMIN.toLowerCase());
+        .includes(RolesEnum.ADMIN.toLowerCase());
     }
     return false;
   }
