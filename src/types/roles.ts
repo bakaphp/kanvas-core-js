@@ -19,3 +19,7 @@ export interface CreatedRoles {
     data: RolesInterface;
   };
 }
+
+export interface AssignRoleToUser {
+  assignRoleToUser: boolean;
+}
