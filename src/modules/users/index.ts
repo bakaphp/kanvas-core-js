@@ -19,9 +19,8 @@ import {
   WhereCondition,
   RoleData,
   MultiUpload,
+  Roles,
 } from '../../types';
-
-const ADMIN_ROLE = 'Admin';
 
 export class Users {
   constructor(protected client: ClientType) {}
@@ -118,7 +117,7 @@ export class Users {
     if (Array.isArray(roles)) {
       return roles
         .map(role => role.toLowerCase())
-        .includes(ADMIN_ROLE.toLowerCase());
+        .includes(Roles.ADMIN.toLowerCase());
     }
     return false;
   }
