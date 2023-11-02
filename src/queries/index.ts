@@ -5,6 +5,7 @@ export * from './users.query';
 export * from './leads.query';
 export * from './inventory.query';
 export * from './agents.query';
-export * from './usersLists.query'
+export * from './usersLists.query';
 export * from './users-interactions.query';
 export * from './messages.query';
+export * from './roles.query';
