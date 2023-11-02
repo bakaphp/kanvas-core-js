@@ -20,6 +20,15 @@ export interface CreatedRoles {
   };
 }
 
-export interface AssignRoleToUser {
+export interface AssignRoleUser {
   assignRoleToUser: boolean;
+}
+
+export interface RemoveRoleUser {
+  removeRole: boolean;
+}
+
+export interface UserRoleParams {
+  userId: string | number;
+  role: string | number;
 }

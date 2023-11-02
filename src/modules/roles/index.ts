@@ -1,7 +1,12 @@
 import { ClientType } from '../../index';
 import { GET_ROLES } from '../../queries';
-import { AssignRoleToUser, CreatedRoles } from '../../types';
-import { ASSIGN_ROLE_USER } from '../../mutations';
+import {
+  AssignRoleUser,
+  CreatedRoles,
+  RemoveRoleUser,
+  UserRoleParams,
+} from '../../types';
+import { ASSIGN_ROLE_USER, REMOVE_ROLE_USER } from '../../mutations';
 
 export class Roles {
   constructor(protected client: ClientType) {}
@@ -13,16 +18,18 @@ export class Roles {
     return response.data;
   }
 
-  public async assignRoleToUser(
-    userId: string | number,
-    role: string | number
-  ): Promise<AssignRoleToUser> {
+  public async assignRoleUser(params: UserRoleParams): Promise<AssignRoleUser> {
     const response = await this.client.mutate({
       mutation: ASSIGN_ROLE_USER,
-      variables: {
-        userId,
-        role,
-      },
+      variables: { ...params },
+    });
+    return response.data;
+  }
+
+  public async removeRoleUser(params: UserRoleParams): Promise<RemoveRoleUser> {
+    const response = await this.client.mutate({
+      mutation: REMOVE_ROLE_USER,
+      variables: { ...params },
     });
     return response.data;
   }

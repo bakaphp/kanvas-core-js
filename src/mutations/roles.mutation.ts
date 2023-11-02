@@ -5,3 +5,9 @@ export const ASSIGN_ROLE_USER = gql`
     assignRoleToUser(userId: $userId, role: $role)
   }
 `;
+
+export const REMOVE_ROLE_USER = gql`
+  mutation($userId: ID!, $role: Mixed!) {
+    removeRole(userId: $userId, role: $role)
+  }
+`;
