@@ -100,7 +100,7 @@ export class Users {
     return response.data;
   }
 
-  public async multiUpload(files: []): Promise<MultiUpload> {
+  public async multipleUploadFiles(files: File[]): Promise<MultiUpload> {
     const response = await this.client.mutate({
       mutation: MULTIPLE_UPLOAD_FILES,
       variables: {
