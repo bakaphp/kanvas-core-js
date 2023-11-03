@@ -12,3 +12,4 @@ export * from './companies';
 export * from './messages';
 export * from './user-list';
 export * from './channels';
+export * from './roles';
