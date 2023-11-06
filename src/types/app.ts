@@ -89,6 +89,8 @@ export interface AppCreateUserParams {
   lastname?: string;
   displayname?: string;
   company_name?: string;
+  phone_number?: string;
+  cell_phone_number?: string;
   roles_id?: string | number;
 }
 

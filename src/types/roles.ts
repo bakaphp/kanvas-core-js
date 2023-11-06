@@ -16,7 +16,7 @@ export interface RolesInterface {
 
 export interface CreatedRoles {
   roles: {
-    data: RolesInterface;
+    data: RolesInterface[];
   };
 }
 
