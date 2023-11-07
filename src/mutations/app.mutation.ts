@@ -27,6 +27,10 @@ export const APP_CREATE_USER = gql`
       default_company
       default_company_branch
       email
+      contact {
+        phone_number
+        cell_phone_number
+      }
       branches {
         id
         name
