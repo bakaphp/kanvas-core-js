@@ -254,6 +254,7 @@ export interface CreateProductParams {
   variants?: ProductVariant[];
   price?: number;
   attributes?: ProductAttributes[];
+  company_id?: number | string;
 }
 
 export interface AllCreatedProducts {
