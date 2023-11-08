@@ -7,5 +7,6 @@ export * from './inventory.mutation';
 export * from './user-interaction.mutation';
 export * from './commerce.mutation';
 export * from './messages.mutation';
-export * from "./userList.mutation"
-export * from "./channels.mutation";
+export * from './userList.mutation';
+export * from './channels.mutation';
+export * from './roles.mutation';
