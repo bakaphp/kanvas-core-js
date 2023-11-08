@@ -1,10 +1,10 @@
-import type { AppUserInterface, AppUpdatePasswordInterface } from '../../types';
-import { USER_UPDATE_PASSWORD_MUTATION } from '../../mutations';
-import { APP_USERS_QUERY } from '../../queries';
+import type { AppUserInterface, AppUpdatePasswordInterface, WhereCondition, AllAppUsersInterface, OrderBy, AppCreateUserParams, CreatedAppCreateUser } from '../../types';
+import { APP_CREATE_USER, USER_UPDATE_PASSWORD_MUTATION } from '../../mutations';
+import { APP_USERS_QUERY, GET_ALL_APP_USERS } from '../../queries';
 import type { ClientType } from '../../index';
 
 class Users {
-  constructor(protected client: ClientType) {}
+  constructor(protected client: ClientType) { }
 
   /**
    * Update user password as admin
@@ -50,14 +50,58 @@ class Users {
     return response.data.appUsers.data[0];
   }
 
+  public async getAllAppUsers(
+    options: {
+      first?: number;
+      page?: number;
+      whereCondition?: WhereCondition;
+      orderByCondition?: OrderBy[];
+      search?: string;
+    } = {}
+  ): Promise<AllAppUsersInterface> {
+    const { first, page, whereCondition, orderByCondition, search } = options;
+
+    const response = await this.client.query({
+      query: GET_ALL_APP_USERS,
+      variables: {
+        first,
+        page,
+        whereCondition,
+        orderByCondition,
+        search
+      },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
+    });
+    return response.data;
+  }
+
+}
+
+
+class Admin {
+  constructor(protected client: ClientType) { }
   
-  
+
+  public async appCreateUser(data: AppCreateUserParams): Promise<CreatedAppCreateUser> {
+    const response = await this.client.mutate({
+      mutation: APP_CREATE_USER,
+      variables: { data: data },
+    });
+
+    return response.data
+  }
+
+
 }
 
 export class App {
   public users: Users;
+  public admin: Admin;
 
   constructor(protected client: ClientType) {
     this.users = new Users(this.client);
+    this.admin = new Admin(this.client);
+
   }
 }

@@ -1,3 +1,5 @@
+import { PaginatorInfo } from './paginator';
+
 export interface AppUpdatePasswordInterface {
   appUserUpdatePassword: boolean;
 }
@@ -12,11 +14,13 @@ export interface AppUserInterface {
   sex: string;
   description: string | null;
   user_active: boolean;
+  roles: string[];
   address: AddressInterface;
   contact: ContantInterface;
   companies: CompanyInterface[];
   branches: BranchInterface[];
   created_at: string;
+
   updated_at: string;
 }
 
@@ -70,4 +74,24 @@ interface FileUpload {
 
 export interface MultiUpload {
   multiUpload: FileUpload[];
+}
+
+export interface AllAppUsersInterface {
+  appUsers: {
+    data: AppUserInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
+}
+
+export interface AppCreateUserParams {
+  email: string;
+  firstname?: string;
+  lastname?: string;
+  displayname?: string;
+  company_name?: string;
+  roles_id?: string | number;
+}
+
+export interface CreatedAppCreateUser {
+  appCreateUser: AppUserInterface;
 }

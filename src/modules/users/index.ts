@@ -19,6 +19,7 @@ import {
   WhereCondition,
   RoleData,
   MultiUpload,
+  Roles,
 } from '../../types';
 
 export class Users {
@@ -44,6 +45,7 @@ export class Users {
   public async getUserData(): Promise<UserData> {
     const response = await this.client.query({
       query: GET_USER_DATA_QUERY,
+      fetchPolicy: 'network-only',
     });
 
     return response.data.me;
@@ -99,7 +101,7 @@ export class Users {
     return response.data;
   }
 
-  public async multiUpload(files: []): Promise<MultiUpload> {
+  public async multipleUploadFiles(files: File[]): Promise<MultiUpload> {
     const response = await this.client.mutate({
       mutation: MULTIPLE_UPLOAD_FILES,
       variables: {
@@ -108,5 +110,15 @@ export class Users {
     });
 
     return response.data;
+  }
+
+  public isAdmin(user: UserData): boolean {
+    const roles = user.roles;
+    if (Array.isArray(roles)) {
+      return roles
+        .map(role => role.toLowerCase())
+        .includes(Roles.ADMIN.toLowerCase());
+    }
+    return false;
   }
 }

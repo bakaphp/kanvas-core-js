@@ -5,8 +5,20 @@ export const GET_PRODUCTS = gql`
     $first: Int
     $page: Int
     $whereCondition: QueryProductsWhereWhereConditions
+    $orderByCondition: [QueryProductsOrderByOrderByClause!]
+    $hasCategoriesCondition: QueryProductsHasCategoriesWhereHasConditions
+    $hasAttributesCondition: QueryProductsHasAttributesWhereHasConditions
+    $search: String
   ) {
-    products(first: $first, page: $page, where: $whereCondition) {
+    products(
+      first: $first
+      page: $page
+      where: $whereCondition
+      orderBy: $orderByCondition
+      hasCategories: $hasCategoriesCondition
+      hasAttributes: $hasAttributesCondition
+      search: $search
+    ) {
       data {
         id
         products_types_id
@@ -22,14 +34,16 @@ export const GET_PRODUCTS = gql`
         created_at
         updated_at
         files {
-          id
-          uuid
-          name
-          url
-          type
-          size
-          field_name
-          attributes
+          data {
+            id
+            uuid
+            name
+            url
+            size
+            field_name
+            type
+            attributes
+          }
         }
         categories {
           id
@@ -51,6 +65,7 @@ export const GET_PRODUCTS = gql`
           uuid
           name
           slug
+          user_interactions
           description
           short_description
           html_description
@@ -61,11 +76,16 @@ export const GET_PRODUCTS = gql`
             name
           }
           warehouses {
-            id
+            warehouses_id
             status_history {
               id
               name
               from_date
+            }
+            channels {
+              name
+              price
+              is_published
             }
             warehouseinfo {
               id
@@ -78,13 +98,8 @@ export const GET_PRODUCTS = gql`
           }
         }
         attributes {
-          id
-          uuid
           name
-          values {
-            id
-            value
-          }
+          value
         }
         productsTypes {
           id
@@ -101,6 +116,7 @@ export const GET_PRODUCTS = gql`
           user {
             firstname
             lastname
+            displayname
           }
         }
       }
@@ -158,6 +174,231 @@ export const GET_REGIONS = gql`
         slug
         short_slug
         is_default
+      }
+    }
+  }
+`;
+
+export const GET_WAREHOUSES = gql`
+  query getWarehouses($whereCondition: QueryGetWarehousesWhereWhereConditions) {
+    getWarehouses(where: $whereCondition) {
+      data {
+        name
+        id
+        uuid
+        location
+        is_default
+        regions {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const GET_ATTRIBUTES = gql`
+  query getAttributes($whereCondition: QueryAttributesWhereWhereConditions) {
+    attributes(where: $whereCondition) {
+      data {
+        id
+        name
+        values {
+          id
+          value
+        }
+      }
+    }
+  }
+`;
+
+export const PRODUCT_DASHBOARD = gql`
+  query getproductDashboard {
+    productDashboard {
+      total_products
+      total_variants
+      product_status {
+        status_id
+        status_name
+        warehouses_name
+        warehouses_id
+        total_amount
+      }
+    }
+  }
+`;
+
+export const GET_VARIANTS = gql`
+  query getVariants(
+    $first: Int
+    $page: Int
+    $whereCondition: QueryVariantsWhereWhereConditions
+    $orderByCondition: [QueryVariantsOrderByOrderByClause!]
+    $search: String
+  ) {
+    variants(
+      first: $first
+      page: $page
+      where: $whereCondition
+      orderBy: $orderByCondition
+      search: $search
+    ) {
+      data {
+        id
+        products_id
+        uuid
+        name
+        slug
+        user_interactions
+        description
+        short_description
+        html_description
+        sku
+        ean
+        status {
+          id
+          name
+        }
+        warehouses {
+          warehouses_id
+          status_history {
+            id
+            name
+            from_date
+          }
+          channels {
+            name
+            price
+            is_published
+          }
+          warehouseinfo {
+            id
+            name
+          }
+        }
+        attributes {
+          name
+          value
+        }
+
+        product {
+          id
+          slug
+          name
+          description
+          created_at
+          updated_at
+          companies {
+            id
+            name
+
+            user {
+              firstname
+              lastname
+              displayname
+            }
+          }
+        }
+      }
+
+      paginatorInfo {
+        currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
+        lastPage
+        hasMorePages
+      }
+    }
+  }
+`;
+
+export const GET_VARIANTS_BY_STATUS = gql`
+  query getVariantsByStatus(
+    $warehouse_id: ID!
+    $status_id: ID!
+    $first: Int
+    $page: Int
+    $whereCondition: QueryVariantsByStatusWhereWhereConditions
+    $search: String
+    $orderByCondition: [QueryVariantsByStatusOrderByOrderByClause!]
+  ) {
+    variantsByStatus(
+      warehouse_id: $warehouse_id
+      status_id: $status_id
+      first: $first
+      page: $page
+      where: $whereCondition
+      search: $search
+      orderBy: $orderByCondition
+    ) {
+      data {
+        id
+        products_id
+        uuid
+        name
+        slug
+        user_interactions
+        description
+        short_description
+        html_description
+        sku
+        ean
+        status {
+          id
+          name
+        }
+        warehouses {
+          warehouses_id
+          status_history {
+            id
+            name
+            from_date
+          }
+          channels {
+            name
+            price
+            is_published
+          }
+          warehouseinfo {
+            id
+            name
+          }
+        }
+        attributes {
+          name
+          value
+        }
+
+        product {
+          id
+          slug
+          name
+          description
+          created_at
+          updated_at
+          companies {
+            id
+            name
+            user {
+              firstname
+              lastname
+              displayname
+            }
+          }
+        }
+      }
+      paginatorInfo {
+        currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
+        lastPage
+        hasMorePages
       }
     }
   }

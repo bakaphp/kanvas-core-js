@@ -86,6 +86,7 @@ export interface CreateLeadData {
   user?: User;
   owner?: User;
   company: Company;
+  organization?: Organization;
   status: Status;
   custom_fields: CustomFieldData;
   receiver?: Receiver | null;
@@ -144,5 +145,5 @@ export interface LeadsDashboardData {
 }
 
 export interface LeadsData {
-  leads: { data: CreateLeadData[],  paginatorInfo?: PaginatorInfo };
+  leads: { data: CreateLeadData[]; paginatorInfo?: PaginatorInfo };
 }

@@ -15,3 +15,28 @@ export const MULTIPLE_UPLOAD_FILES = gql`
     }
   }
 `;
+
+export const APP_CREATE_USER = gql`
+  mutation appCreateUser($data: CreateUserInput!) {
+    appCreateUser(data: $data) {
+      id
+      uuid
+      firstname
+      lastname
+      displayname
+      default_company
+      default_company_branch
+      email
+      branches {
+        id
+        name
+        phone
+      }
+      companies {
+        id
+        name
+      }
+      roles
+    }
+  }
+`;

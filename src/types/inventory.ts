@@ -8,6 +8,10 @@ export interface ProductAttributes {
 export interface ProductCompany {
   id: string;
   name: string;
+  user: {
+    firstname: string;
+    lastname: string;
+  };
 }
 export interface StatusReferenceInput {
   id: string;
@@ -25,6 +29,11 @@ export interface ProductWarehouse {
 export interface StatusInterface {
   id: string;
   name: string;
+}
+
+export interface OrderBy {
+  column: string;
+  order: 'ASC' | 'DESC';
 }
 
 export interface AttributesInterface {
@@ -67,33 +76,39 @@ export interface RegionsInterface {
 
 export interface WarehouseInterface {
   id: number;
-  apps_id: number;
-  regions_id: number;
-  companies_id: number;
   uuid: string;
   name: string;
   location: string;
   is_default: boolean;
   is_published: number;
+  regions: {
+    id: number;
+    name: string;
+  };
 }
 export interface VariantInterface {
   id: string;
   products_id: number;
   slug: string;
   name: string;
+  user_interactions: any;
   description?: string;
   short_description: string;
   html_description: string;
   status: StatusInterface;
   sku: string;
   ean: string;
-  files?: []; // Filesystem[];
   warehouses: {
-    id: string;
+    warehouses_id: string;
     status_history?: {
       id: string | number;
       name: string;
       from_date: string;
+    }[];
+    channels: {
+      name: string;
+      price: number;
+      is_published: boolean;
     }[];
     warehouseinfo: {
       id: number;
@@ -101,6 +116,7 @@ export interface VariantInterface {
     };
   }[];
   attributes?: ProductAttributes[];
+  product: ProductInterface;
 }
 
 export interface ProductTypeInterface {
@@ -112,6 +128,17 @@ export interface ProductTypeInterface {
   slug: string;
   weight: number;
   companies: ProductCompany;
+}
+
+export interface FilesystemInterface {
+  id: number | string;
+  uuid: string;
+  name: string;
+  url: string;
+  type: string;
+  size: number;
+  field_name: string;
+  attributes: any;
 }
 
 export interface ProductInterface {
@@ -128,11 +155,13 @@ export interface ProductInterface {
   is_published: boolean;
   created_at: string;
   updated_at: string;
-  files: []; // Filesystem[];
+  files: {
+    data: FilesystemInterface[];
+  };
   categories: CategoryInterface[];
   warehouses: ProductWarehouse[];
   variants: VariantInterface[];
-  attributes: AttributesInterface[];
+  attributes: ProductAttributes[];
   productsTypes: ProductTypeInterface;
   companies: ProductCompany;
 }
@@ -168,7 +197,10 @@ export interface InputVariantParams {
       value?: string | number; //Mixed
     }[];
     warehouse?: {
-      id: number;
+      warehouse_id: number;
+      status?: {
+        id: number | string;
+      };
     };
     serial_number?: string;
     is_published?: boolean;
@@ -178,7 +210,7 @@ export interface InputVariantParams {
 export interface InputVariantWarehouseParams {
   id: string | number;
   input: {
-    warehouse_id: string | number;
+    warehouses_id: string | number;
     status?: {
       id: string;
     };
@@ -198,10 +230,10 @@ export interface ProductVariant {
   sku?: string;
   ean?: string;
   barcode?: string;
-  warehouse: {
+  warehouse?: {
     id: number;
     status?: {
-      id: number;
+      id: number | string;
     };
   };
   attributes?: ProductAttributes[];
@@ -221,6 +253,7 @@ export interface CreateProductParams {
   categories?: number[];
   variants?: ProductVariant[];
   price?: number;
+  attributes?: ProductAttributes[];
 }
 
 export interface AllCreatedProducts {
@@ -230,9 +263,28 @@ export interface AllCreatedProducts {
   };
 }
 
+export interface AllCreatedVariants {
+  variants: {
+    data: VariantInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
+}
+
+export interface AllCreatedVariantsbyStatus {
+  variantsByStatus: {
+    data: VariantInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
+}
+
 export interface CreatedProduct {
   createProduct: ProductInterface;
 }
+
+export interface CreatedStatus {
+  createStatus: StatusInterface;
+}
+
 export interface CreatedProductTypes {
   productTypes: {
     data: ProductTypeInterface[];
@@ -267,6 +319,36 @@ export interface CreatedrRegions {
   };
 }
 
+export interface CreatedWarehouses {
+  getWarehouses: {
+    data: WarehouseInterface[];
+  };
+}
+
+export interface CreatedAttributes {
+  attributes: {
+    data: AttributesInterface[];
+  };
+}
+
 export interface DeleteProduct {
   deleteProduct: boolean;
+}
+
+export interface ProductDashboardInterface {
+  productDashboard: {
+    total_products: number;
+    total_variants: number;
+    product_status: {
+      status_id: number | string;
+      status_name: string;
+      warehouses_name: string;
+      warehouses_id: number | string;
+      total_amount: number;
+    }[];
+  };
+}
+
+export interface deleteVariant {
+  deleteVariant: boolean;
 }
