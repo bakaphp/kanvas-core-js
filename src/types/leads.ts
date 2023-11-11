@@ -49,7 +49,7 @@ interface Receiver {
   uuid: string;
 }
 
-interface File {
+interface LeadAttachment {
   name: string;
   url: string;
 }
@@ -96,7 +96,7 @@ export interface CreateLeadData {
   pipeline?: Pipeline | null;
   people?: People;
   followers?: { data: Follower[] };
-  files?: File[];
+  files?: { data: LeadAttachment[] };
 }
 
 export interface LeadInput {
@@ -113,7 +113,7 @@ export interface LeadInput {
   reason_lost: string;
   pipeline_stage_id: number;
   custom_fields: CustomFieldInput[];
-  files?: File[];
+  files?: LeadAttachment[];
 }
 
 export interface WhereCondition {
