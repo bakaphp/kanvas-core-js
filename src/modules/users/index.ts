@@ -17,7 +17,6 @@ import {
   InviteUserParams,
   WhereCondition,
   RoleData,
-  MultiUpload,
   RolesEnum,
 } from '../../types';
 
