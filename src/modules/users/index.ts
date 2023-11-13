@@ -101,17 +101,6 @@ export class Users {
     return response.data;
   }
 
-  public async multipleUploadFiles(files: File[]): Promise<MultiUpload> {
-    const response = await this.client.mutate({
-      mutation: MULTIPLE_UPLOAD_FILES,
-      variables: {
-        files,
-      },
-    });
-
-    return response.data;
-  }
-
   public isAdmin(user: UserData): boolean {
     const roles = user.roles;
     if (Array.isArray(roles)) {
