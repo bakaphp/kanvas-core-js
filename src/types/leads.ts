@@ -96,6 +96,7 @@ export interface CreateLeadData {
   pipeline?: Pipeline | null;
   people?: People;
   followers?: { data: Follower[] };
+  paginatorInfo?: PaginatorInfo;
   files?: { data: LeadAttachment[] };
 }
 
