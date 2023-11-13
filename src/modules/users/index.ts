@@ -6,7 +6,6 @@ import {
   UPDATE_USER_MUTATION,
   INVITE_USER_MUTATION,
   SWITCH_COMPANY_BRANCH_MUTATION,
-  MULTIPLE_UPLOAD_FILES,
 } from '../../mutations';
 import {
   UserInterface,
