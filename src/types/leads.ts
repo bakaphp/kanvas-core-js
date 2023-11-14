@@ -120,7 +120,7 @@ export interface LeadInput {
 export interface WhereCondition {
   column: string;
   operator: string;
-  value: number | string;
+  value: number | string | (number | string)[];
 }
 
 export interface LeadsDashboardInput {

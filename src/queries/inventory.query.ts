@@ -156,6 +156,7 @@ export const GET_STATUS = gql`
       data {
         name
         id
+        is_default
       }
     }
   }
