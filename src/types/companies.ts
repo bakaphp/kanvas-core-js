@@ -1,4 +1,4 @@
-import { UserInterface, FilesystemInterface, FilesystemInputUrl } from 'index';
+import { UserInterface } from 'index';
 
 export interface CompanyInterface {
   id: string;
@@ -29,7 +29,6 @@ export interface CompanyInput {
   country_code: string;
   files: File[];
 }
-
 
 export interface QueryCompaniesWhereWhereConditions {
   column: string;

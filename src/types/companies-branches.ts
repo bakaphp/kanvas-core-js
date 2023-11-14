@@ -1,5 +1,4 @@
 import {
-  UserInterface,
   FilesystemInterface,
   FilesystemInputUrl,
   CompanyInterface,
