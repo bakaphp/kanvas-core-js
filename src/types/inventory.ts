@@ -29,6 +29,7 @@ export interface ProductWarehouse {
 export interface StatusInterface {
   id: string;
   name: string;
+  is_default: boolean;
 }
 
 export interface OrderBy {

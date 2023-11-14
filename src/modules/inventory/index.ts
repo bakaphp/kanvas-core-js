@@ -57,12 +57,13 @@ export class Inventory {
     return response.data;
   }
 
-  public async createStatus(name: string): Promise<CreatedStatus> {
+  public async createStatus(name: string, is_default?:boolean): Promise<CreatedStatus> {
     const response = await this.client.mutate({
       mutation: CREATE_STATUS,
       variables: {
         input: {
           name: name,
+          is_default: is_default
         },
       },
     });

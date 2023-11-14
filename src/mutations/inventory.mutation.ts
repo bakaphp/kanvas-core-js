@@ -203,6 +203,7 @@ export const CREATE_STATUS = gql`
     createStatus(input: $input) {
       id
       name
+      is_default
     }
   }
 `;
