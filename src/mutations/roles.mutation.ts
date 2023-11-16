@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client/core';
 
 export const ASSIGN_ROLE_USER = gql`
   mutation($userId: ID!, $role: Mixed!) {
