@@ -29,7 +29,8 @@ export interface ProductWarehouse {
 export interface StatusInterface {
   id: string;
   name: string;
-  is_default: boolean;
+  is_default?: boolean;
+  slug: string;
 }
 
 export interface OrderBy {
@@ -353,4 +354,25 @@ export interface ProductDashboardInterface {
 
 export interface deleteVariant {
   deleteVariant: boolean;
+}
+
+export interface InputStatusParams {
+  name: string;
+  is_default?: boolean;
+  company_id?: number | number;
+}
+
+export interface ProductAdminDashboardInterface {
+  productAdminDashboard: {
+    total_products: number;
+    total_variants: number;
+    product_status: ProductAdminStatusDashboard[];
+  };
+}
+
+export interface ProductAdminStatusDashboard {
+  status_id: number | string;
+  status_name: string;
+  status_slug: string;
+  total_amount: number;
 }
