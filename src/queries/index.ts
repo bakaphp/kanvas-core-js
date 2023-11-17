@@ -9,3 +9,4 @@ export * from './usersLists.query';
 export * from './users-interactions.query';
 export * from './messages.query';
 export * from './roles.query';
+export * from './topics.query';
