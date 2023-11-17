@@ -204,6 +204,7 @@ export const CREATE_STATUS = gql`
       id
       name
       is_default
+      slug
     }
   }
 `;

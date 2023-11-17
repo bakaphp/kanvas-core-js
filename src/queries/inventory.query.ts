@@ -229,6 +229,21 @@ export const PRODUCT_DASHBOARD = gql`
   }
 `;
 
+export const PRODUCT_ADMIN_DASHBOARD = gql`
+  query getProductAdminDashboard {
+    productAdminDashboard {
+      total_products
+      total_variants
+      product_status {
+        status_id
+        status_name
+        status_slug
+        total_amount
+      }
+    }
+  }
+`;
+
 export const GET_VARIANTS = gql`
   query getVariants(
     $first: Int
