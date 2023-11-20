@@ -1,6 +1,11 @@
 import { ClientType } from '../../index';
 
-import { CREATE_TOPIC_MUTATION, UPDATE_TOPIC_MUTATION } from '../../mutations/';
+import {
+  CREATE_TOPIC_MUTATION,
+  UPDATE_TOPIC_MUTATION,
+  FOLLOW_TOPIC_MUTATION,
+  UnFOLLOW_TOPIC_MUTATION,
+} from '../../mutations/';
 import { GET_TOPICS } from '../../queries/';
 import {
   TopicInputInterface,
@@ -41,5 +46,19 @@ export class Topics {
       variables: { where: where },
     });
     return response.data.getTopics.data as TopicsInterface[];
+  }
+
+  public async followTopic(id: string): Promise<void> {
+    await this.client.mutate({
+      mutation: FOLLOW_TOPIC_MUTATION,
+      variables: { id: id },
+    });
+  }
+
+  public async unFollowTopic(id: string): Promise<void> {
+    await this.client.mutate({
+      mutation: UnFOLLOW_TOPIC_MUTATION,
+      variables: { id: id },
+    });
   }
 }

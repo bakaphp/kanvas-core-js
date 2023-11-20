@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client/core';
 
 export const CREATE_TOPIC_MUTATION = gql`
   mutation createTopic($input: TopicInput!) {
@@ -23,5 +23,17 @@ export const UPDATE_TOPIC_MUTATION = gql`
       is_feature
       status
     }
+  }
+`;
+
+export const FOLLOW_TOPIC_MUTATION = gql`
+  mutation followTopic($id: ID!) {
+    followTopic(id: $id)
+  }
+`;
+
+export const UnFOLLOW_TOPIC_MUTATION = gql`
+  mutation unFollowTopic($id: ID!) {
+    unFollowTopic(id: $id)
   }
 `;

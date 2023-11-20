@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client/core';
 
 export const GET_TOPICS = gql`
   query getTopics(
@@ -8,7 +8,13 @@ export const GET_TOPICS = gql`
     $first: Int
     $page: Int
   ) {
-    getTopics {
+    getTopics(
+        where: $where
+        orderBy: $orderBy
+        search: $search
+        first: $first
+        page: $page
+    ) {
       data {
         id
         name
