@@ -21,6 +21,7 @@ import {
   UsersInteractions,
   Messages,
   Roles,
+  SystemModules,
 } from './modules';
 
 import { setContext } from '@apollo/client/link/context';
@@ -88,7 +89,8 @@ export default class KanvasCore {
   public usersLists: UsersLists;
   public messages: Messages;
   public roles: Roles;
-
+  public systemModules: SystemModules;
+  
   constructor(protected options: Options) {
     this.client = new ApolloClient({
       link: this.generateLink(),
@@ -111,6 +113,7 @@ export default class KanvasCore {
     this.usersLists = new UsersLists(this.client);
     this.messages = new Messages(this.client);
     this.roles = new Roles(this.client);
+    this.systemModules = new SystemModules(this.client);
   }
 
   protected generateURL() {

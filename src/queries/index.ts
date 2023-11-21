@@ -1,3 +1,5 @@
+import { from } from '@apollo/client';
+
 export * from './app.query';
 export * from './settings.query';
 export * from './locations.query';
@@ -9,3 +11,4 @@ export * from './usersLists.query';
 export * from './users-interactions.query';
 export * from './messages.query';
 export * from './roles.query';
+export * from './system-module.query';
