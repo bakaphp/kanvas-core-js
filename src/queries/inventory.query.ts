@@ -238,6 +238,7 @@ export const PRODUCT_ADMIN_DASHBOARD = gql`
         status_id
         status_name
         status_slug
+        status_companies_id
         total_amount
       }
     }
@@ -334,7 +335,7 @@ export const GET_VARIANTS = gql`
 export const GET_VARIANTS_BY_STATUS = gql`
   query getVariantsByStatus(
     $warehouse_id: ID!
-    $status_id: ID!
+    $status_id: [ID!]
     $first: Int
     $page: Int
     $whereCondition: QueryVariantsByStatusWhereWhereConditions
