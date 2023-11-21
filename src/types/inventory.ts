@@ -374,5 +374,6 @@ export interface ProductAdminStatusDashboard {
   status_id: number | string;
   status_name: string;
   status_slug: string;
+  status_companies_id: number | string;
   total_amount: number;
 }
