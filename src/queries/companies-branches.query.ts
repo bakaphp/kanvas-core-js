@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client/core';
 
 export const COMPANIES_BRANCHES_QUERY = gql`
   query branches(

@@ -5,7 +5,7 @@ import {
   DELETE_COMPANY_MUTATION,
   ADD_USER_TO_COMPANY,
   REMOVE_USER_FROM_COMPANY,
-} from '../../mutations';
+} from 'mutations';
 import {
   COMPANIES_QUERY,
   COMPANY_USERS_QUERY,
@@ -20,7 +20,6 @@ import {
   QueryCompanyUsersWhereWhereConditions,
   CompanySettings,
 } from '../../types';
-import { from } from '@apollo/client';
 
 export class Companies {
   constructor(protected client: ClientType) {}
@@ -80,7 +79,7 @@ export class Companies {
       mutation: DELETE_COMPANY_MUTATION,
       variables: { id: id },
     });
-    return response.data.deleteCompany;
+    return response.data.deleteCompany as Boolean;
   }
 
   public async addUserToCompany(id: string, user_id: string): Promise<Boolean> {

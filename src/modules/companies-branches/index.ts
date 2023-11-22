@@ -55,7 +55,7 @@ export class CompaniesBranches {
       mutation: CREATE_COMPANY_BRANCH,
       variables: { input },
     });
-    return response.data.createCompanyBranch;
+    return response.data.createCompanyBranch as CompanyBranchInterface;
   }
 
   public async updateCompanyBranch(
@@ -66,7 +66,7 @@ export class CompaniesBranches {
       mutation: UPDATE_COMPANY_BRANCH,
       variables: { id: id, input: input },
     });
-    return response.data.updateCompanyBranch;
+    return response.data.updateCompanyBranch as CompanyBranchInterface;
   }
 
   public async deleteCompanyBranch(id: string): Promise<Boolean> {
