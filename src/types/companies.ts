@@ -4,29 +4,29 @@ export interface CompanyInterface {
   id: string;
   name: string;
   uuid: string;
-  website: string;
-  address: string;
-  zipcode: number;
-  email: string;
-  language: string;
-  timezone: string;
-  phone: string;
-  user: UserInterface;
-  country_code: string;
-  created_at: string;
-  updated_at: string;
+  website?: string;
+  address?: string;
+  zipcode?: number;
+  email?: string;
+  language?: string;
+  timezone?: string;
+  phone?: string;
+  user?: UserInterface;
+  country_code?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface CompanyInput {
   name: string;
-  website: string;
-  address: string;
-  zipcode: number;
-  email: string;
-  language: string;
-  timezone: string;
-  phone: string;
-  country_code: string;
+  website?: string;
+  address?: string;
+  zipcode?: number;
+  email?: string;
+  language?: string;
+  timezone?: string;
+  phone?: string;
+  country_code?: string;
   files: File[];
 }
 
@@ -34,8 +34,8 @@ export interface QueryCompaniesWhereWhereConditions {
   column: string;
   operator: string;
   value: string;
-  AND: Array<QueryCompaniesWhereWhereConditions>;
-  OR: Array<QueryCompaniesWhereWhereConditions>;
+  AND?: Array<QueryCompaniesWhereWhereConditions>;
+  OR?: Array<QueryCompaniesWhereWhereConditions>;
 }
 
 export interface QueryCompaniesWhereWhereConditionsRelation {
@@ -49,8 +49,8 @@ export interface QueryCompanyUsersWhereWhereConditions {
   column: string;
   operator: string;
   value: string;
-  AND: Array<QueryCompanyUsersWhereWhereConditions>;
-  OR: Array<QueryCompanyUsersWhereWhereConditions>;
+  AND?: Array<QueryCompanyUsersWhereWhereConditions>;
+  OR?: Array<QueryCompanyUsersWhereWhereConditions>;
 }
 
 export interface CompanySettings {
