@@ -1,3 +1,4 @@
+import { CustomFieldInput } from './custom-fields';
 import { PaginatorInfo } from './paginator';
 
 export interface AppUpdatePasswordInterface {
@@ -92,6 +93,8 @@ export interface AppCreateUserParams {
   phone_number?: string;
   cell_phone_number?: string;
   roles_id?: string | number;
+  password?: string;
+  custom_fields: CustomFieldInput[];
 }
 
 export interface CreatedAppCreateUser {

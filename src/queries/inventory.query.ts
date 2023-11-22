@@ -156,6 +156,7 @@ export const GET_STATUS = gql`
       data {
         name
         id
+        is_default
       }
     }
   }
@@ -222,6 +223,22 @@ export const PRODUCT_DASHBOARD = gql`
         status_name
         warehouses_name
         warehouses_id
+        total_amount
+      }
+    }
+  }
+`;
+
+export const PRODUCT_ADMIN_DASHBOARD = gql`
+  query getProductAdminDashboard {
+    productAdminDashboard {
+      total_products
+      total_variants
+      product_status {
+        status_id
+        status_name
+        status_slug
+        status_companies_id
         total_amount
       }
     }
@@ -318,7 +335,7 @@ export const GET_VARIANTS = gql`
 export const GET_VARIANTS_BY_STATUS = gql`
   query getVariantsByStatus(
     $warehouse_id: ID!
-    $status_id: ID!
+    $status_id:  [ID]!
     $first: Int
     $page: Int
     $whereCondition: QueryVariantsByStatusWhereWhereConditions

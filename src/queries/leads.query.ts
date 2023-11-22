@@ -168,6 +168,12 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
             value
           }
         }
+        files {
+          data {
+            name
+            url
+          }
+        }
       }
     }
   }

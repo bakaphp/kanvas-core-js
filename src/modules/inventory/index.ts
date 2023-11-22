@@ -8,6 +8,7 @@ import {
   GET_VARIANTS,
   GET_VARIANTS_BY_STATUS,
   GET_WAREHOUSES,
+  PRODUCT_ADMIN_DASHBOARD,
   PRODUCT_DASHBOARD,
 } from '../../queries/inventory.query';
 import {
@@ -42,6 +43,8 @@ import {
   AllCreatedVariants,
   deleteVariant,
   AllCreatedVariantsbyStatus,
+  InputStatusParams,
+  ProductAdminDashboardInterface,
 } from '../../types';
 
 export class Inventory {
@@ -57,13 +60,11 @@ export class Inventory {
     return response.data;
   }
 
-  public async createStatus(name: string): Promise<CreatedStatus> {
+  public async createStatus(data: InputStatusParams): Promise<CreatedStatus> {
     const response = await this.client.mutate({
       mutation: CREATE_STATUS,
       variables: {
-        input: {
-          name: name,
-        },
+        input: data,
       },
     });
     return response.data;
@@ -207,6 +208,17 @@ export class Inventory {
 
     return response.data;
   }
+  public async productAdminDashboard(): Promise<
+    ProductAdminDashboardInterface
+  > {
+    const response = await this.client.query({
+      query: PRODUCT_ADMIN_DASHBOARD,
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
+    });
+
+    return response.data;
+  }
 
   public async getVariants(
     options: {
@@ -266,7 +278,7 @@ export class Inventory {
       page,
       whereCondition,
       search,
-      orderByCondition
+      orderByCondition,
     } = options;
 
     const response = await this.client.query({
@@ -279,7 +291,7 @@ export class Inventory {
         page,
         whereCondition,
         search,
-        orderByCondition
+        orderByCondition,
       },
       fetchPolicy: 'network-only',
       partialRefetch: true,

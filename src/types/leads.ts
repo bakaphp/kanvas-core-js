@@ -49,7 +49,7 @@ interface Receiver {
   uuid: string;
 }
 
-interface File {
+interface LeadAttachment {
   name: string;
   url: string;
 }
@@ -97,7 +97,7 @@ export interface CreateLeadData {
   people?: People;
   followers?: { data: Follower[] };
   paginatorInfo?: PaginatorInfo;
-  files?: File[];
+  files?: { data: LeadAttachment[] };
 }
 
 export interface LeadInput {
@@ -114,13 +114,13 @@ export interface LeadInput {
   reason_lost: string;
   pipeline_stage_id: number;
   custom_fields: CustomFieldInput[];
-  files?: File[];
+  files?: LeadAttachment[];
 }
 
 export interface WhereCondition {
   column: string;
   operator: string;
-  value: number | string;
+  value: number | string | Array<string | number>;
 }
 
 export interface LeadsDashboardInput {
