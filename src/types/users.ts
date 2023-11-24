@@ -106,6 +106,7 @@ export interface UserData {
     cell_phone_number: string;
   };
   roles: string[];
+  is_active: boolean;
   abilities: string[];
   custom_fields: {
     data: {

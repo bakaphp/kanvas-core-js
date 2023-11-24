@@ -151,8 +151,8 @@ export const GET_PRODUCT_TYPES = gql`
 `;
 
 export const GET_STATUS = gql`
-  query getStatus($whereCondition: QueryGetStatusWhereWhereConditions) {
-    getStatus(where: $whereCondition) {
+  query getStatus($whereCondition: [QueryGetStatusWhereWhereConditions!]) {
+    getStatus(where: { AND: $whereCondition }) {
       data {
         name
         id
@@ -297,7 +297,6 @@ export const GET_VARIANTS = gql`
           name
           value
         }
-
         product {
           id
           slug
@@ -335,7 +334,7 @@ export const GET_VARIANTS = gql`
 export const GET_VARIANTS_BY_STATUS = gql`
   query getVariantsByStatus(
     $warehouse_id: ID!
-    $status_id:  [ID]!
+    $status_id: [ID]!
     $first: Int
     $page: Int
     $whereCondition: QueryVariantsByStatusWhereWhereConditions
