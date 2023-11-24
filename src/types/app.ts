@@ -100,3 +100,11 @@ export interface AppCreateUserParams {
 export interface CreatedAppCreateUser {
   appCreateUser: AppUserInterface;
 }
+
+export interface AppActivateUser {
+  appActivateUser: boolean;
+}
+
+export interface AppDeactiveUser {
+  appDeActiveUser: boolean;
+}
