@@ -44,3 +44,15 @@ export const APP_CREATE_USER = gql`
     }
   }
 `;
+
+export const APP_ACTIVE_USER = gql`
+  mutation($user_id: ID!) {
+    appActivateUser(user_id: $user_id)
+  }
+`;
+
+export const APP_DEACTIVE_USER = gql`
+  mutation appDeActiveUser($user_id: ID!) {
+    appDeActiveUser(user_id: $user_id)
+  }
+`;
