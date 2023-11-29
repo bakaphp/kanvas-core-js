@@ -129,7 +129,7 @@ export class Inventory {
     return response.data;
   }
   public async getStatus(
-    whereCondition?: WhereCondition
+    whereCondition?: WhereCondition[]
   ): Promise<CreatedStatus> {
     const response = await this.client.query({
       query: GET_STATUS,
