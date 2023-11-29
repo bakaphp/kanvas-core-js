@@ -10,3 +10,4 @@ export * from './messages.mutation';
 export * from './userList.mutation';
 export * from './channels.mutation';
 export * from './roles.mutation';
+export * from './messages-types.mutation';
