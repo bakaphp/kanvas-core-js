@@ -18,10 +18,10 @@ export interface AppUserInterface {
   roles: string[];
   address: AddressInterface;
   contact: ContantInterface;
+  is_active: boolean;
   companies: CompanyInterface[];
   branches: BranchInterface[];
   created_at: string;
-
   updated_at: string;
 }
 
