@@ -108,3 +108,42 @@ export interface AppActivateUser {
 export interface AppDeactiveUser {
   appDeActiveUser: boolean;
 }
+
+export interface AppWithAccessResponse {
+  apps: {
+    data: {
+      id: string;
+      name: string;
+      key: string;
+      default_apps_plan_id: string;
+      created_at: string;
+    }[];
+    paginatorInfo: PaginatorInfo;
+  };
+}
+
+export interface CreateAppInput {
+  name: string;
+  url: string;
+  description?: string;
+  domain: string;
+  is_actived: 1;
+  ecosystem_auth: 0,
+  payments_active: 0,
+  is_public: 1
+  domain_based: 0
+}
+
+export interface CreateAppResponse {
+  createApp: {
+    name: string;
+    url: string;
+    description?: string;
+    domain: string;
+    is_actived: boolean;
+    ecosystem_auth: boolean;
+    payments_active: boolean;
+    is_public: boolean;
+    domain_based: boolean;
+  };
+}

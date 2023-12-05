@@ -83,3 +83,21 @@ export const GET_APP_USERS = gql`
     }
   }
 `;
+
+export const GET_APPS_WITH_ACCESS = gql`
+  query {
+    apps(first: 60) {
+      data {
+        id
+        name
+        key
+        default_apps_plan_id
+        created_at
+      }
+      paginatorInfo {
+        currentPage
+        lastPage
+      }
+    }
+  }
+`;
