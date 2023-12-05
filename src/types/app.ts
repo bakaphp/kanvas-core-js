@@ -92,7 +92,7 @@ export interface AppCreateUserParams {
   company_name?: string;
   phone_number?: string;
   cell_phone_number?: string;
-  roles_id?: string | number;
+  role_ids?:  (string | number)[];
   password?: string;
   custom_fields: CustomFieldInput[];
 }

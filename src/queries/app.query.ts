@@ -22,6 +22,8 @@ export const GET_APP_USERS = gql`
         displayname
         lastname
         firstname
+        default_company
+        default_company_branch
         sex
         description
         user_active

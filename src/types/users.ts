@@ -125,7 +125,7 @@ export interface UpdateUserParams {
   displayname?: string;
   phone_number: string;
   cell_phone_number: string;
-  role_id?: number | string;
+  role_ids?: (string | number)[];
   custom_fields: {
     name: string;
     data: any;
