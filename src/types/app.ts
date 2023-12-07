@@ -12,6 +12,8 @@ export interface AppUserInterface {
   displayname: string;
   firstname: string;
   lastname: string;
+  default_company: number;
+  default_company_branch: number;
   sex: string;
   description: string | null;
   user_active: boolean;
@@ -95,6 +97,7 @@ export interface AppCreateUserParams {
   role_ids?:  (string | number)[];
   password?: string;
   custom_fields: CustomFieldInput[];
+  create_company?: boolean
 }
 
 export interface CreatedAppCreateUser {
