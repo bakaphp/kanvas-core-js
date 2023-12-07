@@ -38,12 +38,13 @@ class Users {
     const response = await this.client.query({
       query: GET_APP_USERS,
       variables: {
-        first: 1,
-        where: {
+        whereCondition: {
           column: 'EMAIL',
           operator: 'EQ',
           value: email,
         },
+        fetchPolicy: 'network-only',
+        partialRefetch: true,
       },
     });
 
