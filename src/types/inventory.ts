@@ -284,10 +284,6 @@ export interface CreatedProduct {
   createProduct: ProductInterface;
 }
 
-export interface CreatedStatus {
-  createStatus: StatusInterface;
-}
-
 export interface CreatedProductTypes {
   productTypes: {
     data: ProductTypeInterface[];
@@ -313,6 +309,7 @@ export interface UpdatedProduct {
 export interface CreatedStatus {
   getStatus: {
     data: StatusInterface[];
+    paginatorInfo: PaginatorInfo;
   };
 }
 
@@ -345,6 +342,7 @@ export interface ProductDashboardInterface {
     product_status: {
       status_id: number | string;
       status_name: string;
+      status_slug:string;
       warehouses_name: string;
       warehouses_id: number | string;
       total_amount: number;
