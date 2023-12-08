@@ -129,6 +129,7 @@ export interface CreateAppInput {
   name: string;
   url: string;
   description?: string;
+  key?: string;
   domain: string;
   is_actived: 1;
   ecosystem_auth: 0,
