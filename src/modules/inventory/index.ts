@@ -75,7 +75,7 @@ export class Inventory {
     options: {
       first?: number;
       page?: number;
-      whereCondition?: WhereCondition[];
+      whereCondition?: WhereCondition;
       orderByCondition?: OrderBy[];
       hasCategoriesCondition?: WhereCondition;
       hasAttributesCondition?: WhereCondition;
@@ -133,7 +133,7 @@ export class Inventory {
     options: {
       first?: number;
       page?: number;
-      whereCondition?: WhereCondition;
+      whereCondition?: WhereCondition[];
       orderByCondition?: OrderBy[];
     } = {}
   ): Promise<CreatedStatus> {

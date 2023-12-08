@@ -306,7 +306,6 @@ export interface UpdatedProduct {
   };
 }
 
-
 export interface CreateStatus {
   createStatus: StatusInterface;
 }
