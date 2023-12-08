@@ -342,7 +342,7 @@ export interface ProductDashboardInterface {
     product_status: {
       status_id: number | string;
       status_name: string;
-      status_slug:string;
+      status_slug: string;
       warehouses_name: string;
       warehouses_id: number | string;
       total_amount: number;
