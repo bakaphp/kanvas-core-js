@@ -129,11 +129,18 @@ export class Inventory {
     return response.data;
   }
   public async getStatus(
-    whereCondition?: WhereCondition[]
+    options: {
+      first?: number;
+      page?: number;
+      whereCondition?: WhereCondition;
+      orderByCondition?: OrderBy[];
+    } = {}
   ): Promise<CreatedStatus> {
+    const { first, page, whereCondition, orderByCondition } = options;
+
     const response = await this.client.query({
       query: GET_STATUS,
-      variables: { whereCondition },
+      variables: { first, page, whereCondition, orderByCondition },
     });
     return response.data;
   }
