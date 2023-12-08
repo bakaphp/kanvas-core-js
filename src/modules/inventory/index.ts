@@ -45,6 +45,7 @@ import {
   AllCreatedVariantsbyStatus,
   InputStatusParams,
   ProductAdminDashboardInterface,
+  CreateStatus,
 } from '../../types';
 
 export class Inventory {
@@ -60,7 +61,7 @@ export class Inventory {
     return response.data;
   }
 
-  public async createStatus(data: InputStatusParams): Promise<CreatedStatus> {
+  public async createStatus(data: InputStatusParams): Promise<CreateStatus> {
     const response = await this.client.mutate({
       mutation: CREATE_STATUS,
       variables: {
@@ -132,7 +133,7 @@ export class Inventory {
     options: {
       first?: number;
       page?: number;
-      whereCondition?: WhereCondition;
+      whereCondition?: WhereCondition[];
       orderByCondition?: OrderBy[];
     } = {}
   ): Promise<CreatedStatus> {
