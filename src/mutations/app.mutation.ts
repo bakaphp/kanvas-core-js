@@ -61,6 +61,7 @@ export const CREATE_APP = gql`
   mutation CreateApp($input: AppInput!) {
     createApp(input: $input) {
       name
+      key
       url
       description
       domain
