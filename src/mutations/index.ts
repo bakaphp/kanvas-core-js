@@ -1,3 +1,5 @@
+import { from } from 'form-data';
+
 export * from './app.mutation';
 export * from './auth.mutation';
 export * from './users.mutation';
@@ -10,3 +12,4 @@ export * from './messages.mutation';
 export * from './userList.mutation';
 export * from './channels.mutation';
 export * from './roles.mutation';
+export * from './filesystem.mutation';
