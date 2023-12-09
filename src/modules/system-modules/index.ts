@@ -1,4 +1,4 @@
-import { ClientType } from 'index';
+import { ClientType } from '../../index';
 
 import { SYSTEM_MODULES_QUERY } from '../../queries/';
 import { SystemModuleInterface } from '../../types/';

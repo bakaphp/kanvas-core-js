@@ -11,10 +11,3 @@ export interface SystemModuleInterface {
   menu_order: number;
   show: number;
 }
-export interface Where {
-  column: string;
-  operator: string;
-  value: string;
-  and: [Where];
-  or: [Where];
-}
