@@ -151,12 +151,33 @@ export const GET_PRODUCT_TYPES = gql`
 `;
 
 export const GET_STATUS = gql`
-  query getStatus($whereCondition: QueryGetStatusWhereWhereConditions) {
-    getStatus(where: $whereCondition) {
+  query getStatus(
+    $first: Int
+    $page: Int
+    $whereCondition: [QueryGetStatusWhereWhereConditions!]
+    $orderByCondition: [QueryGetStatusOrderByOrderByClause!]
+  ) {
+    getStatus(
+      first: $first
+      page: $page
+      where: { AND: $whereCondition }
+      orderBy: $orderByCondition
+    ) {
       data {
         name
         id
         is_default
+        slug
+      }
+      paginatorInfo {
+        currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
+        lastPage
+        hasMorePages
       }
     }
   }
@@ -238,6 +259,7 @@ export const PRODUCT_ADMIN_DASHBOARD = gql`
         status_id
         status_name
         status_slug
+        status_companies_id
         total_amount
       }
     }
@@ -296,7 +318,6 @@ export const GET_VARIANTS = gql`
           name
           value
         }
-
         product {
           id
           slug
@@ -334,7 +355,7 @@ export const GET_VARIANTS = gql`
 export const GET_VARIANTS_BY_STATUS = gql`
   query getVariantsByStatus(
     $warehouse_id: ID!
-    $status_id: ID!
+    $status_id: [ID]!
     $first: Int
     $page: Int
     $whereCondition: QueryVariantsByStatusWhereWhereConditions

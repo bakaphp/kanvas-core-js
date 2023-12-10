@@ -12,3 +12,5 @@ export * from './usersLists';
 export * from './messages';
 export * from './roles';
 export * from './system-modules';
+export * from './companies';
+export * from './companies-branches';
