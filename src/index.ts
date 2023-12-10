@@ -12,6 +12,8 @@ import {
   Users,
   CustomFields,
   Locations,
+  Companies,
+  CompaniesBranches,
   Leads,
   Inventory,
   Agents,
@@ -90,6 +92,8 @@ export default class KanvasCore {
   public messages: Messages;
   public roles: Roles;
   public topics: Topics;
+  public companies: Companies;
+  public companiesBranches: CompaniesBranches;
 
   constructor(protected options: Options) {
     this.client = new ApolloClient({
@@ -114,6 +118,8 @@ export default class KanvasCore {
     this.messages = new Messages(this.client);
     this.roles = new Roles(this.client);
     this.topics = new Topics(this.client);
+    this.companies = new Companies(this.client);
+    this.companiesBranches = new CompaniesBranches(this.client);
   }
 
   protected generateURL() {

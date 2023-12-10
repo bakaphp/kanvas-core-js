@@ -1,6 +1,6 @@
-import type { AppUserInterface, AppUpdatePasswordInterface, WhereCondition, AllAppUsersInterface, OrderBy, AppCreateUserParams, CreatedAppCreateUser } from '../../types';
-import { APP_CREATE_USER, USER_UPDATE_PASSWORD_MUTATION } from '../../mutations';
-import { APP_USERS_QUERY, GET_ALL_APP_USERS } from '../../queries';
+import type { AppUserInterface, AppUpdatePasswordInterface, WhereCondition, AllAppUsersInterface, OrderBy, AppCreateUserParams, CreatedAppCreateUser, AppActivateUser, AppDeactiveUser, AppWithAccessResponse, CreateAppInput, CreateAppResponse, } from '../../types';
+import { APP_ACTIVE_USER, APP_CREATE_USER, APP_DEACTIVE_USER, CREATE_APP, USER_UPDATE_PASSWORD_MUTATION } from '../../mutations';
+import { GET_APPS_WITH_ACCESS, GET_APP_USERS } from '../../queries';
 import type { ClientType } from '../../index';
 
 class Users {
@@ -36,21 +36,22 @@ class Users {
    * */
   public async getUserByEmail(email: string): Promise<AppUserInterface> {
     const response = await this.client.query({
-      query: APP_USERS_QUERY,
+      query: GET_APP_USERS,
       variables: {
-        first: 1,
-        where: {
+        whereCondition: {
           column: 'EMAIL',
           operator: 'EQ',
           value: email,
         },
+        fetchPolicy: 'network-only',
+        partialRefetch: true,
       },
     });
 
     return response.data.appUsers.data[0];
   }
 
-  public async getAllAppUsers(
+  public async getAppUsers(
     options: {
       first?: number;
       page?: number;
@@ -62,7 +63,7 @@ class Users {
     const { first, page, whereCondition, orderByCondition, search } = options;
 
     const response = await this.client.query({
-      query: GET_ALL_APP_USERS,
+      query: GET_APP_USERS,
       variables: {
         first,
         page,
@@ -76,13 +77,6 @@ class Users {
     return response.data;
   }
 
-}
-
-
-class Admin {
-  constructor(protected client: ClientType) { }
-  
-
   public async appCreateUser(data: AppCreateUserParams): Promise<CreatedAppCreateUser> {
     const response = await this.client.mutate({
       mutation: APP_CREATE_USER,
@@ -92,16 +86,52 @@ class Admin {
     return response.data
   }
 
+  public async appActivateUser(user_id: number | string): Promise<AppActivateUser> {
+    const response = await this.client.mutate({
+      mutation: APP_ACTIVE_USER,
+      variables: { user_id: user_id },
+    });
+
+    return response.data
+  }
+
+  public async appDeactivateUser(user_id: number | string): Promise<AppDeactiveUser> {
+    const response = await this.client.mutate({
+      mutation: APP_DEACTIVE_USER,
+      variables: { user_id: user_id },
+    });
+
+    return response.data
+  }
 
 }
 
+
 export class App {
   public users: Users;
-  public admin: Admin;
 
   constructor(protected client: ClientType) {
     this.users = new Users(this.client);
-    this.admin = new Admin(this.client);
 
+  }
+
+  public async createApp(input: CreateAppInput): Promise<CreateAppResponse> {
+    const response = await this.client.mutate({
+      mutation: CREATE_APP,
+      variables: {
+        input
+      },
+      fetchPolicy: 'network-only',
+    })
+    return response.data
+  }
+
+  public async getAppsWithAccess(): Promise<AppWithAccessResponse> {
+    const response = await this.client.query({
+      query: GET_APPS_WITH_ACCESS,
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
+    })
+    return response.data
   }
 }
