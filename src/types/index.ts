@@ -16,3 +16,4 @@ export * from './roles';
 export * from './companies';
 export * from './filesystem';
 export * from './companies-branches';
+export * from './topics';
