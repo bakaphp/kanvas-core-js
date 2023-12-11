@@ -5,7 +5,7 @@ import {
   DELETE_COMPANY_MUTATION,
   ADD_USER_TO_COMPANY,
   REMOVE_USER_FROM_COMPANY,
-} from 'mutations';
+} from '../../mutations';
 import {
   COMPANIES_QUERY,
   COMPANY_USERS_QUERY,
