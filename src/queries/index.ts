@@ -9,5 +9,6 @@ export * from './usersLists.query';
 export * from './users-interactions.query';
 export * from './messages.query';
 export * from './roles.query';
+export * from './system-module.query';
 export * from './companies-branches.query';
 export * from './companies.query';
