@@ -1,6 +1,6 @@
 import { MessagesInterface } from './messages';
 import { UserInterface } from './users';
-import { SystemModuleInterface } from './systemModule';
+import { SystemModuleInterface } from './system-module';
 
 export interface ChannelInterface {
   id: string;
