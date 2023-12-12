@@ -4,7 +4,7 @@ import {
   CREATE_TOPIC_MUTATION,
   UPDATE_TOPIC_MUTATION,
   FOLLOW_TOPIC_MUTATION,
-  UnFOLLOW_TOPIC_MUTATION,
+  UNFOLLOW_TOPIC_MUTATION,
 } from '../../mutations/';
 import { GET_TOPICS } from '../../queries/';
 import {
@@ -57,7 +57,7 @@ export class Topics {
 
   public async unFollowTopic(id: string): Promise<void> {
     await this.client.mutate({
-      mutation: UnFOLLOW_TOPIC_MUTATION,
+      mutation: UNFOLLOW_TOPIC_MUTATION,
       variables: { id: id },
     });
   }

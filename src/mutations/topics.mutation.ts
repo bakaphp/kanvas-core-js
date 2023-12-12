@@ -32,7 +32,7 @@ export const FOLLOW_TOPIC_MUTATION = gql`
   }
 `;
 
-export const UnFOLLOW_TOPIC_MUTATION = gql`
+export const UNFOLLOW_TOPIC_MUTATION = gql`
   mutation unFollowTopic($id: ID!) {
     unFollowTopic(id: $id)
   }
