@@ -10,5 +10,6 @@ export * from './messages.mutation';
 export * from './userList.mutation';
 export * from './channels.mutation';
 export * from './roles.mutation';
+export * from './topics.mutation';
 export * from './companies.mutation';
 export * from './companies-branches.mutation';

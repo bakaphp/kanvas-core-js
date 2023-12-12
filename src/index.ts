@@ -23,6 +23,7 @@ import {
   UsersInteractions,
   Messages,
   Roles,
+  Topics,
   SystemModules,
 } from './modules';
 
@@ -91,6 +92,7 @@ export default class KanvasCore {
   public usersLists: UsersLists;
   public messages: Messages;
   public roles: Roles;
+  public topics: Topics;
   public systemModules: SystemModules;
   
   public companies: Companies;
@@ -118,6 +120,7 @@ export default class KanvasCore {
     this.usersLists = new UsersLists(this.client);
     this.messages = new Messages(this.client);
     this.roles = new Roles(this.client);
+    this.topics = new Topics(this.client);
     this.systemModules = new SystemModules(this.client);
     this.companies = new Companies(this.client);
     this.companiesBranches = new CompaniesBranches(this.client);
