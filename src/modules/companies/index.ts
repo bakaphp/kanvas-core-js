@@ -16,16 +16,15 @@ import {
   UserInterface,
   CompanyInput,
   CompanyInterface,
-  QueryCompaniesWhereWhereConditions,
-  QueryCompanyUsersWhereWhereConditions,
   CompanySettings,
+  WhereCondition
 } from '../../types';
 
 export class Companies {
   constructor(protected client: ClientType) {}
 
   public async getCompanies(
-    where: QueryCompaniesWhereWhereConditions,
+    where: WhereCondition,
     first?: number,
     page?: number
   ): Promise<CompanyInterface> {
@@ -37,7 +36,7 @@ export class Companies {
   }
 
   public async getCompanyUsers(
-    where: QueryCompanyUsersWhereWhereConditions,
+    where: WhereCondition,
     first?: number,
     page?: number
   ): Promise<UserInterface> {

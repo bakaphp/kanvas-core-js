@@ -4,9 +4,9 @@ import {
   MessageInputInterface,
   MessagesInterface,
   InteractionTypeInput,
-  MessageWhereConditions,
   HasAppModuleMessageWhereConditions,
   OrderByMessage,
+  WhereCondition
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
@@ -40,7 +40,7 @@ export class Messages {
   }
 
   public async getMessages(
-    where: MessageWhereConditions,
+    where: WhereCondition,
     hasAppModuleMessageWhere: HasAppModuleMessageWhereConditions,
     orderBy: Array<OrderByMessage>,
     search: string,
