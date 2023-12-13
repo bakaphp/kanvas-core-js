@@ -38,12 +38,13 @@ class Users {
     const response = await this.client.query({
       query: GET_APP_USERS,
       variables: {
-        first: 1,
-        where: {
+        whereCondition: {
           column: 'EMAIL',
           operator: 'EQ',
           value: email,
         },
+        fetchPolicy: 'network-only',
+        partialRefetch: true,
       },
     });
 
@@ -119,14 +120,17 @@ export class App {
       mutation: CREATE_APP,
       variables: {
         input
-      }
+      },
+      fetchPolicy: 'network-only',
     })
     return response.data
   }
 
   public async getAppsWithAccess(): Promise<AppWithAccessResponse> {
     const response = await this.client.query({
-      query: GET_APPS_WITH_ACCESS
+      query: GET_APPS_WITH_ACCESS,
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     })
     return response.data
   }

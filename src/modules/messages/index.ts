@@ -11,6 +11,8 @@ import {
 import {
   CREATE_MESSAGE_MUTATION,
   INTERACTION_MESSAGE_MUTATION,
+  ATTACH_TOPIC_TO_MESSAGE_MUTATION,
+  DETACH_TOPIC_TO_MESSAGE_MUTATION,
 } from '../../mutations';
 
 import { GET_MESSAGES_QUERY } from '../../queries';
@@ -59,5 +61,25 @@ export class Messages {
       },
     });
     return response.data.getMessages as MessagesInterface[];
+  }
+
+  public async attachTopicToMessage(
+    messageId: string,
+    topicId: string
+  ): Promise<void> {
+    await this.client.mutate({
+      mutation: ATTACH_TOPIC_TO_MESSAGE_MUTATION,
+      variables: { message_id: messageId, topic_id: topicId },
+    });
+  }
+
+  public async detachTopicToMessage(
+    messageId: string,
+    topicId: string
+  ): Promise<void> {
+    await this.client.mutate({
+      mutation: DETACH_TOPIC_TO_MESSAGE_MUTATION,
+      variables: { message_id: messageId, topic_id: topicId },
+    });
   }
 }

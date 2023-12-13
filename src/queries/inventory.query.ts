@@ -151,12 +151,33 @@ export const GET_PRODUCT_TYPES = gql`
 `;
 
 export const GET_STATUS = gql`
-  query getStatus($whereCondition: [QueryGetStatusWhereWhereConditions!]) {
-    getStatus(where: { AND: $whereCondition }) {
+  query getStatus(
+    $first: Int
+    $page: Int
+    $whereCondition: [QueryGetStatusWhereWhereConditions!]
+    $orderByCondition: [QueryGetStatusOrderByOrderByClause!]
+  ) {
+    getStatus(
+      first: $first
+      page: $page
+      where: { AND: $whereCondition }
+      orderBy: $orderByCondition
+    ) {
       data {
         name
         id
         is_default
+        slug
+      }
+      paginatorInfo {
+        currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
+        lastPage
+        hasMorePages
       }
     }
   }

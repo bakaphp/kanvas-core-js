@@ -6,7 +6,6 @@ import {
   RequestHandler,
   NormalizedCacheObject,
 } from '@apollo/client/core';
-// import axios from 'axios';
 
 import {
   App,
@@ -14,6 +13,8 @@ import {
   Users,
   CustomFields,
   Locations,
+  Companies,
+  CompaniesBranches,
   Leads,
   Inventory,
   Agents,
@@ -24,6 +25,8 @@ import {
   Messages,
   Roles,
   FileSystem,
+  Topics,
+  SystemModules,
 } from './modules';
 
 import { setContext } from '@apollo/client/link/context';
@@ -100,6 +103,11 @@ export default class KanvasCore {
   public messages: Messages;
   public roles: Roles;
   public filesystem: FileSystem;
+  public topics: Topics;
+  public systemModules: SystemModules;
+  
+  public companies: Companies;
+  public companiesBranches: CompaniesBranches;
 
   constructor(protected options: Options) {
     this.client = new ApolloClient({
@@ -124,6 +132,10 @@ export default class KanvasCore {
     this.messages = new Messages(this.client);
     this.roles = new Roles(this.client);
     this.filesystem = new FileSystem(this.client, this.options);
+    this.topics = new Topics(this.client);
+    this.systemModules = new SystemModules(this.client);
+    this.companies = new Companies(this.client);
+    this.companiesBranches = new CompaniesBranches(this.client);
   }
   protected generateURL() {
     return new HttpLink({ uri: this.options.url });

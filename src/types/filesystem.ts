@@ -20,3 +20,7 @@ export interface FILESYSTEM {
   size: number;
   field_name: string;
 }
+export interface FilesystemInputUrl {
+  url: string;
+  name: string;
+}
