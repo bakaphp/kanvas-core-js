@@ -7,12 +7,30 @@ interface Options {
   adminKey?: string;
   authAxiosMiddleware?: any;
 }
-import { UPLOAD_INTERFACE, FILESYSTEM } from '../../types';
+import {
+  UPLOAD_INTERFACE,
+  FILESYSTEM,
+  SystemModuleEntityInput,
+  WhereCondition,
+} from '../../types';
 import { ATTACH_FILE_MUTATION, DETACH_FILE_MUTATION } from '../../mutations';
 import { ENTITY_FILES_QUERY } from '../../queries';
 
 export class FileSystem {
   constructor(protected client: ClientType, protected options?: Options) {}
+
+  public async getEntityFiles(
+    entity: SystemModuleEntityInput,
+    where?: WhereCondition,
+    first?: number,
+    page?: number
+  ): Promise<FILESYSTEM[]> {
+    const response = await this.client.query({
+      query: ENTITY_FILES_QUERY,
+      variables: { entity, where, first, page },
+    });
+    return response.data.entityFiles as FILESYSTEM[];
+  }
 
   public async attachFile(input: UPLOAD_INTERFACE): Promise<string> {
     const response = await this.client.mutate({
@@ -21,8 +39,6 @@ export class FileSystem {
     });
     return response.data.attachFile as string;
   }
-
-
 
   public async detachFile(uuid: string): Promise<boolean> {
     const response = await this.client.mutate({
