@@ -11,9 +11,8 @@ import {
   UserInterface,
   CompanyBranchInput,
   CompanyBranchInterface,
-  QueryBranchesWhereWhereConditions,
   QueryBranchesOrderByOrderByClause,
-  QueryCompanyBranchUsersWhereWhereConditions,
+  WhereCondition
 } from '../../types';
 import {
   COMPANIES_BRANCHES_QUERY,
@@ -24,7 +23,7 @@ export class CompaniesBranches {
   constructor(protected client: ClientType) {}
 
   public async getCompanyBranches(
-    where: QueryBranchesWhereWhereConditions,
+    where: WhereCondition,
     orderBy: QueryBranchesOrderByOrderByClause,
     first?: number,
     page?: number
@@ -37,7 +36,7 @@ export class CompaniesBranches {
   }
 
   public async getCompanyBranchUsers(
-    where: QueryCompanyBranchUsersWhereWhereConditions,
+    where: WhereCondition,
     first?: number,
     page?: number
   ): Promise<UserInterface> {
