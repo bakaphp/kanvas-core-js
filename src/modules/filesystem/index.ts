@@ -17,7 +17,27 @@ import { ATTACH_FILE_MUTATION, DETACH_FILE_MUTATION } from '../../mutations';
 import { ENTITY_FILES_QUERY } from '../../queries';
 
 export class FileSystem {
-  constructor(protected client: ClientType, protected options?: Options) {}
+  protected axiosClient: any;
+  constructor(protected client: ClientType, protected options?: Options) {
+    if (this.options) {
+      this.axiosClient = axios.create({
+        baseURL: this.options.url,
+        headers: {
+          'X-Kanvas-App': this.options.key,
+          ...(this.options.adminKey && {
+            'X-Kanvas-Key': this.options.adminKey,
+          }),
+        },
+      });
+
+      this.axiosClient.interceptors.request.use(
+        this.options.authAxiosMiddleware,
+        function(error: any) {
+          return Promise.reject(error);
+        }
+      );
+    }
+  }
 
   public async getEntityFiles(
     entity: SystemModuleEntityInput,
@@ -57,20 +77,9 @@ export class FileSystem {
   }
 
   public async uploadFile(data: any): Promise<UPLOAD_INTERFACE> {
-    if (!this.options) throw new Error('FileSystem module not initialized');
-    axios.create({
-      baseURL: this.options.url,
-      headers: {
-        'X-Kanvas-App': this.options.key,
-        ...(this.options.adminKey && { 'X-Kanvas-Key': this.options.adminKey }),
-      },
-    });
+    if (!this.options || !this.axiosClient)
+      throw new Error('FileSystem module not initialized');
 
-    axios.interceptors.request.use(this.options.authAxiosMiddleware, function(
-      error: any
-    ) {
-      return Promise.reject(error);
-    });
     const formData = new FormData();
     formData.append(
       'operations',
@@ -78,7 +87,7 @@ export class FileSystem {
     );
     formData.append('map', '{"0": ["variables.file"]}');
     formData.append('0', data);
-    let response = await axios.post('/graphql', formData);
+    let response = await this.axiosClient.post('', formData);
     return response.data.data.upload as UPLOAD_INTERFACE;
   }
 }
