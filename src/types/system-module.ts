@@ -11,3 +11,10 @@ export interface SystemModuleInterface {
   menu_order: number;
   show: number;
 }
+
+export interface SystemModuleEntityInput {
+  name: string;
+  data: any;
+  system_module_uuid: string;
+  entity_id: string;
+}

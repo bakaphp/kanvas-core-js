@@ -6,6 +6,7 @@ import {
   RequestHandler,
   NormalizedCacheObject,
 } from '@apollo/client/core';
+
 import {
   App,
   Auth,
@@ -23,6 +24,7 @@ import {
   UsersInteractions,
   Messages,
   Roles,
+  FileSystem,
   Topics,
   SystemModules,
   Peoples,
@@ -44,6 +46,7 @@ interface Options {
   key: string;
   middlewares?: Middleware[];
   adminKey?: string;
+  authAxiosMiddleware?: any;
 }
 
 export function genericAuthMiddleware(
@@ -75,7 +78,14 @@ export function locationMiddleware(
     return { headers };
   });
 }
-
+export async function authAxiosMiddleware(
+  fn: () => Promise<string | null | undefined>
+) {
+  const key = await fn();
+  return {
+    Authorization: key ? `Bearer ${key}` : '',
+  };
+}
 export default class KanvasCore {
   public client: ClientType;
   public auth: Auth;
@@ -93,6 +103,7 @@ export default class KanvasCore {
   public usersLists: UsersLists;
   public messages: Messages;
   public roles: Roles;
+  public filesystem: FileSystem;
   public topics: Topics;
   public systemModules: SystemModules;
 
@@ -122,13 +133,13 @@ export default class KanvasCore {
     this.usersLists = new UsersLists(this.client);
     this.messages = new Messages(this.client);
     this.roles = new Roles(this.client);
+    this.filesystem = new FileSystem(this.client, this.options);
     this.topics = new Topics(this.client);
     this.systemModules = new SystemModules(this.client);
     this.companies = new Companies(this.client);
     this.companiesBranches = new CompaniesBranches(this.client);
     this.peoples = new Peoples(this.client);
   }
-
   protected generateURL() {
     return new HttpLink({ uri: this.options.url });
   }
