@@ -15,3 +15,4 @@ export * from './topics';
 export * from './system-modules';
 export * from './companies';
 export * from './companies-branches';
+export * from './peoples';

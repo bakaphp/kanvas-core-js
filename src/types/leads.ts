@@ -2,7 +2,7 @@
 
 import { CustomFieldInput, CustomFieldData } from './custom-fields';
 import { PaginatorInfo } from './paginator';
-import {People} from './index';
+import {PeopleInterface} from './index';
 // interface Contact {
 //   value: string;
 //   contacts_types_id?: number;
@@ -71,7 +71,7 @@ export interface CreateLeadParams {
   branch_id: number;
   title: string;
   pipeline_stage_id: number;
-  people: People;
+  people: PeopleInterface;
   organization: Organization;
   custom_fields: CustomFieldInput[];
 }
@@ -96,7 +96,7 @@ export interface CreateLeadData {
   source?: Source | null;
   stage?: Stage | null;
   pipeline?: Pipeline | null;
-  people?: People;
+  people?: PeopleInterface;
   followers?: { data: Follower[] };
   paginatorInfo?: PaginatorInfo;
   files?: { data: LeadAttachment[] };
@@ -105,7 +105,7 @@ export interface CreateLeadData {
 export interface LeadInput {
   branch_id: number;
   title: string;
-  people: People;
+  people: PeopleInterface;
   organization: Organization;
   leads_owner_id: number;
   receiver_id: number;

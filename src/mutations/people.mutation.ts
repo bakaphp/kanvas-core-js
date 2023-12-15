@@ -28,9 +28,10 @@ export const CREATE_PEOPLE_MUTATION = gql`
         city
       }
       custom_fields {
-        id
-        name
-        value
+        data {
+          name
+          value
+        }
       }
     }
   }
@@ -65,9 +66,10 @@ export const UPDATE_PEOPLE_MUTATION = gql`
         city
       }
       custom_fields {
-        id
-        name
-        value
+        data {
+          name
+          value
+        }
       }
     }
   }

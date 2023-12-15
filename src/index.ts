@@ -25,6 +25,7 @@ import {
   Roles,
   Topics,
   SystemModules,
+  Peoples,
 } from './modules';
 
 import { setContext } from '@apollo/client/link/context';
@@ -94,9 +95,10 @@ export default class KanvasCore {
   public roles: Roles;
   public topics: Topics;
   public systemModules: SystemModules;
-  
+
   public companies: Companies;
   public companiesBranches: CompaniesBranches;
+  public peoples: Peoples;
 
   constructor(protected options: Options) {
     this.client = new ApolloClient({
@@ -124,6 +126,7 @@ export default class KanvasCore {
     this.systemModules = new SystemModules(this.client);
     this.companies = new Companies(this.client);
     this.companiesBranches = new CompaniesBranches(this.client);
+    this.peoples = new Peoples(this.client);
   }
 
   protected generateURL() {
