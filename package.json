@@ -1,6 +1,5 @@
 {
-
-  "version": "0.0.71",
+  "version": "0.0.72",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -56,6 +55,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.10",
+    "axios": "^1.6.2",
+    "form-data": "^4.0.0",
     "graphql": "^16.6.0",
     "typescript-transform-paths": "^3.4.6"
   }
