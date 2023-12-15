@@ -2,27 +2,29 @@
 
 import { CustomFieldInput, CustomFieldData } from './custom-fields';
 import { PaginatorInfo } from './paginator';
+import {People} from './index';
+// interface Contact {
+//   value: string;
+//   contacts_types_id?: number;
+//   weight?: number;
+//   type?: Type;
+// }
 
-interface Contact {
-  value: string;
-  contacts_types_id?: number;
-  weight?: number;
-  type?: Type;
-}
+// interface Address {
+//   address: string;
+//   city: string;
+// }
 
-interface Address {
-  address: string;
-  city: string;
-}
-
-interface People {
-  name?: string;
-  firstname?: string;
-  lastname?: string;
-  contacts: Contact[];
-  address?: Address[];
-  custom_fields?: CustomFieldInput[];
-}
+// interface People {
+//   id: string;
+//   uuid: string;
+//   name?: string;
+//   firstname?: string;
+//   lastname?: string;
+//   contacts: Contact[];
+//   address?: Address[];
+//   custom_fields?: CustomFieldInput[];
+// }
 
 interface User {
   id: number;

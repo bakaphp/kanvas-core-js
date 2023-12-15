@@ -18,3 +18,5 @@ export * from './companies';
 export * from './filesystem';
 export * from './companies-branches';
 export * from './topics';
+export * from './people';
+export * from './contact';

@@ -13,3 +13,4 @@ export * from './roles.mutation';
 export * from './topics.mutation';
 export * from './companies.mutation';
 export * from './companies-branches.mutation';
+export * from './people.mutation';
