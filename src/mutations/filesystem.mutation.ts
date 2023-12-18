@@ -2,12 +2,7 @@ import { gql } from '@apollo/client/core';
 
 export const ATTACH_FILE_MUTATION = gql`
   mutation attachFile($input: FilesystemAttachInput!) {
-    attachFile(input: $input) {
-      id
-      uuid
-      name
-      url
-    }
+    attachFile(input: $input)
   }
 `;
 

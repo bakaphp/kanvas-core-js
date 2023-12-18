@@ -12,6 +12,7 @@ import {
   FILESYSTEM,
   SystemModuleEntityInput,
   WhereCondition,
+  FILESYSTEM_ATTACH_INPUT
 } from '../../types';
 import { ATTACH_FILE_MUTATION, DETACH_FILE_MUTATION } from '../../mutations';
 import { ENTITY_FILES_QUERY } from '../../queries';
@@ -49,10 +50,10 @@ export class FileSystem {
       query: ENTITY_FILES_QUERY,
       variables: { entity, where, first, page },
     });
-    return response.data.entityFiles as FILESYSTEM[];
+    return response.data.entityFiles.data as FILESYSTEM[];
   }
 
-  public async attachFile(input: UPLOAD_INTERFACE): Promise<string> {
+  public async attachFile(input: FILESYSTEM_ATTACH_INPUT): Promise<string> {
     const response = await this.client.mutate({
       mutation: ATTACH_FILE_MUTATION,
       variables: { input: input },
