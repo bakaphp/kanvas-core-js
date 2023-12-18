@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client/core';
 
-export const PEOPLES_QUERY = gql`
+export const PEOPLE_QUERY = gql`
   query peoples(
     $where: WhereCondition
     $orderBy: [OrderBy]

@@ -14,8 +14,8 @@ import {
   RESTORE_PEOPLE_MUTATION,
 } from '../../mutations';
 
-import { PEOPLES_QUERY } from '../../index';
-export class Peoples {
+import { PEOPLE_QUERY } from '../../index';
+export class People {
   constructor(protected client: ClientType) {}
 
   public async createPeople(
@@ -55,7 +55,7 @@ export class Peoples {
     return response.data.restorePeople as Boolean;
   }
 
-  public async getPeoples(
+  public async getPeople(
     where?: WhereCondition,
     orderBy?: Array<OrderBy>,
     search?: string,
@@ -63,7 +63,7 @@ export class Peoples {
     page?: number
   ): Promise<PeopleInterface[]> {
     const response = await this.client.query({
-      query: PEOPLES_QUERY,
+      query: PEOPLE_QUERY,
       variables: {
         where,
         orderBy,
