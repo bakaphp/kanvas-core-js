@@ -6,10 +6,12 @@ export const ENTITY_FILES_QUERY = gql`
     $where: QueryEntityFilesWhereWhereConditions
   ) {
     entityFiles(entity: $entity, where: $where) {
-      id
-      uuid
-      name
-      url
+      data {
+        id
+        uuid
+        name
+        url
+      }
     }
   }
 `;
