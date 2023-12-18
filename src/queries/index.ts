@@ -14,3 +14,4 @@ export * from './topics.query';
 export * from './system-module.query';
 export * from './companies-branches.query';
 export * from './companies.query';
+export * from './people.query';
