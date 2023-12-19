@@ -17,3 +17,4 @@ export * from './system-modules';
 export * from './companies';
 export * from './companies-branches';
 export * from './follows';
+export * from './people';
