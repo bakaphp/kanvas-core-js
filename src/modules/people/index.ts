@@ -1,4 +1,4 @@
-import { ClientType } from '../../index';
+import { ClientType } from './../../index';
 
 import {
   PeopleInputInterface,
@@ -14,7 +14,7 @@ import {
   RESTORE_PEOPLE_MUTATION,
 } from '../../mutations';
 
-import { PEOPLE_QUERY } from '../../index';
+import { PEOPLE_QUERY } from './../../queries/';
 export class People {
   constructor(protected client: ClientType) {}
 

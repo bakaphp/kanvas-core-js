@@ -2,7 +2,7 @@ import { UserInterface } from './users';
 
 export interface FollowingInterface {
   id: number;
-  user_id: number;
+  users_id: number;
   entity_namespace: string;
   entity_id: number;
   entity: UserInterface;

@@ -6,9 +6,9 @@ export const IS_FOLLOWING_QUERY = gql`
   }
 `;
 
-export const USER_FOLLOWERS_QUERY = gql`
-  query userFollowers($user_id: Int!) {
-    userFollowers(user_id: $user_id) {
+export const GET_FOLLOWERS_QUERY = gql`
+  query getFollowers($user_id: Int!) {
+    getFollowers(user_id: $user_id) {
       data {
         id
         uuid
@@ -49,11 +49,11 @@ export const USER_FOLLOWERS_QUERY = gql`
 `;
 
 export const GET_FOLLOWING_QUERY = gql`
-  query getFollowing {
-    getFollowing {
+  query getFollowing($user_id: Int!) {
+    getFollowing(user_id: $user_id) {
       data {
         id
-        user_id
+        users_id
         entity_namespace
         entity_id
         entity {
