@@ -27,6 +27,7 @@ import {
   FileSystem,
   Topics,
   SystemModules,
+  Follow,
   People,
 } from './modules';
 
@@ -109,6 +110,7 @@ export default class KanvasCore {
 
   public companies: Companies;
   public companiesBranches: CompaniesBranches;
+  public follow: Follow;
   public people: People;
 
   constructor(protected options: Options) {
@@ -138,6 +140,7 @@ export default class KanvasCore {
     this.systemModules = new SystemModules(this.client);
     this.companies = new Companies(this.client);
     this.companiesBranches = new CompaniesBranches(this.client);
+    this.follow = new Follow(this.client);
     this.people = new People(this.client);
   }
   protected generateURL() {
