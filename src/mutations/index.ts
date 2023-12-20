@@ -15,3 +15,4 @@ export * from './topics.mutation';
 export * from './companies.mutation';
 export * from './companies-branches.mutation';
 export * from './people.mutation';
+export * from './message-comment.mutation';

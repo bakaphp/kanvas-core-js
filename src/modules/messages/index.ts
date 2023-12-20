@@ -6,7 +6,7 @@ import {
   InteractionTypeInput,
   HasAppModuleMessageWhereConditions,
   OrderByMessage,
-  WhereCondition
+  WhereCondition,
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
@@ -16,9 +16,14 @@ import {
 } from '../../mutations';
 
 import { GET_MESSAGES_QUERY } from '../../queries';
-
+import { MessagesComments } from '../messages-comments';
 export class Messages {
-  constructor(protected client: ClientType) {}
+  
+  public comments: MessagesComments;
+
+  constructor(protected client: ClientType) {
+    this.comments = new MessagesComments(client);
+  }
 
   public async createMessage(
     input: MessageInputInterface
