@@ -22,3 +22,4 @@ export * from './topics';
 export * from './follows';
 export * from './people';
 export * from './contact';
+export * from './message-comment';

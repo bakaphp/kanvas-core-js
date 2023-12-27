@@ -16,3 +16,4 @@ export * from './companies.mutation';
 export * from './companies-branches.mutation';
 export * from './follows.mutation';
 export * from './people.mutation';
+export * from './message-comment.mutation';
