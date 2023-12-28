@@ -20,7 +20,7 @@ export class SystemModules {
     return response.data.systemModels.data as SystemModuleInterface[];
   }
 
-  public async getSystemModulesUuidBySlug(
+  public async getSystemModulesBySlug(
     slug: string
   ): Promise<SystemModuleInterface[]> {
     const response = await this.client.query({
