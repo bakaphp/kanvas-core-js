@@ -2,11 +2,11 @@ import { gql } from '@apollo/client/core';
 export const SYSTEM_MODULES_QUERY = gql`
   query systemModels(
     $where: QuerySystemModelsWhereWhereConditions
-    $orderBy: [QuerySystemModelsOrderByOrderByClause]
+    $orderBy: [QuerySystemModelsOrderByOrderByClause!]
     $first: Int!
     $page: Int
   ) {
-    systemModels {
+    systemModels(where: $where, orderBy: $orderBy, first: $first, page: $page) {
       data {
         id
         uuid
@@ -29,3 +29,5 @@ export const SYSTEM_MODULES_QUERY = gql`
     }
   }
 `;
+
+
