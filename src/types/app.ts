@@ -94,10 +94,10 @@ export interface AppCreateUserParams {
   company_name?: string;
   phone_number?: string;
   cell_phone_number?: string;
-  role_ids?:  (string | number)[];
+  role_ids?: (string | number)[];
   password?: string;
   custom_fields: CustomFieldInput[];
-  create_company?: boolean
+  create_company?: boolean;
 }
 
 export interface CreatedAppCreateUser {
@@ -131,11 +131,11 @@ export interface CreateAppInput {
   description?: string;
   key?: string;
   domain: string;
-  is_actived: 1;
-  ecosystem_auth: 0,
-  payments_active: 0,
-  is_public: 1
-  domain_based: 0
+  is_actived: boolean;
+  ecosystem_auth: boolean;
+  payments_active: boolean;
+  is_public: boolean;
+  domain_based: boolean;
 }
 
 export interface CreateAppResponse {
