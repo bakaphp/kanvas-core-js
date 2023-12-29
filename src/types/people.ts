@@ -22,13 +22,13 @@ export interface PeopleInputInterface {
   address?: [AddressInputInterface];
 }
 export interface PeopleInterface {
-  id: string;
-  uuid: string;
+  id?: string;
+  uuid?: string;
   name?: string;
   firstname?: string;
   lastname?: string;
-  company: CompanyInterface;
-  user: UserInterface;
+  company?: CompanyInterface;
+  user?: UserInterface;
   contacts: ContactInterface[];
   address?: AddressInterface[];
   custom_fields?: CustomFieldInput[];
