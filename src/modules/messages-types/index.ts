@@ -2,7 +2,7 @@ import { ClientType } from 'index';
 import {
   MessageTypeInterface,
   CreateMessageTypeInputInterface,
-  QueryMessageTypesWhereWhereConditions,
+  WhereCondition,
 } from '../../types';
 import {
   CREATE_MESSAGE_TYPE_MUTATION,
@@ -35,12 +35,12 @@ export class MessagesTypes {
   }
 
   public async getMessageTypes(
-    where?: QueryMessageTypesWhereWhereConditions
+    where?: WhereCondition
   ): Promise<MessageTypeInterface[]> {
     const response = await this.client.query({
       query: MESSAGES_TYPES_QUERY,
       variables: { where: where },
     });
-    return response.data.getMessageTypes as MessageTypeInterface[];
+    return response.data.messageTypes as MessageTypeInterface[];
   }
 }
