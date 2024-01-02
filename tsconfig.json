@@ -1,16 +1,37 @@
 {
   // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
-  "include": ["src", "types"],
-  "exclude": ["test", "node_modules"],
+  "include": [
+    "src",
+    "types"
+  ],
+  "exclude": [
+    "test",
+    "node_modules"
+  ],
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "baseUrl": "src",
     "paths": {
-      "core/*": ["core/*"],
-      "modules/*": ["modules/*"],
-      "types/*": ["types/*"],
+      "core/*": [
+        "core/*"
+      ],
+      "modules/*": [
+        "modules/*"
+      ],
+      "types/*": [
+        "types/*"
+      ],
+      "mutations/*": [
+        "mutations/*"
+      ],
+      "queries/*": [
+        "queries/*"
+      ],
     },
     "importHelpers": true,
     // output .d.ts declaration files for consumers
@@ -40,10 +61,14 @@
     // Note: In order to transform *both* js and d.ts files, you need to add both of the below lines to plugins
     "plugins": [
       // Transform paths in output .js files
-      { "transform": "typescript-transform-paths" },
-
+      {
+        "transform": "typescript-transform-paths"
+      },
       // Transform paths in output .d.ts files (Include this line if you output declarations files)
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+      {
+        "transform": "typescript-transform-paths",
+        "afterDeclarations": true
+      }
     ]
   }
 }

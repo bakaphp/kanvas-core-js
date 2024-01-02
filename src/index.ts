@@ -6,12 +6,15 @@ import {
   RequestHandler,
   NormalizedCacheObject,
 } from '@apollo/client/core';
+
 import {
   App,
   Auth,
   Users,
   CustomFields,
   Locations,
+  Companies,
+  CompaniesBranches,
   Leads,
   Inventory,
   Agents,
@@ -22,6 +25,11 @@ import {
   Messages,
   Roles,
   MessagesTypes,
+  FileSystem,
+  Topics,
+  SystemModules,
+  Follow,
+  People,
 } from './modules';
 
 import { setContext } from '@apollo/client/link/context';
@@ -40,6 +48,7 @@ interface Options {
   key: string;
   middlewares?: Middleware[];
   adminKey?: string;
+  authAxiosMiddleware?: any;
 }
 
 export function genericAuthMiddleware(
@@ -71,7 +80,14 @@ export function locationMiddleware(
     return { headers };
   });
 }
-
+export async function authAxiosMiddleware(
+  fn: () => Promise<string | null | undefined>
+) {
+  const key = await fn();
+  return {
+    Authorization: key ? `Bearer ${key}` : '',
+  };
+}
 export default class KanvasCore {
   public client: ClientType;
   public auth: Auth;
@@ -90,6 +106,15 @@ export default class KanvasCore {
   public messages: Messages;
   public roles: Roles;
   public messagesTypes: MessagesTypes;
+  public filesystem: FileSystem;
+  public topics: Topics;
+  public systemModules: SystemModules;
+
+  public companies: Companies;
+  public companiesBranches: CompaniesBranches;
+  public follow: Follow;
+  public people: People;
+
   constructor(protected options: Options) {
     this.client = new ApolloClient({
       link: this.generateLink(),
@@ -113,8 +138,14 @@ export default class KanvasCore {
     this.messages = new Messages(this.client);
     this.roles = new Roles(this.client);
     this.messagesTypes = new MessagesTypes(this.client);
+    this.filesystem = new FileSystem(this.client, this.options);
+    this.topics = new Topics(this.client);
+    this.systemModules = new SystemModules(this.client);
+    this.companies = new Companies(this.client);
+    this.companiesBranches = new CompaniesBranches(this.client);
+    this.follow = new Follow(this.client);
+    this.people = new People(this.client);
   }
-
   protected generateURL() {
     return new HttpLink({ uri: this.options.url });
   }

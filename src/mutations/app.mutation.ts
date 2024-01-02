@@ -56,3 +56,20 @@ export const APP_DEACTIVE_USER = gql`
     appDeActiveUser(user_id: $user_id)
   }
 `;
+
+export const CREATE_APP = gql`
+  mutation CreateApp($input: AppInput!) {
+    createApp(input: $input) {
+      name
+      key
+      url
+      description
+      domain
+      is_actived
+      ecosystem_auth
+      payments_active
+      is_public
+      domain_based
+    }
+  }
+`;

@@ -2,27 +2,29 @@
 
 import { CustomFieldInput, CustomFieldData } from './custom-fields';
 import { PaginatorInfo } from './paginator';
+import {PeopleInterface} from './index';
+// interface Contact {
+//   value: string;
+//   contacts_types_id?: number;
+//   weight?: number;
+//   type?: Type;
+// }
 
-interface Contact {
-  value: string;
-  contacts_types_id?: number;
-  weight?: number;
-  type?: Type;
-}
+// interface Address {
+//   address: string;
+//   city: string;
+// }
 
-interface Address {
-  address: string;
-  city: string;
-}
-
-interface People {
-  name?: string;
-  firstname?: string;
-  lastname?: string;
-  contacts: Contact[];
-  address?: Address[];
-  custom_fields?: CustomFieldInput[];
-}
+// interface People {
+//   id: string;
+//   uuid: string;
+//   name?: string;
+//   firstname?: string;
+//   lastname?: string;
+//   contacts: Contact[];
+//   address?: Address[];
+//   custom_fields?: CustomFieldInput[];
+// }
 
 interface User {
   id: number;
@@ -69,7 +71,7 @@ export interface CreateLeadParams {
   branch_id: number;
   title: string;
   pipeline_stage_id: number;
-  people: People;
+  people: PeopleInterface;
   organization: Organization;
   custom_fields: CustomFieldInput[];
 }
@@ -94,7 +96,7 @@ export interface CreateLeadData {
   source?: Source | null;
   stage?: Stage | null;
   pipeline?: Pipeline | null;
-  people?: People;
+  people?: PeopleInterface;
   followers?: { data: Follower[] };
   paginatorInfo?: PaginatorInfo;
   files?: { data: LeadAttachment[] };
@@ -103,7 +105,7 @@ export interface CreateLeadData {
 export interface LeadInput {
   branch_id: number;
   title: string;
-  people: People;
+  people: PeopleInterface;
   organization: Organization;
   leads_owner_id: number;
   receiver_id: number;
@@ -121,6 +123,8 @@ export interface WhereCondition {
   column: string;
   operator: string;
   value: number | string | Array<string | number>;
+  and?: [WhereCondition];
+  or?: [WhereCondition];
 }
 
 export interface LeadsDashboardInput {

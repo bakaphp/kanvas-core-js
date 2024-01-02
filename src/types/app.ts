@@ -12,16 +12,18 @@ export interface AppUserInterface {
   displayname: string;
   firstname: string;
   lastname: string;
+  default_company: number;
+  default_company_branch: number;
   sex: string;
   description: string | null;
   user_active: boolean;
   roles: string[];
   address: AddressInterface;
   contact: ContantInterface;
+  is_active: boolean;
   companies: CompanyInterface[];
   branches: BranchInterface[];
   created_at: string;
-
   updated_at: string;
 }
 
@@ -92,9 +94,10 @@ export interface AppCreateUserParams {
   company_name?: string;
   phone_number?: string;
   cell_phone_number?: string;
-  roles_id?: string | number;
+  role_ids?: (string | number)[];
   password?: string;
   custom_fields: CustomFieldInput[];
+  create_company?: boolean;
 }
 
 export interface CreatedAppCreateUser {
@@ -107,4 +110,44 @@ export interface AppActivateUser {
 
 export interface AppDeactiveUser {
   appDeActiveUser: boolean;
+}
+
+export interface AppWithAccessResponse {
+  apps: {
+    data: {
+      id: string;
+      name: string;
+      key: string;
+      default_apps_plan_id: string;
+      created_at: string;
+    }[];
+    paginatorInfo: PaginatorInfo;
+  };
+}
+
+export interface CreateAppInput {
+  name: string;
+  url: string;
+  description?: string;
+  key?: string;
+  domain: string;
+  is_actived: boolean;
+  ecosystem_auth: boolean;
+  payments_active: boolean;
+  is_public: boolean;
+  domain_based: boolean;
+}
+
+export interface CreateAppResponse {
+  createApp: {
+    name: string;
+    url: string;
+    description?: string;
+    domain: string;
+    is_actived: boolean;
+    ecosystem_auth: boolean;
+    payments_active: boolean;
+    is_public: boolean;
+    domain_based: boolean;
+  };
 }
