@@ -84,14 +84,17 @@ export class FileSystem {
     const formData = new FormData();
     formData.append(
       'operations',
-      '{ "query": "mutation ($file: Upload!) { upload(file: $file) {id, uuid, name, url } }"}'
+      JSON.stringify({
+        query:
+          'mutation ($file: Upload!) { upload(file: $file) {id, uuid, name, url } }',
+        variables: {
+          file: null,
+        },
+      })
     );
-    formData.append('map', '{"0": ["variables.file"]}');
-    formData.append('0', data);
+    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+    formData.append('0', data, data.name);
     let response = await this.axiosClient.post('', formData);
-    if (!response.data || !response.data.data) {
-      throw new Error('Unexpected response from server');
-    }
 
     return response.data.data.upload as UPLOAD_INTERFACE;
   }
