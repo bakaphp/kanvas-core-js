@@ -12,7 +12,7 @@ import {
   FILESYSTEM,
   SystemModuleEntityInput,
   WhereCondition,
-  FILESYSTEM_ATTACH_INPUT
+  FILESYSTEM_ATTACH_INPUT,
 } from '../../types';
 import { ATTACH_FILE_MUTATION, DETACH_FILE_MUTATION } from '../../mutations';
 import { ENTITY_FILES_QUERY } from '../../queries';
@@ -77,18 +77,25 @@ export class FileSystem {
     return response.data.deAttachFiles as boolean;
   }
 
-  public async uploadFile(data: any): Promise<UPLOAD_INTERFACE> {
+  public async uploadFile(data: File): Promise<UPLOAD_INTERFACE> {
     if (!this.options || !this.axiosClient)
       throw new Error('FileSystem module not initialized');
 
     const formData = new FormData();
     formData.append(
       'operations',
-      '{ "query": "mutation ($file: Upload!) { upload(file: $file) {id, uuid, name, url } }"}'
+      JSON.stringify({
+        query:
+          'mutation ($file: Upload!) { upload(file: $file) {id, uuid, name, url } }',
+        variables: {
+          file: null,
+        },
+      })
     );
-    formData.append('map', '{"0": ["variables.file"]}');
-    formData.append('0', data);
+    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+    formData.append('0', data, data.name);
     let response = await this.axiosClient.post('', formData);
+
     return response.data.data.upload as UPLOAD_INTERFACE;
   }
 }
