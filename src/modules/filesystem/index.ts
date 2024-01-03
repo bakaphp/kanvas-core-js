@@ -12,7 +12,7 @@ import {
   FILESYSTEM,
   SystemModuleEntityInput,
   WhereCondition,
-  FILESYSTEM_ATTACH_INPUT
+  FILESYSTEM_ATTACH_INPUT,
 } from '../../types';
 import { ATTACH_FILE_MUTATION, DETACH_FILE_MUTATION } from '../../mutations';
 import { ENTITY_FILES_QUERY } from '../../queries';
@@ -77,7 +77,7 @@ export class FileSystem {
     return response.data.deAttachFiles as boolean;
   }
 
-  public async uploadFile(data: any): Promise<UPLOAD_INTERFACE> {
+  public async uploadFile(data: File): Promise<UPLOAD_INTERFACE> {
     if (!this.options || !this.axiosClient)
       throw new Error('FileSystem module not initialized');
 
@@ -89,6 +89,10 @@ export class FileSystem {
     formData.append('map', '{"0": ["variables.file"]}');
     formData.append('0', data);
     let response = await this.axiosClient.post('', formData);
+    if (!response.data || !response.data.data) {
+      throw new Error('Unexpected response from server');
+    }
+
     return response.data.data.upload as UPLOAD_INTERFACE;
   }
 }
