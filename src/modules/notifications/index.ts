@@ -26,12 +26,14 @@ export class Notifications {
 
   public async getNotifications(
     where: WhereCondition,
+    whereEntity: NotificationEntityFilterInputInterface,
+    whereType: NotificationTypeFilterInputInterface,
     first: number,
     page: number
   ): Promise<NotificationInterface[]> {
     const response = await this.client.query({
       query: NOTIFICATION_QUERY,
-      variables: { where, first, page },
+      variables: { where, first, page, whereEntity, whereType },
     });
     return response.data.notifications.data as NotificationInterface[];
   }
