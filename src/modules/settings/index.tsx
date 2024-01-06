@@ -70,8 +70,6 @@ export default class Settings {
           input,
         },
       });
-      console.log(data);
-      // return data;
       return true;
     } catch {
       return undefined;
