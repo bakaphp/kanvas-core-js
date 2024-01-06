@@ -64,7 +64,7 @@ export default class Settings {
 
   async setUserSettings(input: ConfigInput): Promise<boolean | undefined> {
     try {
-      const data = this.client.mutate({
+      await this.client.mutate({
         mutation: SET_USER_SETTINGS_MUTATION,
         variables: {
           input,
