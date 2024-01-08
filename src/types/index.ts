@@ -13,6 +13,7 @@ export * from './messages';
 export * from './user-list';
 export * from './channels';
 export * from './roles';
+export * from './messages-types';
 export * from "./filesystem";
 export * from './system-module';
 export * from './companies';

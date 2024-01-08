@@ -24,6 +24,7 @@ import {
   UsersInteractions,
   Messages,
   Roles,
+  MessagesTypes,
   FileSystem,
   Topics,
   SystemModules,
@@ -104,6 +105,7 @@ export default class KanvasCore {
   public usersLists: UsersLists;
   public messages: Messages;
   public roles: Roles;
+  public messagesTypes: MessagesTypes;
   public filesystem: FileSystem;
   public topics: Topics;
   public systemModules: SystemModules;
@@ -135,6 +137,7 @@ export default class KanvasCore {
     this.usersLists = new UsersLists(this.client);
     this.messages = new Messages(this.client);
     this.roles = new Roles(this.client);
+    this.messagesTypes = new MessagesTypes(this.client);
     this.filesystem = new FileSystem(this.client, this.options);
     this.topics = new Topics(this.client);
     this.systemModules = new SystemModules(this.client);
