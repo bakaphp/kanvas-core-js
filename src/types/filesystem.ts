@@ -9,7 +9,7 @@ export interface FILESYSTEM_ATTACH_INPUT {
   filesystem_uuid: string;
   field_name: string;
   system_module_uuid: string;
-  entity_uuid: string;
+  entity_id: string;
 }
 
 export interface FILESYSTEM {

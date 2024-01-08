@@ -25,7 +25,7 @@ export class Leads {
       variables: { input: leadData },
     });
 
-    return response.data as CreateLeadData;
+    return response.data.createLead as CreateLeadData;
   }
 
   public async getAllLeads(first?: number, page?: number): Promise<LeadsData> {
