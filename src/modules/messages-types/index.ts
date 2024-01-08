@@ -1,7 +1,7 @@
 import { ClientType } from 'index';
 import {
   MessageTypeInterface,
-  CreateMessageTypeInputInterface,
+  MessageTypeInputInterface,
   WhereCondition,
 } from '../../types';
 import {
@@ -14,7 +14,7 @@ export class MessagesTypes {
   constructor(protected client: ClientType) {}
 
   public async createMessageType(
-    input: CreateMessageTypeInputInterface
+    input: MessageTypeInputInterface
   ): Promise<MessageTypeInterface> {
     const response = await this.client.mutate({
       mutation: CREATE_MESSAGE_TYPE_MUTATION,
@@ -25,7 +25,7 @@ export class MessagesTypes {
 
   public async updateMessageType(
     id: number,
-    input: CreateMessageTypeInputInterface
+    input: MessageTypeInputInterface
   ): Promise<MessageTypeInterface> {
     const response = await this.client.mutate({
       mutation: UPDATE_MESSAGE_TYPE_MUTATION,

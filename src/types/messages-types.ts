@@ -9,7 +9,7 @@ export interface MessageTypeInterface {
   templates_plura: string;
 }
 
-export interface CreateMessageTypeInputInterface {
+export interface MessageTypeInputInterface {
   languages_id: number;
   name: string;
   verb: string;
