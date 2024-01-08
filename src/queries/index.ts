@@ -9,6 +9,7 @@ export * from './usersLists.query';
 export * from './users-interactions.query';
 export * from './messages.query';
 export * from './roles.query';
+export * from './messages-types.query';
 export * from './filesystem.query';
 export * from './topics.query';
 export * from './system-module.query';

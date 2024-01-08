@@ -1,11 +1,11 @@
 import { UserInterface } from './index';
 export interface MessagesInterface {
   id: string;
-  parent_id: string;
-  parent_unique_id: any;
+  parent_id?: string;
+  parent_unique_id?: any;
   uuid: string;
   companies_id: string;
-  message: any;
+  message?: any;
   message_types_id: string;
   user: UserInterface;
   appModuleMessage: AppModuleMessage;
@@ -21,8 +21,8 @@ export interface MessageInputInterface {
   message: any;
   system_modules_id: string;
   entity_id: string;
-  parent_id: string;
-  distribution: DistributionInputInterface;
+  parent_id?: string;
+  distribution?: DistributionInputInterface;
 }
 
 export interface DistributionInputInterface {
@@ -32,11 +32,11 @@ export interface DistributionInputInterface {
 }
 
 export interface MessageWhereConditions {
-  column: string;
-  operator: string;
-  value: string;
-  and: [MessageWhereConditions];
-  or: [MessageWhereConditions];
+  column?: string;
+  operator?: string;
+  value?: string;
+  and?: [MessageWhereConditions];
+  or?: [MessageWhereConditions];
 }
 
 export interface HasAppModuleMessageWhereConditions {
