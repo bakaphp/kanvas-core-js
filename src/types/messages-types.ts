@@ -16,9 +16,3 @@ export interface CreateMessageTypeInputInterface {
   template: string;
   templates_plura: string;
 }
-
-export interface QueryMessageTypesWhereWhereConditions {
-  column: string;
-  operator: string;
-  value: string;
-}
