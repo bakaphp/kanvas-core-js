@@ -1,21 +1,33 @@
 import {
+  APP_SETTINGS_QUERY,
   AppSettingsQuery,
   CompanySettingsQuery,
   ConfigInput,
   USERS_SETTINGS_QUERY,
 } from '../../queries';
 import {
+  AppSettingsQueryResponse,
   AppSettingsResponse,
   ClientType,
   CompanySettingsResponse,
   SettingsResponse,
-  userSettingsResponse,
+  UserSettingsResponse,
 } from '../../index';
 import { SET_USER_SETTINGS_MUTATION } from '../../mutations';
 
 export default class Settings {
   constructor(protected client: ClientType, protected key: string) {}
 
+  async fetchAppSettings(): Promise<AppSettingsQueryResponse | undefined> {
+    try {
+      const { data } = await this.client.query({
+        query: APP_SETTINGS_QUERY,
+      });
+      return data;
+    } catch {
+      return undefined;
+    }
+  }
   async getAppSettings(): Promise<SettingsResponse | undefined> {
     try {
       const {
@@ -47,7 +59,7 @@ export default class Settings {
 
   async getUserSettings(
     entity_uuid: string
-  ): Promise<userSettingsResponse | undefined> {
+  ): Promise<UserSettingsResponse | undefined> {
     try {
       const { data } = await this.client.query({
         query: USERS_SETTINGS_QUERY,

@@ -32,3 +32,12 @@ export const USERS_SETTINGS_QUERY = gql`
     }
   }
 `;
+
+export const APP_SETTINGS_QUERY = gql`
+  query {
+    appSettings {
+      key
+      value
+    }
+  }
+`;
