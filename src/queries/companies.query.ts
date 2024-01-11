@@ -4,8 +4,8 @@ export const COMPANIES_QUERY = gql`
   query companies(
     $where: QueryCompaniesWhereWhereConditions
     $orderBy: [QueryCompaniesOrderByOrderByClause!]
-    $first: Int!
-    $page: Int!
+    $first: Int
+    $page: Int
   ) {
     companies(where: $where, orderBy: $orderBy, first: $first, page: $page) {
       data {
@@ -39,7 +39,6 @@ export const COMPANIES_QUERY = gql`
         }
         groups {
           id
-          uuid
           name
         }
         branches {

@@ -17,22 +17,31 @@ import {
   CompanyInput,
   CompanyInterface,
   CompanySettings,
-  WhereCondition
+  WhereCondition,
+  OrderBy,
+  CreatedCompanies
 } from '../../types';
 
 export class Companies {
   constructor(protected client: ClientType) {}
 
   public async getCompanies(
-    where: WhereCondition,
-    first?: number,
-    page?: number
-  ): Promise<CompanyInterface> {
+    options: {
+      first?: number;
+      page?: number;
+      where?: WhereCondition;
+      orderBy?: OrderBy[];
+    } = {}
+  ): Promise<CreatedCompanies> {
+    const { first, page, where, orderBy } = options;
+
     const response = await this.client.query({
       query: COMPANIES_QUERY,
-      variables: { where, first, page },
+      variables: { where, first, page, orderBy },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
-    return response.data as CompanyInterface;
+    return response.data;
   }
 
   public async getCompanyUsers(
