@@ -4,7 +4,7 @@ import { SystemModuleInterface } from './system-module';
 
 export interface NotificationInterface {
   id: string;
-  user: UserInterface;
+  users: UserInterface;
   fromUsers: UserInterface;
   companies: CompanyInterface;
   systemModule: SystemModuleInterface;

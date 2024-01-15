@@ -6,8 +6,8 @@ export const NOTIFICATION_QUERY = gql`
     $whereEntity: NotificationEntityFilterInput
     $whereType: NotificationTypeFilterInput
     $orderBy: [QueryNotificationsOrderByOrderByClause!]
-    $first: Int!
-    $page: Int!
+    $first: Int
+    $page: Int
   ) {
     notifications(
       where: $where
@@ -19,20 +19,19 @@ export const NOTIFICATION_QUERY = gql`
     ) {
       data {
         id
-        user {
+        users {
           id
-          name
+          displayname
           email
         }
         fromUsers {
           id
-          name
+          displayname
           email
         }
         companies {
           id
           name
-          slug
         }
         systemModule {
           id
@@ -73,8 +72,8 @@ export const NOTIFICATION_TYPE_QUERY = gql`
   query notificationTypes(
     $where: QueryNotificationTypesWhereWhereConditions
     $orderBy: [QueryNotificationTypesOrderByOrderByClause!]
-    $first: Int!
-    $page: Int!
+    $first: Int
+    $page: Int
   ) {
     notificationTypes(
       where: $where
@@ -131,8 +130,8 @@ export const NOTIFICATION_CHANNEL_QUERY = gql`
   query notificationChannels(
     $where: QueryNotificationChannelsWhereWhereConditions
     $orderBy: [QueryNotificationChannelsOrderByOrderByClause!]
-    $first: Int!
-    $page: Int!
+    $first: Int
+    $page: Int
   ) {
     notificationChannels(
       where: $where
@@ -144,8 +143,6 @@ export const NOTIFICATION_CHANNEL_QUERY = gql`
         id
         name
         slug
-        created_at
-        updated_at
       }
       paginatorInfo {
         total
