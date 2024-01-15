@@ -1,4 +1,5 @@
 import { UserInterface } from 'index';
+import { PaginatorInfo } from './paginator';
 
 export interface CompanyInterface {
   id: string;
@@ -56,4 +57,11 @@ export interface QueryCompanyUsersWhereWhereConditions {
 export interface CompanySettings {
   name: string;
   settings: any;
+}
+
+export interface CreatedCompanies {
+  companies: {
+    data: CompanyInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
 }
