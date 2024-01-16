@@ -1,10 +1,10 @@
-import { UserInterface } from 'index';
+import { CompanyBranchInterface, UserInterface } from 'index';
 import { PaginatorInfo } from './paginator';
 
 export interface CompanyInterface {
   id: string;
-  name: string;
   uuid: string;
+  name: string;
   website?: string;
   address?: string;
   zipcode?: number;
@@ -13,6 +13,22 @@ export interface CompanyInterface {
   timezone?: string;
   phone?: string;
   user?: UserInterface;
+  groups?: CompanyGroup[];
+  is_active: boolean;
+  total_users: number;
+  country_code?: string;
+  created_at?: string;
+  updated_at?: string;
+  branches: CompanyBranchInterface[];
+}
+
+export interface CompanyGroup {
+  id: string;
+  uuid: string;
+  name: string;
+  app: any;
+  stripe_id?: string;
+  is_default: number;
   country_code?: string;
   created_at?: string;
   updated_at?: string;
@@ -28,7 +44,8 @@ export interface CompanyInput {
   timezone?: string;
   phone?: string;
   country_code?: string;
-  files: File[];
+  files?: File[];
+  is_active?:boolean
 }
 
 export interface QueryCompaniesWhereWhereConditions {
