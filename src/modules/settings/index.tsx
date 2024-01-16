@@ -13,7 +13,7 @@ import {
   SettingsResponse,
   UserSettingsResponse,
 } from '../../index';
-import { SET_USER_SETTINGS_MUTATION } from '../../mutations';
+import { SET_APP_SETTINGS_MUTATION, SET_USER_SETTINGS_MUTATION } from '../../mutations';
 
 export default class Settings {
   constructor(protected client: ClientType, protected key: string) {}
@@ -78,6 +78,19 @@ export default class Settings {
     try {
       await this.client.mutate({
         mutation: SET_USER_SETTINGS_MUTATION,
+        variables: {
+          input,
+        },
+      });
+      return true;
+    } catch {
+      return undefined;
+    }
+  }
+  async setAppSettings(input: ConfigInput) {
+    try {
+      await this.client.mutate({
+        mutation: SET_APP_SETTINGS_MUTATION,
         variables: {
           input,
         },
