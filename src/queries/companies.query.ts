@@ -6,8 +6,15 @@ export const COMPANIES_QUERY = gql`
     $orderBy: [QueryCompaniesOrderByOrderByClause!]
     $first: Int
     $page: Int
+    $search: String
   ) {
-    companies(where: $where, orderBy: $orderBy, first: $first, page: $page) {
+    companies(
+      where: $where
+      orderBy: $orderBy
+      first: $first
+      page: $page
+      search: $search
+    ) {
       data {
         id
         name
@@ -22,6 +29,8 @@ export const COMPANIES_QUERY = gql`
         country_code
         created_at
         updated_at
+        is_active
+        total_users
         photo {
           id
           uuid

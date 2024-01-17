@@ -15,6 +15,17 @@ export const CREATE_COMPANY_MUTATION = gql`
       country_code
       created_at
       updated_at
+      is_active
+      total_users
+      photo {
+        id
+        uuid
+        name
+        url
+        type
+        size
+        field_name
+      }
       user {
         id
         firstname
@@ -23,7 +34,6 @@ export const CREATE_COMPANY_MUTATION = gql`
       }
       groups {
         id
-        uuid
         name
       }
       branches {
@@ -36,7 +46,7 @@ export const CREATE_COMPANY_MUTATION = gql`
 `;
 
 export const UPDATE_COMPANY_MUTATION = gql`
-  mutation updateCompany($id: ID, $input: CompanyInput) {
+  mutation updateCompany($id: ID!, $input: CompanyInput) {
     updateCompany(id: $id, input: $input) {
       id
       name
@@ -51,6 +61,17 @@ export const UPDATE_COMPANY_MUTATION = gql`
       country_code
       created_at
       updated_at
+      is_active
+      total_users
+      photo {
+        id
+        uuid
+        name
+        url
+        type
+        size
+        field_name
+      }
       user {
         id
         firstname
@@ -59,7 +80,6 @@ export const UPDATE_COMPANY_MUTATION = gql`
       }
       groups {
         id
-        uuid
         name
       }
       branches {
