@@ -18,3 +18,4 @@ export * from './companies.query';
 export * from './follows.query';
 export * from './people.query';
 export * from './message-comment.query';
+export * from './notification.query';
