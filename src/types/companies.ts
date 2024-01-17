@@ -76,6 +76,11 @@ export interface CompanySettings {
   settings: any;
 }
 
+export interface InputCompanyParams {
+  id: number;
+  input: CompanyInput;
+}
+
 export interface CreatedCompanies {
   companies: {
     data: CompanyInterface[];

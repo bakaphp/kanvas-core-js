@@ -20,6 +20,7 @@ import {
   WhereCondition,
   OrderBy,
   CreatedCompanies,
+  InputCompanyParams,
 } from '../../types';
 
 export class Companies {
@@ -72,10 +73,10 @@ export class Companies {
     return response.data.createCompany as CompanyInterface;
   }
 
-  public async updateCompany(
-    id: string,
-    input: CompanyInput
-  ): Promise<CompanyInterface> {
+  public async updateCompany({
+    id,
+    input,
+  }: InputCompanyParams): Promise<CompanyInterface> {
     const response = await this.client.mutate({
       mutation: UPDATE_COMPANY_MUTATION,
       variables: { id: id, input: input },
