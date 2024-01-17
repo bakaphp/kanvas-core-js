@@ -24,3 +24,4 @@ export * from './follows';
 export * from './people';
 export * from './contact';
 export * from './message-comment';
+export * from './notification';

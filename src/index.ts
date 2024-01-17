@@ -30,6 +30,7 @@ import {
   SystemModules,
   Follow,
   People,
+  Notifications,
 } from './modules';
 
 import { setContext } from '@apollo/client/link/context';
@@ -114,7 +115,7 @@ export default class KanvasCore {
   public companiesBranches: CompaniesBranches;
   public follow: Follow;
   public people: People;
-
+  public notifications: Notifications;
   constructor(protected options: Options) {
     this.client = new ApolloClient({
       link: this.generateLink(),
@@ -145,6 +146,7 @@ export default class KanvasCore {
     this.companiesBranches = new CompaniesBranches(this.client);
     this.follow = new Follow(this.client);
     this.people = new People(this.client);
+    this.notifications = new Notifications(this.client);
   }
   protected generateURL() {
     return new HttpLink({ uri: this.options.url });
