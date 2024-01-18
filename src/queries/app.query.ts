@@ -93,6 +93,14 @@ export const GET_APPS_WITH_ACCESS = gql`
         key
         default_apps_plan_id
         created_at
+        secrets {
+          client_id
+          client_secret_id
+          name
+          user {
+            firstname
+          }
+        }
       }
       paginatorInfo {
         currentPage
