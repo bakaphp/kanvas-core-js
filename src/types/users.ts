@@ -132,11 +132,19 @@ export interface UpdateUserParams {
   }[];
 }
 
-export interface InviteUserParams {
+export interface DeleteInviteData {
+  deleteInvite: boolean;
+}
+
+export interface BasicInvite {
   email: string;
   firstname: string;
   lastname: string;
-  role_id: number;
+  invite_hash: string;
+}
+
+export interface InviteUserParams extends BasicInvite {
+  role_id?: number;
   custom_fields: CustomFieldInput[];
 }
 
@@ -144,6 +152,19 @@ export interface InviteUserData {
   id: number;
   email: string;
   invite_hash: string;
+}
+
+export interface InviteData extends BasicInvite {}
+
+export interface InviteParams extends BasicInvite {}
+
+export interface InviteProcessParams extends BasicInvite {
+  password: string;
+}
+
+export interface InviteProcessData {
+  id: string;
+  email: string;
 }
 
 export interface RoleData {

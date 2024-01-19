@@ -12,7 +12,7 @@ import {
   SWITCH_COMPANY_BRANCH_MUTATION,
   GET_INVITE_MUTATION,
   PROCESS_INVITE_MUTATION,
-  DELETE_INVITE_MUTATION
+  DELETE_INVITE_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -25,6 +25,9 @@ import {
   WhereCondition,
   RoleData,
   RolesEnum,
+  DeleteInviteData,
+  InviteProcessParams,
+  InviteProcessData,
 } from '../../types';
 
 export class Users {
@@ -121,17 +124,16 @@ export class Users {
       variables: { first },
     });
 
-    return response.data;
+    return response.data.usersInvites.data as InviteUserData[];
   }
 
-
-  public async processInvite(input: InviteUserParams) {
+  public async processInvite(input: InviteProcessParams) {
     const response = await this.client.mutate({
       mutation: PROCESS_INVITE_MUTATION,
       variables: { input },
     });
 
-    return response.data;
+    return response.data as InviteProcessData;
   }
 
   public async deleteInvite(id: number) {
@@ -140,10 +142,9 @@ export class Users {
       variables: { id },
     });
 
-    return response.data;
+    return response.data as DeleteInviteData;
   }
 
-  
   public isAdmin(user: UserData): boolean {
     const roles = user.roles;
     if (Array.isArray(roles)) {
