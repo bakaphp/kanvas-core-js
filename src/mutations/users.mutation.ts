@@ -86,6 +86,21 @@ export const GET_INVITE_MUTATION = gql`
   }
 `;
 
+export const PROCESS_INVITE_MUTATION = gql`
+  mutation processInvite($input: CompleteInviteInput!) {
+    processInvite(input: $input) {
+      id
+      email
+    }
+  }
+`;
+
+export const DELETE_INVITE_MUTATION = gql`
+  mutation deleteInvite($id: Int!) {
+    deleteInvite(id: $id)
+  }
+`;
+
 export const SWITCH_COMPANY_BRANCH_MUTATION = gql`
   mutation switchCompanyBranch($company_branch_id: Int!) {
     switchCompanyBranch(company_branch_id: $company_branch_id)
