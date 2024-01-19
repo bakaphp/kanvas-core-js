@@ -1,5 +1,9 @@
 import { ClientType } from '../../index';
-import { GET_USER_DATA_QUERY, GET_ROLE_ID_BY_NAME_QUERY } from '../../queries';
+import {
+  GET_USER_DATA_QUERY,
+  GET_ROLE_ID_BY_NAME_QUERY,
+  GET_USERS_INVITES_QUERY,
+} from '../../queries';
 import {
   REGISTER_MUTATTION,
   FORGOT_PASSWORD_MUTATION,
@@ -7,6 +11,8 @@ import {
   INVITE_USER_MUTATION,
   SWITCH_COMPANY_BRANCH_MUTATION,
   GET_INVITE_MUTATION,
+  PROCESS_INVITE_MUTATION,
+  DELETE_INVITE_MUTATION
 } from '../../mutations';
 import {
   UserInterface,
@@ -109,6 +115,35 @@ export class Users {
     return response.data;
   }
 
+  public async getUsersInvites(first: number) {
+    const response = await this.client.query({
+      query: GET_USERS_INVITES_QUERY,
+      variables: { first },
+    });
+
+    return response.data;
+  }
+
+
+  public async processInvite(input: InviteUserParams) {
+    const response = await this.client.mutate({
+      mutation: PROCESS_INVITE_MUTATION,
+      variables: { input },
+    });
+
+    return response.data;
+  }
+
+  public async deleteInvite(id: number) {
+    const response = await this.client.mutate({
+      mutation: DELETE_INVITE_MUTATION,
+      variables: { id },
+    });
+
+    return response.data;
+  }
+
+  
   public isAdmin(user: UserData): boolean {
     const roles = user.roles;
     if (Array.isArray(roles)) {
