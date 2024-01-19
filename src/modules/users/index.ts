@@ -6,6 +6,7 @@ import {
   UPDATE_USER_MUTATION,
   INVITE_USER_MUTATION,
   SWITCH_COMPANY_BRANCH_MUTATION,
+  GET_INVITE_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -83,6 +84,15 @@ export class Users {
     const response = await this.client.mutate({
       mutation: INVITE_USER_MUTATION,
       variables: { input: inviteInput },
+    });
+
+    return response.data;
+  }
+
+  public async getInvite(hash: string): Promise<InviteUserData> {
+    const response = await this.client.mutate({
+      mutation: GET_INVITE_MUTATION,
+      variables: { hash },
     });
 
     return response.data;

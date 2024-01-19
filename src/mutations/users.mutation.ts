@@ -75,6 +75,17 @@ export const INVITE_USER_MUTATION = gql`
   }
 `;
 
+export const GET_INVITE_MUTATION = gql`
+  mutation($hash: String!) {
+    getInvite(hash: $hash) {
+      email
+      invite_hash
+      firstname
+      lastname
+    }
+  }
+`;
+
 export const SWITCH_COMPANY_BRANCH_MUTATION = gql`
   mutation switchCompanyBranch($company_branch_id: Int!) {
     switchCompanyBranch(company_branch_id: $company_branch_id)
