@@ -49,3 +49,15 @@ export const GET_ROLE_ID_BY_NAME_QUERY = gql`
     }
   }
 `;
+
+export const GET_USERS_INVITES_QUERY = gql`
+  query UsersInvites($first: Int!) {
+    usersInvites(first: $first) {
+      data {
+        email
+        id
+        invite_hash
+      }
+    }
+  }
+`;
