@@ -52,7 +52,10 @@ export const GET_ROLE_ID_BY_NAME_QUERY = gql`
 
 export const GET_USERS_INVITES_QUERY = gql`
   query UsersInvites($first: Int!) {
-    usersInvites(first: $first) {
+    usersInvites(
+      first: $first
+      orderBy: [{ column: ID, order: DESC }]
+    ) {
       data {
         email
         id

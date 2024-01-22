@@ -89,6 +89,17 @@ export class Users {
     return response.data.updateUser;
   }
 
+  public async switchCompany(id: number) {
+    const response = await this.client.mutate({
+      mutation: SWITCH_COMPANY_BRANCH_MUTATION,
+      variables: {
+        company_branch_id: id,
+      },
+    });
+
+    return response.data;
+  }
+
   public async invite(inviteInput: InviteUserParams): Promise<InviteUserData> {
     const response = await this.client.mutate({
       mutation: INVITE_USER_MUTATION,
@@ -102,17 +113,6 @@ export class Users {
     const response = await this.client.mutate({
       mutation: GET_INVITE_MUTATION,
       variables: { hash },
-    });
-
-    return response.data;
-  }
-
-  public async switchCompany(id: number) {
-    const response = await this.client.mutate({
-      mutation: SWITCH_COMPANY_BRANCH_MUTATION,
-      variables: {
-        company_branch_id: id,
-      },
     });
 
     return response.data;
