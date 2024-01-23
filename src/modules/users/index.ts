@@ -3,6 +3,7 @@ import {
   GET_USER_DATA_QUERY,
   GET_ROLE_ID_BY_NAME_QUERY,
   GET_USERS_INVITES_QUERY,
+  GET_USERS_INVITES_BY_ROLE_ID_QUERY,
 } from '../../queries';
 import {
   REGISTER_MUTATTION,
@@ -127,6 +128,26 @@ export class Users {
     return response.data.usersInvites.data as InviteUserData[];
   }
 
+  // Get invites by role id
+  public async getUsersInvitesByRoleID(first: number, role_id: number) {
+    const where: WhereCondition = {
+      column: 'ROLE_ID',
+      operator: 'EQ',
+      value: role_id,
+    };
+
+    const orderBy: { column: string; order: string }[] = [
+      { column: 'ID', order: 'DESC' },
+    ];
+
+    const response = await this.client.query({
+      query: GET_USERS_INVITES_BY_ROLE_ID_QUERY,
+      variables: { where, first, orderBy },
+    });
+
+    return response.data.usersInvites.data as InviteUserData[];
+  }
+  
   public async processInvite(input: InviteProcessParams) {
     const response = await this.client.mutate({
       mutation: PROCESS_INVITE_MUTATION,

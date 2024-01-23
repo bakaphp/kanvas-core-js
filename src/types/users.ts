@@ -152,6 +152,7 @@ export interface InviteUserData {
   id: number;
   email: string;
   invite_hash: string;
+  role_id?: number;
 }
 
 export interface InviteData extends BasicInvite {}
@@ -165,6 +166,7 @@ export interface InviteProcessParams extends BasicInvite {
 export interface InviteProcessData {
   id: string;
   email: string;
+  roles?: string[];
 }
 
 export interface RoleData {

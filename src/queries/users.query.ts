@@ -52,14 +52,29 @@ export const GET_ROLE_ID_BY_NAME_QUERY = gql`
 
 export const GET_USERS_INVITES_QUERY = gql`
   query UsersInvites($first: Int!) {
-    usersInvites(
-      first: $first
-      orderBy: [{ column: ID, order: DESC }]
-    ) {
+    usersInvites(first: $first, orderBy: [{ column: ID, order: DESC }]) {
       data {
         email
         id
         invite_hash
+        role_id
+      }
+    }
+  }
+`;
+
+export const GET_USERS_INVITES_BY_ROLE_ID_QUERY = gql`
+  query UsersInvites(
+    $first: Int!
+    $where: QueryUsersInvitesWhereWhereConditions!
+    $orderBy: [QueryUsersInvitesOrderByOrderByClause!]
+  ) {
+    usersInvites(first: $first, orderBy: $orderBy, where: $where) {
+      data {
+        email
+        id
+        invite_hash
+        role_id
       }
     }
   }

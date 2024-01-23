@@ -71,6 +71,7 @@ export const INVITE_USER_MUTATION = gql`
       id
       email
       invite_hash
+      role_id
     }
   }
 `;
@@ -82,6 +83,7 @@ export const GET_INVITE_MUTATION = gql`
       invite_hash
       firstname
       lastname
+      role_id
     }
   }
 `;
@@ -91,6 +93,7 @@ export const PROCESS_INVITE_MUTATION = gql`
     processInvite(input: $input) {
       id
       email
+      roles
     }
   }
 `;
