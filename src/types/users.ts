@@ -165,8 +165,14 @@ export interface InviteProcessParams extends BasicInvite {
 
 export interface InviteProcessData {
   id: string;
-  email: string;
+  email?: string;
   roles?: string[];
+  token: string;
+  refresh_token: string;
+  token_expires: string;
+  refresh_token_expires: string;
+  time: string;
+  timezone: string;
 }
 
 export interface RoleData {

@@ -92,8 +92,12 @@ export const PROCESS_INVITE_MUTATION = gql`
   mutation processInvite($input: CompleteInviteInput!) {
     processInvite(input: $input) {
       id
-      email
-      roles
+      token
+      refresh_token
+      token_expires
+      refresh_token_expires
+      time
+      timezone
     }
   }
 `;
