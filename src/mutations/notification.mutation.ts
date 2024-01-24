@@ -7,13 +7,13 @@ export const READ_ALL_NOTIFICATIONS_MUTATION = gql`
 `;
 
 export const SEND_NOTIFICATION_BASE_TEMPLATE_MUTATION = gql`
-  mutation sendNotificationBaseTemplate(
+  mutation sendNotificationBaseOnTemplate(
     $template_name: String!
     $data: Mixed!
     $via: [String!]!
     $users_id: [Int!]!
   ) {
-    sendNotificationBaseTemplate(
+    sendNotificationBaseOnTemplate(
       template_name: $template_name
       data: $data
       via: $via

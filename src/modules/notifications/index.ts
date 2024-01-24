@@ -80,7 +80,7 @@ export class Notifications {
       mutation: SEND_NOTIFICATION_BASE_TEMPLATE_MUTATION,
       variables: { template_name, data, via, users_id },
     });
-    return response.data.sendNotificationBaseTemplate as boolean;
+    return response.data.sendNotificationBaseOnTemplate as boolean;
   }
 
   public async sendNotificationByMessage(
