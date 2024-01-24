@@ -70,49 +70,51 @@ export const COMPANIES_QUERY = gql`
 export const COMPANY_USERS_QUERY = gql`
   query companyUsers(
     $where: QueryCompanyUsersWhereWhereConditions
-    $first: Int!
+    $first: Int
     $page: Int
   ) {
-    data {
-      id
-      uuid
-      firstname
-      lastname
-      displayname
-      default_company
-      default_company_branch
-      email
-      branches {
+    companyUsers(where: $where, first: $first, page: $page) {
+      data {
         id
-        name
-        phone
-      }
-      companies {
-        id
-        name
-      }
-      contact {
-        phone_number
-        cell_phone_number
-      }
-      roles
-      abilities
-      custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }]) {
-        data {
+        uuid
+        firstname
+        lastname
+        displayname
+        default_company
+        default_company_branch
+        email
+        branches {
+          id
           name
-          value
+          phone
+        }
+        companies {
+          id
+          name
+        }
+        contact {
+          phone_number
+          cell_phone_number
+        }
+        roles
+        abilities
+        custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }]) {
+          data {
+            name
+            value
+          }
+        }
+        photo {
+          url
         }
       }
-      photo {
-        url
+      paginatorInfo {
+        count
+        currentPage
+        lastPage
+        perPage
+        total
       }
-    }
-    paginatorInfo {
-      count
-      currentPage
-      lastPage
-      perPage
-      total
     }
   }
 `;

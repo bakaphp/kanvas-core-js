@@ -13,7 +13,6 @@ import {
 } from '../../queries';
 
 import {
-  UserInterface,
   CompanyInput,
   CompanyInterface,
   CompanySettings,
@@ -21,6 +20,7 @@ import {
   OrderBy,
   CreatedCompanies,
   InputCompanyParams,
+  CreatedCompanyUsers,
 } from '../../types';
 
 export class Companies {
@@ -47,15 +47,20 @@ export class Companies {
   }
 
   public async getCompanyUsers(
-    where: WhereCondition,
-    first?: number,
-    page?: number
-  ): Promise<UserInterface> {
+    options: {
+      first?: number;
+      page?: number;
+      where?: WhereCondition;
+    } = {}
+  ): Promise<CreatedCompanyUsers> {
+
+    const { first, page, where } = options;
+
     const response = await this.client.query({
       query: COMPANY_USERS_QUERY,
       variables: { where, first, page },
     });
-    return response.data as UserInterface;
+    return response.data;
   }
 
   public async getCompanySettings(): Promise<CompanySettings> {
