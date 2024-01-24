@@ -21,12 +21,13 @@ import {
   CreatedUser,
   UserData,
   UpdateUserParams,
-  InviteUserData,
-  InviteUserParams,
   WhereCondition,
   RoleData,
   RolesEnum,
   InviteProcessParams,
+  InviteParams,
+  InviteProcessData,
+  InviteData,
 } from '../../types';
 
 export class Users {
@@ -99,7 +100,7 @@ export class Users {
     return response.data;
   }
 
-  public async invite(inviteInput: InviteUserParams): Promise<InviteUserData> {
+  public async invite(inviteInput: InviteParams): Promise<InviteData> {
     const response = await this.client.mutate({
       mutation: INVITE_USER_MUTATION,
       variables: { input: inviteInput },
@@ -108,7 +109,7 @@ export class Users {
     return response.data.inviteUser;
   }
 
-  public async getInvite(hash: string): Promise<InviteUserData> {
+  public async getInvite(hash: string): Promise<InviteData> {
     const response = await this.client.mutate({
       mutation: GET_INVITE_MUTATION,
       variables: { hash },
@@ -146,13 +147,15 @@ export class Users {
     return response.data.usersInvites.data;
   }
 
-  public async processInvite(input: InviteProcessParams) {
+  public async processInvite(
+    input: InviteProcessParams
+  ): Promise<InviteProcessData> {
     const response = await this.client.mutate({
       mutation: PROCESS_INVITE_MUTATION,
       variables: { input },
     });
 
-    return response.data.processInvite ;
+    return response.data.processInvite;
   }
 
   public async deleteInvite(id: number) {

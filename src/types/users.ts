@@ -148,27 +148,30 @@ export interface InviteUserParams extends BasicInvite {
   custom_fields: CustomFieldInput[];
 }
 
-export interface InviteUserData {
+export interface InviteData {
   id: number;
   email: string;
   invite_hash: string;
-  firstname?: string;
-  lastname?: string;
   role_id?: number;
 }
 
-export interface InviteData extends BasicInvite {}
+export interface InviteParams {
+  email: string;
+  firstname: string;
+  lastname: string;
+  custom_fields: Array<{ name: string; data: string }>;
+  role_id?: number;
+}
 
-export interface InviteParams extends BasicInvite {}
-
-export interface InviteProcessParams extends BasicInvite {
+export interface InviteProcessParams {
+  invite_hash: string;
+  firstname: string;
+  lastname: string;
   password: string;
 }
 
 export interface InviteProcessData {
-  id: string;
-  email?: string;
-  roles?: string[];
+  id: number;
   token: string;
   refresh_token: string;
   token_expires: string;
