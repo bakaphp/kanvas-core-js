@@ -45,7 +45,8 @@ export interface CompanyInput {
   phone?: string;
   country_code?: string;
   files?: File[];
-  is_active?:boolean
+  is_active?: boolean;
+  users_id: number;
 }
 
 export interface QueryCompaniesWhereWhereConditions {
@@ -84,6 +85,13 @@ export interface InputCompanyParams {
 export interface CreatedCompanies {
   companies: {
     data: CompanyInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
+}
+
+export interface CreatedCompanyUsers {
+  companyUsers: {
+    data: UserInterface[];
     paginatorInfo?: PaginatorInfo;
   };
 }
