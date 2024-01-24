@@ -151,6 +151,8 @@ export interface InviteUserParams extends BasicInvite {
 export interface InviteData {
   id: number;
   email: string;
+  firstname?: string;
+  lastname?: string;
   invite_hash: string;
   role_id?: number;
 }

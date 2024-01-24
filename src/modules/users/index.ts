@@ -154,7 +154,6 @@ export class Users {
       mutation: PROCESS_INVITE_MUTATION,
       variables: { input },
     });
-
     return response.data.processInvite;
   }
 
