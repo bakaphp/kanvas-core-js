@@ -137,7 +137,7 @@ export interface DeleteInviteData {
 }
 
 export interface BasicInvite {
-  email: string;
+  email?: string;
   firstname: string;
   lastname: string;
   invite_hash: string;
@@ -152,6 +152,8 @@ export interface InviteUserData {
   id: number;
   email: string;
   invite_hash: string;
+  firstname?: string;
+  lastname?: string;
   role_id?: number;
 }
 

@@ -26,9 +26,7 @@ import {
   WhereCondition,
   RoleData,
   RolesEnum,
-  DeleteInviteData,
   InviteProcessParams,
-  InviteProcessData,
 } from '../../types';
 
 export class Users {
@@ -107,7 +105,7 @@ export class Users {
       variables: { input: inviteInput },
     });
 
-    return response.data;
+    return response.data.inviteUser;
   }
 
   public async getInvite(hash: string): Promise<InviteUserData> {
@@ -116,7 +114,7 @@ export class Users {
       variables: { hash },
     });
 
-    return response.data;
+    return response.data.getInvite;
   }
 
   public async getUsersInvites(first: number) {
@@ -125,7 +123,7 @@ export class Users {
       variables: { first },
     });
 
-    return response.data.usersInvites.data as InviteUserData[];
+    return response.data.usersInvites.data;
   }
 
   // Get invites by role id
@@ -145,16 +143,16 @@ export class Users {
       variables: { where, first, orderBy },
     });
 
-    return response.data.usersInvites.data as InviteUserData[];
+    return response.data.usersInvites.data;
   }
-  
+
   public async processInvite(input: InviteProcessParams) {
     const response = await this.client.mutate({
       mutation: PROCESS_INVITE_MUTATION,
       variables: { input },
     });
 
-    return response.data as InviteProcessData;
+    return response.data.processInvite ;
   }
 
   public async deleteInvite(id: number) {
@@ -163,7 +161,7 @@ export class Users {
       variables: { id },
     });
 
-    return response.data as DeleteInviteData;
+    return response.data;
   }
 
   public isAdmin(user: UserData): boolean {
