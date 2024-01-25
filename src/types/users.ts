@@ -132,18 +132,54 @@ export interface UpdateUserParams {
   }[];
 }
 
-export interface InviteUserParams {
-  email: string;
+export interface DeleteInviteData {
+  deleteInvite: boolean;
+}
+
+export interface BasicInvite {
+  email?: string;
   firstname: string;
   lastname: string;
-  role_id: number;
+  invite_hash: string;
+}
+
+export interface InviteUserParams extends BasicInvite {
+  role_id?: number;
   custom_fields: CustomFieldInput[];
 }
 
-export interface InviteUserData {
+export interface InviteData {
   id: number;
   email: string;
+  firstname?: string;
+  lastname?: string;
   invite_hash: string;
+  role_id?: number;
+}
+
+export interface InviteParams {
+  email: string;
+  firstname: string;
+  lastname: string;
+  custom_fields: Array<{ name: string; data: string }>;
+  role_id?: number;
+}
+
+export interface InviteProcessParams {
+  invite_hash: string;
+  firstname: string;
+  lastname: string;
+  password: string;
+}
+
+export interface InviteProcessData {
+  id: number;
+  token: string;
+  refresh_token: string;
+  token_expires: string;
+  refresh_token_expires: string;
+  time: string;
+  timezone: string;
 }
 
 export interface RoleData {
