@@ -75,7 +75,7 @@ export interface CreateUserParams {
   email: string;
   firstname: string;
   lastname: string;
-  displayname: string;
+  displayname?: string;
   password: string;
   password_confirmation: string;
   custom_fields?: CustomFieldInput[];
