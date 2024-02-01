@@ -110,7 +110,7 @@ export interface UserData {
   roles: string[];
   is_active: boolean;
   abilities: string[];
-  custom_fields: CustomFieldData;
+  custom_fields?: CustomFieldData;
   photo?: {
     url: string;
   };
@@ -123,7 +123,7 @@ export interface UpdateUserParams {
   phone_number: string;
   cell_phone_number: string;
   role_ids?: (string | number)[];
-  custom_fields: CustomFieldInput[];
+  custom_fields?: CustomFieldInput[];
 }
 
 export interface DeleteInviteData {
