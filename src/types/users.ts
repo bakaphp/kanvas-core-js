@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { CustomFieldInput } from './custom-fields';
+import { CustomFieldData, CustomFieldInput } from './custom-fields';
 
 export interface UserInterface {
   id: number;
@@ -68,10 +68,7 @@ export interface UserInterface {
   user_activation_key: string;
   user_activation_forgot: boolean | null;
   // social_links: SocialLinkInterface[];
-  custom_fields?: {
-    name: string;
-    data: any;
-  }[];
+  custom_fields?: CustomFieldInput[];
 }
 
 export interface CreateUserParams {
@@ -81,10 +78,7 @@ export interface CreateUserParams {
   displayname: string;
   password: string;
   password_confirmation: string;
-  custom_fields?: {
-    name: string;
-    data: any;
-  }[];
+  custom_fields?: CustomFieldInput[];
 }
 
 export interface CreatedUser {
@@ -116,12 +110,7 @@ export interface UserData {
   roles: string[];
   is_active: boolean;
   abilities: string[];
-  custom_fields: {
-    data: {
-      name: string;
-      value: any;
-    }[];
-  };
+  custom_fields: CustomFieldData;
   photo?: {
     url: string;
   };
@@ -134,10 +123,7 @@ export interface UpdateUserParams {
   phone_number: string;
   cell_phone_number: string;
   role_ids?: (string | number)[];
-  custom_fields: {
-    name: string;
-    data: any;
-  }[];
+  custom_fields: CustomFieldInput[];
 }
 
 export interface DeleteInviteData {
@@ -153,7 +139,7 @@ export interface BasicInvite {
 
 export interface InviteUserParams extends BasicInvite {
   role_id?: number;
-  custom_fields: CustomFieldInput[];
+  custom_fields?: CustomFieldInput[];
 }
 
 export interface InviteData {
@@ -169,7 +155,7 @@ export interface InviteParams {
   email: string;
   firstname: string;
   lastname: string;
-  custom_fields: Array<{ name: string; data: string }>;
+  custom_fields?: CustomFieldInput[];
   role_id?: number;
 }
 
