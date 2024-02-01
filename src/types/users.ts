@@ -110,7 +110,7 @@ export interface UserData {
   roles: string[];
   is_active: boolean;
   abilities: string[];
-  custom_fields?: CustomFieldData;
+  custom_fields: CustomFieldData;
   photo?: {
     url: string;
   };
