@@ -68,6 +68,10 @@ export interface UserInterface {
   user_activation_key: string;
   user_activation_forgot: boolean | null;
   // social_links: SocialLinkInterface[];
+  custom_fields?: {
+    name: string;
+    data: any;
+  }[];
 }
 
 export interface CreateUserParams {
@@ -77,6 +81,10 @@ export interface CreateUserParams {
   displayname: string;
   password: string;
   password_confirmation: string;
+  custom_fields?: {
+    name: string;
+    data: any;
+  }[];
 }
 
 export interface CreatedUser {
