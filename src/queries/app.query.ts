@@ -62,6 +62,9 @@ export const GET_APP_USERS = gql`
           uuid
           name
         }
+        photo {
+          url
+        }
         branches {
           id
           name
