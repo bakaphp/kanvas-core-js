@@ -77,36 +77,57 @@ export const COMPANY_USERS_QUERY = gql`
       data {
         id
         uuid
-        firstname
-        lastname
+        email
         displayname
+        lastname
+        firstname
         default_company
         default_company_branch
-        email
-        branches {
-          id
-          name
-          phone
-        }
-        companies {
-          id
-          name
+        sex
+        description
+        user_active
+        roles
+        is_active
+        address {
+          address_1
+          address_2
+          city {
+            id
+            name
+            latitude
+            longitude
+            states_id
+            countries_id
+          }
+          country {
+            id
+            name
+            code
+            flag
+          }
+          zip_code
+          state {
+            id
+            code
+            name
+          }
         }
         contact {
           phone_number
           cell_phone_number
         }
-        roles
-        abilities
-        custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }]) {
-          data {
-            name
-            value
-          }
+        companies {
+          id
+          uuid
+          name
         }
-        photo {
-          url
+        branches {
+          id
+          name
+          companies_id
         }
+        created_at
+        updated_at
       }
       paginatorInfo {
         count
