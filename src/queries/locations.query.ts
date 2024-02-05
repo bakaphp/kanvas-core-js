@@ -1,8 +1,13 @@
 import { gql } from '@apollo/client/core';
 
 export const COUNTRIES_QUERY = gql`
-  query {
-    countries(first: 250, orderBy: [{ column: ID, order: ASC }]) {
+  query(
+    $first: Int
+    $page: Int
+    $where: QueryCountriesWhereWhereConditions
+    $order: [QueryCountriesOrderByOrderByClause!]
+  ) {
+    countries(first: $first, page: $page, where: $where, orderBy: $order) {
       data {
         id
         name
@@ -10,7 +15,13 @@ export const COUNTRIES_QUERY = gql`
       }
       paginatorInfo {
         currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
         lastPage
+        hasMorePages
       }
     }
   }
@@ -33,6 +44,28 @@ export const GET_STATES_BY_COUNTRY_QUERY = gql`
             countries_id
           }
         }
+      }
+    }
+  }
+`;
+
+export const GET_STATES = gql`
+  query($first: Int, $page: Int, $where: QueryStatesWhereWhereConditions) {
+    states(first: $first, page: $page, where: $where) {
+      data {
+        id
+        name
+        code
+      }
+      paginatorInfo {
+        currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
+        lastPage
+        hasMorePages
       }
     }
   }
