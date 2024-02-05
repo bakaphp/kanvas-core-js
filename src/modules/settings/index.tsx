@@ -22,6 +22,8 @@ export default class Settings {
     try {
       const { data } = await this.client.query({
         query: APP_SETTINGS_QUERY,
+        fetchPolicy: "network-only",
+        partialRefetch: true,
       });
       return data;
     } catch {
@@ -63,7 +65,8 @@ export default class Settings {
     try {
       const { data } = await this.client.query({
         query: USERS_SETTINGS_QUERY,
-        fetchPolicy: 'no-cache',
+        fetchPolicy: 'network-only',
+        partialRefetch: true,
         variables: {
           entityUUID: entity_uuid,
         },

@@ -71,7 +71,40 @@ export const INVITE_USER_MUTATION = gql`
       id
       email
       invite_hash
+      role_id
     }
+  }
+`;
+
+export const GET_INVITE_MUTATION = gql`
+  mutation($hash: String!) {
+    getInvite(hash: $hash) {
+      email
+      invite_hash
+      firstname
+      lastname
+      role_id
+    }
+  }
+`;
+
+export const PROCESS_INVITE_MUTATION = gql`
+  mutation processInvite($input: CompleteInviteInput!) {
+    processInvite(input: $input) {
+      id
+      token
+      refresh_token
+      token_expires
+      refresh_token_expires
+      time
+      timezone
+    }
+  }
+`;
+
+export const DELETE_INVITE_MUTATION = gql`
+  mutation deleteInvite($id: Int!) {
+    deleteInvite(id: $id)
   }
 `;
 

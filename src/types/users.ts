@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { CustomFieldInput } from './custom-fields';
+import { CustomFieldData, CustomFieldInput } from './custom-fields';
 
 export interface UserInterface {
   id: number;
@@ -68,15 +68,17 @@ export interface UserInterface {
   user_activation_key: string;
   user_activation_forgot: boolean | null;
   // social_links: SocialLinkInterface[];
+  custom_fields?: CustomFieldInput[];
 }
 
 export interface CreateUserParams {
   email: string;
   firstname: string;
   lastname: string;
-  displayname: string;
+  displayname?: string;
   password: string;
   password_confirmation: string;
+  custom_fields?: CustomFieldInput[];
 }
 
 export interface CreatedUser {
@@ -108,12 +110,7 @@ export interface UserData {
   roles: string[];
   is_active: boolean;
   abilities: string[];
-  custom_fields: {
-    data: {
-      name: string;
-      value: any;
-    }[];
-  };
+  custom_fields: CustomFieldData;
   photo?: {
     url: string;
   };
@@ -126,24 +123,57 @@ export interface UpdateUserParams {
   phone_number: string;
   cell_phone_number: string;
   role_ids?: (string | number)[];
-  custom_fields: {
-    name: string;
-    data: any;
-  }[];
+  custom_fields?: CustomFieldInput[];
 }
 
-export interface InviteUserParams {
+export interface DeleteInviteData {
+  deleteInvite: boolean;
+}
+
+export interface BasicInvite {
+  email?: string;
+  firstname: string;
+  lastname: string;
+  invite_hash: string;
+}
+
+export interface InviteUserParams extends BasicInvite {
+  role_id?: number;
+  custom_fields?: CustomFieldInput[];
+}
+
+export interface InviteData {
+  id: number;
+  email: string;
+  firstname?: string;
+  lastname?: string;
+  invite_hash: string;
+  role_id?: number;
+}
+
+export interface InviteParams {
   email: string;
   firstname: string;
   lastname: string;
-  role_id: number;
-  custom_fields: CustomFieldInput[];
+  custom_fields?: CustomFieldInput[];
+  role_id?: number;
 }
 
-export interface InviteUserData {
-  id: number;
-  email: string;
+export interface InviteProcessParams {
   invite_hash: string;
+  firstname: string;
+  lastname: string;
+  password: string;
+}
+
+export interface InviteProcessData {
+  id: number;
+  token: string;
+  refresh_token: string;
+  token_expires: string;
+  refresh_token_expires: string;
+  time: string;
+  timezone: string;
 }
 
 export interface RoleData {

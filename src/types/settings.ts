@@ -16,5 +16,5 @@ export interface UserSettingsResponse {
 }
 
 export interface AppSettingsQueryResponse {
-  appSettings: Array<{ key: string; value: any }>;
+  appSettings: Array<{ key: string; value: any; public?: boolean }>;
 }
