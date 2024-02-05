@@ -1,10 +1,12 @@
+import { PaginatorInfo } from "./paginator";
+
 interface Location {
   id: number;
   name: string;
   code: string;
 }
 
-interface Country extends Location {
+export interface Country extends Location {
   states: Array<State>;
 }
 
@@ -17,8 +19,11 @@ interface City extends Omit<Location, 'code'> {
 }
 
 export interface CountriesResponse {
-  data: Array<Country>;
-  paginatorInfo: Record<string, number>;
+  countries: {
+    data:Location[];
+    paginatorInfo: PaginatorInfo
+  }
+
 }
 
 export interface StateResponse {

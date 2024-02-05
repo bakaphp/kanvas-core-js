@@ -1,13 +1,24 @@
 import { StateResponse, CountriesResponse } from 'types/locations';
-import { ClientType } from '../../index';
+import { ClientType, OrderBy, WhereCondition } from '../../index';
 import { COUNTRIES_QUERY, GET_STATES_BY_COUNTRY_QUERY } from '../../queries';
 
 export class Locations {
   constructor(protected client: ClientType) {}
 
-  public async getAllCountries(): Promise<CountriesResponse> {
+  public async getAllCountries( 
+     options: {
+    first?: number;
+    page?: number;
+    where?: WhereCondition;
+    orderBy?: OrderBy[];
+    search?: string;
+  } = {}): Promise<CountriesResponse> {
+
+    const { first, page, where, orderBy, search } = options;
+
     const response = await this.client.query({
       query: COUNTRIES_QUERY,
+      variables: { where, first, page, orderBy, search },
     });
     return response.data;
   }

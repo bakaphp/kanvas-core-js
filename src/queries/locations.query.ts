@@ -1,8 +1,13 @@
 import { gql } from '@apollo/client/core';
 
 export const COUNTRIES_QUERY = gql`
-  query {
-    countries(first: 250, orderBy: [{ column: ID, order: ASC }]) {
+  query(
+    $first: Int
+    $page: Int
+    $where: QueryCountriesWhereWhereConditions
+    $order: [QueryCountriesOrderByOrderByClause!]
+  ) {
+    countries(first: $first, page: $page, where: $where, orderBy: $order) {
       data {
         id
         name
@@ -10,7 +15,13 @@ export const COUNTRIES_QUERY = gql`
       }
       paginatorInfo {
         currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
         lastPage
+        hasMorePages
       }
     }
   }
