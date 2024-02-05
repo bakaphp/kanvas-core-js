@@ -48,3 +48,25 @@ export const GET_STATES_BY_COUNTRY_QUERY = gql`
     }
   }
 `;
+
+export const GET_STATES = gql`
+  query($first: Int, $page: Int, $where: QueryStatesWhereWhereConditions) {
+    states(first: $first, page: $page, where: $where) {
+      data {
+        id
+        name
+        code
+      }
+      paginatorInfo {
+        currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
+        lastPage
+        hasMorePages
+      }
+    }
+  }
+`;

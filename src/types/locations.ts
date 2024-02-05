@@ -27,5 +27,9 @@ export interface CountriesResponse {
 }
 
 export interface StateResponse {
-  data: Array<State>;
+  data:{
+    states:Location[]
+    paginatorInfo: PaginatorInfo
+
+  }
 }
