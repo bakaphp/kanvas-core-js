@@ -12,7 +12,7 @@ import {
   CompanyBranchInput,
   CompanyBranchInterface,
   QueryBranchesOrderByOrderByClause,
-  WhereCondition
+  WhereCondition,
 } from '../../types';
 import {
   COMPANIES_BRANCHES_QUERY,
@@ -23,26 +23,39 @@ export class CompaniesBranches {
   constructor(protected client: ClientType) {}
 
   public async getCompanyBranches(
-    where: WhereCondition,
-    orderBy: QueryBranchesOrderByOrderByClause,
-    first?: number,
-    page?: number
+    options: {
+      first?: number;
+      page?: number;
+      where?: WhereCondition;
+      orderBy?: QueryBranchesOrderByOrderByClause[];
+      search?: string;
+    } = {}
   ): Promise<CompanyBranchInterface> {
+    const { first, page, where, orderBy, search } = options;
+
     const response = await this.client.query({
       query: COMPANIES_BRANCHES_QUERY,
-      variables: { where, orderBy, first, page },
+      variables: { where, orderBy, first, page, search },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
     return response.data as CompanyBranchInterface;
   }
 
   public async getCompanyBranchUsers(
-    where: WhereCondition,
-    first?: number,
-    page?: number
+    options: {
+      first?: number;
+      page?: number;
+      where?: WhereCondition;
+    } = {}
   ): Promise<UserInterface> {
+    const { first, page, where } = options;
+
     const response = await this.client.query({
       query: COMPANIES_BRANCHES_USER_QUERY,
       variables: { where, first, page },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
     return response.data as UserInterface;
   }

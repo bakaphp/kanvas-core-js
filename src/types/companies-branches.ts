@@ -2,7 +2,7 @@ import {
   FilesystemInterface,
   FilesystemInputUrl,
   CompanyInterface,
-  AddressInterface,
+  UserInterface
 } from 'index';
 
 export interface CompanyBranchInput {
@@ -31,7 +31,8 @@ export interface CompanyBranchInterface {
   zipcode?: number;
   total_users:number;
   is_active: boolean;
-  address: AddressInterface;
+  user: UserInterface
+  address: string;
   is_default: Boolean;
   created_at?: string;
   updated_at?: string;
