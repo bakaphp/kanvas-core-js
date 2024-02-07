@@ -6,10 +6,6 @@ export interface ContactInterface {
   type?: ContactTypeInterface;
 }
 
-export interface AddressInterface {
-  address: string;
-  city: string;
-}
 
 export interface ContactTypeInterface {
   name: string;

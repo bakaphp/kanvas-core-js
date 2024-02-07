@@ -27,7 +27,7 @@ export interface AppUserInterface {
   updated_at: string;
 }
 
-interface AddressInterface {
+export interface AddressInterface {
   address_1: string | null;
   address_2: string | null;
   zip_code: string | null;

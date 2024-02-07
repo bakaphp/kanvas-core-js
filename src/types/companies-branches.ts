@@ -2,6 +2,7 @@ import {
   FilesystemInterface,
   FilesystemInputUrl,
   CompanyInterface,
+  UserInterface
 } from 'index';
 
 export interface CompanyBranchInput {
@@ -28,6 +29,10 @@ export interface CompanyBranchInterface {
   phone?: string;
   photo?: FilesystemInterface;
   zipcode?: number;
+  total_users:number;
+  is_active: boolean;
+  user: UserInterface
+  address: string;
   is_default: Boolean;
   created_at?: string;
   updated_at?: string;
