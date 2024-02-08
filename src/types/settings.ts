@@ -7,8 +7,8 @@ export interface AppSettingsResponse<T = any> {
   getAppSettings: SettingsResponse<T>;
 }
 
-export interface CompanySettingsResponse<T = any> {
-  companySettings: SettingsResponse<T>;
+export interface CompanySettingsResponse {
+  companySettings: Array<{ key: string; value: any }>
 }
 
 export interface UserSettingsResponse {

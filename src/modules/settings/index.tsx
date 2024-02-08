@@ -1,7 +1,7 @@
 import {
   APP_SETTINGS_QUERY,
   AppSettingsQuery,
-  CompanySettingsQuery,
+  COMPANY_SETTING_QUERY,
   ConfigInput,
   USERS_SETTINGS_QUERY,
 } from '../../queries';
@@ -45,15 +45,20 @@ export default class Settings {
     }
   }
 
-  async getCompanySettings(): Promise<SettingsResponse | undefined> {
+  async getCompanySettings( entity_uuid: string): Promise<CompanySettingsResponse | undefined> {
     try {
       const {
-        data: { companySettings },
+        data,
       } = await this.client.query<CompanySettingsResponse>({
-        query: CompanySettingsQuery,
-        fetchPolicy: 'no-cache',
+        query: COMPANY_SETTING_QUERY,
+        variables: {
+          entityUUID: entity_uuid,
+        },
+        fetchPolicy: 'network-only',
+        partialRefetch: true,
+
       });
-      return companySettings;
+      return data;
     } catch {
       return undefined;
     }
