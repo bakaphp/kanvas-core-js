@@ -11,3 +11,9 @@ export const SET_APP_SETTINGS_MUTATION = gql`
     setAppSetting(input: $input)
   }
 `;
+
+export const SET_COMPANY_SETTINGS_MUTATION = gql`
+  mutation setCompanySetting($input: ModuleConfigInput!) {
+    setCompanySetting(input: $input)
+  }
+`;

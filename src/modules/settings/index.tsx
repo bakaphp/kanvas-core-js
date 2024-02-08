@@ -1,7 +1,7 @@
 import {
   APP_SETTINGS_QUERY,
   AppSettingsQuery,
-  CompanySettingsQuery,
+  COMPANY_SETTING_QUERY,
   ConfigInput,
   USERS_SETTINGS_QUERY,
 } from '../../queries';
@@ -13,7 +13,11 @@ import {
   SettingsResponse,
   UserSettingsResponse,
 } from '../../index';
-import { SET_APP_SETTINGS_MUTATION, SET_USER_SETTINGS_MUTATION } from '../../mutations';
+import {
+  SET_APP_SETTINGS_MUTATION,
+  SET_COMPANY_SETTINGS_MUTATION,
+  SET_USER_SETTINGS_MUTATION,
+} from '../../mutations';
 
 export default class Settings {
   constructor(protected client: ClientType, protected key: string) {}
@@ -22,7 +26,7 @@ export default class Settings {
     try {
       const { data } = await this.client.query({
         query: APP_SETTINGS_QUERY,
-        fetchPolicy: "network-only",
+        fetchPolicy: 'network-only',
         partialRefetch: true,
       });
       return data;
@@ -45,15 +49,19 @@ export default class Settings {
     }
   }
 
-  async getCompanySettings(): Promise<SettingsResponse | undefined> {
+  async getCompanySettings(
+    entity_uuid: string
+  ): Promise<CompanySettingsResponse | undefined> {
     try {
-      const {
-        data: { companySettings },
-      } = await this.client.query<CompanySettingsResponse>({
-        query: CompanySettingsQuery,
-        fetchPolicy: 'no-cache',
+      const { data } = await this.client.query<CompanySettingsResponse>({
+        query: COMPANY_SETTING_QUERY,
+        variables: {
+          entityUUID: entity_uuid,
+        },
+        fetchPolicy: 'network-only',
+        partialRefetch: true,
       });
-      return companySettings;
+      return data;
     } catch {
       return undefined;
     }
@@ -94,6 +102,20 @@ export default class Settings {
     try {
       await this.client.mutate({
         mutation: SET_APP_SETTINGS_MUTATION,
+        variables: {
+          input,
+        },
+      });
+      return true;
+    } catch {
+      return undefined;
+    }
+  }
+
+  async setCompanySettings(input: ConfigInput): Promise<boolean | undefined> {
+    try {
+      await this.client.mutate({
+        mutation: SET_COMPANY_SETTINGS_MUTATION,
         variables: {
           input,
         },

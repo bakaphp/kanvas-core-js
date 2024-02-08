@@ -16,13 +16,14 @@ export const AppSettingsQuery = gql`
   }
 `;
 
-export const CompanySettingsQuery = gql`
-  query getCompanySettings {
-    companySettings {
-      name
-      settings
-    }
+export const COMPANY_SETTING_QUERY = gql`
+query companySetting($entityUUID: String!) {
+  companySetting(entity_uuid: $entityUUID) {
+    key
+    value
+    public
   }
+}
 `;
 
 export const USERS_SETTINGS_QUERY = gql`
