@@ -70,6 +70,14 @@ export const CREATE_APP = gql`
       payments_active
       is_public
       domain_based
+      secrets {
+        client_id
+        client_secret_id
+        name
+        user {
+          firstname
+        }
+      }
     }
   }
 `;
