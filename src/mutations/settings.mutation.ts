@@ -17,3 +17,9 @@ export const SET_COMPANY_SETTINGS_MUTATION = gql`
     setCompanySetting(input: $input)
   }
 `;
+
+export const DELETE_COMPANY_SETTINGS_MUTATION = gql`
+  mutation deleteCompanySetting($input: ModuleConfigInput!) {
+    deleteCompanySetting(input: $input)
+  }
+`;
