@@ -120,6 +120,14 @@ export interface AppWithAccessResponse {
       key: string;
       default_apps_plan_id: string;
       created_at: string;
+      secrets?: {
+        client_id: string;
+        client_secret_id: string;
+        name: string;
+        user: {
+          firstname: string;
+        };
+      };
     }[];
     paginatorInfo: PaginatorInfo;
   };
@@ -149,5 +157,13 @@ export interface CreateAppResponse {
     payments_active: boolean;
     is_public: boolean;
     domain_based: boolean;
+    secrets?: {
+      client_id: string;
+      client_secret_id: string;
+      name: string;
+      user: {
+        firstname: string;
+      };
+    };
   };
 }
