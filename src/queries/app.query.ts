@@ -61,6 +61,10 @@ export const GET_APP_USERS = gql`
           id
           uuid
           name
+          user {
+            firstname
+            roles
+          }
         }
         photo {
           url
