@@ -5,14 +5,14 @@ export const GET_APP_USERS = gql`
     $first: Int
     $page: Int
     $whereCondition: QueryAppUsersWhereWhereConditions
-    $orderByCondition: [QueryAppUsersOrderByOrderByClause!]
+    $orderBy: [QueryAppUsersOrderByOrderByClause!]
     $search: String
   ) {
     appUsers(
       first: $first
       page: $page
       where: $whereCondition
-      orderBy: $orderByCondition
+      orderBy: $orderBy
       search: $search
     ) {
       data {
