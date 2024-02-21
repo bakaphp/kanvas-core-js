@@ -5,14 +5,14 @@ export const GET_APP_USERS = gql`
     $first: Int
     $page: Int
     $whereCondition: QueryAppUsersWhereWhereConditions
-    $orderByCondition: [QueryAppUsersOrderByOrderByClause!]
+    $orderBy: [QueryAppUsersOrderByOrderByClause!]
     $search: String
   ) {
     appUsers(
       first: $first
       page: $page
       where: $whereCondition
-      orderBy: $orderByCondition
+      orderBy: $orderBy
       search: $search
     ) {
       data {
@@ -100,6 +100,9 @@ export const GET_APPS_WITH_ACCESS = gql`
         key
         default_apps_plan_id
         created_at
+        total_users
+        total_companies
+        total_system_modules
         secrets {
           client_id
           client_secret_id

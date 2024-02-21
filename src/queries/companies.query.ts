@@ -72,8 +72,9 @@ export const COMPANY_USERS_QUERY = gql`
     $where: QueryCompanyUsersWhereWhereConditions
     $first: Int
     $page: Int
+    $orderBy: [QueryCompanyUsersOrderByOrderByClause!]
   ) {
-    companyUsers(where: $where, first: $first, page: $page) {
+    companyUsers(where: $where, first: $first, page: $page, orderBy:$orderBy) {
       data {
         id
         uuid

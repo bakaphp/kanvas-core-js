@@ -56,11 +56,11 @@ class Users {
       first?: number;
       page?: number;
       whereCondition?: WhereCondition;
-      orderByCondition?: OrderBy[];
+      orderBy?: OrderBy[];
       search?: string;
     } = {}
   ): Promise<AllAppUsersInterface> {
-    const { first, page, whereCondition, orderByCondition, search } = options;
+    const { first, page, whereCondition, orderBy, search } = options;
 
     const response = await this.client.query({
       query: GET_APP_USERS,
@@ -68,7 +68,7 @@ class Users {
         first,
         page,
         whereCondition,
-        orderByCondition,
+        orderBy,
         search
       },
       fetchPolicy: 'network-only',

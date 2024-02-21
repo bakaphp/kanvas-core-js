@@ -51,14 +51,16 @@ export class Companies {
       first?: number;
       page?: number;
       where?: WhereCondition;
+      orderBy?: OrderBy[];
+
     } = {}
   ): Promise<CreatedCompanyUsers> {
 
-    const { first, page, where } = options;
+    const { first, page, where, orderBy } = options;
 
     const response = await this.client.query({
       query: COMPANY_USERS_QUERY,
-      variables: { where, first, page },
+      variables: { where, first, page, orderBy },
     });
     return response.data;
   }
