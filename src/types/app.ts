@@ -120,6 +120,9 @@ export interface AppWithAccessResponse {
       key: string;
       default_apps_plan_id: string;
       created_at: string;
+      total_users: number;
+      total_companies: number;
+      total_system_modules: number;
       secrets?: {
         client_id: string;
         client_secret_id: string;

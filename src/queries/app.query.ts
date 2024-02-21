@@ -96,6 +96,9 @@ export const GET_APPS_WITH_ACCESS = gql`
         key
         default_apps_plan_id
         created_at
+        total_users
+        total_companies
+        total_system_modules
         secrets {
           client_id
           client_secret_id
