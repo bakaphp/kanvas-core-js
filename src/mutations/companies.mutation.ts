@@ -98,8 +98,8 @@ export const DELETE_COMPANY_MUTATION = gql`
 `;
 
 export const ADD_USER_TO_COMPANY = gql`
-  mutation addUserToCompany($id: ID!, $user_id: ID!) {
-    addUserToCompany(id: $id, user_id: $user_id)
+  mutation addUserToCompany($id: ID!, $user_id: ID!, $rol_id: ID) {
+    addUserToCompany(id: $id, user_id: $user_id, rol_id: $rol_id)
   }
 `;
 

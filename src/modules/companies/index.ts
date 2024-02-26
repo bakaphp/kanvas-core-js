@@ -99,10 +99,23 @@ export class Companies {
     return response.data.deleteCompany as Boolean;
   }
 
-  public async addUserToCompany(id: string, user_id: string): Promise<Boolean> {
+  public async addUserToCompany(
+    options: {
+      id: string,
+      user_id: string,
+      rol_id?: string
+    } = {
+      id: '',
+      user_id: '',
+    }    
+    
+    ): Promise<Boolean> {
+      const { id, user_id, rol_id} = options
+
     const response = await this.client.mutate({
+
       mutation: ADD_USER_TO_COMPANY,
-      variables: { id: id, user_id: user_id },
+      variables: { id: id, user_id: user_id, role_id: rol_id},
     });
     return response.data.addUserToCompany as Boolean;
   }
