@@ -37,7 +37,7 @@ export const USERS_SETTINGS_QUERY = gql`
 
 export const APP_SETTINGS_QUERY = gql`
   query {
-    appSettings {
+    adminAppSettings {
       key
       value
       public
