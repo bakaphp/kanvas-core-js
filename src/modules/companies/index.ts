@@ -115,7 +115,7 @@ export class Companies {
     const response = await this.client.mutate({
 
       mutation: ADD_USER_TO_COMPANY,
-      variables: { id: id, user_id: user_id, role_id: rol_id},
+      variables: { id: id, user_id: user_id, rol_id: rol_id},
     });
     return response.data.addUserToCompany as Boolean;
   }
