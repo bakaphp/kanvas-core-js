@@ -8,7 +8,7 @@ export interface AppSettingsResponse<T = any> {
 }
 
 export interface CompanySettingsResponse {
-  companySettings: Array<{ key: string; value: any }>
+  adminCompanySettings: Array<{ key: string; value: any; public?: boolean }>
 }
 
 export interface UserSettingsResponse {

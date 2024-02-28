@@ -5,20 +5,10 @@ export const CREATE_COMPANY_BRANCH = gql`
     createCompanyBranch(input: $input) {
       id
       uuid
-      company
       companies_id
       name
       email
       phone
-      photo {
-        id
-        uuid
-        name
-        url
-        type
-        size
-        field_name
-      }
       zipcode
       is_default
       created_at
