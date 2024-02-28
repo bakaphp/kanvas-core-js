@@ -31,6 +31,7 @@ export const USERS_SETTINGS_QUERY = gql`
     userSettings(entity_uuid: $entityUUID) {
       key
       value
+      public
     }
   }
 `;

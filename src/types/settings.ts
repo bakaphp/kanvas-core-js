@@ -12,7 +12,7 @@ export interface CompanySettingsResponse {
 }
 
 export interface UserSettingsResponse {
-  userSettings: Array<{ key: string; value: any }>;
+  userSettings: Array<{ key: string; value: any; public?: boolean }>;
 }
 
 export interface AppSettingsQueryResponse {
