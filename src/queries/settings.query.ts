@@ -17,8 +17,8 @@ export const AppSettingsQuery = gql`
 `;
 
 export const COMPANY_SETTING_QUERY = gql`
-query companySetting($entityUUID: String!) {
-  companySetting(entity_uuid: $entityUUID) {
+query adminCompanySettings($entityUUID: String!) {
+  adminCompanySettings(entity_uuid: $entityUUID) {
     key
     value
     public
@@ -31,13 +31,14 @@ export const USERS_SETTINGS_QUERY = gql`
     userSettings(entity_uuid: $entityUUID) {
       key
       value
+      public
     }
   }
 `;
 
 export const APP_SETTINGS_QUERY = gql`
   query {
-    appSettings {
+    adminAppSettings {
       key
       value
       public
