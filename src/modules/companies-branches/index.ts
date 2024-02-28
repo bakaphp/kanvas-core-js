@@ -39,7 +39,7 @@ export class CompaniesBranches {
       fetchPolicy: 'network-only',
       partialRefetch: true,
     });
-    return response.data as CompanyBranchInterface;
+    return response.data 
   }
 
   public async getCompanyBranchUsers(
