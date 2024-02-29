@@ -9,6 +9,7 @@ export const CREATE_COMPANY_BRANCH = gql`
       name
       email
       phone
+      address
       zipcode
       is_default
       created_at
@@ -22,10 +23,10 @@ export const UPDATE_COMPANY_BRANCH = gql`
     updateCompanyBranch(id: $id, input: $input) {
       id
       uuid
-      company
       companies_id
       name
       email
+      address
       phone
       photo {
         id
