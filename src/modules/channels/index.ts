@@ -1,6 +1,10 @@
 import { ClientType } from '../../index';
 
-import { ChannelInterface, ChannelInputInterface } from '../../types';
+import {
+  ChannelInterface,
+  ChannelInputInterface,
+  WhereCondition,
+} from '../../types';
 import {
   CREATE_SOCIAL_CHANNEL_MUTATION,
   UPDATE_SOCIAL_CHANNEL_MUTATION,
@@ -8,8 +12,22 @@ import {
   DETACH_USER_FROM_CHANNEL,
 } from '../../mutations';
 
+import { GET_CHANNEL_SOCIAL_CHANNELS } from '../../queries';
+
 export class Channels {
   constructor(protected client: ClientType) {}
+
+  public async getChannels(
+    where: WhereCondition,
+    first: number = 10,
+    page: number = 1
+  ): Promise<ChannelInterface[]> {
+    const response = await this.client.query({
+      query: GET_CHANNEL_SOCIAL_CHANNELS,
+      variables: { whereCondition: where, first, page },
+    });
+    return response.data.socialChannels.data as ChannelInterface[];
+  }
 
   public async createChannel(
     input: ChannelInputInterface
