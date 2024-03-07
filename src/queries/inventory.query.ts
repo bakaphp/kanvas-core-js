@@ -154,10 +154,10 @@ export const GET_STATUS = gql`
   query getStatus(
     $first: Int
     $page: Int
-    $whereCondition: [QueryGetStatusWhereWhereConditions!]
-    $orderByCondition: [QueryGetStatusOrderByOrderByClause!]
+    $whereCondition: [QueryStatusWhereWhereConditions!]
+    $orderByCondition: [QueryStatusOrderByOrderByClause!]
   ) {
-    getStatus(
+    status(
       first: $first
       page: $page
       where: { AND: $whereCondition }
