@@ -31,6 +31,7 @@ import {
   Follow,
   People,
   Notifications,
+  Channels,
 } from './modules';
 
 import { setContext } from '@apollo/client/link/context';
@@ -116,6 +117,7 @@ export default class KanvasCore {
   public follow: Follow;
   public people: People;
   public notifications: Notifications;
+  public channels: Channels;
   constructor(protected options: Options) {
     this.client = new ApolloClient({
       link: this.generateLink(),
@@ -147,6 +149,7 @@ export default class KanvasCore {
     this.follow = new Follow(this.client);
     this.people = new People(this.client);
     this.notifications = new Notifications(this.client);
+    this.channels = new Channels(this.client);
   }
   protected generateURL() {
     return new HttpLink({ uri: this.options.url });

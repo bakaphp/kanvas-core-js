@@ -20,3 +20,4 @@ export * from './companies-branches';
 export * from './follows';
 export * from './people';
 export * from './notifications';
+export * from './channels';
