@@ -259,6 +259,17 @@ export interface CreateProductParams {
   company_id?: number | string;
 }
 
+export interface InputCategoriesParams {
+  id: number | null;
+  input: {
+    name: string,
+    is_published: boolean,
+    companies_id: number,
+    position?: number,
+    slug?: string
+  }
+}
+
 export interface AllCreatedProducts {
   products: {
     data: ProductInterface[];
@@ -306,6 +317,12 @@ export interface UpdatedProduct {
   };
 }
 
+export interface UpdatedCategory {
+  data: {
+    updateCategory: CategoryInterface;
+  };
+}
+
 export interface CreateStatus {
   createStatus: StatusInterface;
 }
@@ -336,6 +353,10 @@ export interface CreatedAttributes {
 
 export interface DeleteProduct {
   deleteProduct: boolean;
+}
+
+export interface deleteCategories {
+  deleteCategories: boolean;
 }
 
 export interface ProductDashboardInterface {

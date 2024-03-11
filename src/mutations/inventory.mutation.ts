@@ -214,3 +214,29 @@ export const DELETE_VARIANT = gql`
     deleteVariant(id: $id)
   }
 `;
+
+export const CREATE_CATEGORIES = gql`
+  mutation CreateRegion($input: CategoryInput!) {
+    createCategory(input: $input) {
+      name
+      id
+    }
+  }
+`;
+
+export const UPDATE_CATEGORIES = gql`
+  mutation($input: CategoryUpdateInput! $id: Int!) {
+    updateCategory(
+        id: $id
+        input:$input
+    ){
+        name,
+        id
+    }
+}`;
+
+export const DELETE_CATEGORIES = gql`
+  mutation delete($id: Int!){
+    deleteCategory(id: $id)
+  }`
+  ;
