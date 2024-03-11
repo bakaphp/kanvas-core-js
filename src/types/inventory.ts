@@ -351,8 +351,8 @@ export interface CreatedAttributes {
   };
 }
 
-export interface DeleteProduct {
-  DeleteProduct: boolean;
+export interface deleteProduct {
+  deleteProduct: boolean;
 }
 
 export interface deleteCategories {
