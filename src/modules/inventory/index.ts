@@ -14,8 +14,11 @@ import {
 import {
   CREATE_PRODUCT,
   CREATE_STATUS,
+  CREATE_CATEGORIES,
+  DELETE_CATEGORIES,
   DELETE_PRODUCT,
   DELETE_VARIANT,
+  UPDATE_CATEGORIES,
   UPDATE_PRODUCT,
   UPDATE_VARIANT,
   UPDATE_VARIANT_IN_WAREHOUSE,
@@ -46,6 +49,9 @@ import {
   InputStatusParams,
   ProductAdminDashboardInterface,
   CreateStatus,
+  DeleteCategories,
+  UpdatedCategory,
+  InputCategoriesParams,
 } from '../../types';
 
 export class Inventory {
@@ -303,6 +309,36 @@ export class Inventory {
       },
       fetchPolicy: 'network-only',
       partialRefetch: true,
+    });
+
+    return response.data;
+  }
+
+  public async updateCategory({
+    id,
+    input,
+  }: InputCategoriesParams): Promise<UpdatedCategory> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_CATEGORIES,
+      variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
+  public async createCategory(data: InputCategoriesParams): Promise<CreateStatus> {
+    const response = await this.client.mutate({
+      mutation: CREATE_CATEGORIES,
+      variables: {
+        input: data,
+      },
+    });
+    return response.data;
+  }
+
+  public async deleteCategory(id: number | string): Promise<DeleteCategories> {
+    const response = await this.client.mutate({
+      mutation: DELETE_CATEGORIES,
+      variables: { id: id },
     });
 
     return response.data;
