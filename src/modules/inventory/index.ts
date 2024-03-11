@@ -29,7 +29,7 @@ import {
   CreatedProductTypes,
   CreatedStatus,
   CreatedrRegions,
-  deleteProduct,
+  DeleteProduct,
   ProductInterface,
   UpdatedVariant,
   InputVariantParams,
@@ -49,7 +49,7 @@ import {
   InputStatusParams,
   ProductAdminDashboardInterface,
   CreateStatus,
-  deleteCategories,
+  DeleteCategories,
   UpdatedCategory,
   InputCategoriesParams,
 } from '../../types';
@@ -127,7 +127,7 @@ export class Inventory {
     return response.data;
   }
 
-  public async deleteProduct(id: number): Promise<deleteProduct> {
+  public async deleteProduct(id: number): Promise<DeleteProduct> {
     const response = await this.client.mutate({
       mutation: DELETE_PRODUCT,
       variables: { id: id },
@@ -335,7 +335,7 @@ export class Inventory {
     return response.data;
   }
 
-  public async deleteCategory(id: number | string): Promise<deleteCategories> {
+  public async deleteCategory(id: number | string): Promise<DeleteCategories> {
     const response = await this.client.mutate({
       mutation: DELETE_CATEGORIES,
       variables: { id: id },

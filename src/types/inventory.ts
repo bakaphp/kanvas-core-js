@@ -351,11 +351,11 @@ export interface CreatedAttributes {
   };
 }
 
-export interface deleteProduct {
+export interface DeleteProduct {
   deleteProduct: boolean;
 }
 
-export interface deleteCategories {
+export interface DeleteCategories {
   deleteCategories: boolean;
 }
 
