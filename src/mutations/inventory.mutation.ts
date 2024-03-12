@@ -240,3 +240,45 @@ export const DELETE_CATEGORIES = gql`
     deleteCategory(id: $id)
   }`
   ;
+
+export const CREATE_PRODUCT_TYPE= gql`
+  mutation createProductType($input: ProductTypeInput!) {
+    createProductType(input: $input) {
+      name
+    }
+  }
+`;
+
+export const UPDATE_PRODUCT_TYPE = gql`
+  mutation($input: ProductTypeUpdateInput! $id: Int!) {
+    updateProductType(
+        id: $id
+        input:$input
+    ){
+        name,
+        id
+    }
+}`;
+
+export const DELETE_PRODUCT_TYPE = gql`
+  mutation delete($id: Int!){
+    deleteProductType(id: $id)
+  }`
+  ;
+
+export const UPDATE_STATUS = gql`
+  mutation($input: StatusInput! $id: Int!) {
+    updateStatus(
+        id: $id
+        input: $input
+    ){
+        name,
+        id
+    }
+}`;
+
+export const DELETE_STATUS = gql`
+  mutation delete($id: Int!){
+    deleteProductType(id: $id)
+  }`
+  ;
