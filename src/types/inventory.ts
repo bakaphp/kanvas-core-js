@@ -130,6 +130,7 @@ export interface ProductTypeInterface {
   slug: string;
   weight: number;
   companies: ProductCompany;
+  is_published: boolean;
 }
 
 export interface FilesystemInterface {
@@ -270,6 +271,28 @@ export interface InputCategoriesParams {
   }
 }
 
+export interface InputProductTypeParams {
+  id: number | null;
+  input: {
+    name: string,
+    is_published?: boolean,
+    companies_id?: number,
+    position?: number,
+    slug?: string,
+    description?: string,
+    weight: number
+  }
+}
+
+export interface InputUpdateStatusParams {
+  id: number | null;
+  input: {
+    name: string;
+    is_default?: boolean;
+    company_id?: number | number;
+  }
+}
+
 export interface AllCreatedProducts {
   products: {
     data: ProductInterface[];
@@ -323,6 +346,18 @@ export interface UpdatedCategory {
   };
 }
 
+export interface UpdatedProductType {
+  data: {
+    updatedProductTypes: ProductTypeInterface;
+  };
+}
+
+export interface UpdatedStatus {
+  data: {
+    updatedStatus: StatusInterface;
+  };
+}
+
 export interface CreateStatus {
   createStatus: StatusInterface;
 }
@@ -355,8 +390,16 @@ export interface DeleteProduct {
   deleteProduct: boolean;
 }
 
+export interface DeleteStatus {
+  deleteStatus: boolean;
+}
+
 export interface DeleteCategories {
   deleteCategories: boolean;
+}
+
+export interface DeleteProductType {
+  deleteProductType: boolean;
 }
 
 export interface ProductDashboardInterface {

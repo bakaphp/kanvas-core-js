@@ -22,6 +22,11 @@ import {
   UPDATE_PRODUCT,
   UPDATE_VARIANT,
   UPDATE_VARIANT_IN_WAREHOUSE,
+  CREATE_PRODUCT_TYPE,
+  UPDATE_PRODUCT_TYPE,
+  DELETE_PRODUCT_TYPE,
+  UPDATE_STATUS,
+  DELETE_STATUS
 } from '../../mutations';
 import {
   CreateProductParams,
@@ -52,6 +57,12 @@ import {
   DeleteCategories,
   UpdatedCategory,
   InputCategoriesParams,
+  InputProductTypeParams,
+  DeleteProductType,
+  UpdatedProductType,
+  DeleteStatus,
+  InputUpdateStatusParams,
+  UpdatedStatus,
 } from '../../types';
 
 export class Inventory {
@@ -152,6 +163,15 @@ export class Inventory {
     return response.data;
   }
 
+  public async deleteStatus(id: number): Promise<DeleteStatus> {
+    const response = await this.client.mutate({
+      mutation: DELETE_STATUS,
+      variables: { id: id },
+    });
+
+    return response.data;
+  }
+
   public async getRegions(
     whereCondition?: WhereCondition
   ): Promise<CreatedrRegions> {
@@ -222,6 +242,18 @@ export class Inventory {
 
     return response.data;
   }
+
+  public async updateStatus({
+    id,
+    input,
+  }: InputUpdateStatusParams): Promise<UpdatedStatus> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_STATUS,
+      variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
   public async productAdminDashboard(): Promise<
     ProductAdminDashboardInterface
   > {
@@ -338,6 +370,36 @@ export class Inventory {
   public async deleteCategory(id: number | string): Promise<DeleteCategories> {
     const response = await this.client.mutate({
       mutation: DELETE_CATEGORIES,
+      variables: { id: id },
+    });
+
+    return response.data;
+  }
+
+  public async updateProductType({
+    id,
+    input,
+  }: InputProductTypeParams): Promise<UpdatedProductType> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_PRODUCT_TYPE,
+      variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
+  public async createProductType(data: InputProductTypeParams): Promise<CreatedProductTypes> {
+    const response = await this.client.mutate({
+      mutation: CREATE_PRODUCT_TYPE,
+      variables: {
+        input: data,
+      },
+    });
+    return response.data;
+  }
+
+  public async deleteProductType(id: number | string): Promise<DeleteProductType> {
+    const response = await this.client.mutate({
+      mutation: DELETE_PRODUCT_TYPE,
       variables: { id: id },
     });
 
