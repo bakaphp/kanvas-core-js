@@ -15,6 +15,7 @@ import {
 } from '../../index';
 import {
   DELETE_COMPANY_SETTINGS_MUTATION,
+  DELETE_USER_SETTINGS_MUTATION,
   SET_APP_SETTINGS_MUTATION,
   SET_COMPANY_SETTINGS_MUTATION,
   SET_USER_SETTINGS_MUTATION,
@@ -127,7 +128,9 @@ export default class Settings {
     }
   }
 
-  async deleteCompanySettings(input: ConfigInput): Promise<boolean | undefined> {
+  async deleteCompanySettings(
+    input: ConfigInput
+  ): Promise<boolean | undefined> {
     try {
       const response = await this.client.mutate({
         mutation: DELETE_COMPANY_SETTINGS_MUTATION,
@@ -135,8 +138,21 @@ export default class Settings {
           input,
         },
       });
-      return response.data.deleteCompanySetting
+      return response.data.deleteCompanySetting;
     } catch {
+      return undefined;
+    }
+  }
+  async deleteUserSettings(input: ConfigInput): Promise<boolean | undefined> {
+    try {
+      const response = await this.client.mutate({
+        mutation: DELETE_USER_SETTINGS_MUTATION,
+        variables: {
+          input,
+        },
+      });
+      return response.data.deleteUserSetting;
+    } catch (err){
       return undefined;
     }
   }
