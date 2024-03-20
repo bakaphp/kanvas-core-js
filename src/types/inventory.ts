@@ -74,6 +74,7 @@ export interface RegionsInterface {
   short_slug: string;
   settings: string;
   is_default: boolean;
+  company: ProductCompany;
 }
 
 export interface WarehouseInterface {
@@ -87,6 +88,7 @@ export interface WarehouseInterface {
     id: number;
     name: string;
   };
+  company: ProductCompany;
 }
 export interface VariantInterface {
   id: string;
