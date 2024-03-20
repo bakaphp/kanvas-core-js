@@ -107,13 +107,13 @@ export const CREATE_PRODUCT = gql`
 `;
 
 export const DELETE_PRODUCT = gql`
-  mutation($id: Int!) {
+  mutation($id: ID!) {
     deleteProduct(id: $id)
   }
 `;
 
 export const UPDATE_PRODUCT = gql`
-  mutation($input: ProductInputUpdate, $id: Int!) {
+  mutation($input: ProductInputUpdate, $id: ID!) {
     updateProduct(id: $id, input: $input) {
       products_types_id
       name
@@ -225,7 +225,7 @@ export const CREATE_CATEGORIES = gql`
 `;
 
 export const UPDATE_CATEGORIES = gql`
-  mutation($input: CategoryUpdateInput! $id: Int!) {
+  mutation($input: CategoryUpdateInput! $id: ID!) {
     updateCategory(
         id: $id
         input:$input
@@ -236,7 +236,7 @@ export const UPDATE_CATEGORIES = gql`
 }`;
 
 export const DELETE_CATEGORIES = gql`
-  mutation delete($id: Int!){
+  mutation delete($id: ID!) {
     deleteCategory(id: $id)
   }`
   ;
@@ -250,7 +250,7 @@ export const CREATE_PRODUCT_TYPE= gql`
 `;
 
 export const UPDATE_PRODUCT_TYPE = gql`
-  mutation($input: ProductTypeUpdateInput! $id: Int!) {
+  mutation($input: ProductTypeUpdateInput! $id: ID!) {
     updateProductType(
         id: $id
         input:$input
@@ -261,13 +261,13 @@ export const UPDATE_PRODUCT_TYPE = gql`
 }`;
 
 export const DELETE_PRODUCT_TYPE = gql`
-  mutation delete($id: Int!){
+  mutation delete($id: ID!){
     deleteProductType(id: $id)
   }`
   ;
 
 export const UPDATE_STATUS = gql`
-  mutation($input: StatusInput! $id: Int!) {
+  mutation($input: StatusInput! $id: ID!) {
     updateStatus(
         id: $id
         input: $input
@@ -278,7 +278,7 @@ export const UPDATE_STATUS = gql`
 }`;
 
 export const DELETE_STATUS = gql`
-  mutation delete($id: Int!){
+  mutation delete($id: ID!){
     deleteProductType(id: $id)
   }`
   ;
