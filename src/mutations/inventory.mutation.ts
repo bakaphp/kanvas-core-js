@@ -279,6 +279,58 @@ export const UPDATE_STATUS = gql`
 
 export const DELETE_STATUS = gql`
   mutation delete($id: ID!){
-    deleteProductType(id: $id)
+    deleteStatus(id: $id)
   }`
   ;
+
+export const CREATE_REGION = gql`
+  mutation CreateRegion($input: RegionInput!) {
+    createRegion(input: $input) {
+      name
+      id
+    }
+  }
+`;
+
+export const UPDATE_REGION = gql`
+  mutation($input: RegionInputUpdate! $id: ID!) {
+    updateRegion(
+        id: $id
+        input:$input
+    ){
+        name,
+        id
+    }
+}`;
+
+export const DELETE_REGION = gql`
+  mutation delete($id: ID!){
+    deleteRegion(id: $id)
+  }`
+  ;
+
+export const CREATE_WAREHOUSE = gql`
+  mutation createWarehouse($input: WarehouseInput!){
+    createWarehouse(input: $input) {
+        id,
+        name,
+        is_default
+    }
+  }`;
+
+export const UPDATE_WAREHOUSE = gql`
+  mutation updateWarehouse($input: WarehouseInputUpdate! $id: ID!) {
+    updateWarehouse(input: $input, id:$id){
+        name,
+        is_default
+    }
+  }`;
+
+export const DELETE_WAREHOUSE = gql`
+  mutation delete($id: ID!){
+    deleteWarehouse(id: $id)
+  }`;
+
+
+
+
