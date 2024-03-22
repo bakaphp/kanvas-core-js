@@ -212,6 +212,31 @@ export interface InputVariantParams {
   };
 }
 
+export interface InputWarehouseParams {
+  id: string | number | null;
+  input: {
+    uuid?: string;
+    name: string;
+    location?: string;
+    is_default?: boolean;
+    is_published?: number;
+    regions_id?: number;
+    companies_id?: number;
+  };
+}
+
+export interface InputRegionParams {
+  id: string | number | null;
+  input: {
+    name: string;
+    short_slug?: string;
+    is_default?: boolean;
+    currency_id?: number;
+    companies_id?: number;
+  };
+}
+
+
 export interface InputVariantWarehouseParams {
   id: string | number;
   input: {
@@ -291,7 +316,7 @@ export interface InputUpdateStatusParams {
   input: {
     name: string;
     is_default?: boolean;
-    company_id?: number | number;
+    company_id?: number;
   }
 }
 
@@ -326,6 +351,13 @@ export interface CreatedProductTypes {
   };
 }
 
+export interface CreatedRegion {
+  createRegion: {
+    data: RegionsInterface[];
+  };
+}
+
+
 export interface UpdatedVariant {
   products: {
     updateVariant: VariantInterface;
@@ -354,6 +386,18 @@ export interface UpdatedProductType {
   };
 }
 
+export interface UpdatedWarehouse {
+  data: {
+    updatedWarehouse: WarehouseInterface;
+  };
+}
+
+export interface UpdatedRegion {
+  data: {
+    updatedRegion: RegionsInterface;
+  };
+}
+
 export interface UpdatedStatus {
   data: {
     updatedStatus: StatusInterface;
@@ -370,7 +414,14 @@ export interface CreatedStatus {
   };
 }
 
-export interface CreatedrRegions {
+export interface CreatedWarehouse {
+  getStatus: {
+    data: WarehouseInterface[];
+    paginatorInfo: PaginatorInfo;
+  };
+}
+
+export interface CreatedRegions {
   regions: {
     data: RegionsInterface[];
   };
@@ -402,6 +453,14 @@ export interface DeleteCategories {
 
 export interface DeleteProductType {
   deleteProductType: boolean;
+}
+
+export interface DeleteRegion {
+  deleteRegion: boolean;
+}
+
+export interface DeleteWarehouse {
+  deleteWarehousee: boolean;
 }
 
 export interface ProductDashboardInterface {

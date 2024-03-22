@@ -26,14 +26,20 @@ import {
   UPDATE_PRODUCT_TYPE,
   DELETE_PRODUCT_TYPE,
   UPDATE_STATUS,
-  DELETE_STATUS
+  DELETE_STATUS,
+  UPDATE_WAREHOUSE,
+  DELETE_WAREHOUSE,
+  CREATE_WAREHOUSE,
+  UPDATE_REGION,
+  CREATE_REGION,
+  DELETE_REGION
 } from '../../mutations';
 import {
   CreateProductParams,
   CreatedProduct,
   CreatedProductTypes,
   CreatedStatus,
-  CreatedrRegions,
+  CreatedRegions,
   DeleteProduct,
   ProductInterface,
   UpdatedVariant,
@@ -63,6 +69,14 @@ import {
   DeleteStatus,
   InputUpdateStatusParams,
   UpdatedStatus,
+  InputWarehouseParams,
+  DeleteWarehouse,
+  CreatedWarehouse,
+  UpdatedWarehouse,
+  DeleteRegion,
+  UpdatedRegion,
+  InputRegionParams,
+  CreatedRegion,
 } from '../../types';
 
 export class Inventory {
@@ -174,7 +188,7 @@ export class Inventory {
 
   public async getRegions(
     whereCondition?: WhereCondition
-  ): Promise<CreatedrRegions> {
+  ): Promise<CreatedRegions> {
     const response = await this.client.query({
       query: GET_REGIONS,
       variables: { whereCondition },
@@ -400,6 +414,66 @@ export class Inventory {
   public async deleteProductType(id: number | string): Promise<DeleteProductType> {
     const response = await this.client.mutate({
       mutation: DELETE_PRODUCT_TYPE,
+      variables: { id: id },
+    });
+
+    return response.data;
+  }
+
+  public async updateWarehouse({
+    id,
+    input,
+  }: InputWarehouseParams): Promise<UpdatedWarehouse> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_WAREHOUSE,
+      variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
+  public async createWarehouse(data: InputWarehouseParams): Promise<CreatedWarehouse> {
+    const response = await this.client.mutate({
+      mutation: CREATE_WAREHOUSE,
+      variables: {
+        input: data,
+      },
+    });
+    return response.data;
+  }
+
+  public async deleteWarehouse(id: number | string): Promise<DeleteWarehouse> {
+    const response = await this.client.mutate({
+      mutation: DELETE_WAREHOUSE,
+      variables: { id: id },
+    });
+
+    return response.data;
+  }
+
+  public async updateRegion({
+    id,
+    input,
+  }: InputRegionParams): Promise<UpdatedRegion> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_REGION,
+      variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
+  public async createRegion(data: InputRegionParams): Promise<CreatedRegion> {
+    const response = await this.client.mutate({
+      mutation: CREATE_REGION,
+      variables: {
+        input: data,
+      },
+    });
+    return response.data;
+  }
+
+  public async deleteRegion(id: number | string): Promise<DeleteRegion> {
+    const response = await this.client.mutate({
+      mutation: DELETE_REGION,
       variables: { id: id },
     });
 
