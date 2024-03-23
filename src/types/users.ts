@@ -78,6 +78,7 @@ export interface CreateUserParams {
   displayname?: string;
   password: string;
   password_confirmation: string;
+  phone_number?: string;
   custom_fields?: CustomFieldInput[];
 }
 
