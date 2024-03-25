@@ -202,8 +202,8 @@ export const GET_REGIONS = gql`
 `;
 
 export const GET_WAREHOUSES = gql`
-  query getWarehouses($whereCondition: QueryGetWarehousesWhereWhereConditions) {
-    getWarehouses(where: $whereCondition) {
+  query getWarehouses($whereCondition: QueryWarehousesWhereWhereConditions) {
+    warehouses(where: $whereCondition) {
       data {
         name
         id

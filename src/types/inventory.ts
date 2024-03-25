@@ -428,7 +428,7 @@ export interface CreatedRegions {
 }
 
 export interface CreatedWarehouses {
-  getWarehouses: {
+  warehouses: {
     data: WarehouseInterface[];
   };
 }
