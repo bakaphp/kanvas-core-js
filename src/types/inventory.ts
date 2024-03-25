@@ -74,6 +74,7 @@ export interface RegionsInterface {
   short_slug: string;
   settings: string;
   is_default: boolean;
+  company: ProductCompany;
 }
 
 export interface WarehouseInterface {
@@ -87,6 +88,7 @@ export interface WarehouseInterface {
     id: number;
     name: string;
   };
+  company: ProductCompany;
 }
 export interface VariantInterface {
   id: string;
@@ -130,6 +132,7 @@ export interface ProductTypeInterface {
   slug: string;
   weight: number;
   companies: ProductCompany;
+  is_published: boolean;
 }
 
 export interface FilesystemInterface {
@@ -209,6 +212,31 @@ export interface InputVariantParams {
   };
 }
 
+export interface InputWarehouseParams {
+  id: string | number | null;
+  input: {
+    uuid?: string;
+    name: string;
+    location?: string;
+    is_default?: boolean;
+    is_published?: number;
+    regions_id?: number;
+    companies_id?: number;
+  };
+}
+
+export interface InputRegionParams {
+  id: string | number | null;
+  input: {
+    name: string;
+    short_slug?: string;
+    is_default?: boolean;
+    currency_id?: number;
+    companies_id?: number;
+  };
+}
+
+
 export interface InputVariantWarehouseParams {
   id: string | number;
   input: {
@@ -259,6 +287,39 @@ export interface CreateProductParams {
   company_id?: number | string;
 }
 
+export interface InputCategoriesParams {
+  id: number | null;
+  input: {
+    name: string,
+    is_published: boolean,
+    companies_id: number,
+    position?: number,
+    slug?: string
+  }
+}
+
+export interface InputProductTypeParams {
+  id: number | null;
+  input: {
+    name: string,
+    is_published?: boolean,
+    companies_id?: number,
+    position?: number,
+    slug?: string,
+    description?: string,
+    weight: number
+  }
+}
+
+export interface InputUpdateStatusParams {
+  id: number | null;
+  input: {
+    name: string;
+    is_default?: boolean;
+    company_id?: number;
+  }
+}
+
 export interface AllCreatedProducts {
   products: {
     data: ProductInterface[];
@@ -290,6 +351,13 @@ export interface CreatedProductTypes {
   };
 }
 
+export interface CreatedRegion {
+  createRegion: {
+    data: RegionsInterface[];
+  };
+}
+
+
 export interface UpdatedVariant {
   products: {
     updateVariant: VariantInterface;
@@ -306,6 +374,36 @@ export interface UpdatedProduct {
   };
 }
 
+export interface UpdatedCategory {
+  data: {
+    updateCategory: CategoryInterface;
+  };
+}
+
+export interface UpdatedProductType {
+  data: {
+    updatedProductTypes: ProductTypeInterface;
+  };
+}
+
+export interface UpdatedWarehouse {
+  data: {
+    updatedWarehouse: WarehouseInterface;
+  };
+}
+
+export interface UpdatedRegion {
+  data: {
+    updatedRegion: RegionsInterface;
+  };
+}
+
+export interface UpdatedStatus {
+  data: {
+    updatedStatus: StatusInterface;
+  };
+}
+
 export interface CreateStatus {
   createStatus: StatusInterface;
 }
@@ -316,7 +414,14 @@ export interface CreatedStatus {
   };
 }
 
-export interface CreatedrRegions {
+export interface CreatedWarehouse {
+  getStatus: {
+    data: WarehouseInterface[];
+    paginatorInfo: PaginatorInfo;
+  };
+}
+
+export interface CreatedRegions {
   regions: {
     data: RegionsInterface[];
   };
@@ -336,6 +441,26 @@ export interface CreatedAttributes {
 
 export interface DeleteProduct {
   deleteProduct: boolean;
+}
+
+export interface DeleteStatus {
+  deleteStatus: boolean;
+}
+
+export interface DeleteCategories {
+  deleteCategories: boolean;
+}
+
+export interface DeleteProductType {
+  deleteProductType: boolean;
+}
+
+export interface DeleteRegion {
+  deleteRegion: boolean;
+}
+
+export interface DeleteWarehouse {
+  deleteWarehousee: boolean;
 }
 
 export interface ProductDashboardInterface {

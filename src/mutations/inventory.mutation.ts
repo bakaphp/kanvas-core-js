@@ -107,13 +107,13 @@ export const CREATE_PRODUCT = gql`
 `;
 
 export const DELETE_PRODUCT = gql`
-  mutation($id: Int!) {
+  mutation($id: ID!) {
     deleteProduct(id: $id)
   }
 `;
 
 export const UPDATE_PRODUCT = gql`
-  mutation($input: ProductInputUpdate, $id: Int!) {
+  mutation($input: ProductInputUpdate, $id: ID!) {
     updateProduct(id: $id, input: $input) {
       products_types_id
       name
@@ -214,3 +214,123 @@ export const DELETE_VARIANT = gql`
     deleteVariant(id: $id)
   }
 `;
+
+export const CREATE_CATEGORIES = gql`
+  mutation CreateRegion($input: CategoryInput!) {
+    createCategory(input: $input) {
+      name
+      id
+    }
+  }
+`;
+
+export const UPDATE_CATEGORIES = gql`
+  mutation($input: CategoryUpdateInput! $id: ID!) {
+    updateCategory(
+        id: $id
+        input:$input
+    ){
+        name,
+        id
+    }
+}`;
+
+export const DELETE_CATEGORIES = gql`
+  mutation delete($id: ID!) {
+    deleteCategory(id: $id)
+  }`
+  ;
+
+export const CREATE_PRODUCT_TYPE= gql`
+  mutation createProductType($input: ProductTypeInput!) {
+    createProductType(input: $input) {
+      name
+    }
+  }
+`;
+
+export const UPDATE_PRODUCT_TYPE = gql`
+  mutation($input: ProductTypeUpdateInput! $id: ID!) {
+    updateProductType(
+        id: $id
+        input:$input
+    ){
+        name,
+        id
+    }
+}`;
+
+export const DELETE_PRODUCT_TYPE = gql`
+  mutation delete($id: ID!){
+    deleteProductType(id: $id)
+  }`
+  ;
+
+export const UPDATE_STATUS = gql`
+  mutation($input: StatusInput! $id: ID!) {
+    updateStatus(
+        id: $id
+        input: $input
+    ){
+        name,
+        id
+    }
+}`;
+
+export const DELETE_STATUS = gql`
+  mutation delete($id: ID!){
+    deleteStatus(id: $id)
+  }`
+  ;
+
+export const CREATE_REGION = gql`
+  mutation CreateRegion($input: RegionInput!) {
+    createRegion(input: $input) {
+      name
+      id
+    }
+  }
+`;
+
+export const UPDATE_REGION = gql`
+  mutation($input: RegionInputUpdate! $id: ID!) {
+    updateRegion(
+        id: $id
+        input:$input
+    ){
+        name,
+        id
+    }
+}`;
+
+export const DELETE_REGION = gql`
+  mutation delete($id: ID!){
+    deleteRegion(id: $id)
+  }`
+  ;
+
+export const CREATE_WAREHOUSE = gql`
+  mutation createWarehouse($input: WarehouseInput!){
+    createWarehouse(input: $input) {
+        id,
+        name,
+        is_default
+    }
+  }`;
+
+export const UPDATE_WAREHOUSE = gql`
+  mutation updateWarehouse($input: WarehouseInputUpdate! $id: ID!) {
+    updateWarehouse(input: $input, id:$id){
+        name,
+        is_default
+    }
+  }`;
+
+export const DELETE_WAREHOUSE = gql`
+  mutation delete($id: ID!){
+    deleteWarehouse(id: $id)
+  }`;
+
+
+
+

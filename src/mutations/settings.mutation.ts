@@ -23,3 +23,9 @@ export const DELETE_COMPANY_SETTINGS_MUTATION = gql`
     deleteCompanySetting(input: $input)
   }
 `;
+
+export const DELETE_USER_SETTINGS_MUTATION = gql`
+  mutation deleteUserSetting($input: ModuleConfigInput!) {
+    deleteUserSetting(input: $input)
+  }
+`;
