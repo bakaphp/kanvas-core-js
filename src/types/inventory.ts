@@ -323,7 +323,7 @@ export interface CreatedrRegions {
 }
 
 export interface CreatedWarehouses {
-  getWarehouses: {
+  warehouses: {
     data: WarehouseInterface[];
   };
 }
