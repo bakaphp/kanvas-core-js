@@ -1,3 +1,5 @@
+import { PaginatorInfo } from "./paginator";
+
 export enum RolesEnum {
   OWNER = 'Owner',
   ADMIN = 'Admin',
@@ -19,6 +21,7 @@ export interface RolesInterface {
 export interface CreatedRoles {
   roles: {
     data: RolesInterface[];
+    paginatorInfo?: PaginatorInfo;
   };
 }
 

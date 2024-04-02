@@ -5,10 +5,11 @@ import {
   CreatedRoles,
   OrderBy,
   RemoveRoleUser,
+  RolesInterface,
   UserRoleParams,
   WhereCondition,
 } from '../../types';
-import { ASSIGN_ROLE_USER, REMOVE_ROLE_USER } from '../../mutations';
+import { ASSIGN_ROLE_USER, CREATE_ROLE, REMOVE_ROLE_USER } from '../../mutations';
 
 export class Roles {
   constructor(protected client: ClientType) {}
@@ -29,6 +30,8 @@ export class Roles {
         orderBy,
         search
       },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
     return response.data;
   }
@@ -47,5 +50,14 @@ export class Roles {
       variables: { ...params },
     });
     return response.data;
+  }
+
+
+  public async createRole(params: UserRoleParams): Promise<RolesInterface> {
+    const response = await this.client.mutate({
+      mutation: CREATE_ROLE,
+      variables: { ...params },
+    });
+    return response.data.createRole;
   }
 }

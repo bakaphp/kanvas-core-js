@@ -11,3 +11,16 @@ export const REMOVE_ROLE_USER = gql`
     removeRole(userId: $userId, role: $role)
   }
 `;
+
+export const CREATE_ROLE = gql`
+  mutation createRole($name: String!, $title: String!) {
+    createRole(name: $name, title: $title) {
+      id
+      name
+      title
+      scope
+      userCount
+      abilitiesCount
+    }
+  }
+`;
