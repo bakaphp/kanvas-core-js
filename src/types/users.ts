@@ -165,6 +165,7 @@ export interface InviteProcessParams {
   firstname: string;
   lastname: string;
   password: string;
+  phone_number?: string
 }
 
 export interface InviteProcessData {
