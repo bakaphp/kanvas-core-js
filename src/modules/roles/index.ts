@@ -15,17 +15,19 @@ export class Roles {
 
   public async getRoles(
     options: {
-      whereCondition?: WhereCondition;
-      orderByCondition?: OrderBy[];
+      where?: WhereCondition;
+      orderBy?: OrderBy[];
+      search?:string
     } = {}
   ): Promise<CreatedRoles> {
-    const { whereCondition, orderByCondition } = options;
+    const { where, orderBy,search } = options;
 
     const response = await this.client.query({
       query: GET_ROLES,
       variables: {
-        whereCondition,
-        orderByCondition,
+        where,
+        orderBy,
+        search
       },
     });
     return response.data;

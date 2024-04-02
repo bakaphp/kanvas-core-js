@@ -12,6 +12,8 @@ export interface RolesInterface {
   name: string;
   title: string;
   scope: string;
+  userCount: number;
+  abilitiesCount: number;
 }
 
 export interface CreatedRoles {
