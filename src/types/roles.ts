@@ -21,7 +21,7 @@ export interface RolesInterface {
 export interface CreatedRoles {
   roles: {
     data: RolesInterface[];
-    paginatorInfo?: PaginatorInfo;
+    paginatorInfo: PaginatorInfo;
   };
 }
 
