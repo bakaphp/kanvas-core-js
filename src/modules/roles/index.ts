@@ -2,14 +2,21 @@ import { ClientType } from '../../index';
 import { GET_ROLES } from '../../queries';
 import {
   AssignRoleUser,
+  CreateRoleParams,
   CreatedRoles,
   OrderBy,
   RemoveRoleUser,
   RolesInterface,
+  UpdateRoleParams,
   UserRoleParams,
   WhereCondition,
 } from '../../types';
-import { ASSIGN_ROLE_USER, CREATE_ROLE, REMOVE_ROLE_USER } from '../../mutations';
+import {
+  ASSIGN_ROLE_USER,
+  CREATE_ROLE,
+  REMOVE_ROLE_USER,
+  UPDATE_ROLE,
+} from '../../mutations';
 
 export class Roles {
   constructor(protected client: ClientType) {}
@@ -18,17 +25,17 @@ export class Roles {
     options: {
       where?: WhereCondition;
       orderBy?: OrderBy[];
-      search?:string
+      search?: string;
     } = {}
   ): Promise<CreatedRoles> {
-    const { where, orderBy,search } = options;
+    const { where, orderBy, search } = options;
 
     const response = await this.client.query({
       query: GET_ROLES,
       variables: {
         where,
         orderBy,
-        search
+        search,
       },
       fetchPolicy: 'network-only',
       partialRefetch: true,
@@ -52,12 +59,19 @@ export class Roles {
     return response.data;
   }
 
-
-  public async createRole(params: UserRoleParams): Promise<RolesInterface> {
+  public async createRole(params: CreateRoleParams): Promise<RolesInterface> {
     const response = await this.client.mutate({
       mutation: CREATE_ROLE,
       variables: { ...params },
     });
     return response.data.createRole;
+  }
+
+  public async updateRole(params: UpdateRoleParams): Promise<RolesInterface> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_ROLE,
+      variables: { ...params },
+    });
+    return response.data.updateRole;
   }
 }

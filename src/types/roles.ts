@@ -37,3 +37,14 @@ export interface UserRoleParams {
   userId: string | number;
   role: string | number;
 }
+
+export interface CreateRoleParams {
+  name: string;
+  title: string;
+}
+
+export interface UpdateRoleParams {
+  id: string | number;
+  name?: string;
+  title?: string;
+}

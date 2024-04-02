@@ -24,3 +24,16 @@ export const CREATE_ROLE = gql`
     }
   }
 `;
+
+export const UPDATE_ROLE = gql`
+  mutation updateRole($id: ID!, $name: String, $title: String) {
+    updateRole(id: $id, name: $name, title: $title) {
+      id
+      name
+      title
+      scope
+      userCount
+      abilitiesCount
+    }
+  }
+`;
