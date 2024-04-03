@@ -15,6 +15,13 @@ export const GET_ROLES = gql`
         userCount
         abilitiesCount
       }
+      paginatorInfo {
+        count
+        currentPage
+        lastPage
+        perPage
+        total
+      }
     }
   }
 `;
