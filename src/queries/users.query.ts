@@ -55,6 +55,7 @@ export const GET_USERS_INVITES_QUERY = gql`
     usersInvites(first: $first, orderBy: [{ column: ID, order: DESC }]) {
       data {
         email
+        firstname
         id
         invite_hash
         role_id
