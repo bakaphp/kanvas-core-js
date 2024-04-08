@@ -51,13 +51,21 @@ export const GET_ROLE_ID_BY_NAME_QUERY = gql`
 `;
 
 export const GET_USERS_INVITES_QUERY = gql`
-  query UsersInvites($first: Int!) {
-    usersInvites(first: $first, orderBy: [{ column: ID, order: DESC }]) {
+  query UsersInvites($first: Int! $page: Int) {
+    usersInvites(first: $first, orderBy: [{ column: ID, order: DESC }], page: $page) {
       data {
         email
+        firstname
         id
         invite_hash
         role_id
+      }
+      paginatorInfo {
+        total
+        currentPage
+        hasMorePages
+        lastPage
+        count
       }
     }
   }

@@ -116,15 +116,15 @@ export class Users {
     });
 
     return response.data.getInvite;
-  }
+  } 
 
-  public async getUsersInvites(first: number) {
+  public async getUsersInvites(first: number, page?: number) {
     const response = await this.client.query({
       query: GET_USERS_INVITES_QUERY,
-      variables: { first },
+      variables: { first, page },
     });
 
-    return response.data.usersInvites.data;
+    return page ? response.data.usersInvites : response.data.usersInvites.data;
   }
 
   // Get invites by role id
