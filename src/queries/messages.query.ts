@@ -3,13 +3,13 @@ import { gql } from '@apollo/client/core';
 export const GET_MESSAGES_QUERY = gql`
   query getMessages(
     $where: QueryMessagesWhereWhereConditions
-    $hasAppModuleMessage: QueryGetMessagesHasAppModuleMessageWhereHasConditions
-    $orderBy: [QueryGetMessagesOrderByOrderByClause!]
+    $hasAppModuleMessage: QueryMessagesHasAppModuleMessageWhereHasConditions
+    $orderBy: [QueryMessagesOrderByOrderByClause!]
     $search: String
     $first: Int! = 25
     $page: Int
   ) {
-    getMessages(
+    messages(
       where: $where
       hasAppModuleMessage: $hasAppModuleMessage
       orderBy: $orderBy
