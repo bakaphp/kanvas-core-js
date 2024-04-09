@@ -18,7 +18,6 @@ import {
 import { GET_MESSAGES_QUERY } from '../../queries';
 import { MessagesComments } from '../messages-comments';
 export class Messages {
-  
   public comments: MessagesComments;
 
   constructor(protected client: ClientType) {
@@ -65,7 +64,7 @@ export class Messages {
         page,
       },
     });
-    return response.data.getMessages as MessagesInterface[];
+    return response.data.messages as MessagesInterface[];
   }
 
   public async attachTopicToMessage(
