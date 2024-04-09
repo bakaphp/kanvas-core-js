@@ -116,12 +116,17 @@ export class Users {
     });
 
     return response.data.getInvite;
-  } 
+  }
 
-  public async getUsersInvites(first: number, page?: number) {
+  public async getUsersInvites(
+    first: number,
+    page?: number,
+    order?: 'DESC' | 'ASC'
+  ) {
+    const sort = order ? order : 'DESC';
     const response = await this.client.query({
       query: GET_USERS_INVITES_QUERY,
-      variables: { first, page },
+      variables: { first, page, sort },
     });
 
     return page ? response.data.usersInvites : response.data.usersInvites.data;
