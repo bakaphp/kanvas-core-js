@@ -118,15 +118,28 @@ export class Users {
     return response.data.getInvite;
   }
 
-  public async getUsersInvites(
-    first: number,
-    page?: number,
-    order?: 'DESC' | 'ASC'
-  ) {
-    const sort = order ? order : 'DESC';
+  public async getUsersInvites({
+    first,
+    page,
+    order,
+    where,
+  }: {
+    first: number;
+    page?: number;
+    order?: 'DESC' | 'ASC';
+    where?: WhereCondition;
+  }) {
+    const sort = order
+      ? [{ column: 'ID', order: order }]
+      : [{ column: 'ID', order: 'DESC' }];
     const response = await this.client.query({
       query: GET_USERS_INVITES_QUERY,
-      variables: { first, page, sort },
+      variables: {
+        first,
+        page,
+        orderBy: sort,
+        where
+      },
     });
 
     return page ? response.data.usersInvites : response.data.usersInvites.data;
