@@ -26,6 +26,7 @@ export interface UserInterface {
   lastname: string;
   lastvisit: string;
   last_visit: string;
+  mainRole: string;
   // location: Location;
   phone: string;
   phone_number: string;
@@ -95,6 +96,7 @@ export interface UserData {
   default_company: number;
   default_company_branch: number;
   email: string;
+  mainRole: string;
   branches: {
     id: string;
     name: string;
