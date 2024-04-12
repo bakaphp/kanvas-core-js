@@ -25,6 +25,10 @@ export interface MessageInputInterface {
   distribution?: DistributionInputInterface;
 }
 
+export interface MessageUpdateInputInterface {
+  message: string;
+}
+
 export interface DistributionInputInterface {
   distributionType: string;
   channels: Array<string>;
