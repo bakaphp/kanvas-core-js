@@ -41,18 +41,19 @@ export class Messages {
     id: string,
     input: MessageUpdateInputInterface
   ): Promise<MessagesInterface> {
-    const response = this.client.mutate({
+    const response = await this.client.mutate({
       mutation: UPDATE_MESSAGE_MUTATION,
-      variables: { input: input, id: id},
+      variables: { input: input, id: id },
     });
-    return (await response).data.updateMessage as MessagesInterface;
+    return response.data.updateMessage as MessagesInterface;
   }
 
-  public async deleteMessage(id: string): Promise<void> {
+  public async deleteMessage(id: string): Promise<Boolean> {
     await this.client.mutate({
       mutation: DELETE_MESSAGE_MUTATION,
       variables: { id: id },
     });
+    return true;
   }
 
   public async interactionMessage(
