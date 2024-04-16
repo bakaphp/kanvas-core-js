@@ -71,6 +71,31 @@ export const CREATE_LEAD_MUTATION = gql`
           url
         }
       }
+      channels {
+        id
+        name
+        uuid
+        slug
+        description
+        entity_namespace
+        entity_id
+        last_message_id
+        messages {
+          id
+          parent_id
+          parent_unique_id
+          uuid
+          companies_id
+          users_id
+          message_types_id
+          message
+          reactions_count
+          comment_count
+          total_liked
+          total_saved
+          total_shared
+        }
+      }
     }
   }
 `;
