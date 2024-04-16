@@ -495,7 +495,7 @@ export class Inventory {
       mutation: UPDATE_CHANNELS,
       variables: { id: id, input: input },
     });
-    return response.data;
+    return response.data as UpdatedChannels;
   }
 
   public async createChannels(data: InputChannelsParams): Promise<CreatedChannels> {
@@ -505,7 +505,7 @@ export class Inventory {
         input: data,
       },
     });
-    return response.data;
+    return response.data as CreatedChannels;
   }
 
   public async deleteChannels(id: number | string): Promise<DeleteChannels> {
@@ -514,6 +514,6 @@ export class Inventory {
       variables: { id: id },
     });
 
-    return response.data;
+    return response.data as DeleteChannels;
   }
 }
