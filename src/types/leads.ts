@@ -2,7 +2,11 @@
 
 import { CustomFieldInput, CustomFieldData } from './custom-fields';
 import { PaginatorInfo } from './paginator';
-import { PeopleInterface, ChannelInterface } from './index';
+import {
+  PeopleInterface,
+  ChannelInterface,
+  SystemModuleInterface,
+} from './index';
 // interface Contact {
 //   value: string;
 //   contacts_types_id?: number;
@@ -101,6 +105,7 @@ export interface CreateLeadData {
   paginatorInfo?: PaginatorInfo;
   files?: { data: LeadAttachment[] };
   channels?: ChannelInterface[];
+  systemModule: SystemModuleInterface;
 }
 
 export interface LeadInput {
