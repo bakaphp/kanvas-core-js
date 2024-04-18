@@ -127,7 +127,10 @@ export const UPDATE_PRODUCT = gql`
       warranty_terms
       upc
       is_published
-      status
+      status {
+        id
+        name
+      }
     }
   }
 `;
