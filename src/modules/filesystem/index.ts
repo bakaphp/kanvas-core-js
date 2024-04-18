@@ -14,7 +14,7 @@ import {
   WhereCondition,
   FILESYSTEM_ATTACH_INPUT,
 } from '../../types';
-import { ATTACH_FILE_MUTATION, DETACH_FILE_MUTATION } from '../../mutations';
+import { ATTACH_FILE_MUTATION, DETACH_FILES_MUTATION, DETACH_FILE_MUTATION } from '../../mutations';
 import { ENTITY_FILES_QUERY } from '../../queries';
 
 export class FileSystem {
@@ -71,7 +71,7 @@ export class FileSystem {
 
   public async detachFiles(uuids: string[]): Promise<boolean> {
     const response = await this.client.mutate({
-      mutation: DETACH_FILE_MUTATION,
+      mutation: DETACH_FILES_MUTATION,
       variables: { uuids: uuids },
     });
     return response.data.deAttachFiles as boolean;
