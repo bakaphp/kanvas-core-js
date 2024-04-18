@@ -32,7 +32,10 @@ import {
   CREATE_WAREHOUSE,
   UPDATE_REGION,
   CREATE_REGION,
-  DELETE_REGION
+  DELETE_REGION,
+  UPDATE_CHANNELS,
+  CREATE_CHANNELS,
+  DELETE_CHANNELS
 } from '../../mutations';
 import {
   CreateProductParams,
@@ -77,6 +80,10 @@ import {
   UpdatedRegion,
   InputRegionParams,
   CreatedRegion,
+  DeleteChannels,
+  CreatedChannels,
+  UpdatedChannels,
+  InputChannelsParams,
 } from '../../types';
 
 export class Inventory {
@@ -478,5 +485,35 @@ export class Inventory {
     });
 
     return response.data;
+  }
+
+  public async updateChannels({
+    id,
+    input,
+  }: InputChannelsParams): Promise<UpdatedChannels> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_CHANNELS,
+      variables: { id: id, input: input },
+    });
+    return response.data as UpdatedChannels;
+  }
+
+  public async createChannels(data: InputChannelsParams): Promise<CreatedChannels> {
+    const response = await this.client.mutate({
+      mutation: CREATE_CHANNELS,
+      variables: {
+        input: data,
+      },
+    });
+    return response.data as CreatedChannels;
+  }
+
+  public async deleteChannels(id: number | string): Promise<DeleteChannels> {
+    const response = await this.client.mutate({
+      mutation: DELETE_CHANNELS,
+      variables: { id: id },
+    });
+
+    return response.data as DeleteChannels;
   }
 }

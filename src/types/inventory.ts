@@ -171,6 +171,28 @@ export interface ProductInterface {
   companies: ProductCompany;
 }
 
+export interface ChannelsInterface {
+  id: string;
+  name: string;
+  slug: string;
+  companies: ProductCompany;
+  is_default: boolean;
+  uuid: string;
+  is_published: boolean
+}
+
+export interface InputChannelsParams {
+  id: number;
+  input: {
+    name: string;
+    slug?: string;
+    companies?: ProductCompany;
+    is_default: boolean;
+    uuid?: string;
+    is_published?: boolean
+  };
+}
+
 export interface InputProductParams {
   id: number;
   input: {
@@ -345,6 +367,10 @@ export interface CreatedProduct {
   createProduct: ProductInterface;
 }
 
+export interface CreatedChannels {
+  createChannel: ChannelsInterface;
+}
+
 export interface CreatedProductTypes {
   productTypes: {
     data: ProductTypeInterface[];
@@ -362,6 +388,10 @@ export interface UpdatedVariant {
   products: {
     updateVariant: VariantInterface;
   };
+}
+
+export interface UpdatedChannels {
+  updateChannelInWarehouse: ChannelsInterface;
 }
 
 export interface UpdatedVariantWarehouse {
@@ -437,6 +467,10 @@ export interface CreatedAttributes {
   attributes: {
     data: AttributesInterface[];
   };
+}
+
+export interface DeleteChannels {
+  deleteChannels: boolean;
 }
 
 export interface DeleteProduct {

@@ -127,6 +127,10 @@ export const UPDATE_PRODUCT = gql`
       warranty_terms
       upc
       is_published
+      status {
+        id
+        name
+      }
     }
   }
 `;
@@ -330,6 +334,30 @@ export const DELETE_WAREHOUSE = gql`
   mutation delete($id: ID!){
     deleteWarehouse(id: $id)
   }`;
+
+export const CREATE_CHANNELS = gql`
+  mutation($input: CreateChannelInput!){
+    createChannel(input: $input){
+        name,
+        id,
+        uuid,
+        slug
+    }
+}`;
+
+export const UPDATE_CHANNELS = gql`
+  mutation($input: UpdateChannelInput! $id: ID!) {
+    updateChannel(input: $input, id: $id) {
+        name,
+        description
+    }
+}`;
+
+export const DELETE_CHANNELS = gql`
+  mutation($id: ID!) {
+    deleteChannel(id: $id)
+  }`;
+
 
 
 

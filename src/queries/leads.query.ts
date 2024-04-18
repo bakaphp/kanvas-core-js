@@ -66,6 +66,31 @@ export const GET_ALL_LEADS_QUERY = gql`
             value
           }
         }
+        channels {
+          id
+          name
+          uuid
+          slug
+          description
+          entity_namespace
+          entity_id
+          last_message_id
+          messages {
+            id
+            parent_id
+            parent_unique_id
+            uuid
+            companies_id
+            users_id
+            message_types_id
+            message
+            reactions_count
+            comment_count
+            total_liked
+            total_saved
+            total_shared
+          }
+        }
       }
       paginatorInfo {
         currentPage
@@ -108,6 +133,20 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
         created_at
         description
         reason_lost
+        systemModule {
+          id
+          uuid
+          slug
+          model_name
+          parent {
+            id
+            uuid
+            slug
+            model_name
+          }
+          menu_order
+          show
+        }
         user {
           firstname
           lastname
@@ -172,6 +211,31 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
           data {
             name
             url
+          }
+        }
+        channels {
+          id
+          name
+          uuid
+          slug
+          description
+          entity_namespace
+          entity_id
+          last_message_id
+          messages {
+            id
+            parent_id
+            parent_unique_id
+            uuid
+            companies_id
+            users_id
+            message_types_id
+            message
+            reactions_count
+            comment_count
+            total_liked
+            total_saved
+            total_shared
           }
         }
       }
