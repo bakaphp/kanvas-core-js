@@ -133,6 +133,20 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
         created_at
         description
         reason_lost
+        systemModule {
+          id
+          uuid
+          slug
+          model_name
+          parent {
+            id
+            uuid
+            slug
+            model_name
+          }
+          menu_order
+          show
+        }
         user {
           firstname
           lastname
