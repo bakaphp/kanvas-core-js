@@ -358,6 +358,42 @@ export const DELETE_CHANNELS = gql`
     deleteChannel(id: $id)
   }`;
 
+export const CREATE_VARIANT = gql`
+  mutation($input: VariantsInput!) {
+    createVariant(input: $input){
+        id,
+        products_id,
+        name,
+        attributes{
+            name,
+            value
+        },
+        status{
+            id,
+            name
+        },
+        warehouses{
+            status{
+                id
+                name
+            }
+            warehouses_id,
+            warehouseinfo{
+                id,
+                name,
+                total_products
+            },
+            quantity,
+            price,
+            status_history {
+                name
+                id
+            }
+        }
+    }
+}
+`;
+
 
 
 

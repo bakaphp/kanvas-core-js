@@ -469,6 +469,12 @@ export interface CreatedAttributes {
   };
 }
 
+export interface CreatedVariant {
+  variants: {
+    data: VariantInterface[];
+  };
+}
+
 export interface DeleteChannels {
   deleteChannels: boolean;
 }
