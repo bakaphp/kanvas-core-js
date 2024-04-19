@@ -35,7 +35,8 @@ import {
   DELETE_REGION,
   UPDATE_CHANNELS,
   CREATE_CHANNELS,
-  DELETE_CHANNELS
+  DELETE_CHANNELS,
+  CREATE_VARIANT
 } from '../../mutations';
 import {
   CreateProductParams,
@@ -84,6 +85,7 @@ import {
   CreatedChannels,
   UpdatedChannels,
   InputChannelsParams,
+  CreatedVariant,
 } from '../../types';
 
 export class Inventory {
@@ -515,5 +517,15 @@ export class Inventory {
     });
 
     return response.data as DeleteChannels;
+  }
+
+  public async createVariant(data: InputVariantParams): Promise<CreatedVariant> {
+    const response = await this.client.mutate({
+      mutation: CREATE_VARIANT,
+      variables: {
+        input: data,
+      },
+    });
+    return response.data;
   }
 }

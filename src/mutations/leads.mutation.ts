@@ -71,6 +71,20 @@ export const CREATE_LEAD_MUTATION = gql`
           url
         }
       }
+      systemModule {
+        id
+        uuid
+        slug
+        model_name
+        parent {
+          id
+          uuid
+          slug
+          model_name
+        }
+        menu_order
+        show
+      }
       channels {
         id
         name
