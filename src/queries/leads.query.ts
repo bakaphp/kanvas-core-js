@@ -91,6 +91,20 @@ export const GET_ALL_LEADS_QUERY = gql`
             total_shared
           }
         }
+        systemModule {
+          id
+          uuid
+          slug
+          model_name
+          parent {
+            id
+            uuid
+            slug
+            model_name
+          }
+          menu_order
+          show
+        }
       }
       paginatorInfo {
         currentPage
