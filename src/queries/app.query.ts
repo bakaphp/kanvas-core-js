@@ -93,7 +93,7 @@ export const GET_APP_USERS = gql`
 
 export const GET_APPS_WITH_ACCESS = gql`
   query {
-    apps(first: 60) {
+    apps(first: 100) {
       data {
         id
         name
