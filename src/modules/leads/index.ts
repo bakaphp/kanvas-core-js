@@ -4,7 +4,7 @@ import {
   GET_LEAD_BY_UUID_QUERY,
 } from '../../queries';
 import { ClientType } from '../../index';
-import { CREATE_LEAD_MUTATION } from '../../mutations';
+import { CREATE_LEAD_MUTATION, UPDATE_LEAD_MUTATION } from '../../mutations';
 import {
   CreateLeadData,
   CreateLeadParams,
@@ -12,6 +12,7 @@ import {
   LeadsDashboardData,
   WhereCondition,
   LeadsData,
+  UpdateLeadInput,
 } from '../../types';
 
 export class Leads {
@@ -28,6 +29,17 @@ export class Leads {
     return response.data.createLead as CreateLeadData;
   }
 
+  public async updateLead(
+    leadId: string,
+    leadData: UpdateLeadInput
+  ): Promise<any> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_LEAD_MUTATION,
+      variables: { id: leadId, input: leadData },
+    });
+  
+    return response.data.updateLead;
+  }
   public async getAllLeads(first?: number, page?: number): Promise<LeadsData> {
     const response = await this.client.query({
       query: GET_ALL_LEADS_QUERY,
