@@ -36,7 +36,10 @@ import {
   UPDATE_CHANNELS,
   CREATE_CHANNELS,
   DELETE_CHANNELS,
-  CREATE_VARIANT
+  CREATE_VARIANT,
+  DELETE_ATTRIBUTES,
+  CREATE_ATTRIBUTES,
+  UPDATE_ATTRIBUTES
 } from '../../mutations';
 import {
   CreateProductParams,
@@ -86,6 +89,10 @@ import {
   UpdatedChannels,
   InputChannelsParams,
   CreatedVariant,
+  InputChannelVariantParams,
+  InputAttributesParams,
+  DeleteAttribute,
+  UpdatedAttributes,
 } from '../../types';
 
 export class Inventory {
@@ -232,6 +239,19 @@ export class Inventory {
     const response = await this.client.mutate({
       mutation: UPDATE_VARIANT_IN_WAREHOUSE,
       variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
+  public async updateChannelInVariant({
+    variants_id,
+    channels_id,
+    warehouses_id,
+    input,
+  }: InputChannelVariantParams): Promise<UpdatedVariantWarehouse> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_VARIANT_IN_WAREHOUSE,
+      variables: { variants_id: variants_id, channels_id: channels_id, warehouses_id: warehouses_id, input: input },
     });
     return response.data;
   }
@@ -522,6 +542,39 @@ export class Inventory {
   public async createVariant(data: InputVariantParams): Promise<CreatedVariant> {
     const response = await this.client.mutate({
       mutation: CREATE_VARIANT,
+      variables: {
+        input: data,
+      },
+    });
+    return response.data;
+  }
+
+  public async updateAttribute({
+    id,
+    input,
+  }: InputAttributesParams): Promise<UpdatedAttributes> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_ATTRIBUTES,
+      variables: {
+        input: input,
+        id: id
+      },
+    });
+    return response.data;
+  }
+
+  public async deleteAttribute(id: number | string): Promise<DeleteAttribute> {
+    const response = await this.client.mutate({
+      mutation: DELETE_ATTRIBUTES,
+      variables: { id: id },
+    });
+
+    return response.data;
+  }
+
+  public async createAttribute(data: InputAttributesParams): Promise<CreatedAttributes> {
+    const response = await this.client.mutate({
+      mutation: CREATE_ATTRIBUTES,
       variables: {
         input: data,
       },
