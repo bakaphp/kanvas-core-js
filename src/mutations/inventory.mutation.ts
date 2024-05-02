@@ -202,13 +202,19 @@ export const UPDATE_VARIANT_IN_WAREHOUSE = gql`
     }
   }
 `;
+export const CHANNEL_IN_VARIANT = gql`
+  mutation($variants_id:ID! $channels_id:ID! $warehouses_id: ID! $input:VariantChannelInput!){
+    updateVariantInChannel(variants_id:$variants_id channels_id:$channels_id warehouses_id:$warehouses_id input: $input){
+        id,
+        name
+    }
+  }
+`;
 export const CREATE_STATUS = gql`
   mutation createStatus($input: StatusInput!) {
     createStatus(input: $input) {
       id
       name
-      is_default
-      slug
     }
   }
 `;
@@ -234,8 +240,17 @@ export const UPDATE_CATEGORIES = gql`
         id: $id
         input:$input
     ){
-        name,
+        total_products
+        weight
+        slug
+        position
+        name
+        is_published
         id
+        companies {
+          name
+          id
+        }
     }
 }`;
 
@@ -259,8 +274,16 @@ export const UPDATE_PRODUCT_TYPE = gql`
         id: $id
         input:$input
     ){
-        name,
+        companies {
+          name
+        }
+        name
+        is_published
+        description
         id
+        total_products
+        weight
+        uuid
     }
 }`;
 
@@ -276,8 +299,10 @@ export const UPDATE_STATUS = gql`
         id: $id
         input: $input
     ){
-        name,
         id
+        name
+        is_default
+        slug
     }
 }`;
 
@@ -325,8 +350,20 @@ export const CREATE_WAREHOUSE = gql`
 export const UPDATE_WAREHOUSE = gql`
   mutation updateWarehouse($input: WarehouseInputUpdate! $id: ID!) {
     updateWarehouse(input: $input, id:$id){
-        name,
+        name
+        id
         is_default
+        location
+        regions_id
+        uuid
+        total_products
+        company {
+          id
+          name
+        }
+        regions {
+         name
+        }
     }
   }`;
 
@@ -348,8 +385,16 @@ export const CREATE_CHANNELS = gql`
 export const UPDATE_CHANNELS = gql`
   mutation($input: UpdateChannelInput! $id: ID!) {
     updateChannel(input: $input, id: $id) {
-        name,
-        description
+        id
+        name
+        slug
+        companies {
+          name
+          id
+        }
+        is_default
+        is_published
+        uuid
     }
 }`;
 
@@ -391,8 +436,40 @@ export const CREATE_VARIANT = gql`
             }
         }
     }
-}
-`;
+}`;
+
+export const DELETE_ATTRIBUTES = gql`
+  mutation($id:ID!) {
+      deleteAttribute(id:$id)
+  }`;
+
+export const CREATE_ATTRIBUTES = gql`
+  mutation($input: AttributeInput!){
+      createAttribute(input: $input){
+          name,
+          values{
+              value
+          }
+      }
+  }`;
+
+export const UPDATE_ATTRIBUTES = gql`
+  mutation($id: ID!, $input: AttributeUpdateInput!) {
+      updateAttribute(id: $id, input: $input) {
+          id
+          is_filtrable
+          is_searchable
+          is_visible
+          name
+          uuid
+          values {
+            id
+            value
+          }
+          created_at
+      }
+  }`;
+
 
 
 

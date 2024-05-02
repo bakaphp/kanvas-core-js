@@ -45,9 +45,12 @@ export interface AttributesInterface {
   created_at: string;
   updated_at: string;
   companies: ProductCompany[];
+  is_visible: boolean;
+  is_searchable: boolean;
+  is_filterable: boolean;
   values: {
     id: string;
-    value: string | number; //Mixed
+    value: string | number;
   }[];
 }
 
@@ -272,6 +275,31 @@ export interface InputVariantWarehouseParams {
   };
 }
 
+export interface InputAttributesParams {
+  id: string | number;
+  input: {
+    name: string,
+    isFiltrable: boolean,
+    isSearchable: boolean,
+    isVisible: boolean,
+    value?: {
+      name: string,
+      id: number
+    },
+  };
+}
+
+export interface InputChannelVariantParams {
+  warehouses_id: string | number;
+  variants_id: string | number,
+  channels_id: number,
+  input: {
+    price: number,
+    discounted_price: number,
+    is_published: boolean;
+  }
+}
+
 export interface ProductVariant {
   name: string;
   description: string;
@@ -394,6 +422,10 @@ export interface UpdatedChannels {
   updateChannelInWarehouse: ChannelsInterface;
 }
 
+export interface UpdatedAttributes {
+  updateAttribute: AttributesInterface;
+}
+
 export interface UpdatedVariantWarehouse {
   updateVariantInWarehouse: VariantInterface;
 }
@@ -475,8 +507,18 @@ export interface CreatedVariant {
   };
 }
 
+export interface CreatedAttribute {
+  attributes: {
+    data: AttributesInterface[];
+  };
+}
+
 export interface DeleteChannels {
   deleteChannels: boolean;
+}
+
+export interface DeleteAttribute {
+  deleteAttribute: boolean;
 }
 
 export interface DeleteProduct {
