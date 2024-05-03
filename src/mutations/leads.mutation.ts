@@ -116,26 +116,27 @@ export const CREATE_LEAD_MUTATION = gql`
 export const UPDATE_LEAD_MUTATION = gql`
   mutation updateLead($id: ID!, $input: UpdateLeadInput!) {
     updateLead(id: $id, input: $input) {
-    id
-    branch_id
-    title
-    people_id
-    organization_id
-    leads_owner_id
-    receiver_id
-    status_id
-    type_id
-    source_id
-    description
-    reason_lost
-    pipeline_stage_id
-    custom_fields {
-      field_id
-      value
-    }
-    files {
       id
-      filename
-      url
+      branch_id
+      title
+      people_id
+      organization_id
+      leads_owner_id
+      receiver_id
+      status_id
+      type_id
+      source_id
+      description
+      reason_lost
+      pipeline_stage_id
+      custom_fields {
+        field_id
+        value
+      }
+      files {
+        id
+        filename
+        url
+      }
     }
-  }`;
+}`;
