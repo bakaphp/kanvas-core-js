@@ -115,21 +115,106 @@ export const DELETE_PRODUCT = gql`
 export const UPDATE_PRODUCT = gql`
   mutation($input: ProductInputUpdate, $id: ID!) {
     updateProduct(id: $id, input: $input) {
+      id
       products_types_id
+      uuid
       name
+      slug
       description
-      productsTypes {
-        id
-        name
-      }
       short_description
       html_description
       warranty_terms
       upc
       is_published
+      created_at
+      updated_at
+      files {
+        data {
+          id
+          uuid
+          name
+          url
+          size
+          field_name
+          type
+          attributes
+        }
+      }
+      categories {
+        id
+        uuid
+        name
+        slug
+      }
+      warehouses {
+        id
+        name
+        regions {
+          id
+          name
+        }
+      }
       status {
         id
         name
+      }
+      variants {
+        id
+        products_id
+        uuid
+        name
+        slug
+        user_interactions
+        description
+        short_description
+        html_description
+        sku
+        ean
+        status {
+          id
+          name
+        }
+        warehouses {
+          warehouses_id
+          status_history {
+            id
+            name
+            from_date
+          }
+          channels {
+            name
+            price
+            is_published
+          }
+          warehouseinfo {
+            id
+            name
+          }
+        }
+        attributes {
+          name
+          value
+        }
+      }
+      attributes {
+        name
+        value
+      }
+      productsTypes {
+        id
+        companies_id
+        uuid
+        name
+        description
+        slug
+        weight
+      }
+      companies {
+        id
+          branches{
+            id
+            uuid
+        }
       }
     }
   }
