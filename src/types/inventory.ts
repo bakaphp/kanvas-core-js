@@ -171,6 +171,7 @@ export interface ProductInterface {
   variants: VariantInterface[];
   attributes: ProductAttributes[];
   productsTypes: ProductTypeInterface;
+  status: StatusInterface;
   companies: ProductCompany;
 }
 
