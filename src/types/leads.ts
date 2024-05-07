@@ -127,18 +127,18 @@ export interface LeadInput {
 
 export interface UpdateLeadInput {
   branch_id: number;
-  title: string;
+  title?: string;
   people_id: string;
-  organization_id: number;
-  leads_owner_id: number;
-  receiver_id: number;
-  status_id: number;
-  type_id: number;
-  source_id: number;
-  description: string;
-  reason_lost: string;
-  pipeline_stage_id: number;
-  custom_fields: CustomFieldInput[];
+  organization_id?: number;
+  leads_owner_id?: number;
+  receiver_id?: number;
+  status_id?: number;
+  type_id?: number;
+  source_id?: number;
+  description?: string;
+  reason_lost?: string;
+  pipeline_stage_id?: number;
+  custom_fields?: CustomFieldInput[];
   files?: LeadAttachment[];
 }
 export interface WhereCondition {
