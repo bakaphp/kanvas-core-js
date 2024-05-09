@@ -99,11 +99,12 @@ export class Notifications {
   public async sendAnonymousNotificationBaseOnTemplate(
     template_name: string,
     data: any,
-    email: string
+    email: string,
+    subject: string
   ): Promise<boolean> {
     const response = await this.client.mutate({
       mutation: SEND_ANONYMOUS_NOTIFICATION_MUTATION,
-      variables: { template_name, data, email },
+      variables: { template_name, data, email, subject },
     });
     return response.data.sendNotificationAnonymousBaseOnTemplate as boolean;
   }
