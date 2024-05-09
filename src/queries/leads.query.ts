@@ -190,6 +190,10 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
           name
           uuid
         }
+        branch{
+          id
+          uuid
+        }
         status {
           name
           id
