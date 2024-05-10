@@ -182,6 +182,7 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
           name
           contacts {
             type {
+              id
               name
             }
             value
