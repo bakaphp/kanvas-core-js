@@ -179,6 +179,7 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
         }
         people {
           id
+          uuid
           name
           contacts {
             type {
