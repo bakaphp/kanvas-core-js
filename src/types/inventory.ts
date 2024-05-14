@@ -104,6 +104,7 @@ export interface VariantInterface {
   html_description: string;
   status: StatusInterface;
   sku: string;
+  uuid: string;
   ean: string;
   warehouses: {
     warehouses_id: string;
@@ -136,6 +137,8 @@ export interface ProductTypeInterface {
   weight: number;
   companies: ProductCompany;
   is_published: boolean;
+  products_attributes: AttributesInterface[];
+  variants_attributes: AttributesInterface[];
 }
 
 export interface FilesystemInterface {
@@ -414,9 +417,7 @@ export interface CreatedRegion {
 
 
 export interface UpdatedVariant {
-  products: {
-    updateVariant: VariantInterface;
-  };
+  updateVariant: VariantInterface;
 }
 
 export interface UpdatedChannels {
@@ -432,9 +433,7 @@ export interface UpdatedVariantWarehouse {
 }
 
 export interface UpdatedProduct {
-  data: {
-    updateProduct: ProductInterface;
-  };
+  updateProduct: ProductInterface;
 }
 
 export interface UpdatedCategory {
@@ -444,27 +443,19 @@ export interface UpdatedCategory {
 }
 
 export interface UpdatedProductType {
-  data: {
-    updatedProductTypes: ProductTypeInterface;
-  };
+  updatedProductTypes: ProductTypeInterface;
 }
 
 export interface UpdatedWarehouse {
-  data: {
-    updatedWarehouse: WarehouseInterface;
-  };
+  updatedWarehouse: WarehouseInterface;
 }
 
 export interface UpdatedRegion {
-  data: {
-    updatedRegion: RegionsInterface;
-  };
+  updatedRegion: RegionsInterface;
 }
 
 export interface UpdatedStatus {
-  data: {
-    updatedStatus: StatusInterface;
-  };
+  updatedStatus: StatusInterface;
 }
 
 export interface CreateStatus {
