@@ -72,7 +72,7 @@ export const GET_PRODUCTS = gql`
           html_description
           sku
           ean
-          channel{
+          channel {
             price
             quantity
         }
