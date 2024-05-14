@@ -105,7 +105,7 @@ export interface VariantInterface {
   status: StatusInterface;
   sku: string;
   ean: string;
-  channel:{
+  channel: {
     price:string
     quantity:string
   }
