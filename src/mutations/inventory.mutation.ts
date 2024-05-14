@@ -221,35 +221,99 @@ export const UPDATE_PRODUCT = gql`
 `;
 
 export const UPDATE_VARIANT = gql`
-  mutation($id: ID!, $input: VariantsUpdateInput!) {
+  mutation ($id: ID!, $input: VariantsUpdateInput!) {
     updateVariant(id: $id, input: $input) {
-      id
-      products_id
-      name
+      channels {
+        name
+        price
+      }
       description
-      short_description
+      ean
+      files {
+        data {
+          name
+          url
+        }
+      }
+      channels {
+        name
+        price
+        discounted_price
+      }
       html_description
+      id
+      name
+      sku
+      uuid
+      warehouses {
+        price
+        warehouseinfo {
+          total_products
+          location
+          id
+          name
+        }
+        quantity
+      }
+      product {
+        description
+        id
+        name
+        variants {
+          name
+          uuid
+          files {
+            data {
+              name
+              url
+            }
+          }
+        }
+        files {
+          data {
+            name
+            url
+          }
+        }
+      }
       status {
         id
+        name
       }
+      user_interactions
       attributes {
         name
+        id
         value
       }
-      warehouses {
-        warehouses_id
-        status_history {
-          id
-          name
-          from_date
-        }
-        warehouseinfo {
-          id
+      products_id
+      status {
+        id
+        name
+      }
+      companies {
+        branches {
+          uuid
           name
         }
       }
-      sku
-      ean
+      user_interactions
+      attributes {
+        name
+        id
+        value
+      }
+      products_id
+      status {
+        id
+        name
+      }
+      companies {
+        branches {
+          uuid
+          name
+        }
+      }
     }
   }
 `;
@@ -369,6 +433,14 @@ export const UPDATE_PRODUCT_TYPE = gql`
         total_products
         weight
         uuid
+        products_attributes {
+          name
+          id
+        }
+        variants_attributes {
+          name
+          id
+        }
     }
 }`;
 
@@ -412,8 +484,16 @@ export const UPDATE_REGION = gql`
         id: $id
         input:$input
     ){
-        name,
         id
+        name
+        uuid
+        is_default
+        currencies {
+          currency
+        }
+        companies {
+          name
+        }
     }
 }`;
 
