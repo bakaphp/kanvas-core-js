@@ -65,12 +65,17 @@ export const GET_PRODUCTS = gql`
           uuid
           name
           slug
+          metadata
           user_interactions
           description
           short_description
           html_description
           sku
           ean
+          channel {
+            price
+            quantity
+        }
           status {
             id
             name

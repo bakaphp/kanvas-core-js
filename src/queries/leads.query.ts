@@ -178,9 +178,12 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
           name
         }
         people {
+          id
+          uuid
           name
           contacts {
             type {
+              id
               name
             }
             value
@@ -188,6 +191,10 @@ export const GET_LEAD_BY_UUID_QUERY = gql`
         }
         receiver {
           name
+          uuid
+        }
+        branch{
+          id
           uuid
         }
         status {

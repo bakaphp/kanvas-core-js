@@ -44,11 +44,13 @@ export const SEND_ANONYMOUS_NOTIFICATION_MUTATION = gql`
     $template_name: String!
     $data: Mixed!
     $email: Email!
+    $subject: String!
   ) {
     sendNotificationAnonymousBaseOnTemplate(
       template_name: $template_name
       data: $data
       email: $email
+      subject: $subject
     )
   }
 `;
