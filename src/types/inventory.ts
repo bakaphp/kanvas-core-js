@@ -105,6 +105,10 @@ export interface VariantInterface {
   status: StatusInterface;
   sku: string;
   ean: string;
+  channel:{
+    price:string
+    quantity:string
+  }
   warehouses: {
     warehouses_id: string;
     status_history?: {
