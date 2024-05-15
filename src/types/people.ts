@@ -22,6 +22,7 @@ export interface PeopleInputInterface {
   dob?: string;
   contacts?: [ContactInputInterface];
   address?: [AddressInputInterface];
+  custom_fields: [CustomFieldInput]
 }
 export interface PeopleInterface {
   id?: string;

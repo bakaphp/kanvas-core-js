@@ -56,12 +56,16 @@ export class People {
   }
 
   public async getPeople(
-    where?: WhereCondition,
-    orderBy?: Array<OrderBy>,
-    search?: string,
-    first?: number,
-    page?: number
+    options:{
+      where?: WhereCondition,
+      orderBy?: Array<OrderBy>,
+      search?: string,
+      first?: number,
+      page?: number
+    } ={}
   ): Promise<PeopleInterface[]> {
+    const { first, page, where, orderBy, search } = options;
+
     const response = await this.client.query({
       query: PEOPLE_QUERY,
       variables: {
