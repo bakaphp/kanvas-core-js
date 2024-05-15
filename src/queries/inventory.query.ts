@@ -72,6 +72,10 @@ export const GET_PRODUCTS = gql`
           html_description
           sku
           ean
+          channel {
+            price
+            quantity
+        }
           status {
             id
             name
