@@ -6,12 +6,18 @@ export const PEOPLE_QUERY = gql`
     $orderBy: [QueryPeoplesOrderByOrderByClause!]
     $first: Int
     $page: Int
+    $hasEmails: QueryPeoplesHasEmailsWhereHasConditions
+    $hasPhones: QueryPeoplesHasPhonesWhereHasConditions
+    $hasCustomFields: QueryPeoplesHasCustomFieldsWhereHasConditions
   ) {
     peoples(
       where: $where
       orderBy: $orderBy
       first: $first
       page: $page
+      hasEmails: $hasEmails
+      hasPhones: $hasPhones
+      hasCustomFields: $hasCustomFields
     ) {
       data {
         id
@@ -27,7 +33,6 @@ export const PEOPLE_QUERY = gql`
           id
           firstname
           lastname
-          displayname
         }
         contacts {
           type {
