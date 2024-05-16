@@ -8,7 +8,6 @@ export const PEOPLE_QUERY = gql`
     $page: Int
     $hasEmails: QueryPeoplesHasEmailsWhereHasConditions
     $hasPhones: QueryPeoplesHasPhonesWhereHasConditions
-    $hasPhones: QueryPeoplesHasPhonesWhereHasConditions
     $hasCustomFields: QueryPeoplesHasCustomFieldsWhereHasConditions
   ) {
     peoples(
