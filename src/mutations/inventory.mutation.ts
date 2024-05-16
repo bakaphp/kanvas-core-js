@@ -572,6 +572,7 @@ export const CREATE_VARIANT = gql`
   mutation($input: VariantsInput!) {
     createVariant(input: $input){
         id,
+        uuid,
         products_id,
         name,
         attributes{
