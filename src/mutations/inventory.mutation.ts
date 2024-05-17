@@ -208,6 +208,22 @@ export const UPDATE_PRODUCT = gql`
         description
         slug
         weight
+        products_attributes {
+            name
+            id
+            values {
+              value
+              id
+            }
+          }
+          variants_attributes {
+            name
+            id
+            values {
+              value
+              id
+            }
+          }
       }
       companies {
         id
