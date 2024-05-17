@@ -102,6 +102,7 @@ export interface CreateLeadData {
   pipeline?: Pipeline | null;
   people?: PeopleInterface;
   followers?: { data: Follower[] };
+  branch?:{id:number, uuid:string}
   paginatorInfo?: PaginatorInfo;
   files?: { data: LeadAttachment[] };
   channels?: ChannelInterface[];
