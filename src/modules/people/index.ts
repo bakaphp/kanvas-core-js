@@ -56,15 +56,27 @@ export class People {
   }
 
   public async getPeople(
-    options:{
-      where?: WhereCondition,
-      orderBy?: Array<OrderBy>,
-      search?: string,
-      first?: number,
-      page?: number
-    } ={}
+    options: {
+      where?: WhereCondition;
+      orderBy?: Array<OrderBy>;
+      search?: string;
+      first?: number;
+      page?: number;
+      hasEmails?: WhereCondition;
+      hasPhones?: WhereCondition;
+      hasCustomFields?: WhereCondition;
+    } = {}
   ): Promise<PeopleInterface[]> {
-    const { first, page, where, orderBy, search } = options;
+    const {
+      first,
+      page,
+      where,
+      orderBy,
+      search,
+      hasEmails,
+      hasPhones,
+      hasCustomFields,
+    } = options;
 
     const response = await this.client.query({
       query: PEOPLE_QUERY,
@@ -74,6 +86,9 @@ export class People {
         search,
         first,
         page,
+        hasEmails,
+        hasPhones,
+        hasCustomFields,
       },
     });
     return response.data.peoples.data as PeopleInterface[];

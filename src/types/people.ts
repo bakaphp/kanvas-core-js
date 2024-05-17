@@ -10,8 +10,8 @@ import {
 
 export interface PeopleInputInterface {
   id: string;
-  uuid:string
-  name:string
+  uuid?:string
+  name?:string
   firstname: string;
   middlename?: string;
   lastname: string;
