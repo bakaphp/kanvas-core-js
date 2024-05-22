@@ -13,7 +13,7 @@ import {
   LogoutInterface,
   RefreshTokenInterface,
   ResetPasswordInterface,
-  socialLoginInputInterface,
+  SocialLoginInputInterface,
 } from '../../types';
 
 export class Auth {
@@ -85,9 +85,9 @@ export class Auth {
 
     return response.data as ChangePasswordInterface;
   }
-  
+
   public async socialLogin(
-    data: socialLoginInputInterface
+    data: SocialLoginInputInterface
   ): Promise<AuthenticationInterface> {
     const response = await this.client.mutate({
       mutation: SOCIAL_LOGIN_MUTATION,

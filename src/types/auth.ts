@@ -24,7 +24,7 @@ export interface ChangePasswordInterface {
   changePassword: boolean;
 }
 
-export interface socialLoginInputInterface {
+export interface SocialLoginInputInterface {
   token: string;
   provider: string;
 }
