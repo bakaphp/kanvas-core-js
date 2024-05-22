@@ -48,3 +48,16 @@ export const CHANGE_PASSWORD_MUTATION = gql`
     )
   }
 `;
+
+export const SOCIAL_LOGIN_MUTATION = gql`
+  mutation socialLogin($data: SocialLoginInput!) {
+    socialLogin(data: $data) {
+      id
+      uuid
+      token
+      refresh_token
+      token_expires
+      refresh_token_expires
+    }
+  }
+`;

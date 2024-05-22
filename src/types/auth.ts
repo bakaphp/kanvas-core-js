@@ -23,3 +23,8 @@ export interface ResetPasswordInterface {
 export interface ChangePasswordInterface {
   changePassword: boolean;
 }
+
+export interface socialLoginInputInterface {
+  token: string;
+  provider: string;
+}
