@@ -31,8 +31,10 @@ export const GET_ALL_LEADS_QUERY = gql`
         }
         organization {
           name
+          id
         }
         people {
+          id
           name
           contacts {
             type {
@@ -46,7 +48,12 @@ export const GET_ALL_LEADS_QUERY = gql`
           uuid
         }
         status {
+          id
           name
+        }
+        branch{
+          id
+          uuid
         }
         type {
           name
