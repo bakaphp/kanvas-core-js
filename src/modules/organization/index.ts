@@ -3,7 +3,7 @@ import {
   OrganizationInterface,
 } from 'types/organization';
 import { ClientType } from '../../index';
-import { UPDATE_ORGANIZATION_MUTATION } from 'mutations/organization.mutation';
+import { UPDATE_ORGANIZATION_MUTATION } from '../../mutations';
 
 export class Organization {
   constructor(protected client: ClientType) {}
