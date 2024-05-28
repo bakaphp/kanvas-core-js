@@ -20,3 +20,4 @@ export * from './people.mutation';
 export * from './message-comment.mutation';
 export * from './notification.mutation';
 export * from './settings.mutation';
+export * from './organization.mutation'
