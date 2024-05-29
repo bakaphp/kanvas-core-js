@@ -67,6 +67,12 @@ export const GET_ALL_LEADS_QUERY = gql`
         stage {
           name
         }
+        files {
+          data {
+            name
+            url
+          }
+        }
         custom_fields {
           data {
             name
