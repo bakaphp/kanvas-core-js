@@ -249,6 +249,7 @@ export const UPDATE_VARIANT = gql`
         data {
           name
           url
+          type
         }
       }
       channels {
