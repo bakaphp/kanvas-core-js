@@ -179,3 +179,10 @@ export interface InviteProcessData {
 export interface RoleData {
   roles: { data: { id: number }[] };
 }
+
+export interface SocialLoginParams {
+  token: string;
+  provider: string;
+}
+
+export interface SocialLoginData extends InviteProcessData {}
