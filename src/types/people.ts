@@ -26,9 +26,9 @@ export interface PeopleInputInterface {
   custom_fields?: [CustomFieldInput];
 }
 export interface PeopleInterface {
-  id?: string;
-  uuid?: string;
-  name?: string;
+  id: string;
+  uuid: string;
+  name: string;
   firstname?: string;
   lastname?: string;
   company?: CompanyInterface;
