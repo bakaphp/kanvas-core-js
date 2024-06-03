@@ -2,7 +2,11 @@
 
 import { CustomFieldInput, CustomFieldData } from './custom-fields';
 import { PaginatorInfo } from './paginator';
-import {PeopleInterface} from './index';
+import {
+  PeopleInterface,
+  ChannelInterface,
+  SystemModuleInterface,
+} from './index';
 // interface Contact {
 //   value: string;
 //   contacts_types_id?: number;
@@ -98,8 +102,11 @@ export interface CreateLeadData {
   pipeline?: Pipeline | null;
   people?: PeopleInterface;
   followers?: { data: Follower[] };
+  branch?:{id:number, uuid:string}
   paginatorInfo?: PaginatorInfo;
   files?: { data: LeadAttachment[] };
+  channels?: ChannelInterface[];
+  systemModule: SystemModuleInterface;
 }
 
 export interface LeadInput {
@@ -119,6 +126,22 @@ export interface LeadInput {
   files?: LeadAttachment[];
 }
 
+export interface UpdateLeadInput {
+  branch_id: number;
+  title?: string;
+  people_id: string;
+  organization_id?: number;
+  leads_owner_id?: number;
+  receiver_id?: number;
+  status_id?: number;
+  type_id?: number;
+  source_id?: number;
+  description?: string;
+  reason_lost?: string;
+  pipeline_stage_id?: number;
+  custom_fields?: CustomFieldInput[];
+  files?: LeadAttachment[];
+}
 export interface WhereCondition {
   column: string;
   operator: string;

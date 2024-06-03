@@ -17,12 +17,16 @@ interface AppModuleMessage {
 }
 
 export interface MessageInputInterface {
-  message_types_id: string;
+  message_verb: string;
   message: any;
   system_modules_id: string;
   entity_id: string;
   parent_id?: string;
   distribution?: DistributionInputInterface;
+}
+
+export interface MessageUpdateInputInterface {
+  message: string;
 }
 
 export interface DistributionInputInterface {
@@ -46,8 +50,8 @@ export interface HasAppModuleMessageWhereConditions {
 }
 
 export interface OrderByMessage {
-    column: string;
-    order: string;
+  column: string;
+  order: string;
 }
 
 export enum InteractionTypeInput {

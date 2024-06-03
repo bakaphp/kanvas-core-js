@@ -26,6 +26,7 @@ export interface UserInterface {
   lastname: string;
   lastvisit: string;
   last_visit: string;
+  mainRole: string;
   // location: Location;
   phone: string;
   phone_number: string;
@@ -78,6 +79,7 @@ export interface CreateUserParams {
   displayname?: string;
   password: string;
   password_confirmation: string;
+  phone_number?: string;
   custom_fields?: CustomFieldInput[];
 }
 
@@ -94,6 +96,7 @@ export interface UserData {
   default_company: number;
   default_company_branch: number;
   email: string;
+  mainRole: string;
   branches: {
     id: string;
     name: string;
@@ -164,6 +167,7 @@ export interface InviteProcessParams {
   firstname: string;
   lastname: string;
   password: string;
+  phone_number?: string
 }
 
 export interface InviteProcessData {

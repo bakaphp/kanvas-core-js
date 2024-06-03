@@ -32,6 +32,7 @@ import {
   People,
   Notifications,
   Channels,
+  Organization,
 } from './modules';
 
 import { setContext } from '@apollo/client/link/context';
@@ -113,6 +114,7 @@ export default class KanvasCore {
   public systemModules: SystemModules;
 
   public companies: Companies;
+  public organization: Organization;
   public companiesBranches: CompaniesBranches;
   public follow: Follow;
   public people: People;
@@ -145,6 +147,7 @@ export default class KanvasCore {
     this.topics = new Topics(this.client);
     this.systemModules = new SystemModules(this.client);
     this.companies = new Companies(this.client);
+    this.organization = new Organization(this.client);
     this.companiesBranches = new CompaniesBranches(this.client);
     this.follow = new Follow(this.client);
     this.people = new People(this.client);

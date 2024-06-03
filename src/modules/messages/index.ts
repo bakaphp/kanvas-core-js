@@ -7,18 +7,20 @@ import {
   HasAppModuleMessageWhereConditions,
   OrderByMessage,
   WhereCondition,
+  MessageUpdateInputInterface,
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
   INTERACTION_MESSAGE_MUTATION,
   ATTACH_TOPIC_TO_MESSAGE_MUTATION,
   DETACH_TOPIC_TO_MESSAGE_MUTATION,
+  UPDATE_MESSAGE_MUTATION,
+  DELETE_MESSAGE_MUTATION,
 } from '../../mutations';
 
 import { GET_MESSAGES_QUERY } from '../../queries';
 import { MessagesComments } from '../messages-comments';
 export class Messages {
-  
   public comments: MessagesComments;
 
   constructor(protected client: ClientType) {
@@ -33,6 +35,25 @@ export class Messages {
       variables: { input: input },
     });
     return (await response).data.createMessage as MessagesInterface;
+  }
+
+  public async updateMessage(
+    id: string,
+    input: MessageUpdateInputInterface
+  ): Promise<MessagesInterface> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_MESSAGE_MUTATION,
+      variables: { input: input, id: id },
+    });
+    return response.data.updateMessage as MessagesInterface;
+  }
+
+  public async deleteMessage(id: string): Promise<Boolean> {
+    await this.client.mutate({
+      mutation: DELETE_MESSAGE_MUTATION,
+      variables: { id: id },
+    });
+    return true;
   }
 
   public async interactionMessage(
@@ -65,7 +86,7 @@ export class Messages {
         page,
       },
     });
-    return response.data.getMessages as MessagesInterface[];
+    return response.data.messages as MessagesInterface[];
   }
 
   public async attachTopicToMessage(

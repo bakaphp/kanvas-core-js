@@ -45,9 +45,12 @@ export interface AttributesInterface {
   created_at: string;
   updated_at: string;
   companies: ProductCompany[];
+  is_visible: boolean;
+  is_searchable: boolean;
+  is_filterable: boolean;
   values: {
     id: string;
-    value: string | number; //Mixed
+    value: string | number;
   }[];
 }
 
@@ -74,6 +77,7 @@ export interface RegionsInterface {
   short_slug: string;
   settings: string;
   is_default: boolean;
+  company: ProductCompany;
 }
 
 export interface WarehouseInterface {
@@ -87,6 +91,7 @@ export interface WarehouseInterface {
     id: number;
     name: string;
   };
+  company: ProductCompany;
 }
 export interface VariantInterface {
   id: string;
@@ -99,7 +104,12 @@ export interface VariantInterface {
   html_description: string;
   status: StatusInterface;
   sku: string;
+  uuid: string;
   ean: string;
+  channel: {
+    price:string
+    quantity:string
+  }
   warehouses: {
     warehouses_id: string;
     status_history?: {
@@ -130,6 +140,9 @@ export interface ProductTypeInterface {
   slug: string;
   weight: number;
   companies: ProductCompany;
+  is_published: boolean;
+  products_attributes: AttributesInterface[];
+  variants_attributes: AttributesInterface[];
 }
 
 export interface FilesystemInterface {
@@ -165,7 +178,30 @@ export interface ProductInterface {
   variants: VariantInterface[];
   attributes: ProductAttributes[];
   productsTypes: ProductTypeInterface;
+  status: StatusInterface;
   companies: ProductCompany;
+}
+
+export interface ChannelsInterface {
+  id: string;
+  name: string;
+  slug: string;
+  companies: ProductCompany;
+  is_default: boolean;
+  uuid: string;
+  is_published: boolean
+}
+
+export interface InputChannelsParams {
+  id: number;
+  input: {
+    name: string;
+    slug?: string;
+    companies?: ProductCompany;
+    is_default: boolean;
+    uuid?: string;
+    is_published?: boolean
+  };
 }
 
 export interface InputProductParams {
@@ -209,6 +245,31 @@ export interface InputVariantParams {
   };
 }
 
+export interface InputWarehouseParams {
+  id: string | number | null;
+  input: {
+    uuid?: string;
+    name: string;
+    location?: string;
+    is_default?: boolean;
+    is_published?: number;
+    regions_id?: number;
+    companies_id?: number;
+  };
+}
+
+export interface InputRegionParams {
+  id: string | number | null;
+  input: {
+    name: string;
+    short_slug?: string;
+    is_default?: boolean;
+    currency_id?: number;
+    companies_id?: number;
+  };
+}
+
+
 export interface InputVariantWarehouseParams {
   id: string | number;
   input: {
@@ -220,6 +281,31 @@ export interface InputVariantWarehouseParams {
     price?: number;
     sku?: string;
   };
+}
+
+export interface InputAttributesParams {
+  id: string | number;
+  input: {
+    name: string,
+    isFiltrable: boolean,
+    isSearchable: boolean,
+    isVisible: boolean,
+    value?: {
+      name: string,
+      id: number
+    },
+  };
+}
+
+export interface InputChannelVariantParams {
+  warehouses_id: string | number;
+  variants_id: string | number,
+  channels_id: number,
+  input: {
+    price: number,
+    discounted_price: number,
+    is_published: boolean;
+  }
 }
 
 export interface ProductVariant {
@@ -259,6 +345,39 @@ export interface CreateProductParams {
   company_id?: number | string;
 }
 
+export interface InputCategoriesParams {
+  id: number | null;
+  input: {
+    name: string,
+    is_published: boolean,
+    companies_id: number,
+    position?: number,
+    slug?: string
+  }
+}
+
+export interface InputProductTypeParams {
+  id: number | null;
+  input: {
+    name: string,
+    is_published?: boolean,
+    companies_id?: number,
+    position?: number,
+    slug?: string,
+    description?: string,
+    weight: number
+  }
+}
+
+export interface InputUpdateStatusParams {
+  id: number | null;
+  input: {
+    name: string;
+    is_default?: boolean;
+    company_id?: number;
+  }
+}
+
 export interface AllCreatedProducts {
   products: {
     data: ProductInterface[];
@@ -284,16 +403,33 @@ export interface CreatedProduct {
   createProduct: ProductInterface;
 }
 
+export interface CreatedChannels {
+  createChannel: ChannelsInterface;
+}
+
 export interface CreatedProductTypes {
   productTypes: {
     data: ProductTypeInterface[];
   };
 }
 
-export interface UpdatedVariant {
-  products: {
-    updateVariant: VariantInterface;
+export interface CreatedRegion {
+  createRegion: {
+    data: RegionsInterface[];
   };
+}
+
+
+export interface UpdatedVariant {
+  updateVariant: VariantInterface;
+}
+
+export interface UpdatedChannels {
+  updateChannelInWarehouse: ChannelsInterface;
+}
+
+export interface UpdatedAttributes {
+  updateAttribute: AttributesInterface;
 }
 
 export interface UpdatedVariantWarehouse {
@@ -301,9 +437,29 @@ export interface UpdatedVariantWarehouse {
 }
 
 export interface UpdatedProduct {
+  updateProduct: ProductInterface;
+}
+
+export interface UpdatedCategory {
   data: {
-    updateProduct: ProductInterface;
+    updateCategory: CategoryInterface;
   };
+}
+
+export interface UpdatedProductType {
+  updatedProductTypes: ProductTypeInterface;
+}
+
+export interface UpdatedWarehouse {
+  updatedWarehouse: WarehouseInterface;
+}
+
+export interface UpdatedRegion {
+  updatedRegion: RegionsInterface;
+}
+
+export interface UpdatedStatus {
+  updatedStatus: StatusInterface;
 }
 
 export interface CreateStatus {
@@ -316,14 +472,21 @@ export interface CreatedStatus {
   };
 }
 
-export interface CreatedrRegions {
+export interface CreatedWarehouse {
+  getStatus: {
+    data: WarehouseInterface[];
+    paginatorInfo: PaginatorInfo;
+  };
+}
+
+export interface CreatedRegions {
   regions: {
     data: RegionsInterface[];
   };
 }
 
 export interface CreatedWarehouses {
-  getWarehouses: {
+  warehouses: {
     data: WarehouseInterface[];
   };
 }
@@ -334,8 +497,48 @@ export interface CreatedAttributes {
   };
 }
 
+export interface CreatedVariant {
+  variants: {
+    data: VariantInterface[];
+  };
+}
+
+export interface CreatedAttribute {
+  attributes: {
+    data: AttributesInterface[];
+  };
+}
+
+export interface DeleteChannels {
+  deleteChannels: boolean;
+}
+
+export interface DeleteAttribute {
+  deleteAttribute: boolean;
+}
+
 export interface DeleteProduct {
   deleteProduct: boolean;
+}
+
+export interface DeleteStatus {
+  deleteStatus: boolean;
+}
+
+export interface DeleteCategories {
+  deleteCategories: boolean;
+}
+
+export interface DeleteProductType {
+  deleteProductType: boolean;
+}
+
+export interface DeleteRegion {
+  deleteRegion: boolean;
+}
+
+export interface DeleteWarehouse {
+  deleteWarehousee: boolean;
 }
 
 export interface ProductDashboardInterface {

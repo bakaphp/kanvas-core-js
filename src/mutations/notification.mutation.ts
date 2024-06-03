@@ -11,13 +11,13 @@ export const SEND_NOTIFICATION_BASE_TEMPLATE_MUTATION = gql`
     $template_name: String!
     $data: Mixed!
     $via: [String!]!
-    $users_id: [Int!]!
+    $users: [Mixed!]!
   ) {
     sendNotificationBaseOnTemplate(
       template_name: $template_name
       data: $data
       via: $via
-      users_id: $users_id
+      users: $users
     )
   }
 `;
@@ -36,5 +36,21 @@ export const SEND_NOTIFICATION_BY_MESSAGE_MUTATION = gql`
       sent
       message
     }
+  }
+`;
+
+export const SEND_ANONYMOUS_NOTIFICATION_MUTATION = gql`
+  mutation sendNotificationAnonymousBaseOnTemplate(
+    $template_name: String!
+    $data: Mixed!
+    $email: Email!
+    $subject: String!
+  ) {
+    sendNotificationAnonymousBaseOnTemplate(
+      template_name: $template_name
+      data: $data
+      email: $email
+      subject: $subject
+    )
   }
 `;

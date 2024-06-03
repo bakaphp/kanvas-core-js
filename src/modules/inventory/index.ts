@@ -14,18 +14,39 @@ import {
 import {
   CREATE_PRODUCT,
   CREATE_STATUS,
+  CREATE_CATEGORIES,
+  DELETE_CATEGORIES,
   DELETE_PRODUCT,
   DELETE_VARIANT,
+  UPDATE_CATEGORIES,
   UPDATE_PRODUCT,
   UPDATE_VARIANT,
   UPDATE_VARIANT_IN_WAREHOUSE,
+  CREATE_PRODUCT_TYPE,
+  UPDATE_PRODUCT_TYPE,
+  DELETE_PRODUCT_TYPE,
+  UPDATE_STATUS,
+  DELETE_STATUS,
+  UPDATE_WAREHOUSE,
+  DELETE_WAREHOUSE,
+  CREATE_WAREHOUSE,
+  UPDATE_REGION,
+  CREATE_REGION,
+  DELETE_REGION,
+  UPDATE_CHANNELS,
+  CREATE_CHANNELS,
+  DELETE_CHANNELS,
+  CREATE_VARIANT,
+  DELETE_ATTRIBUTES,
+  CREATE_ATTRIBUTES,
+  UPDATE_ATTRIBUTES
 } from '../../mutations';
 import {
   CreateProductParams,
   CreatedProduct,
   CreatedProductTypes,
   CreatedStatus,
-  CreatedrRegions,
+  CreatedRegions,
   DeleteProduct,
   ProductInterface,
   UpdatedVariant,
@@ -46,6 +67,32 @@ import {
   InputStatusParams,
   ProductAdminDashboardInterface,
   CreateStatus,
+  DeleteCategories,
+  UpdatedCategory,
+  InputCategoriesParams,
+  InputProductTypeParams,
+  DeleteProductType,
+  UpdatedProductType,
+  DeleteStatus,
+  InputUpdateStatusParams,
+  UpdatedStatus,
+  InputWarehouseParams,
+  DeleteWarehouse,
+  CreatedWarehouse,
+  UpdatedWarehouse,
+  DeleteRegion,
+  UpdatedRegion,
+  InputRegionParams,
+  CreatedRegion,
+  DeleteChannels,
+  CreatedChannels,
+  UpdatedChannels,
+  InputChannelsParams,
+  CreatedVariant,
+  InputChannelVariantParams,
+  InputAttributesParams,
+  DeleteAttribute,
+  UpdatedAttributes,
 } from '../../types';
 
 export class Inventory {
@@ -146,9 +193,18 @@ export class Inventory {
     return response.data;
   }
 
+  public async deleteStatus(id: number): Promise<DeleteStatus> {
+    const response = await this.client.mutate({
+      mutation: DELETE_STATUS,
+      variables: { id: id },
+    });
+
+    return response.data;
+  }
+
   public async getRegions(
     whereCondition?: WhereCondition
-  ): Promise<CreatedrRegions> {
+  ): Promise<CreatedRegions> {
     const response = await this.client.query({
       query: GET_REGIONS,
       variables: { whereCondition },
@@ -187,6 +243,19 @@ export class Inventory {
     return response.data;
   }
 
+  public async updateChannelInVariant({
+    variants_id,
+    channels_id,
+    warehouses_id,
+    input,
+  }: InputChannelVariantParams): Promise<UpdatedVariantWarehouse> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_VARIANT_IN_WAREHOUSE,
+      variables: { variants_id: variants_id, channels_id: channels_id, warehouses_id: warehouses_id, input: input },
+    });
+    return response.data;
+  }
+
   public async getWareHouses(
     whereCondition?: WhereCondition
   ): Promise<CreatedWarehouses> {
@@ -216,6 +285,18 @@ export class Inventory {
 
     return response.data;
   }
+
+  public async updateStatus({
+    id,
+    input,
+  }: InputUpdateStatusParams): Promise<UpdatedStatus> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_STATUS,
+      variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
   public async productAdminDashboard(): Promise<
     ProductAdminDashboardInterface
   > {
@@ -305,6 +386,199 @@ export class Inventory {
       partialRefetch: true,
     });
 
+    return response.data;
+  }
+
+  public async updateCategory({
+    id,
+    input,
+  }: InputCategoriesParams): Promise<UpdatedCategory> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_CATEGORIES,
+      variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
+  public async createCategory(data: InputCategoriesParams): Promise<CreateStatus> {
+    const response = await this.client.mutate({
+      mutation: CREATE_CATEGORIES,
+      variables: {
+        input: data,
+      },
+    });
+    return response.data;
+  }
+
+  public async deleteCategory(id: number | string): Promise<DeleteCategories> {
+    const response = await this.client.mutate({
+      mutation: DELETE_CATEGORIES,
+      variables: { id: id },
+    });
+
+    return response.data;
+  }
+
+  public async updateProductType({
+    id,
+    input,
+  }: InputProductTypeParams): Promise<UpdatedProductType> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_PRODUCT_TYPE,
+      variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
+  public async createProductType(data: InputProductTypeParams): Promise<CreatedProductTypes> {
+    const response = await this.client.mutate({
+      mutation: CREATE_PRODUCT_TYPE,
+      variables: {
+        input: data,
+      },
+    });
+    return response.data;
+  }
+
+  public async deleteProductType(id: number | string): Promise<DeleteProductType> {
+    const response = await this.client.mutate({
+      mutation: DELETE_PRODUCT_TYPE,
+      variables: { id: id },
+    });
+
+    return response.data;
+  }
+
+  public async updateWarehouse({
+    id,
+    input,
+  }: InputWarehouseParams): Promise<UpdatedWarehouse> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_WAREHOUSE,
+      variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
+  public async createWarehouse(data: InputWarehouseParams): Promise<CreatedWarehouse> {
+    const response = await this.client.mutate({
+      mutation: CREATE_WAREHOUSE,
+      variables: {
+        input: data,
+      },
+    });
+    return response.data;
+  }
+
+  public async deleteWarehouse(id: number | string): Promise<DeleteWarehouse> {
+    const response = await this.client.mutate({
+      mutation: DELETE_WAREHOUSE,
+      variables: { id: id },
+    });
+
+    return response.data;
+  }
+
+  public async updateRegion({
+    id,
+    input,
+  }: InputRegionParams): Promise<UpdatedRegion> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_REGION,
+      variables: { id: id, input: input },
+    });
+    return response.data;
+  }
+
+  public async createRegion(data: InputRegionParams): Promise<CreatedRegion> {
+    const response = await this.client.mutate({
+      mutation: CREATE_REGION,
+      variables: {
+        input: data,
+      },
+    });
+    return response.data;
+  }
+
+  public async deleteRegion(id: number | string): Promise<DeleteRegion> {
+    const response = await this.client.mutate({
+      mutation: DELETE_REGION,
+      variables: { id: id },
+    });
+
+    return response.data;
+  }
+
+  public async updateChannels({
+    id,
+    input,
+  }: InputChannelsParams): Promise<UpdatedChannels> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_CHANNELS,
+      variables: { id: id, input: input },
+    });
+    return response.data as UpdatedChannels;
+  }
+
+  public async createChannels(data: InputChannelsParams): Promise<CreatedChannels> {
+    const response = await this.client.mutate({
+      mutation: CREATE_CHANNELS,
+      variables: {
+        input: data,
+      },
+    });
+    return response.data as CreatedChannels;
+  }
+
+  public async deleteChannels(id: number | string): Promise<DeleteChannels> {
+    const response = await this.client.mutate({
+      mutation: DELETE_CHANNELS,
+      variables: { id: id },
+    });
+
+    return response.data as DeleteChannels;
+  }
+
+  public async createVariant(data: InputVariantParams): Promise<CreatedVariant> {
+    const response = await this.client.mutate({
+      mutation: CREATE_VARIANT,
+      variables: {
+        input: data,
+      },
+    });
+    return response.data;
+  }
+
+  public async updateAttribute({
+    id,
+    input,
+  }: InputAttributesParams): Promise<UpdatedAttributes> {
+    const response = await this.client.mutate({
+      mutation: UPDATE_ATTRIBUTES,
+      variables: {
+        input: input,
+        id: id
+      },
+    });
+    return response.data;
+  }
+
+  public async deleteAttribute(id: number | string): Promise<DeleteAttribute> {
+    const response = await this.client.mutate({
+      mutation: DELETE_ATTRIBUTES,
+      variables: { id: id },
+    });
+
+    return response.data;
+  }
+
+  public async createAttribute(data: InputAttributesParams): Promise<CreatedAttributes> {
+    const response = await this.client.mutate({
+      mutation: CREATE_ATTRIBUTES,
+      variables: {
+        input: data,
+      },
+    });
     return response.data;
   }
 }

@@ -19,6 +19,7 @@ import {
   READ_ALL_NOTIFICATIONS_MUTATION,
   SEND_NOTIFICATION_BASE_TEMPLATE_MUTATION,
   SEND_NOTIFICATION_BY_MESSAGE_MUTATION,
+  SEND_ANONYMOUS_NOTIFICATION_MUTATION,
 } from '../../mutations';
 
 export class Notifications {
@@ -74,11 +75,11 @@ export class Notifications {
     template_name: string,
     data: any,
     via: string[],
-    users_id: number[]
+    users: number | string[]
   ): Promise<boolean> {
     const response = await this.client.mutate({
       mutation: SEND_NOTIFICATION_BASE_TEMPLATE_MUTATION,
-      variables: { template_name, data, via, users_id },
+      variables: { template_name, data, via, users },
     });
     return response.data.sendNotificationBaseOnTemplate as boolean;
   }
@@ -93,5 +94,18 @@ export class Notifications {
       variables: { message, via, users_id },
     });
     return response.data.sendNotificationByMessage as boolean;
+  }
+
+  public async sendAnonymousNotificationBaseOnTemplate(
+    template_name: string,
+    data: any,
+    email: string,
+    subject: string
+  ): Promise<boolean> {
+    const response = await this.client.mutate({
+      mutation: SEND_ANONYMOUS_NOTIFICATION_MUTATION,
+      variables: { template_name, data, email, subject },
+    });
+    return response.data.sendNotificationAnonymousBaseOnTemplate as boolean;
   }
 }

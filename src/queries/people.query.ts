@@ -2,18 +2,22 @@ import { gql } from '@apollo/client/core';
 
 export const PEOPLE_QUERY = gql`
   query peoples(
-    $where: WhereCondition
-    $orderBy: [OrderBy]
-    $search: String
+    $where: QueryPeoplesWhereWhereConditions
+    $orderBy: [QueryPeoplesOrderByOrderByClause!]
     $first: Int
     $page: Int
+    $hasEmails: QueryPeoplesHasEmailsWhereHasConditions
+    $hasPhones: QueryPeoplesHasPhonesWhereHasConditions
+    $hasCustomFields: QueryPeoplesHasCustomFieldsWhereHasConditions
   ) {
     peoples(
       where: $where
       orderBy: $orderBy
-      search: $search
       first: $first
       page: $page
+      hasEmails: $hasEmails
+      hasPhones: $hasPhones
+      hasCustomFields: $hasCustomFields
     ) {
       data {
         id
@@ -29,7 +33,6 @@ export const PEOPLE_QUERY = gql`
           id
           firstname
           lastname
-          displayname
         }
         contacts {
           type {

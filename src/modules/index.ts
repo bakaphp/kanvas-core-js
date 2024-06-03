@@ -21,3 +21,4 @@ export * from './follows';
 export * from './people';
 export * from './notifications';
 export * from './channels';
+export * from './organization';
