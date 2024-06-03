@@ -113,3 +113,17 @@ export const SWITCH_COMPANY_BRANCH_MUTATION = gql`
     switchCompanyBranch(company_branch_id: $company_branch_id)
   }
 `;
+
+export const SOCIAL_LOGIN_MUTATTION = gql`
+  mutation socialLogin($data: SocialLoginInput!) {
+    socialLogin(data: $data) {
+      id
+      token
+      refresh_token
+      token_expires
+      refresh_token_expires
+      time
+      timezone
+    }
+  }
+`;
