@@ -7,11 +7,12 @@ import {
   ContactInterface,
   AddressInterface,
 } from './index';
+import { PaginatorInfo } from './paginator';
 
 export interface PeopleInputInterface {
   id: string;
-  uuid?:string
-  name?:string
+  uuid: string;
+  name: string;
   firstname: string;
   middlename?: string;
   lastname: string;
@@ -22,12 +23,12 @@ export interface PeopleInputInterface {
   dob?: string;
   contacts?: [ContactInputInterface];
   address?: [AddressInputInterface];
-  custom_fields?: [CustomFieldInput]
+  custom_fields?: [CustomFieldInput];
 }
 export interface PeopleInterface {
-  id?: string;
-  uuid?: string;
-  name?: string;
+  id: string;
+  uuid: string;
+  name: string;
   firstname?: string;
   lastname?: string;
   company?: CompanyInterface;
@@ -35,4 +36,9 @@ export interface PeopleInterface {
   contacts: ContactInterface[];
   address?: AddressInterface[];
   custom_fields?: CustomFieldInput[];
+}
+
+export interface CreatedPeople {
+  data: PeopleInterface[];
+  paginatorInfo?: PaginatorInfo;
 }
