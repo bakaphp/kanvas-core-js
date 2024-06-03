@@ -76,6 +76,8 @@ export class Leads {
     const response = await this.client.query({
       query: GET_LEAD_BY_UUID_QUERY,
       variables: { where },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
 
     return response.data;

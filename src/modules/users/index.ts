@@ -14,6 +14,7 @@ import {
   GET_INVITE_MUTATION,
   PROCESS_INVITE_MUTATION,
   DELETE_INVITE_MUTATION,
+  SOCIAL_LOGIN_MUTATTION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -28,6 +29,8 @@ import {
   InviteParams,
   InviteProcessData,
   InviteData,
+  SocialLoginData,
+  SocialLoginParams,
 } from '../../types';
 
 export class Users {
@@ -192,5 +195,15 @@ export class Users {
         .includes(RolesEnum.ADMIN.toLowerCase());
     }
     return false;
+  }
+
+  public async socialLoging(
+    input: SocialLoginParams
+  ): Promise<SocialLoginData> {
+    const response = await this.client.mutate({
+      mutation: SOCIAL_LOGIN_MUTATTION,
+      variables: { input },
+    });
+    return response.data;
   }
 }
