@@ -5,6 +5,7 @@ import {
   PeopleInterface,
   WhereCondition,
   OrderBy,
+  CreatedPeople,
 } from '../../types';
 
 import {
@@ -66,7 +67,7 @@ export class People {
       hasPhones?: WhereCondition;
       hasCustomFields?: WhereCondition;
     } = {}
-  ): Promise<PeopleInterface[]> {
+  ): Promise<CreatedPeople> {
     const {
       first,
       page,
@@ -91,6 +92,6 @@ export class People {
         hasCustomFields,
       },
     });
-    return response.data.peoples.data as PeopleInterface[];
+    return response.data.peoples
   }
 }
