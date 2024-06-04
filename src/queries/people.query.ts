@@ -9,10 +9,12 @@ export const PEOPLE_QUERY = gql`
     $hasEmails: QueryPeoplesHasEmailsWhereHasConditions
     $hasPhones: QueryPeoplesHasPhonesWhereHasConditions
     $hasCustomFields: QueryPeoplesHasCustomFieldsWhereHasConditions
+    $search: String
   ) {
     peoples(
       where: $where
       orderBy: $orderBy
+      search: $search
       first: $first
       page: $page
       hasEmails: $hasEmails
