@@ -12,7 +12,6 @@ import { PaginatorInfo } from './paginator';
 export interface PeopleInputInterface {
   id: string;
   uuid: string;
-  name: string;
   firstname: string;
   middlename?: string;
   lastname: string;
