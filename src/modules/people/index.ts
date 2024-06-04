@@ -91,6 +91,8 @@ export class People {
         hasPhones,
         hasCustomFields,
       },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
     return response.data.peoples
   }
