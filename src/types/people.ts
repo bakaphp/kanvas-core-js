@@ -26,8 +26,8 @@ export interface PeopleInterface {
   id: string;
   uuid: string;
   name: string;
-  firstname?: string;
-  lastname?: string;
+  firstname: string;
+  lastname: string;
   company?: CompanyInterface;
   user?: UserInterface;
   contacts: ContactInterface[];
