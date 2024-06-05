@@ -66,7 +66,7 @@ export const UPDATE_USER_MUTATION = gql`
 `;
 
 export const INVITE_USER_MUTATION = gql`
-  mutation($input: InviteInput!) {
+  mutation ($input: InviteInput!) {
     inviteUser(input: $input) {
       id
       email
@@ -77,7 +77,7 @@ export const INVITE_USER_MUTATION = gql`
 `;
 
 export const GET_INVITE_MUTATION = gql`
-  mutation($hash: String!) {
+  mutation ($hash: String!) {
     getInvite(hash: $hash) {
       email
       invite_hash
@@ -125,5 +125,11 @@ export const SOCIAL_LOGIN_MUTATTION = gql`
       time
       timezone
     }
+  }
+`;
+
+export const REQUEST_DELETED_ACCOUNT_MUTATION = gql`
+  mutation requestDeleteAccount {
+    requestDeleteAccount
   }
 `;
