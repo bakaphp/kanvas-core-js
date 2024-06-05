@@ -34,16 +34,7 @@ export interface PeopleInterface {
   address?: AddressInterface[];
   custom_fields?: CustomFieldInput[];
 }
-export interface PeopleInterfaceForLeads {
-  name?: string;
-  firstname?: string;
-  lastname?: string;
-  company?: CompanyInterface;
-  user?: UserInterface;
-  contacts: ContactInterface[];
-  address?: AddressInterface[];
-  custom_fields?: CustomFieldInput[];
-}
+
 
 export interface CreatedPeople {
   data: PeopleInterface[];
