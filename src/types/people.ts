@@ -10,9 +10,6 @@ import {
 import { PaginatorInfo } from './paginator';
 
 export interface PeopleInputInterface {
-  id: string;
-  uuid: string;
-  name?:string
   firstname: string;
   middlename?: string;
   lastname: string;
@@ -26,8 +23,18 @@ export interface PeopleInputInterface {
   custom_fields?: [CustomFieldInput];
 }
 export interface PeopleInterface {
-  id?: string;
-  uuid?: string;
+  id: string;
+  uuid: string;
+  name: string;
+  firstname?: string;
+  lastname?: string;
+  company?: CompanyInterface;
+  user?: UserInterface;
+  contacts: ContactInterface[];
+  address?: AddressInterface[];
+  custom_fields?: CustomFieldInput[];
+}
+export interface PeopleInterfaceForLeads {
   name?: string;
   firstname?: string;
   lastname?: string;
