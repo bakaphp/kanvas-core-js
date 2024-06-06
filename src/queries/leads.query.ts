@@ -132,7 +132,11 @@ export const GET_ALL_LEADS_QUERY = gql`
     }
   }
 `;
-
+export const LEAD_DELETE_MUTATION = gql`
+  mutation deleteLead($id: ID!) {
+    deleteLead(id: $id)
+  }
+`;
 export const GET_LEADS_DASHBOARD_QUERY = gql`
   query GetLeadsDashboard(
     $first: Int!

@@ -2,6 +2,7 @@ import {
   GET_ALL_LEADS_QUERY,
   GET_LEADS_DASHBOARD_QUERY,
   GET_LEAD_BY_UUID_QUERY,
+  LEAD_DELETE_MUTATION,
 } from '../../queries';
 import { ClientType } from '../../index';
 import { CREATE_LEAD_MUTATION, UPDATE_LEAD_MUTATION } from '../../mutations';
@@ -39,6 +40,16 @@ export class Leads {
     });
   
     return response.data.updateLead;
+  }
+
+
+  public async deleteLead(id: string): Promise<any> {
+    const response = await this.client.mutate({
+      mutation: LEAD_DELETE_MUTATION,
+      variables: { id },
+    });
+
+    return response.data;
   }
   public async getAllLeads(first?: number, page?: number): Promise<LeadsData> {
     const response = await this.client.query({
