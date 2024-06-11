@@ -22,3 +22,4 @@ export * from './people';
 export * from './notifications';
 export * from './channels';
 export * from './organization';
+export * from './tags';

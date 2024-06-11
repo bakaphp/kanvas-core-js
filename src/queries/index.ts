@@ -20,3 +20,4 @@ export * from './people.query';
 export * from './message-comment.query';
 export * from './notification.query';
 export * from './channel.query';
+export * from './tags.query';
