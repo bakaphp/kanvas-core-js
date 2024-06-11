@@ -645,6 +645,7 @@ export const UPDATE_ATTRIBUTES = gql`
           is_visible
           name
           uuid
+          slug
           values {
             id
             value
