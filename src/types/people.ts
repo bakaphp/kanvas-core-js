@@ -1,3 +1,4 @@
+
 import {
   ContactInputInterface,
   AddressInputInterface,
@@ -8,6 +9,7 @@ import {
   AddressInterface,
 } from './index';
 import { PaginatorInfo } from './paginator';
+import { CreatedTags } from './tags';
 
 export interface PeopleInputInterface {
   firstname: string;
@@ -33,6 +35,7 @@ export interface PeopleInterface {
   contacts: ContactInterface[];
   address?: AddressInterface[];
   custom_fields?: CustomFieldInput[];
+  tags?: CreatedTags;
 }
 
 

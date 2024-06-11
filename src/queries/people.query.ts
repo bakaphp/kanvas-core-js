@@ -52,6 +52,15 @@ export const PEOPLE_QUERY = gql`
             value
           }
         }
+        tags {
+          data {
+            id
+            name
+            slug
+            name
+            weight
+          }
+        }
       }
       paginatorInfo {
         total
