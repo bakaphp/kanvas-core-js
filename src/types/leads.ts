@@ -6,6 +6,7 @@ import {
   PeopleInterface,
   ChannelInterface,
   SystemModuleInterface,
+  PeopleInputInterface,
 } from './index';
 // interface Contact {
 //   value: string;
@@ -75,7 +76,7 @@ export interface CreateLeadParams {
   branch_id: number;
   title: string;
   pipeline_stage_id: number;
-  people: PeopleInterface;
+  people: PeopleInputInterface;
   organization: Organization;
   custom_fields: CustomFieldInput[];
 }

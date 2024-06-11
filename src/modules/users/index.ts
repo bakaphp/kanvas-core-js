@@ -15,6 +15,7 @@ import {
   PROCESS_INVITE_MUTATION,
   DELETE_INVITE_MUTATION,
   SOCIAL_LOGIN_MUTATTION,
+  REQUEST_DELETED_ACCOUNT_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -34,7 +35,7 @@ import {
 } from '../../types';
 
 export class Users {
-  constructor(protected client: ClientType) {}
+  constructor(protected client: ClientType) { }
 
   public async register(
     userData: UserInterface | CreateUserParams
@@ -206,4 +207,12 @@ export class Users {
     });
     return response.data;
   }
+
+  public async requestDeletedAccount() {
+    const response = await this.client.mutate({
+      mutation: REQUEST_DELETED_ACCOUNT_MUTATION,
+    });
+    return response.data;
+  }
+
 }
