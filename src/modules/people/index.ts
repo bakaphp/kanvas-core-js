@@ -65,6 +65,7 @@ export class People {
       page?: number;
       hasEmails?: WhereCondition;
       hasPhones?: WhereCondition;
+      hasTags?: WhereCondition;
       hasCustomFields?: WhereCondition;
     } = {}
   ): Promise<CreatedPeople> {
@@ -76,6 +77,7 @@ export class People {
       search,
       hasEmails,
       hasPhones,
+      hasTags,
       hasCustomFields,
     } = options;
 
@@ -89,6 +91,7 @@ export class People {
         page,
         hasEmails,
         hasPhones,
+        hasTags,
         hasCustomFields,
       },
       fetchPolicy: 'network-only',

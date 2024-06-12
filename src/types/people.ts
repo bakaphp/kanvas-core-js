@@ -9,7 +9,7 @@ import {
   AddressInterface,
 } from './index';
 import { PaginatorInfo } from './paginator';
-import { CreatedTags } from './tags';
+import { CreatedTags, TagInput } from './tags';
 
 export interface PeopleInputInterface {
   firstname: string;
@@ -23,6 +23,7 @@ export interface PeopleInputInterface {
   contacts?: [ContactInputInterface];
   address?: [AddressInputInterface];
   custom_fields?: [CustomFieldInput];
+  tags?: [TagInput];
 }
 export interface PeopleInterface {
   id: string;
