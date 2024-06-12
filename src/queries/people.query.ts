@@ -8,6 +8,7 @@ export const PEOPLE_QUERY = gql`
     $page: Int
     $hasEmails: QueryPeoplesHasEmailsWhereHasConditions
     $hasPhones: QueryPeoplesHasPhonesWhereHasConditions
+    $hasTags: QueryPeoplesHasTagsWhereHasConditions
     $hasCustomFields: QueryPeoplesHasCustomFieldsWhereHasConditions
     $search: String
   ) {
@@ -19,6 +20,7 @@ export const PEOPLE_QUERY = gql`
       page: $page
       hasEmails: $hasEmails
       hasPhones: $hasPhones
+      hasTags: $hasTags
       hasCustomFields: $hasCustomFields
     ) {
       data {
