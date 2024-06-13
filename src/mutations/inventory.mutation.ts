@@ -253,10 +253,13 @@ export const UPDATE_VARIANT = gql`
         }
       }
       channels {
-        name
-        price
-        discounted_price
-      }
+          name
+          pivot {
+            warehouses_id
+            price
+          }
+          id
+        }
       html_description
       id
       name
