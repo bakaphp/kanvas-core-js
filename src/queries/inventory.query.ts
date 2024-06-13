@@ -75,7 +75,7 @@ export const GET_PRODUCTS = gql`
           channel {
             price
             quantity
-        }
+          }
           status {
             id
             name
@@ -311,7 +311,10 @@ export const GET_VARIANTS = gql`
           }
           channels {
             name
-            price
+            pivot {
+              warehouses_id
+              price
+            }
             is_published
           }
           warehouseinfo {
