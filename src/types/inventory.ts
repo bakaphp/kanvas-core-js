@@ -107,9 +107,9 @@ export interface VariantInterface {
   uuid: string;
   ean: string;
   channel: {
-    price:string
-    quantity:string
-  }
+    price: string;
+    quantity: string;
+  };
   warehouses: {
     warehouses_id: string;
     status_history?: {
@@ -119,7 +119,10 @@ export interface VariantInterface {
     }[];
     channels: {
       name: string;
-      price: number;
+      pivot: {
+        warehouses_id: any;
+        price: any;
+      };
       is_published: boolean;
     }[];
     warehouseinfo: {
@@ -189,7 +192,7 @@ export interface ChannelsInterface {
   companies: ProductCompany;
   is_default: boolean;
   uuid: string;
-  is_published: boolean
+  is_published: boolean;
 }
 
 export interface InputChannelsParams {
@@ -200,7 +203,7 @@ export interface InputChannelsParams {
     companies?: ProductCompany;
     is_default: boolean;
     uuid?: string;
-    is_published?: boolean
+    is_published?: boolean;
   };
 }
 
@@ -269,7 +272,6 @@ export interface InputRegionParams {
   };
 }
 
-
 export interface InputVariantWarehouseParams {
   id: string | number;
   input: {
@@ -286,26 +288,26 @@ export interface InputVariantWarehouseParams {
 export interface InputAttributesParams {
   id: string | number;
   input: {
-    name: string,
-    isFiltrable: boolean,
-    isSearchable: boolean,
-    isVisible: boolean,
+    name: string;
+    isFiltrable: boolean;
+    isSearchable: boolean;
+    isVisible: boolean;
     value?: {
-      name: string,
-      id: number
-    },
+      name: string;
+      id: number;
+    };
   };
 }
 
 export interface InputChannelVariantParams {
   warehouses_id: string | number;
-  variants_id: string | number,
-  channels_id: number,
+  variants_id: string | number;
+  channels_id: number;
   input: {
-    price: number,
-    discounted_price: number,
+    price: number;
+    discounted_price: number;
     is_published: boolean;
-  }
+  };
 }
 
 export interface ProductVariant {
@@ -348,25 +350,25 @@ export interface CreateProductParams {
 export interface InputCategoriesParams {
   id: number | null;
   input: {
-    name: string,
-    is_published: boolean,
-    companies_id: number,
-    position?: number,
-    slug?: string
-  }
+    name: string;
+    is_published: boolean;
+    companies_id: number;
+    position?: number;
+    slug?: string;
+  };
 }
 
 export interface InputProductTypeParams {
   id: number | null;
   input: {
-    name: string,
-    is_published?: boolean,
-    companies_id?: number,
-    position?: number,
-    slug?: string,
-    description?: string,
-    weight: number
-  }
+    name: string;
+    is_published?: boolean;
+    companies_id?: number;
+    position?: number;
+    slug?: string;
+    description?: string;
+    weight: number;
+  };
 }
 
 export interface InputUpdateStatusParams {
@@ -375,7 +377,7 @@ export interface InputUpdateStatusParams {
     name: string;
     is_default?: boolean;
     company_id?: number;
-  }
+  };
 }
 
 export interface AllCreatedProducts {
@@ -418,7 +420,6 @@ export interface CreatedRegion {
     data: RegionsInterface[];
   };
 }
-
 
 export interface UpdatedVariant {
   updateVariant: VariantInterface;

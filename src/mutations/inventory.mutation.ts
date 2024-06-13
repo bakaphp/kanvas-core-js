@@ -67,7 +67,10 @@ export const CREATE_PRODUCT = gql`
           }
           channels {
             name
-            price
+            pivot {
+              warehouses_id
+              price
+            }
             is_published
           }
           warehouseinfo {
@@ -183,7 +186,10 @@ export const UPDATE_PRODUCT = gql`
           }
           channels {
             name
-            price
+            pivot {
+              warehouses_id
+              price
+            }
             is_published
           }
           warehouseinfo {
@@ -209,27 +215,27 @@ export const UPDATE_PRODUCT = gql`
         slug
         weight
         products_attributes {
-            name
+          name
+          id
+          values {
+            value
             id
-            values {
-              value
-              id
-            }
           }
-          variants_attributes {
-            name
+        }
+        variants_attributes {
+          name
+          id
+          values {
+            value
             id
-            values {
-              value
-              id
-            }
           }
+        }
       }
       companies {
         id
-          branches{
-            id
-            uuid
+        branches {
+          id
+          uuid
         }
       }
     }
@@ -237,7 +243,7 @@ export const UPDATE_PRODUCT = gql`
 `;
 
 export const UPDATE_VARIANT = gql`
-  mutation ($id: ID!, $input: VariantsUpdateInput!) {
+  mutation($id: ID!, $input: VariantsUpdateInput!) {
     updateVariant(id: $id, input: $input) {
       channels {
         name
@@ -253,13 +259,13 @@ export const UPDATE_VARIANT = gql`
         }
       }
       channels {
-          name
-          pivot {
-            warehouses_id
-            price
-          }
-          id
+        name
+        pivot {
+          warehouses_id
+          price
         }
+        id
+      }
       html_description
       id
       name
@@ -372,10 +378,20 @@ export const UPDATE_VARIANT_IN_WAREHOUSE = gql`
   }
 `;
 export const CHANNEL_IN_VARIANT = gql`
-  mutation($variants_id:ID! $channels_id:ID! $warehouses_id: ID! $input:VariantChannelInput!){
-    updateVariantInChannel(variants_id:$variants_id channels_id:$channels_id warehouses_id:$warehouses_id input: $input){
-        id,
-        name
+  mutation(
+    $variants_id: ID!
+    $channels_id: ID!
+    $warehouses_id: ID!
+    $input: VariantChannelInput!
+  ) {
+    updateVariantInChannel(
+      variants_id: $variants_id
+      channels_id: $channels_id
+      warehouses_id: $warehouses_id
+      input: $input
+    ) {
+      id
+      name
     }
   }
 `;
@@ -404,32 +420,30 @@ export const CREATE_CATEGORIES = gql`
 `;
 
 export const UPDATE_CATEGORIES = gql`
-  mutation($input: CategoryUpdateInput! $id: ID!) {
-    updateCategory(
-        id: $id
-        input:$input
-    ){
-        total_products
-        weight
-        slug
-        position
+  mutation($input: CategoryUpdateInput!, $id: ID!) {
+    updateCategory(id: $id, input: $input) {
+      total_products
+      weight
+      slug
+      position
+      name
+      is_published
+      id
+      companies {
         name
-        is_published
         id
-        companies {
-          name
-          id
-        }
+      }
     }
-}`;
+  }
+`;
 
 export const DELETE_CATEGORIES = gql`
   mutation delete($id: ID!) {
     deleteCategory(id: $id)
-  }`
-  ;
+  }
+`;
 
-export const CREATE_PRODUCT_TYPE= gql`
+export const CREATE_PRODUCT_TYPE = gql`
   mutation createProductType($input: ProductTypeInput!) {
     createProductType(input: $input) {
       name
@@ -438,56 +452,52 @@ export const CREATE_PRODUCT_TYPE= gql`
 `;
 
 export const UPDATE_PRODUCT_TYPE = gql`
-  mutation($input: ProductTypeUpdateInput! $id: ID!) {
-    updateProductType(
-        id: $id
-        input:$input
-    ){
-        companies {
-          name
-        }
+  mutation($input: ProductTypeUpdateInput!, $id: ID!) {
+    updateProductType(id: $id, input: $input) {
+      companies {
         name
-        is_published
-        description
+      }
+      name
+      is_published
+      description
+      id
+      total_products
+      weight
+      uuid
+      products_attributes {
+        name
         id
-        total_products
-        weight
-        uuid
-        products_attributes {
-          name
-          id
-        }
-        variants_attributes {
-          name
-          id
-        }
+      }
+      variants_attributes {
+        name
+        id
+      }
     }
-}`;
+  }
+`;
 
 export const DELETE_PRODUCT_TYPE = gql`
-  mutation delete($id: ID!){
+  mutation delete($id: ID!) {
     deleteProductType(id: $id)
-  }`
-  ;
+  }
+`;
 
 export const UPDATE_STATUS = gql`
-  mutation($input: StatusInput! $id: ID!) {
-    updateStatus(
-        id: $id
-        input: $input
-    ){
-        id
-        name
-        is_default
-        slug
+  mutation($input: StatusInput!, $id: ID!) {
+    updateStatus(id: $id, input: $input) {
+      id
+      name
+      is_default
+      slug
     }
-}`;
+  }
+`;
 
 export const DELETE_STATUS = gql`
-  mutation delete($id: ID!){
+  mutation delete($id: ID!) {
     deleteStatus(id: $id)
-  }`
-  ;
+  }
+`;
 
 export const CREATE_REGION = gql`
   mutation CreateRegion($input: RegionInput!) {
@@ -499,166 +509,168 @@ export const CREATE_REGION = gql`
 `;
 
 export const UPDATE_REGION = gql`
-  mutation($input: RegionInputUpdate! $id: ID!) {
-    updateRegion(
-        id: $id
-        input:$input
-    ){
-        id
+  mutation($input: RegionInputUpdate!, $id: ID!) {
+    updateRegion(id: $id, input: $input) {
+      id
+      name
+      uuid
+      is_default
+      currencies {
+        currency
+      }
+      companies {
         name
-        uuid
-        is_default
-        currencies {
-          currency
-        }
-        companies {
-          name
-        }
+      }
     }
-}`;
+  }
+`;
 
 export const DELETE_REGION = gql`
-  mutation delete($id: ID!){
+  mutation delete($id: ID!) {
     deleteRegion(id: $id)
-  }`
-  ;
+  }
+`;
 
 export const CREATE_WAREHOUSE = gql`
-  mutation createWarehouse($input: WarehouseInput!){
+  mutation createWarehouse($input: WarehouseInput!) {
     createWarehouse(input: $input) {
-        id,
-        name,
-        is_default
+      id
+      name
+      is_default
     }
-  }`;
+  }
+`;
 
 export const UPDATE_WAREHOUSE = gql`
-  mutation updateWarehouse($input: WarehouseInputUpdate! $id: ID!) {
-    updateWarehouse(input: $input, id:$id){
-        name
+  mutation updateWarehouse($input: WarehouseInputUpdate!, $id: ID!) {
+    updateWarehouse(input: $input, id: $id) {
+      name
+      id
+      is_default
+      location
+      regions_id
+      uuid
+      total_products
+      company {
         id
-        is_default
-        location
-        regions_id
-        uuid
-        total_products
-        company {
-          id
-          name
-        }
-        regions {
-         name
-        }
+        name
+      }
+      regions {
+        name
+      }
     }
-  }`;
+  }
+`;
 
 export const DELETE_WAREHOUSE = gql`
-  mutation delete($id: ID!){
+  mutation delete($id: ID!) {
     deleteWarehouse(id: $id)
-  }`;
+  }
+`;
 
 export const CREATE_CHANNELS = gql`
-  mutation($input: CreateChannelInput!){
-    createChannel(input: $input){
-        name,
-        id,
-        uuid,
-        slug
+  mutation($input: CreateChannelInput!) {
+    createChannel(input: $input) {
+      name
+      id
+      uuid
+      slug
     }
-}`;
+  }
+`;
 
 export const UPDATE_CHANNELS = gql`
-  mutation($input: UpdateChannelInput! $id: ID!) {
+  mutation($input: UpdateChannelInput!, $id: ID!) {
     updateChannel(input: $input, id: $id) {
-        id
+      id
+      name
+      slug
+      companies {
         name
-        slug
-        companies {
-          name
-          id
-        }
-        is_default
-        is_published
-        uuid
+        id
+      }
+      is_default
+      is_published
+      uuid
     }
-}`;
+  }
+`;
 
 export const DELETE_CHANNELS = gql`
   mutation($id: ID!) {
     deleteChannel(id: $id)
-  }`;
+  }
+`;
 
 export const CREATE_VARIANT = gql`
   mutation($input: VariantsInput!) {
-    createVariant(input: $input){
-        id,
-        uuid,
-        products_id,
-        name,
-        attributes{
-            name,
-            value
-        },
-        status{
-            id,
-            name
-        },
-        warehouses{
-            status{
-                id
-                name
-            }
-            warehouses_id,
-            warehouseinfo{
-                id,
-                name,
-                total_products
-            },
-            quantity,
-            price,
-            status_history {
-                name
-                id
-            }
+    createVariant(input: $input) {
+      id
+      uuid
+      products_id
+      name
+      attributes {
+        name
+        value
+      }
+      status {
+        id
+        name
+      }
+      warehouses {
+        status {
+          id
+          name
         }
+        warehouses_id
+        warehouseinfo {
+          id
+          name
+          total_products
+        }
+        quantity
+        price
+        status_history {
+          name
+          id
+        }
+      }
     }
-}`;
+  }
+`;
 
 export const DELETE_ATTRIBUTES = gql`
-  mutation($id:ID!) {
-      deleteAttribute(id:$id)
-  }`;
+  mutation($id: ID!) {
+    deleteAttribute(id: $id)
+  }
+`;
 
 export const CREATE_ATTRIBUTES = gql`
-  mutation($input: AttributeInput!){
-      createAttribute(input: $input){
-          name,
-          values{
-              value
-          }
+  mutation($input: AttributeInput!) {
+    createAttribute(input: $input) {
+      name
+      values {
+        value
       }
-  }`;
+    }
+  }
+`;
 
 export const UPDATE_ATTRIBUTES = gql`
   mutation($id: ID!, $input: AttributeUpdateInput!) {
-      updateAttribute(id: $id, input: $input) {
-          id
-          is_filtrable
-          is_searchable
-          is_visible
-          name
-          uuid
-          slug
-          values {
-            id
-            value
-          }
-          created_at
+    updateAttribute(id: $id, input: $input) {
+      id
+      is_filtrable
+      is_searchable
+      is_visible
+      name
+      uuid
+      slug
+      values {
+        id
+        value
       }
-  }`;
-
-
-
-
-
-
+      created_at
+    }
+  }
+`;
