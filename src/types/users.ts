@@ -156,6 +156,9 @@ export interface InviteData {
 
 export interface InviteParams {
   email: string;
+  companies_branches_id?: number;
+  description?: String;
+  email_template?: String;
   firstname: string;
   lastname: string;
   custom_fields?: CustomFieldInput[];
@@ -167,7 +170,7 @@ export interface InviteProcessParams {
   firstname: string;
   lastname: string;
   password: string;
-  phone_number?: string
+  phone_number?: string;
 }
 
 export interface InviteProcessData {
