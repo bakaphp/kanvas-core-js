@@ -1,5 +1,6 @@
 import { CompanyBranchInterface, UserInterface } from 'index';
 import { PaginatorInfo } from './paginator';
+import { CustomFieldInput } from './custom-fields';
 
 export interface CompanyInterface {
   id: string;
@@ -47,6 +48,7 @@ export interface CompanyInput {
   files?: File[];
   is_active?: boolean;
   users_id: number;
+  custom_fields?: CustomFieldInput[];
 }
 
 export interface QueryCompaniesWhereWhereConditions {
