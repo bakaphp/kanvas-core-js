@@ -33,11 +33,6 @@ export const PEOPLE_QUERY = gql`
           id
           name
         }
-        user {
-          id
-          firstname
-          lastname
-        }
         contacts {
           type {
             name
