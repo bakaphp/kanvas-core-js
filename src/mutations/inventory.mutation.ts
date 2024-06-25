@@ -201,6 +201,7 @@ export const UPDATE_PRODUCT = gql`
       attributes {
         name
         value
+        id
       }
       productsTypes {
         id
