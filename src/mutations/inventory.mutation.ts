@@ -67,10 +67,8 @@ export const CREATE_PRODUCT = gql`
           }
           channels {
             name
-            pivot {
-              warehouses_id
-              price
-            }
+            warehouses_id
+            price
             is_published
           }
           warehouseinfo {
@@ -186,10 +184,8 @@ export const UPDATE_PRODUCT = gql`
           }
           channels {
             name
-            pivot {
-              warehouses_id
-              price
-            }
+            warehouses_id
+            price
             is_published
           }
           warehouseinfo {
@@ -260,10 +256,8 @@ export const UPDATE_VARIANT = gql`
       }
       channels {
         name
-        pivot {
-          warehouses_id
-          price
-        }
+        warehouses_id
+        price
         id
       }
       html_description
