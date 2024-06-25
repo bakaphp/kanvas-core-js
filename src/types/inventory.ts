@@ -119,10 +119,8 @@ export interface VariantInterface {
     }[];
     channels: {
       name: string;
-      pivot: {
-        warehouses_id: any;
-        price: any;
-      };
+      warehouses_id: any;
+      price: any;
       is_published: boolean;
     }[];
     warehouseinfo: {

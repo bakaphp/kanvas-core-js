@@ -89,10 +89,8 @@ export const GET_PRODUCTS = gql`
             }
             channels {
               name
-              pivot {
-                warehouses_id
-                price
-              }
+              warehouses_id
+              price
               is_published
             }
             warehouseinfo {
@@ -314,10 +312,8 @@ export const GET_VARIANTS = gql`
           }
           channels {
             name
-            pivot {
-              warehouses_id
-              price
-            }
+            warehouses_id
+            price
             is_published
           }
           warehouseinfo {
@@ -407,10 +403,8 @@ export const GET_VARIANTS_BY_STATUS = gql`
           }
           channels {
             name
-            pivot {
-              warehouses_id
-              price
-            }
+            warehouses_id
+            price
             is_published
           }
           warehouseinfo {
