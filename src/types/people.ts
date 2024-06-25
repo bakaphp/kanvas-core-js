@@ -3,7 +3,6 @@ import {
   ContactInputInterface,
   AddressInputInterface,
   CompanyInterface,
-  UserInterface,
   CustomFieldInput,
   ContactInterface,
   AddressInterface,
@@ -32,7 +31,6 @@ export interface PeopleInterface {
   firstname: string;
   lastname: string;
   company?: CompanyInterface;
-  user?: UserInterface;
   contacts: ContactInterface[];
   address?: AddressInterface[];
   custom_fields?: CustomFieldInput[];
