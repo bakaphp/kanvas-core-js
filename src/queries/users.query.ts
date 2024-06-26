@@ -11,6 +11,7 @@ export const GET_USER_DATA_QUERY = gql`
       default_company
       default_company_branch
       email
+      welcome
       mainRole
       branches {
         id
