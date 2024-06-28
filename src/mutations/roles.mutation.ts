@@ -13,11 +13,10 @@ export const REMOVE_ROLE_USER = gql`
 `;
 
 export const CREATE_ROLE = gql`
-  mutation createRole($name: String!, $title: String!) {
-    createRole(name: $name, title: $title) {
+  mutation createRole($name: String!) {
+    createRole(name: $name) {
       id
       name
-      title
       scope
       userCount
       abilitiesCount
