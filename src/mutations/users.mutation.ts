@@ -7,6 +7,7 @@ export const REGISTER_MUTATTION = gql`
         id
         displayname
         uuid
+        welcome
       }
       token {
         token
@@ -42,6 +43,7 @@ export const UPDATE_USER_MUTATION = gql`
         name
         phone
       }
+      welcome
       companies {
         id
         name
