@@ -1,4 +1,4 @@
-import { PaginatorInfo } from "./paginator";
+import { PaginatorInfo } from './paginator';
 
 export enum RolesEnum {
   OWNER = 'Owner',
@@ -40,7 +40,6 @@ export interface UserRoleParams {
 
 export interface CreateRoleParams {
   name: string;
-  title: string;
 }
 
 export interface UpdateRoleParams {
