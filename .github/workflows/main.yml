@@ -19,6 +19,13 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - name: Set up environment variables
+        run: |
+          echo "KANVAS_URL=${{ secrets.KANVAS_URL }}" >> $GITHUB_ENV
+          echo "KANVAS_KEY=${{ secrets.KANVAS_APP_KEY }}" >> $GITHUB_ENV
+          echo "KANVAS_USER=${{ secrets.KANVAS_TEST_USER }}" >> $GITHUB_ENV
+          echo "KANVAS_PASSWORD=${{ secrets.KANVAS_TEST_PASSWORD }}" >> $GITHUB_ENV
+
       - name: Run install
         uses: borales/actions-yarn@v4
         with:
