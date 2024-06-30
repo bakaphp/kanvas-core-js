@@ -3,10 +3,6 @@
 
 Welcome to the documentation for the Kanvas SDK, a TypeScript SDK designed exclusively to seamlessly connect with the Kanvas Niche ecosystem. This SDK is crafted to enhance the development of headless applications by providing easy-to-use interfaces for interacting with various modules within the Kanvas Niche ecosystem.
 
-Here's a comprehensive README.md for Kanvas Core JS with documentation for all modules, including examples and tips:
-
-# Kanvas Core JS
-
 ## Table of Contents
 
 1. [Introduction](#introduction)
@@ -36,6 +32,7 @@ Here's a comprehensive README.md for Kanvas Core JS with documentation for all m
    - [Channels](#channels)
    - [Organization](#organization)
    - [Tags](#tags)
+   - [Settings](#settings)
 5. [Tips and Best Practices](#tips-and-best-practices)
 6. [Troubleshooting](#troubleshooting)
 7. [Contributing](#contributing)
@@ -105,9 +102,6 @@ await kanvas.auth.logout();
 
 // Refresh token
 const newToken = await kanvas.auth.refreshToken('current_refresh_token');
-
-// Reset password
-await kanvas.auth.resetPassword('reset_hash', 'newPassword', 'newPassword');
 ```
 
 ### Users
@@ -131,14 +125,6 @@ const updatedUser = await kanvas.users.updateUserData(userId, {
   firstname: 'Jane',
   lastname: 'Doe',
   displayname: 'JaneDoe'
-});
-
-// Invite a user
-const invite = await kanvas.users.invite({
-  email: 'invite@example.com',
-  firstname: 'Invited',
-  lastname: 'User',
-  role_id: 1
 });
 ```
 
@@ -516,6 +502,74 @@ const tags = await kanvas.tags.getTags({
 });
 ```
 
+### Settings
+
+Manage application, company, and user settings.
+
+```typescript
+// Fetch app settings
+const appSettings = await kanvas.settings.fetchAppSettings();
+
+// Get specific app settings
+const specificAppSettings = await kanvas.settings.getAppSettings();
+
+// Get company settings
+const companySettings = await kanvas.settings.getCompanySettings('company_uuid');
+
+// Get user settings
+const userSettings = await kanvas.settings.getUserSettings('user_uuid');
+
+// Set user settings
+await kanvas.settings.setUserSettings({
+  key: 'theme',
+  value: 'dark',
+  entity_uuid: 'user_uuid'
+});
+
+// Set app settings
+await kanvas.settings.setAppSettings({
+  key: 'maintenance_mode',
+  value: false,
+  entity_uuid: 'app_uuid'
+});
+
+// Set company settings
+await kanvas.settings.setCompanySettings({
+  key: 'logo_url',
+  value: 'https://example.com/logo.png',
+  entity_uuid: 'company_uuid'
+});
+
+// Delete company settings
+await kanvas.settings.deleteCompanySettings({
+  key: 'old_setting',
+  entity_uuid: 'company_uuid'
+});
+
+// Delete user settings
+await kanvas.settings.deleteUserSettings({
+  key: 'deprecated_preference',
+  entity_uuid: 'user_uuid'
+});
+```
+
+Tips for using the Settings module:
+- Use settings to store configuration that might change without requiring code updates.
+- Ensure you have the necessary permissions when accessing or modifying settings.
+- Company and user settings can be used to customize the application experience for different entities.
+- App settings are global and should be used for application-wide configurations.
+
+Error handling example:
+```typescript
+try {
+  const appSettings = await kanvas.settings.getAppSettings();
+  // Use app settings
+} catch (error) {
+  console.error('Failed to fetch app settings:', error);
+  // Handle the error appropriately
+}
+```
+
 ## Tips and Best Practices
 
 1. Always handle errors using try-catch blocks.
@@ -534,8 +588,6 @@ const tags = await kanvas.tags.getTags({
 - **Performance Issues**: Use pagination and limit the amount of data requested when possible.
 
 Remember to replace placeholder values (like 'YOUR_KANVAS_URL') with actual values. This README provides a comprehensive overview of the Kanvas Core JS SDK, its modules, and how to use them. Always refer to the latest API documentation for the most up-to-date information on available methods and their parameters.
-
-
 ## API Reference
 
 For a comprehensive list of available methods and their descriptions, refer to the [API Reference](https://documenter.getpostman.com/view/15472655/2s93CKNtdP). 
