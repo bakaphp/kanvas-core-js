@@ -1,41 +1,30 @@
-name: Node JS publish package
+name: Node.js Package
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [created]
 
 jobs:
-  build_and_publish:
-    name: Build, lint, test, and publish on Node ${{ matrix.node }} and ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        node: ['20.x']
-        os: [ubuntu-latest]
-
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Use Node ${{ matrix.node }}
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 18
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
 
-      - name: Install dependencies
-        uses: borales/actions-yarn@v4
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
-          cmd: 'install'
-
-      - name: Build
-        run: yarn build
-
-      - name: Publish to npm
-        uses: actions/checkout@v4
-        with:
-          node-version: ${{ matrix.node }}
-          registry-url: https://npm.pkg.github.com/
-      - run: npm publish
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+      - run: yarn install --frozen-lockfile
+      - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
