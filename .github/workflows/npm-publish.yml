@@ -1,5 +1,4 @@
-
-name: Node.js Package
+name: Node JS publish package
 
 on:
   push:
@@ -7,28 +6,32 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-      - run: npm install
-      - run: npm run build
+  build_and_publish:
+    name: Build, lint, test, and publish on Node ${{ matrix.node }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node: ['20.x']
+        os: [ubuntu-latest]
 
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Use Node ${{ matrix.node }}
+        uses: actions/setup-node@v3
         with:
-          node-version: 20
-          registry-url: https://npm.pkg.github.com/
-      - run: npm publish
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: 'install'
+
+      - name: Build
+        run: yarn build
+
+      - name: Publish to npm
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
