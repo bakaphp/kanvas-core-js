@@ -32,6 +32,10 @@ jobs:
         run: yarn build
 
       - name: Publish to npm
+        uses: actions/checkout@v4
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com/
+      - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
