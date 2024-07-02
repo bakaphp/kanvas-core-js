@@ -23,7 +23,16 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
+
+      - name: Set up environment variables
+        run: |
+          echo "KANVAS_URL=${{ secrets.KANVAS_URL }}" >> $GITHUB_ENV
+          echo "KANVAS_APP_KEY=${{ secrets.KANVAS_APP_KEY }}" >> $GITHUB_ENV
+          echo "KANVAS_TEST_USER=${{ secrets.KANVAS_TEST_USER }}" >> $GITHUB_ENV
+          echo "KANVAS_TEST_PASSWORD=${{ secrets.KANVAS_TEST_PASSWORD }}" >> $GITHUB_ENV
+
       - run: yarn install --frozen-lockfile
+      
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
