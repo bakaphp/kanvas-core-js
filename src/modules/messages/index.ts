@@ -119,7 +119,7 @@ export class Messages {
       },
       fetchPolicy: 'no-cache',
     });
-    return response.data.messages as MessagesInterface[];
+    return response.data.messagesGroupByDate as MessagesInterface[];
   }
 
   public async attachTopicToMessage(
