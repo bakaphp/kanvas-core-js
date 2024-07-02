@@ -94,6 +94,7 @@ export class Messages {
         first,
         page,
       },
+      fetchPolicy: 'no-cache',
     });
     return response.data.messages as MessagesInterface[];
   }
