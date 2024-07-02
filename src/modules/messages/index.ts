@@ -16,6 +16,7 @@ import {
   DETACH_TOPIC_TO_MESSAGE_MUTATION,
   UPDATE_MESSAGE_MUTATION,
   DELETE_MESSAGE_MUTATION,
+  DELETE_MULTIPLE_MESSAGE_MUTATION,
 } from '../../mutations';
 
 import { GET_MESSAGES_QUERY } from '../../queries';
@@ -52,6 +53,14 @@ export class Messages {
     await this.client.mutate({
       mutation: DELETE_MESSAGE_MUTATION,
       variables: { id: id },
+    });
+    return true;
+  }
+
+  public async deleteMultipleMessage(ids: [string]): Promise<Boolean> {
+    await this.client.mutate({
+      mutation: DELETE_MULTIPLE_MESSAGE_MUTATION,
+      variables: { ids: ids },
     });
     return true;
   }

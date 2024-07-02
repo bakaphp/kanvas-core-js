@@ -17,13 +17,13 @@ describe('Test the Social Messages', () => {
 
         expect(newMessage).toBeDefined();
         expect(newMessage.id).toBeDefined();
-        expect(newMessage.message).toBe(messageContent,);
+        expect(newMessage.message).toBe(messageContent);
     });
 
     it('get messages', async () => {
         const client = getClient();
         const messages = client.messages;
-        const recentMessages = await client.messages.getMessages(
+        const recentMessages = await messages.getMessages(
             {} as WhereCondition,
             {} as HasAppModuleMessageWhereConditions,
             [{ column: 'CREATED_AT', order: 'DESC' }],
@@ -33,5 +33,39 @@ describe('Test the Social Messages', () => {
         );
         expect(recentMessages).toBeDefined();
         //const { data } = recentMessages;
+    });
+
+    it('delete message', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const deleted = await messages.deleteMessage(newMessage.id);
+        expect(deleted).toBe(true);
+    });
+
+    it('delete multiple messages', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const deleted = await messages.deleteMultipleMessage([newMessage.id]);
+        expect(deleted).toBe(true);
     });
 });
