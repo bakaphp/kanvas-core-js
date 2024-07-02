@@ -19,8 +19,8 @@ interface AppModuleMessage {
 export interface MessageInputInterface {
   message_verb: string;
   message: any;
-  system_modules_id: string;
-  entity_id: string;
+  system_modules_id?: string;
+  entity_id?: string;
   parent_id?: string;
   distribution?: DistributionInputInterface;
 }
