@@ -58,15 +58,15 @@ export const GET_MESSAGES_QUERY = gql`
 `;
 
 export const GET_MESSAGES_GROUP_BY_DATE_QUERY = gql`
-  query getMessages(
-    $where: QueryMessagesWhereWhereConditions
-    $hasAppModuleMessage: QueryMessagesHasAppModuleMessageWhereHasConditions
-    $orderBy: [QueryMessagesOrderByOrderByClause!]
+  query messagesGroupByDate(
+    $where: QueryMessagesGroupByDateWhereWhereConditions
+    $hasAppModuleMessage: QueryMessagesGroupByDateHasAppModuleMessageWhereHasConditions
+    $orderBy: [QueryMessagesGroupByDateOrderByOrderByClause!]
     $search: String
     $first: Int! = 25
     $page: Int
   ) {
-    messages(
+    messagesGroupByDate(
       where: $where
       hasAppModuleMessage: $hasAppModuleMessage
       orderBy: $orderBy
