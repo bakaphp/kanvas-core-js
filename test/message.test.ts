@@ -47,7 +47,7 @@ describe('Test the Social Messages', () => {
             1
         );
         expect(recentMessages).toBeDefined();
-        console.log(recentMessages);
+        //console.log(recentMessages);
         //const { data } = recentMessages;
     });
 
