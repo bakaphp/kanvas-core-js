@@ -16,9 +16,10 @@ import {
   DETACH_TOPIC_TO_MESSAGE_MUTATION,
   UPDATE_MESSAGE_MUTATION,
   DELETE_MESSAGE_MUTATION,
+  DELETE_MULTIPLE_MESSAGE_MUTATION,
 } from '../../mutations';
 
-import { GET_MESSAGES_QUERY } from '../../queries';
+import { GET_MESSAGES_GROUP_BY_DATE_QUERY, GET_MESSAGES_QUERY } from '../../queries';
 import { MessagesComments } from '../messages-comments';
 export class Messages {
   public comments: MessagesComments;
@@ -56,6 +57,14 @@ export class Messages {
     return true;
   }
 
+  public async deleteMultipleMessage(ids: [string]): Promise<Boolean> {
+    await this.client.mutate({
+      mutation: DELETE_MULTIPLE_MESSAGE_MUTATION,
+      variables: { ids: ids },
+    });
+    return true;
+  }
+
   public async interactionMessage(
     id: string,
     type: InteractionTypeInput
@@ -85,6 +94,30 @@ export class Messages {
         first,
         page,
       },
+      fetchPolicy: 'no-cache',
+    });
+    return response.data.messages as MessagesInterface[];
+  }
+
+  public async getMessagesGroupByDate(
+    where: WhereCondition,
+    hasAppModuleMessageWhere: HasAppModuleMessageWhereConditions,
+    orderBy: Array<OrderByMessage>,
+    search: string,
+    first: number,
+    page: number
+  ): Promise<MessagesInterface[]> {
+    const response = await this.client.query({
+      query: GET_MESSAGES_GROUP_BY_DATE_QUERY,
+      variables: {
+        where,
+        hasAppModuleMessageWhere,
+        orderBy,
+        search,
+        first,
+        page,
+      },
+      fetchPolicy: 'no-cache',
     });
     return response.data.messages as MessagesInterface[];
   }

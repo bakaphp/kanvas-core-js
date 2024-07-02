@@ -64,32 +64,13 @@ export const UPDATE_MESSAGE_MUTATION = gql`
 
 export const DELETE_MESSAGE_MUTATION = gql`
   mutation deleteMessage($id: ID!) {
-    deleteMessage(id: $id) {
-      id
-      uuid
-      message
-      parent_id
-      user {
-        id
-        firstname
-        lastname
-        displayname
-      }
-      appModuleMessage {
-        entity_id
-        system_modules
-      }
-      message_types_id
-      message
-      reactions_count
-      comment_count
-      total_liked
-      total_saved
-      parent {
-        id
-        uuid
-      }
-    }
+    deleteMessage(id: $id)
+  }
+`;
+
+export const DELETE_MULTIPLE_MESSAGE_MUTATION = gql`
+  mutation deleteMultipleMessages($ids: [ID!]!) {
+    deleteMultipleMessages(ids: $ids)
   }
 `;
 

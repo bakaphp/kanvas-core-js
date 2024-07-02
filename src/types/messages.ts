@@ -4,6 +4,7 @@ export interface MessagesInterface {
   parent_id?: string;
   parent_unique_id?: any;
   uuid: string;
+  additional_field?: any;
   companies_id: string;
   message?: any;
   message_types_id: string;
@@ -19,8 +20,8 @@ interface AppModuleMessage {
 export interface MessageInputInterface {
   message_verb: string;
   message: any;
-  system_modules_id: string;
-  entity_id: string;
+  system_modules_id?: string;
+  entity_id?: string;
   parent_id?: string;
   distribution?: DistributionInputInterface;
 }
