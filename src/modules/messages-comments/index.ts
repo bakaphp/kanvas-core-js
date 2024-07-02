@@ -11,7 +11,7 @@ import {
 } from '../../mutations/';
 import { COMMENTS_QUERY } from '../../queries/';
 export class MessagesComments {
-  constructor(protected client: ClientType) {}
+  constructor(protected client: ClientType) { }
 
   public async addComment(
     input: MessageCommentInputInterface
@@ -53,7 +53,9 @@ export class MessagesComments {
     const response = await this.client.query({
       query: COMMENTS_QUERY,
       variables: { where, first, page },
-    });
+      fetchPolicy: 'no-cache',
+    },
+    );
 
     return response.data.comments.data as MessageCommentsInterface[];
   }
