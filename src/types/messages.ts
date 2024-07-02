@@ -4,6 +4,7 @@ export interface MessagesInterface {
   parent_id?: string;
   parent_unique_id?: any;
   uuid: string;
+  additional_field?: any;
   companies_id: string;
   message?: any;
   message_types_id: string;

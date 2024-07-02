@@ -35,6 +35,22 @@ describe('Test the Social Messages', () => {
         //const { data } = recentMessages;
     });
 
+    it('get messages group by date', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const recentMessages = await messages.getMessagesGroupByDate(
+            {} as WhereCondition,
+            {} as HasAppModuleMessageWhereConditions,
+            [{ column: 'CREATED_AT', order: 'DESC' }],
+            '',
+            25,
+            1
+        );
+        expect(recentMessages).toBeDefined();
+        console.log(recentMessages);
+        //const { data } = recentMessages;
+    });
+
     it('delete message', async () => {
         const client = getClient();
         const messages = client.messages;
