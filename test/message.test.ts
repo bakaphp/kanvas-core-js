@@ -23,7 +23,7 @@ describe('Test the Social Messages', () => {
     it('get messages', async () => {
         const client = getClient();
         const messages = client.messages;
-        const recentMessages = await messages.getMessages(
+        const recentMessages = await client.messages.getMessages(
             {} as WhereCondition,
             {} as HasAppModuleMessageWhereConditions,
             [{ column: 'CREATED_AT', order: 'DESC' }],
@@ -32,6 +32,6 @@ describe('Test the Social Messages', () => {
             1
         );
         expect(recentMessages).toBeDefined();
-
+        //const { data } = recentMessages;
     });
 });
