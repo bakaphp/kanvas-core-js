@@ -16,6 +16,7 @@ import {
   DELETE_INVITE_MUTATION,
   SOCIAL_LOGIN_MUTATTION,
   REQUEST_DELETED_ACCOUNT_MUTATION,
+  UPDATE_DISPLAY_NAME_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -91,6 +92,16 @@ export class Users {
     });
 
     return response.data.updateUser;
+  }
+
+  public async updateDisplayName(id: number, displayName: string) {
+    await this.client.mutate({
+      mutation: UPDATE_DISPLAY_NAME_MUTATION,
+      variables: {
+        user_id: id,
+        displayname: displayName,
+      },
+    });
   }
 
   public async switchCompany(id: number) {
