@@ -98,7 +98,7 @@ export class Users {
     await this.client.mutate({
       mutation: UPDATE_DISPLAY_NAME_MUTATION,
       variables: {
-        id,
+        user_id: id,
         displayname: displayName,
       },
     });
