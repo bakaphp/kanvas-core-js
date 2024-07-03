@@ -67,6 +67,13 @@ export const UPDATE_USER_MUTATION = gql`
   }
 `;
 
+
+export const UPDATE_DISPLAY_NAME_MUTATION = gql`
+  mutation appUpdateUserDisplayname($user_id: ID!, $displayname: String!) {
+    appUpdateUserDisplayname(user_id: $user_id, displayname: $displayname)
+  }
+`
+
 export const INVITE_USER_MUTATION = gql`
   mutation ($input: InviteInput!) {
     inviteUser(input: $input) {
