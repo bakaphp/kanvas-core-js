@@ -74,6 +74,12 @@ export const DELETE_MULTIPLE_MESSAGE_MUTATION = gql`
   }
 `;
 
+export const DELETE_ALL_MESSAGE_MUTATION = gql`
+  mutation deleteAllMessages {
+    deleteAllMessages
+  }
+`;
+
 export const INTERACTION_MESSAGE_MUTATION = gql`
   mutation interactionMessage($id: ID!, $type: InteractionType!) {
     interactionMessage(id: $id, type: $type) {
