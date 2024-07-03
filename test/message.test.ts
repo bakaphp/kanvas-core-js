@@ -85,4 +85,21 @@ describe('Test the Social Messages', () => {
         const deleted = await messages.deleteMultipleMessage([newMessage.id]);
         expect(deleted).toBe(true);
     });
+
+    it('delete all messages', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const deleted = await messages.deleteAllMessages();
+        expect(deleted).toBe(true);
+    });
 });
