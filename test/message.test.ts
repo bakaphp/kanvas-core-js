@@ -36,6 +36,40 @@ describe('Test the Social Messages', () => {
         //const { data } = recentMessages;
     });
 
+    it('like a message', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const likedMessage = await messages.likeMessage(newMessage.id);
+        expect(likedMessage).toBeDefined();
+    });
+
+    it('share a message', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const sharedMessage = await messages.shareMessage(newMessage.id);
+        expect(sharedMessage).toBeDefined();
+    });
+
     it('get messages group by date', async () => {
         const client = getClient();
         const messages = client.messages;
