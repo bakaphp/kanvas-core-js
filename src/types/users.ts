@@ -97,6 +97,9 @@ export interface UserData {
   default_company_branch: number;
   email: string;
   mainRole: string;
+  social: {
+    total_message: number;
+  }
   branches: {
     id: string;
     name: string;

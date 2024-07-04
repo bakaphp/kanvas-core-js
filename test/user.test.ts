@@ -23,6 +23,14 @@ describe('Test the KanvasCore client', () => {
     expect(userInfo).toBeDefined();
     expect(userInfo.id).toBeDefined();
   });
+  
+  it('gets user info social', async () => {
+    const client = getClient();
+    const userInfo = await client.users.getUserData(true);
+    expect(userInfo).toBeDefined();
+    expect(userInfo.id).toBeDefined();
+    expect(userInfo.social.total_message).toBeDefined();
+  });
 
   it('user is admin', async () => {
     const client = getClient();

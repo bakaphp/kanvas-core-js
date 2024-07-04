@@ -4,6 +4,7 @@ import {
   GET_ROLE_ID_BY_NAME_QUERY,
   GET_USERS_INVITES_QUERY,
   GET_USERS_INVITES_BY_ROLE_ID_QUERY,
+  GET_USER_SOCIAL_DATA_QUERY,
 } from '../../queries';
 import {
   REGISTER_MUTATTION,
@@ -55,9 +56,9 @@ export class Users {
     });
   }
 
-  public async getUserData(): Promise<UserData> {
+  public async getUserData(withSocial: boolean = false): Promise<UserData> {
     const response = await this.client.query({
-      query: GET_USER_DATA_QUERY,
+      query: !withSocial ? GET_USER_DATA_QUERY : GET_USER_SOCIAL_DATA_QUERY,
       fetchPolicy: 'network-only',
     });
 
