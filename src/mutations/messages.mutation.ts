@@ -80,6 +80,18 @@ export const DELETE_ALL_MESSAGE_MUTATION = gql`
   }
 `;
 
+export const LIKE_MESSAGE_MUTATION = gql`
+  mutation likeMessage($id: ID!) {
+    likeMessage(id: $id)
+  }
+`;
+
+export const SHARE_MESSAGE_MUTATION = gql`
+  mutation shareMessage($id: ID!) {
+    shareMessage(id: $id)
+  }
+`;
+
 export const INTERACTION_MESSAGE_MUTATION = gql`
   mutation interactionMessage($id: ID!, $type: InteractionType!) {
     interactionMessage(id: $id, type: $type) {

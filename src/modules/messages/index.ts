@@ -18,6 +18,8 @@ import {
   DELETE_MESSAGE_MUTATION,
   DELETE_MULTIPLE_MESSAGE_MUTATION,
   DELETE_ALL_MESSAGE_MUTATION,
+  LIKE_MESSAGE_MUTATION,
+  SHARE_MESSAGE_MUTATION,
 } from '../../mutations';
 
 import { GET_MESSAGES_GROUP_BY_DATE_QUERY, GET_MESSAGES_QUERY } from '../../queries';
@@ -69,7 +71,7 @@ export class Messages {
   public async deleteAllMessages(): Promise<Boolean> {
     await this.client.mutate({
       mutation: DELETE_ALL_MESSAGE_MUTATION,
-      variables: { },
+      variables: {},
     });
     return true;
   }
@@ -149,5 +151,22 @@ export class Messages {
       mutation: DETACH_TOPIC_TO_MESSAGE_MUTATION,
       variables: { message_id: messageId, topic_id: topicId },
     });
+  }
+
+  public async likeMessage(id: string): Promise<Boolean> {
+    await this.client.mutate({
+      mutation: LIKE_MESSAGE_MUTATION,
+      variables: { id: id },
+    });
+    return true;
+  }
+
+  public async shareMessage(id: string): Promise<string> {
+    const response = await this.client.mutate({
+      mutation: SHARE_MESSAGE_MUTATION,
+      variables: { id: id },
+    });
+
+    return response.data.shareMessage;
   }
 }
