@@ -14,6 +14,7 @@ export const GET_ROLES = gql`
         scope
         userCount
         abilitiesCount
+        systemRole
       }
       paginatorInfo {
         count

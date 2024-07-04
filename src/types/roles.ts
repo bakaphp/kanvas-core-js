@@ -16,6 +16,7 @@ export interface RolesInterface {
   scope: string;
   userCount: number;
   abilitiesCount: number;
+  systemRole: boolean;
 }
 
 export interface CreatedRoles {
