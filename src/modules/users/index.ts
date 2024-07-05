@@ -18,6 +18,7 @@ import {
   SOCIAL_LOGIN_MUTATTION,
   REQUEST_DELETED_ACCOUNT_MUTATION,
   UPDATE_DISPLAY_NAME_MUTATION,
+  UPDATE_USER_SOCIAL_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -82,10 +83,11 @@ export class Users {
 
   public async updateUserData(
     id: number,
-    updatedUser: UpdateUserParams
+    updatedUser: UpdateUserParams,
+    withSocial: boolean = false
   ): Promise<UserData> {
     const response = await this.client.mutate({
-      mutation: UPDATE_USER_MUTATION,
+      mutation: !withSocial ? UPDATE_USER_MUTATION : UPDATE_USER_SOCIAL_MUTATION,
       variables: {
         id,
         data: updatedUser,
