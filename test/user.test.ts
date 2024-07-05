@@ -57,6 +57,7 @@ describe('Test the KanvasCore client', () => {
       firstname: 'Max',
       lastname: 'Mustermann',
       phone_number: '123456789',
+      welcome: true,
       cell_phone_number: '123456789'
     };
 
