@@ -128,6 +128,7 @@ export interface UpdateUserParams {
   displayname?: string;
   phone_number: string;
   cell_phone_number: string;
+  welcome?: boolean;
   role_ids?: (string | number)[];
   custom_fields?: CustomFieldInput[];
 }

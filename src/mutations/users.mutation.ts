@@ -67,6 +67,49 @@ export const UPDATE_USER_MUTATION = gql`
   }
 `;
 
+export const UPDATE_USER_SOCIAL_MUTATION = gql`
+  mutation updateUser($id: ID!, $data: UpdateUserInput!) {
+    updateUser(id: $id, data: $data) {
+      id
+      uuid
+      firstname
+      lastname
+      displayname
+      default_company
+      default_company_branch
+      social {
+        total_message
+      }
+      email
+      branches {
+        id
+        name
+        phone
+      }
+      welcome
+      companies {
+        id
+        name
+      }
+      contact {
+        phone_number
+        cell_phone_number
+      }
+      roles
+      abilities
+      custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }]) {
+        data {
+          name
+          value
+        }
+      }
+      photo {
+        url
+      }
+    }
+  }
+`;
+
 
 export const UPDATE_DISPLAY_NAME_MUTATION = gql`
   mutation appUpdateUserDisplayname($user_id: ID!, $displayname: String!) {
