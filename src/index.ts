@@ -34,6 +34,7 @@ import {
   Channels,
   Organization,
   Tags,
+  Receiver,
 } from './modules';
 
 import { setContext } from '@apollo/client/link/context';
@@ -122,6 +123,8 @@ export default class KanvasCore {
   public notifications: Notifications;
   public channels: Channels;
   public tags: Tags;
+  public receiver: Receiver;
+
   constructor(protected options: Options) {
     this.client = new ApolloClient({
       link: this.generateLink(),
@@ -156,6 +159,7 @@ export default class KanvasCore {
     this.notifications = new Notifications(this.client);
     this.channels = new Channels(this.client);
     this.tags = new Tags(this.client);
+    this.receiver = new Receiver(this.options.url);
   }
   protected generateURL() {
     return new HttpLink({ uri: this.options.url });
