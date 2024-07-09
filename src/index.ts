@@ -159,7 +159,7 @@ export default class KanvasCore {
     this.notifications = new Notifications(this.client);
     this.channels = new Channels(this.client);
     this.tags = new Tags(this.client);
-    this.receiver = new Receiver(this.options.url);
+    this.receiver = new Receiver(this.options.url, this.options.key);
   }
   protected generateURL() {
     return new HttpLink({ uri: this.options.url });

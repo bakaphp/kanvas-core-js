@@ -2,11 +2,13 @@ import axios from 'axios';
 
 export class Receiver {
   private baseUrl: string;
+  private key: string;
 
-  constructor(protected url: string) {
+  constructor(protected url: string, key: string) {
     const base = new URL(url);
 
     this.baseUrl = base.origin || '';
+    this.key = key;
   }
 
   /**
@@ -25,6 +27,7 @@ export class Receiver {
       const response = await axios.post(url, data, {
         headers: {
           'Content-Type': 'application/json',
+          'X-Kanvas-App': this.key,
         },
       });
 
