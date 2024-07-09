@@ -33,6 +33,7 @@ Welcome to the documentation for the Kanvas SDK, a TypeScript SDK designed exclu
    - [Organization](#organization)
    - [Tags](#tags)
    - [Settings](#settings)
+   - [Receiver](#receiver)
 5. [Tips and Best Practices](#tips-and-best-practices)
 6. [Troubleshooting](#troubleshooting)
 7. [Contributing](#contributing)
@@ -551,6 +552,61 @@ await kanvas.settings.deleteUserSettings({
   key: 'deprecated_preference',
   entity_uuid: 'user_uuid'
 });
+```
+
+### Receiver
+
+Submit receiver data to the Kanvas API.
+
+```typescript
+// Submit receiver data
+const uuid = '01f6ca9f-fdba-41a1-8e05-bf1fd56122fc';
+const receiverData = {
+  title: "jhon doe store",
+  pipeline_stage_id: 0,
+  people: {
+    firstname: "jhon",
+    lastname: "doe",
+    contacts: [
+      { value: "example@store.com", contacts_types_id: 1, weight: 0 },
+      { value: "8738999933", contacts_types_id: 2, weight: 100 },
+      { value: "8738999911", contacts_types_id: 2, weight: 50 }
+    ],
+    address: [
+      { address: "Sony Store", city: "New York" }
+    ],
+    custom_fields: [
+      { name: "title", data: "CEO" }
+    ]
+  },
+  organization: {
+    name: "jhon doe"
+  },
+  custom_fields: [
+    { name: "organization_phone", data: "8093520515151" },
+    { name: "organization_fax", data: "38329348234982" },
+    { name: "organization_email", data: "nose@nose.com" },
+    { name: "organization_website", data: "https://nose.com" },
+    { name: "organization_online_store", data: "https://nose2.com" },
+    { name: "organization_address", data: { city: "New York", state: "NY", zip: 383838, country: "US" } },
+    { name: "organization_social_url", data: "https://nose3.com" },
+    { name: "organization_remittance_address", data: { city: "New York", state: "NY", zip: 383838, country: "US" } },
+    { name: "organization_state_of_imporcopration", data: "FL" },
+    { name: "organization_tax_ein", data: "2342342" },
+    { name: "organization_number_of_stores", data: 2 },
+    { name: "organization_volumn_of_sales", data: 23333 }
+  ],
+  files: [
+    { name: "something", url: "https://cdn.memod.com/images/lT5sJMf.jpg" }
+  ]
+};
+
+try {
+  const result = await kanvas.receiver.submitReceiverData(uuid, receiverData);
+  console.log('Receiver data submitted successfully:', result);
+} catch (error) {
+  console.error('Error submitting receiver data:', error);
+}
 ```
 
 Tips for using the Settings module:
