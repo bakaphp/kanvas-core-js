@@ -15,7 +15,11 @@ import {
   RESTORE_PEOPLE_MUTATION,
 } from '../../mutations';
 
-import { PEOPLE_QUERY } from './../../queries/';
+import {
+  PEOPLE_COUNT,
+  PEOPLE_COUNT_BY_TAG,
+  PEOPLE_QUERY,
+} from './../../queries/';
 export class People {
   constructor(protected client: ClientType) {}
 
@@ -97,6 +101,21 @@ export class People {
       fetchPolicy: 'network-only',
       partialRefetch: true,
     });
-    return response.data.peoples
+    return response.data.peoples;
+  }
+
+  public async getPeopleCount(): Promise<number> {
+    const response = await this.client.query({
+      query: PEOPLE_COUNT,
+    });
+    return response.data.peopleCount;
+  }
+
+  public async getPeopleCounByTag(tag: string): Promise<number> {
+    const response = await this.client.query({
+      query: PEOPLE_COUNT_BY_TAG,
+      variables: { tag },
+    });
+    return response.data.peopleCountByTag;
   }
 }
