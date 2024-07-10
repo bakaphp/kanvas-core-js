@@ -107,6 +107,8 @@ export class People {
   public async getPeopleCount(): Promise<number> {
     const response = await this.client.query({
       query: PEOPLE_COUNT,
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
     return response.data.peopleCount;
   }
@@ -115,6 +117,8 @@ export class People {
     const response = await this.client.query({
       query: PEOPLE_COUNT_BY_TAG,
       variables: { tag },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
     return response.data.peopleCountByTag;
   }
