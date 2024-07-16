@@ -68,3 +68,15 @@ export const PEOPLE_QUERY = gql`
     }
   }
 `;
+
+export const PEOPLE_COUNT = gql`
+  query peopleCount {
+    peopleCount
+  }
+`;
+
+export const PEOPLE_COUNT_BY_TAG = gql`
+  query peopleCountByTag($tag: String!) {
+    peopleCountByTag(tag: $tag)
+  }
+`;
