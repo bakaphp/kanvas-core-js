@@ -68,5 +68,4 @@ describe('Test the KanvasCore client', () => {
     expect(updateUser).toBeDefined();
     expect(updateUser.firstname).toBe('Max');
   });
-
 });
