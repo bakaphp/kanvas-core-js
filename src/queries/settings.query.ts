@@ -7,6 +7,14 @@ export type ConfigInput = {
   public?: boolean
 };
 
+export type ShopifyInput = {
+  client_id: string,
+  client_secret: string,
+  shop_url: string,
+  region_id: number,
+  company_id: number
+};
+
 export const AppSettingsQuery = gql`
   query getAppSettings($appKey: String!) {
     getAppSettings(key: $appKey) {
@@ -45,3 +53,4 @@ export const APP_SETTINGS_QUERY = gql`
     }
   }
 `;
+
