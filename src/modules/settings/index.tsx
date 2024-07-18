@@ -3,7 +3,6 @@ import {
   AppSettingsQuery,
   COMPANY_SETTING_QUERY,
   ConfigInput,
-  ShopifyInput,
   USERS_SETTINGS_QUERY,
 } from '../../queries';
 import {
@@ -12,6 +11,7 @@ import {
   ClientType,
   CompanySettingsResponse,
   SettingsResponse,
+  ShopifyInput,
   UserSettingsResponse,
 } from '../../index';
 import {
