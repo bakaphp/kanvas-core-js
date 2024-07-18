@@ -14,6 +14,7 @@ import {
 import {
   ASSIGN_ROLE_USER,
   CREATE_ROLE,
+  DELETE_ROLE,
   REMOVE_ROLE_USER,
   UPDATE_ROLE,
 } from '../../mutations';
@@ -73,5 +74,13 @@ export class Roles {
       variables: { ...params },
     });
     return response.data.updateRole;
+  }
+
+  public async deleteRole(id: RolesInterface['id']): Promise<boolean> {
+    const response = await this.client.mutate({
+      mutation: DELETE_ROLE,
+      variables: { id },
+    });
+    return response.data;
   }
 }
