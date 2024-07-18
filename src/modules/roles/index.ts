@@ -4,6 +4,7 @@ import {
   AssignRoleUser,
   CreateRoleParams,
   CreatedRoles,
+  DeleteRole,
   OrderBy,
   RemoveRoleUser,
   RolesInterface,
@@ -76,7 +77,7 @@ export class Roles {
     return response.data.updateRole;
   }
 
-  public async deleteRole(id: RolesInterface['id']): Promise<boolean> {
+  public async deleteRole(id: RolesInterface['id']): Promise<DeleteRole> {
     const response = await this.client.mutate({
       mutation: DELETE_ROLE,
       variables: { id },

@@ -34,6 +34,10 @@ export interface RemoveRoleUser {
   removeRole: boolean;
 }
 
+export interface DeleteRole {
+  deleteRole: boolean;
+}
+
 export interface UserRoleParams {
   userId: string | number;
   role: string | number;
