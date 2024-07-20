@@ -81,3 +81,10 @@ export const CREATE_APP = gql`
     }
   }
 `;
+
+export const SHOPIFY_SETUP = gql`
+  mutation shopifySetup($input: ShopifySetupInput!) {
+    shopifySetup(input: $input)
+  }
+`;
+

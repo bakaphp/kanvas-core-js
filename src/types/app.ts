@@ -149,6 +149,14 @@ export interface CreateAppInput {
   domain_based: boolean;
 }
 
+export interface ShopifyInput {
+  client_id: string,
+  client_secret: string,
+  shop_url: string,
+  region_id: number,
+  company_id: number
+};
+
 export interface CreateAppResponse {
   createApp: {
     name: string;

@@ -45,3 +45,4 @@ export const APP_SETTINGS_QUERY = gql`
     }
   }
 `;
+

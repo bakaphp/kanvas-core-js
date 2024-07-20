@@ -11,6 +11,7 @@ import {
   ClientType,
   CompanySettingsResponse,
   SettingsResponse,
+  ShopifyInput,
   UserSettingsResponse,
 } from '../../index';
 import {
@@ -19,6 +20,7 @@ import {
   SET_APP_SETTINGS_MUTATION,
   SET_COMPANY_SETTINGS_MUTATION,
   SET_USER_SETTINGS_MUTATION,
+  SHOPIFY_SETUP,
 } from '../../mutations';
 
 export default class Settings {
@@ -91,6 +93,19 @@ export default class Settings {
     try {
       await this.client.mutate({
         mutation: SET_USER_SETTINGS_MUTATION,
+        variables: {
+          input,
+        },
+      });
+      return true;
+    } catch {
+      return undefined;
+    }
+  }
+  async shopifySetup(input: ShopifyInput): Promise<boolean | undefined> {
+    try {
+      await this.client.mutate({
+        mutation: SHOPIFY_SETUP,
         variables: {
           input,
         },
