@@ -219,14 +219,6 @@ export const UPDATE_PRODUCT = gql`
             id
           }
         }
-        variants_attributes {
-          name
-          id
-          values {
-            value
-            id
-          }
-        }
       }
       companies {
         id
@@ -324,6 +316,16 @@ export const UPDATE_VARIANT = gql`
         name
         id
         value
+      }
+      productsTypes {
+        variants_attributes {
+          id
+          name
+          values {
+            id
+            value
+          }
+        }
       }
       products_id
       status {
@@ -425,6 +427,7 @@ export const UPDATE_CATEGORIES = gql`
       name
       is_published
       id
+      uuid
       companies {
         name
         id
@@ -484,6 +487,7 @@ export const UPDATE_STATUS = gql`
       id
       name
       is_default
+      is_published
       slug
     }
   }
