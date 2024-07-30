@@ -283,6 +283,16 @@ export const UPDATE_VARIANT = gql`
             }
           }
         }
+        productsTypes {
+          variants_attributes {
+            id
+            name
+            values {
+              id
+              value
+            }
+          }
+        }
         files {
           data {
             name
@@ -316,16 +326,6 @@ export const UPDATE_VARIANT = gql`
         name
         id
         value
-      }
-      productsTypes {
-        variants_attributes {
-          id
-          name
-          values {
-            id
-            value
-          }
-        }
       }
       products_id
       status {
