@@ -252,7 +252,7 @@ export const UPDATE_VARIANT = gql`
         warehouses_id
         price
         discounted_price
-        id
+        channels_id
       }
       html_description
       id
