@@ -42,3 +42,16 @@ export const DELETE_ROLE = gql`
     deleteRole(id: $id)
   }
 `;
+export const GIVE_PERMISSION_ROLE_MUTATION = gql`
+  mutation givePermissionToRole(
+    $role: String!
+    $permission: String!
+    $systemModule: String!
+  ) {
+    givePermissionToRole(
+      role: $role
+      permission: $permission
+      systemModule: $systemModule
+    )
+  }
+`;
