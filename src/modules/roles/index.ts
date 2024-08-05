@@ -16,6 +16,7 @@ import {
   ASSIGN_ROLE_USER,
   CREATE_ROLE,
   DELETE_ROLE,
+  GIVE_PERMISSION_ROLE_MUTATION,
   REMOVE_ROLE_USER,
   UPDATE_ROLE,
 } from '../../mutations';
@@ -83,5 +84,16 @@ export class Roles {
       variables: { id },
     });
     return response.data;
+  }
+  public async givePermissionUser(
+    role: string,
+    permission: string,
+    systemModule: string
+  ): Promise<boolean> {
+    const response = await this.client.mutate({
+      mutation: GIVE_PERMISSION_ROLE_MUTATION,
+      variables: { role, permission, systemModule },
+    });
+    return response.data.givePermissionToRole;
   }
 }
