@@ -22,7 +22,7 @@ import {
   SHARE_MESSAGE_MUTATION,
 } from '../../mutations';
 
-import { GET_MESSAGES_GROUP_BY_DATE_QUERY, GET_MESSAGES_QUERY } from '../../queries';
+import { GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG, GET_MESSAGES_GROUP_BY_DATE_QUERY, GET_MESSAGES_QUERY } from '../../queries';
 import { MessagesComments } from '../messages-comments';
 export class Messages {
   public comments: MessagesComments;
@@ -132,6 +132,18 @@ export class Messages {
     });
     return response.data.messagesGroupByDate as MessagesInterface[];
   }
+
+  public async getMessageByDisplaynameAndSlug(
+    displayname: string,
+    slug: string
+  ): Promise<MessagesInterface> {
+    const response = await this.client.query({
+      query: GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG,
+      variables: { displayname: displayname, slug: slug },
+    });
+    return response.data.messages as MessagesInterface;
+  }
+  
 
   public async attachTopicToMessage(
     messageId: string,

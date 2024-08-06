@@ -7,6 +7,7 @@ export interface MessagesInterface {
   additional_field?: any;
   companies_id: string;
   message?: any;
+  slug?: any;
   message_types_id: string;
   user: UserInterface;
   appModuleMessage: AppModuleMessage;

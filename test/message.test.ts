@@ -70,6 +70,31 @@ describe('Test the Social Messages', () => {
         expect(sharedMessage).toBeDefined();
     });
 
+    it('get message by slug and displayname', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const messageContent = 'Hello Kanvas Time ' + new Date().getTime();
+        const slug = messageContent
+            .toString()
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, '-')
+            .replace(/[^\w\-]+/g, '')
+            .replace(/\-\-+/g, '-');
+
+        const newMessage = await messages.createMessage({
+            message_verb: 'post',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const message = await messages.getMessageByDisplaynameAndSlug(newMessage.user.displayname, slug);
+        expect(message).toBeDefined();
+    });
+
     it('get messages group by date', async () => {
         const client = getClient();
         const messages = client.messages;
