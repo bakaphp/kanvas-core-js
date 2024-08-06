@@ -7,6 +7,7 @@ export const CREATE_MESSAGE_MUTATION = gql`
       uuid
       message
       parent_id
+      slug
       user {
         id
         firstname
@@ -38,6 +39,7 @@ export const UPDATE_MESSAGE_MUTATION = gql`
       uuid
       message
       parent_id
+      slug
       user {
         id
         firstname
@@ -99,6 +101,7 @@ export const INTERACTION_MESSAGE_MUTATION = gql`
       uuid
       message
       parent_id
+      slug
       user {
         id
         firstname
@@ -130,6 +133,7 @@ export const ATTACH_TOPIC_TO_MESSAGE_MUTATION = gql`
       uuid
       message
       parent_id
+      slug
       user {
         id
         firstname
@@ -160,6 +164,7 @@ export const DETACH_TOPIC_TO_MESSAGE_MUTATION = gql`
       uuid
       message
       parent_id
+      slug
       user {
         id
         firstname
