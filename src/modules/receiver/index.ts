@@ -5,12 +5,14 @@ export class Receiver {
   private key: string;
 
   constructor(protected url: string, key: string) {
-    const base = new URL(url);
-
-    this.baseUrl = base.origin || '';
+    this.baseUrl = this.extractOrigin(url);
     this.key = key;
   }
-
+  
+  private extractOrigin(url: string): string {
+    const match = url.match(/^(https?:\/\/[^\/]+)/i);
+    return match ? match[1] : '';
+  }
   /**
    * Submit receiver data to the Kanvas API
    * @param uuid - The UUID of the receiver
