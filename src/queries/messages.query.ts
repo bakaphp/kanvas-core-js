@@ -39,6 +39,11 @@ export const GET_MESSAGES_QUERY = gql`
         comment_count
         total_liked
         total_saved
+        tags {
+          data {
+              name
+          }
+        }
         parent {
           id
           uuid
@@ -96,7 +101,12 @@ export const GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG = gql`
         parent {
           id
           uuid
-        },
+        }
+        tags {
+          data {
+              name
+          }
+        }
         myInteraction {
             is_liked,
             is_saved,
@@ -147,7 +157,12 @@ export const GET_MESSAGES_GROUP_BY_DATE_QUERY = gql`
         parent {
           id
           uuid
-        },
+        }
+        tags {
+          data {
+              name
+          }
+        }
         myInteraction {
             is_liked,
             is_saved,
