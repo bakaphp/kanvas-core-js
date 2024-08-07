@@ -10,6 +10,7 @@ export interface MessagesInterface {
   slug?: any;
   message_types_id: string;
   user: UserInterface;
+  tags: Array<string>;
   appModuleMessage: AppModuleMessage;
 }
 
