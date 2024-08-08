@@ -89,8 +89,8 @@ export const LIKE_MESSAGE_MUTATION = gql`
 `;
 
 export const VIEW_MESSAGE_MUTATION = gql`
-  mutation viewMessageMessage($id: ID!) {
-    viewMessageMessage(id: $id)
+  mutation viewMessage($id: ID!) {
+    viewMessage(id: $id)
   }
 `;
 
