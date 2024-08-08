@@ -20,6 +20,7 @@ import {
   DELETE_ALL_MESSAGE_MUTATION,
   LIKE_MESSAGE_MUTATION,
   SHARE_MESSAGE_MUTATION,
+  VIEW_MESSAGE_MUTATION,
 } from '../../mutations';
 
 import { GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG, GET_MESSAGES_GROUP_BY_DATE_QUERY, GET_MESSAGES_QUERY } from '../../queries';
@@ -168,6 +169,14 @@ export class Messages {
   public async likeMessage(id: string): Promise<Boolean> {
     await this.client.mutate({
       mutation: LIKE_MESSAGE_MUTATION,
+      variables: { id: id },
+    });
+    return true;
+  }
+
+  public async viewMessage(id: string): Promise<Boolean> {
+    await this.client.mutate({
+      mutation: VIEW_MESSAGE_MUTATION,
       variables: { id: id },
     });
     return true;

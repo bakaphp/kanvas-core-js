@@ -53,6 +53,23 @@ describe('Test the Social Messages', () => {
         expect(likedMessage).toBeDefined();
     });
 
+    it('view a message', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const viewMessage = await messages.viewMessage(newMessage.id);
+        expect(viewMessage).toBeDefined();
+    });
+
     it('share a message', async () => {
         const client = getClient();
         const messages = client.messages;
