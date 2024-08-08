@@ -30,7 +30,9 @@ describe('Test the KanvasCore client', () => {
 
   it('gets user info', async () => {
     const client = getClient();
-    const userInfo = await client.users.getUserData();
+    
+    //if you pass anything with been a app owner it will return your user
+    const userInfo = await client.users.getUserByDisplayName('test');
     expect(userInfo).toBeDefined();
     expect(userInfo.id).toBeDefined();
   });

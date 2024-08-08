@@ -5,6 +5,7 @@ import {
   GET_USERS_INVITES_QUERY,
   GET_USERS_INVITES_BY_ROLE_ID_QUERY,
   GET_USER_SOCIAL_DATA_QUERY,
+  GET_USER_BY_DISPLAYNAME,
 } from '../../queries';
 import {
   REGISTER_MUTATTION,
@@ -64,6 +65,18 @@ export class Users {
     });
 
     return response.data.me;
+  }
+
+  public async getUserByDisplayName(displayName: string): Promise<UserData> {
+    const response = await this.client.query({
+      query: GET_USER_BY_DISPLAYNAME,
+      variables: {
+        displayName
+      },
+      fetchPolicy: 'no-cache',
+    });
+
+    return response.data.userByDisplayName;
   }
 
   public async getRoleIdByName(name: string): Promise<RoleData> {
