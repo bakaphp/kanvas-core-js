@@ -95,6 +95,6 @@ export class Auth {
         data,
       },
     });
-    return response.data;
+    return response.data.socialLogin as AuthenticationInterface;
   }
 }
