@@ -3,7 +3,8 @@ import { gql } from '@apollo/client/core';
 export const GET_USER_BY_DISPLAYNAME = gql`
   query getUserByDisplayName(
     $displayName: String!
-  ) {    userByDisplayName(displayname: $displayName) {
+  ) {
+    userByDisplayName(displayname: $displayName) {
       id
       uuid
       firstname
