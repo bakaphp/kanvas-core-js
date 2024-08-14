@@ -36,6 +36,44 @@ describe('Test the Social Messages', () => {
         //const { data } = recentMessages;
     });
 
+    it('get message by type', async () => {
+        const client = getClient();
+
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post2',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const recentMessages = await messages.getMessages(
+            {
+                column: 'MESSAGE_TYPES_ID',
+                operator: 'EQ',
+                value: 'post2',
+                AND: [
+                    {
+                        column: 'USERS_ID',
+                        operator: 'EQ',
+                        value: newMessage.user.id,
+                    }
+                ],
+            } as WhereCondition,
+            {} as HasAppModuleMessageWhereConditions,
+            [{ column: 'CREATED_AT', order: 'DESC' }],
+            '',
+            25,
+            1
+        );
+        expect(recentMessages).toBeDefined();
+        //console.log(recentMessages);
+        //const { data } = recentMessages;
+    });
+
     it('like a message', async () => {
         const client = getClient();
         const messages = client.messages;
