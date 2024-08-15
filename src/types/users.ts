@@ -59,6 +59,9 @@ export interface UserInterface {
   votes_points: number;
   welcome: number;
   user_activation_email: string;
+  photo?: {
+    url: string;
+  };
   // photo: File;
   // files: File[];
   locale: string;

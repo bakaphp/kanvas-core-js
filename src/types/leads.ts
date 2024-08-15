@@ -147,8 +147,8 @@ export interface WhereCondition {
   column: string;
   operator: string;
   value: number | string | Array<string | number>;
-  and?: [WhereCondition];
-  or?: [WhereCondition];
+  AND?: [WhereCondition];
+  OR?: [WhereCondition];
 }
 
 export interface LeadsDashboardInput {

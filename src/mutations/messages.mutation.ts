@@ -88,6 +88,12 @@ export const LIKE_MESSAGE_MUTATION = gql`
   }
 `;
 
+export const VIEW_MESSAGE_MUTATION = gql`
+  mutation viewMessage($id: ID!) {
+    viewMessage(id: $id)
+  }
+`;
+
 export const SHARE_MESSAGE_MUTATION = gql`
   mutation shareMessage($id: ID!) {
     shareMessage(id: $id)

@@ -28,6 +28,9 @@ export const GET_MESSAGES_QUERY = gql`
           firstname
           lastname
           displayname
+          photo {
+            url
+          }
         }
         appModuleMessage {
           entity_id
@@ -87,6 +90,9 @@ export const GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG = gql`
           firstname
           lastname
           displayname
+          photo {
+            url
+          }
         }
         appModuleMessage {
           entity_id
@@ -147,6 +153,9 @@ export const GET_MESSAGES_GROUP_BY_DATE_QUERY = gql`
           firstname
           lastname
           displayname
+          photo {
+            url
+          }
         }
         message_types_id
         message
