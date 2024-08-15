@@ -175,6 +175,13 @@ export const UPDATE_PRODUCT = gql`
           id
           name
         }
+        channels {
+            name
+            warehouses_id
+            discounted_price
+            price
+            channels_id
+          }
         warehouses {
           warehouses_id
           status_history {
@@ -245,6 +252,7 @@ export const UPDATE_VARIANT = gql`
           name
           url
           type
+          uuid
         }
       }
       channels {
@@ -273,6 +281,7 @@ export const UPDATE_VARIANT = gql`
         description
         id
         name
+        uuid
         variants {
           name
           uuid
