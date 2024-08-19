@@ -40,7 +40,7 @@ export const GET_USER_BY_DISPLAYNAME = gql`
       photo {
         url
       }
-      social{
+      social {
         total_followers
         total_following
       }
@@ -86,7 +86,7 @@ export const GET_USER_DATA_QUERY = gql`
       photo {
         url
       }
-      social{
+      social {
         total_followers
         total_following
       }
