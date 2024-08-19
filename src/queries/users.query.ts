@@ -40,6 +40,10 @@ export const GET_USER_BY_DISPLAYNAME = gql`
       photo {
         url
       }
+      social{
+        total_followers
+        total_following
+      }
     }
   }
 `;
@@ -82,6 +86,10 @@ export const GET_USER_DATA_QUERY = gql`
       photo {
         url
       }
+      social{
+        total_followers
+        total_following
+      }
     }
   }
 `;
@@ -101,6 +109,8 @@ export const GET_USER_SOCIAL_DATA_QUERY = gql`
       mainRole
       social {
         total_message
+        total_followers
+        total_following
       }
       branches {
         id
