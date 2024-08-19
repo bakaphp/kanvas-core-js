@@ -102,6 +102,8 @@ export interface UserData {
   mainRole: string;
   social: {
     total_message: number;
+    total_followers: number;
+    total_following: number;
   }
   branches: {
     id: string;

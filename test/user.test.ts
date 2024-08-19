@@ -70,4 +70,20 @@ describe('Test the KanvasCore client', () => {
     expect(updateUser).toBeDefined();
     expect(updateUser.firstname).toBe('Max');
   });
+
+  it('gets user total following', async () => {
+    const client = getClient();
+    const userInfo = await client.users.getUserData(true);
+    expect(userInfo).toBeDefined();
+    expect(userInfo.id).toBeDefined();
+    expect(userInfo.social.total_following).toBeDefined();
+  });
+
+  it('gets user total followers', async () => {
+    const client = getClient();
+    const userInfo = await client.users.getUserData(true);
+    expect(userInfo).toBeDefined();
+    expect(userInfo.id).toBeDefined();
+    expect(userInfo.social.total_followers).toBeDefined();
+  });
 });
