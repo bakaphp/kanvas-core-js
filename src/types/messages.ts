@@ -8,6 +8,13 @@ export interface MessagesInterface {
   companies_id: string;
   message?: any;
   slug?: any;
+  reactions_count: number;
+  comment_count: number;
+  total_liked: number;
+  total_disliked: number;
+  total_saved: number;
+  total_shared: number;
+  total_view: number;
   message_types_id: string;
   user: UserInterface;
   tags: string[];
