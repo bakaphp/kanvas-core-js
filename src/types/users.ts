@@ -104,6 +104,7 @@ export interface UserData {
     total_message: number;
     total_followers: number;
     total_following: number;
+  }
   branches: {
     id: string;
     name: string;
