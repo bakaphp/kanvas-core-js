@@ -41,7 +41,10 @@ export const GET_MESSAGES_QUERY = gql`
         reactions_count
         comment_count
         total_liked
+        total_disliked
         total_saved
+        total_shared
+        total_view
         tags {
           data {
               name
@@ -103,7 +106,10 @@ export const GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG = gql`
         reactions_count
         comment_count
         total_liked
+        total_disliked
         total_saved
+        total_shared
+        total_view
         parent {
           id
           uuid
@@ -162,7 +168,10 @@ export const GET_MESSAGES_GROUP_BY_DATE_QUERY = gql`
         reactions_count
         comment_count
         total_liked
+        total_disliked
         total_saved
+        total_shared
+        total_view
         parent {
           id
           uuid
