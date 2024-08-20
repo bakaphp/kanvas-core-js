@@ -18,14 +18,18 @@ export class Tags {
   constructor(protected client: ClientType) {}
   public async getTags(
     options: {
+      first?: number;
+      page?: number;
       where?: WhereCondition;
+      search?: string;
     } = {}
   ): Promise<CreatedTags> {
-    const { where } = options;
+      
+      const { first,page, where, search } = options;
 
     const response = await this.client.query({
       query: GET_TAGS,
-      variables: { where },
+      variables: { first,page, where, search },
     });
     return response.data.tags;
   }
