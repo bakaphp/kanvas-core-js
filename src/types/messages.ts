@@ -18,7 +18,6 @@ export interface MessagesInterface {
   message_types_id: string;
   user: UserInterface;
   tags: string[];
-  created_at: string;
   appModuleMessage: AppModuleMessage;
 }
 
