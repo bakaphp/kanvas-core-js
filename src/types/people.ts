@@ -7,6 +7,7 @@ import {
   ContactInterface,
   AddressInterface,
 } from './index';
+import { OrganizationInterface } from './organization';
 import { PaginatorInfo } from './paginator';
 import { CreatedTags, TagInput } from './tags';
 
@@ -24,6 +25,21 @@ export interface PeopleInputInterface {
   custom_fields?: [CustomFieldInput];
   tags?: [TagInput];
 }
+
+
+
+export interface PeopleEmploymentHistory{
+  id: string;
+  organization:OrganizationInterface;
+  people:PeopleInterface;
+  position:string;
+  income:number;
+  start_date:string;
+  end_date:string;
+  status:string;
+  income_type:string;
+
+}
 export interface PeopleInterface {
   id: string;
   uuid: string;
@@ -35,6 +51,7 @@ export interface PeopleInterface {
   address?: AddressInterface[];
   custom_fields?: CustomFieldInput[];
   tags?: CreatedTags;
+  employment_history?:PeopleEmploymentHistory[];
 }
 
 
@@ -42,3 +59,4 @@ export interface CreatedPeople {
   data: PeopleInterface[];
   paginatorInfo?: PaginatorInfo;
 }
+

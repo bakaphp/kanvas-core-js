@@ -58,6 +58,19 @@ export const PEOPLE_QUERY = gql`
             weight
           }
         }
+        employment_history {
+          end_date
+          id
+          income
+          income_type
+          position
+          start_date
+          status
+          people {
+            id
+            uuid
+          }
+        }
       }
       paginatorInfo {
         total
