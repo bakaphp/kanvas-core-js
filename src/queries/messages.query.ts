@@ -60,6 +60,7 @@ export const GET_MESSAGES_QUERY = gql`
             is_shared,
             is_reported
         }
+        created_at
       }
       paginatorInfo {
         currentPage
@@ -125,6 +126,7 @@ export const GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG = gql`
             is_shared,
             is_reported
         }
+        created_at
       }
     }
   }
@@ -187,6 +189,7 @@ export const GET_MESSAGES_GROUP_BY_DATE_QUERY = gql`
             is_shared,
             is_reported
         }
+        created_at
       }
       paginatorInfo {
         currentPage
