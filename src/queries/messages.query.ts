@@ -55,11 +55,13 @@ export const GET_MESSAGES_QUERY = gql`
           uuid
         },
         myInteraction {
-            is_liked,
-            is_saved,
-            is_shared,
+            is_liked
+            is_disliked
+            is_saved
+            is_shared
             is_reported
         }
+        created_at
       }
       paginatorInfo {
         currentPage
@@ -120,11 +122,13 @@ export const GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG = gql`
           }
         }
         myInteraction {
-            is_liked,
-            is_saved,
-            is_shared,
+            is_liked
+            is_disliked
+            is_saved
+            is_shared
             is_reported
         }
+        created_at
       }
     }
   }
@@ -182,11 +186,13 @@ export const GET_MESSAGES_GROUP_BY_DATE_QUERY = gql`
           }
         }
         myInteraction {
-            is_liked,
-            is_saved,
-            is_shared,
+            is_liked
+            is_disliked
+            is_saved
+            is_shared
             is_reported
         }
+        created_at
       }
       paginatorInfo {
         currentPage

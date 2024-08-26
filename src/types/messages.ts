@@ -18,7 +18,17 @@ export interface MessagesInterface {
   message_types_id: string;
   user: UserInterface;
   tags: string[];
+  myInteraction: MyInteractionInterface;
+  created_at: string;
   appModuleMessage: AppModuleMessage;
+}
+
+ interface MyInteractionInterface {
+  is_liked: boolean;
+  is_disliked: boolean;
+  is_saved: boolean;
+  is_shared: boolean;
+  is_reported: boolean;
 }
 
 interface AppModuleMessage {
