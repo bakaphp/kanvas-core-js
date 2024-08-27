@@ -62,12 +62,18 @@ export const PEOPLE_QUERY = gql`
           end_date
           id
           income
+          organization {
+            id
+            uuid
+            name
+          }
           income_type
           position
           start_date
           status
           people {
             id
+            name
             uuid
           }
         }
