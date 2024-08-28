@@ -77,6 +77,8 @@ export const PEOPLE_QUERY = gql`
             uuid
           }
         }
+        created_at
+        updated_at
       }
       paginatorInfo {
         total
