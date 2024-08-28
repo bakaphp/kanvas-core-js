@@ -68,6 +68,16 @@ export interface HasAppModuleMessageWhereConditions {
   operator: string;
   value: string;
 }
+export interface HasTagWhereHasConditions {
+  column: string;
+  operator: string;
+  value: string;
+}
+export interface HasTypeWhereHasConditions {
+  column: string;
+  operator: string;
+  value: string;
+}
 
 export interface OrderByMessage {
   column: string;
