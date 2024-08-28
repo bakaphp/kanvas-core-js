@@ -6,6 +6,7 @@ import {
   CustomFieldInput,
   ContactInterface,
   AddressInterface,
+  CustomFieldData,
 } from './index';
 import { OrganizationInterface } from './organization';
 import { PaginatorInfo } from './paginator';
@@ -51,7 +52,7 @@ export interface PeopleInterface {
   company?: CompanyInterface;
   contacts: ContactInterface[];
   address?: AddressInterface[];
-  custom_fields?: CustomFieldInput[];
+  custom_fields?: CustomFieldData[];
   tags?: CreatedTags;
   employment_history?:PeopleEmploymentHistory[];
 }
