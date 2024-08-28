@@ -24,6 +24,8 @@ export interface PeopleInputInterface {
   address?: [AddressInputInterface];
   custom_fields?: [CustomFieldInput];
   tags?: [TagInput];
+  created_at: string;
+  updated_at?:string
 }
 
 
