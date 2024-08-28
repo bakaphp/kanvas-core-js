@@ -25,7 +25,7 @@ export interface PeopleInputInterface {
   address?: [AddressInputInterface];
   custom_fields?: [CustomFieldInput];
   tags?: [TagInput];
-  created_at: string;
+  created_at?: string;
   updated_at?:string
 }
 
@@ -52,9 +52,11 @@ export interface PeopleInterface {
   company?: CompanyInterface;
   contacts: ContactInterface[];
   address?: AddressInterface[];
-  custom_fields?: CustomFieldData[];
+  custom_fields?: CustomFieldData
   tags?: CreatedTags;
   employment_history?:PeopleEmploymentHistory[];
+  created_at: string;
+  updated_at?:string
 }
 
 
