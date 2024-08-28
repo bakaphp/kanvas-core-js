@@ -7,7 +7,7 @@ import {
   HasAppModuleMessageWhereConditions,
   OrderByMessage,
   WhereCondition,
-  MessageUpdateInputInterface,
+  MessageUpdateInputInterface
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
@@ -95,13 +95,17 @@ export class Messages {
     orderBy: Array<OrderByMessage>,
     search: string,
     first: number,
-    page: number
+    page: number,
+    hasTags?: WhereCondition,
+    hasType?: WhereCondition
   ): Promise<MessagesInterface[]> {
     const response = await this.client.query({
       query: GET_MESSAGES_QUERY,
       variables: {
         where,
         hasAppModuleMessageWhere,
+        hasTags,
+        hasType,
         orderBy,
         search,
         first,
@@ -145,7 +149,7 @@ export class Messages {
     });
     return response.data.messages as MessagesInterface;
   }
-  
+
 
   public async attachTopicToMessage(
     messageId: string,
