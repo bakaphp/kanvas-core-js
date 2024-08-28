@@ -5,7 +5,7 @@ import { CreatedContactTypes, OrderBy, WhereCondition } from '../../types';
 
 export class Contact {
   constructor(protected client: ClientType) {}
-  public async getTags(
+  public async getContactTypes(
     options: {
       first?: number;
       page?: number;
