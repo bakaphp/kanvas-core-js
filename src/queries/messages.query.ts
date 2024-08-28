@@ -4,8 +4,8 @@ export const GET_MESSAGES_QUERY = gql`
   query getMessages(
     $where: QueryMessagesWhereWhereConditions
     $hasAppModuleMessage: QueryMessagesHasAppModuleMessageWhereHasConditions
-    $hasTags: QueryMessagesWhereHasTagsWhereConditions
-    $hasType: QueryMessagesWhereHasTypeWhereConditions
+    $hasTags: QueryMessagesHasTagsWhereHasConditions
+    $hasType: QueryMessagesHasTypeWhereHasConditions
     $orderBy: [QueryMessagesOrderByOrderByClause!]
     $search: String
     $first: Int! = 25
