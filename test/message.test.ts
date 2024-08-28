@@ -1,4 +1,4 @@
-import { HasAppModuleMessageWhereConditions, HasTagWhereHasConditions, HasTypeWhereHasConditions, WhereCondition } from '../src';
+import { HasAppModuleMessageWhereConditions, WhereCondition } from '../src';
 import { initializeClient, getClient } from './setupClient';
 
 beforeAll(async () => {
@@ -32,8 +32,6 @@ describe('Test the Social Messages', () => {
             1
         );
         expect(recentMessages).toBeDefined();
-        //console.log(recentMessages);
-        //const { data } = recentMessages;
     });
 
     it('get message by type id', async () => {
@@ -70,8 +68,6 @@ describe('Test the Social Messages', () => {
             1
         );
         expect(recentMessages).toBeDefined();
-        //console.log(recentMessages);
-        //const { data } = recentMessages;
     });
 
     it('get message by type verb', async () => {
@@ -100,12 +96,10 @@ describe('Test the Social Messages', () => {
             '',
             25,
             1,
-            {} as HasTagWhereHasConditions,
-            {column: 'VERB', operator: 'EQ', value: 'post2'} as HasTypeWhereHasConditions
+            {} as WhereCondition,
+            {column: 'VERB', operator: 'EQ', value: 'post2'} as WhereCondition
         );
         expect(recentMessages).toBeDefined();
-        //console.log(recentMessages);
-        //const { data } = recentMessages;
     });
 
     it('get message by tag', async () => {
@@ -129,11 +123,9 @@ describe('Test the Social Messages', () => {
             '',
             25,
             1,
-            {column: 'SLUG', operator: 'EQ', value: 'post2'} as HasTagWhereHasConditions,
+            {column: 'SLUG', operator: 'EQ', value: 'post2'} as WhereCondition,
         );
         expect(recentMessages).toBeDefined();
-        //console.log(recentMessages);
-        //const { data } = recentMessages;
     });
 
     it('like a message', async () => {
@@ -241,8 +233,6 @@ describe('Test the Social Messages', () => {
             1
         );
         expect(recentMessages).toBeDefined();
-        //console.log(recentMessages);
-        //const { data } = recentMessages;
     });
 
     it('delete message', async () => {
