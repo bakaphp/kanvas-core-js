@@ -133,13 +133,23 @@ export class Messages {
   }
 
   public async getMessagesGroupByDate(
-    where: WhereCondition,
-    hasAppModuleMessageWhere: HasAppModuleMessageWhereConditions,
-    orderBy: Array<OrderByMessage>,
-    search: string,
-    first: number,
-    page: number
+    options: {
+      where?: WhereCondition,
+      hasAppModuleMessageWhere?: HasAppModuleMessageWhereConditions,
+      orderBy?: Array<OrderByMessage>,
+      search?: string,
+      first?: number,
+      page?: number
+    } = {}
   ): Promise<MessagesInterface[]> {
+    const {
+      where,
+      hasAppModuleMessageWhere,
+      orderBy,
+      search,
+      first,
+      page,
+    } = options
     const response = await this.client.query({
       query: GET_MESSAGES_GROUP_BY_DATE_QUERY,
       variables: {

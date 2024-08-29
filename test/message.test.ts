@@ -1,4 +1,4 @@
-import { HasAppModuleMessageWhereConditions, WhereCondition } from '../src';
+import { WhereCondition } from '../src';
 import { initializeClient, getClient } from './setupClient';
 
 beforeAll(async () => {
@@ -132,8 +132,8 @@ describe('Test the Social Messages', () => {
         expect(newMessage.id).toBeDefined();
         expect(newMessage.message).toBe(messageContent);
 
-        const recentMessages = await messages.getMessages({ 
-            search: 'Kanvas' 
+        const recentMessages = await messages.getMessages({
+            search: 'Kanvas'
         });
         expect(recentMessages).toBeDefined();
     });
@@ -234,14 +234,11 @@ describe('Test the Social Messages', () => {
     it('get messages group by date', async () => {
         const client = getClient();
         const messages = client.messages;
-        const recentMessages = await messages.getMessagesGroupByDate(
-            {} as WhereCondition,
-            {} as HasAppModuleMessageWhereConditions,
-            [{ column: 'CREATED_AT', order: 'DESC' }],
-            '',
-            25,
-            1
-        );
+        const recentMessages = await messages.getMessagesGroupByDate({
+            orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
+            first: 25,
+            page: 1
+        });
         expect(recentMessages).toBeDefined();
     });
 
