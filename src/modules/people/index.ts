@@ -113,7 +113,7 @@ export class People {
     return response.data.peopleCount;
   }
 
-  public async getPeopleCounByTag(tag: string): Promise<number> {
+  public async getPeopleCountByTag(tag: string): Promise<number> {
     const response = await this.client.query({
       query: PEOPLE_COUNT_BY_TAG,
       variables: { tag },
