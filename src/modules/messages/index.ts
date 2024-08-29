@@ -7,7 +7,7 @@ import {
   HasAppModuleMessageWhereConditions,
   OrderByMessage,
   WhereCondition,
-  MessageUpdateInputInterface
+  MessageUpdateInputInterface,
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
@@ -24,7 +24,11 @@ import {
   DISLIKE_MESSAGE_MUTATION,
 } from '../../mutations';
 
-import { GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG, GET_MESSAGES_GROUP_BY_DATE_QUERY, GET_MESSAGES_QUERY } from '../../queries';
+import {
+  GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG,
+  GET_MESSAGES_GROUP_BY_DATE_QUERY,
+  GET_MESSAGES_QUERY,
+} from '../../queries';
 import { MessagesComments } from '../messages-comments';
 export class Messages {
   public comments: MessagesComments;
@@ -90,15 +94,27 @@ export class Messages {
   }
 
   public async getMessages(
-    where: WhereCondition,
-    hasAppModuleMessageWhere: HasAppModuleMessageWhereConditions,
-    orderBy: Array<OrderByMessage>,
-    search: string,
-    first: number,
-    page: number,
-    hasTags?: WhereCondition,
-    hasType?: WhereCondition
+    options: {
+      where?: WhereCondition;
+      hasAppModuleMessageWhere?: HasAppModuleMessageWhereConditions;
+      orderBy?: Array<OrderByMessage>;
+      search?: string;
+      first?: number;
+      page?: number;
+      hasTags?: WhereCondition;
+      hasType?: WhereCondition;
+    } = {}
   ): Promise<MessagesInterface[]> {
+    const {
+      hasAppModuleMessageWhere,
+      search,
+      hasTags,
+      hasType,
+      where,
+      orderBy,
+      first,
+      page,
+    } = options;
     const response = await this.client.query({
       query: GET_MESSAGES_QUERY,
       variables: {
@@ -149,7 +165,6 @@ export class Messages {
     });
     return response.data.messages as MessagesInterface;
   }
-
 
   public async attachTopicToMessage(
     messageId: string,
