@@ -88,7 +88,7 @@ describe('Test the Social Messages', () => {
             {
                 column: 'USERS_ID',
                 operator: 'EQ',
-                value: newMessage.user.id, 
+                value: newMessage.user.id,
 
             } as WhereCondition,
             {} as HasAppModuleMessageWhereConditions,
@@ -97,7 +97,7 @@ describe('Test the Social Messages', () => {
             25,
             1,
             {} as WhereCondition,
-            {column: 'VERB', operator: 'EQ', value: 'post2'} as WhereCondition
+            { column: 'VERB', operator: 'EQ', value: 'post2' } as WhereCondition
         );
         expect(recentMessages).toBeDefined();
     });
@@ -123,7 +123,27 @@ describe('Test the Social Messages', () => {
             '',
             25,
             1,
-            {column: 'SLUG', operator: 'EQ', value: 'post2'} as WhereCondition,
+            { column: 'SLUG', operator: 'EQ', value: 'post2' } as WhereCondition,
+        );
+        expect(recentMessages).toBeDefined();
+    });
+
+    it('search by message', async () => {
+        const client = getClient();
+
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post2',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const recentMessages = await messages.searchMessages(
+            'Kanvas'
         );
         expect(recentMessages).toBeDefined();
     });

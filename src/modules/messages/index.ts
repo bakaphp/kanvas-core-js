@@ -116,6 +116,19 @@ export class Messages {
     return response.data.messages as MessagesInterface[];
   }
 
+  public async searchMessages(
+    search: string
+  ): Promise<MessagesInterface[]> {
+    const response = await this.client.query({
+      query: GET_MESSAGES_QUERY,
+      variables: {
+        search
+      },
+      fetchPolicy: 'no-cache',
+    });
+    return response.data.messages as MessagesInterface[];
+  }
+
   public async getMessagesGroupByDate(
     where: WhereCondition,
     hasAppModuleMessageWhere: HasAppModuleMessageWhereConditions,
