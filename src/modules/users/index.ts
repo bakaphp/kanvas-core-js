@@ -225,6 +225,9 @@ export class Users {
     return false;
   }
 
+  /**
+   * @deprecated
+   */
   public async socialLoging(
     input: SocialLoginParams
   ): Promise<SocialLoginData> {
