@@ -228,6 +228,12 @@ export class Users {
   public async socialLoging(
     input: SocialLoginParams
   ): Promise<SocialLoginData> {
+    return this.socialLogin(input);
+  }
+
+  public async socialLogin(
+    input: SocialLoginParams
+  ): Promise<SocialLoginData> {
     const response = await this.client.mutate({
       mutation: SOCIAL_LOGIN_MUTATTION,
       variables: { input },
