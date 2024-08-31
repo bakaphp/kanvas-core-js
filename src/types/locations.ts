@@ -3,6 +3,7 @@ import { PaginatorInfo } from "./paginator";
 interface Location {
   id: number;
   name: string;
+  flag?: string;
   code: string;
 }
 
@@ -20,15 +21,15 @@ interface City extends Omit<Location, 'code'> {
 
 export interface CountriesResponse {
   countries: {
-    data:Location[];
+    data: Location[];
     paginatorInfo: PaginatorInfo
   }
 
 }
 
 export interface StateResponse {
-  data:{
-    states:Location[]
+  data: {
+    states: Location[]
     paginatorInfo: PaginatorInfo
 
   }
