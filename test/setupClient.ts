@@ -44,3 +44,7 @@ export const initializeClient = async () => {
 };
 
 export const getClient = () => client;
+
+export const createMockFile = (content: string, name: string, type: string): File => {
+    return new File([content], name, { type });
+};

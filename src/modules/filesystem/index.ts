@@ -14,6 +14,7 @@ import {
   WhereCondition,
   FILESYSTEM_ATTACH_INPUT,
   UserData,
+  CompanyInterface,
 } from '../../types';
 import {
   ATTACH_FILE_MUTATION,
@@ -38,7 +39,7 @@ export class FileSystem {
 
       this.axiosClient.interceptors.request.use(
         this.options.authAxiosMiddleware,
-        function(error: any) {
+        function (error: any) {
           return Promise.reject(error);
         }
       );
@@ -171,5 +172,53 @@ export class FileSystem {
       throw new Error(response.data.errors[0].message);
     }
     return response.data.data.updatePhotoProfile as UserData;
+  }
+
+  public async updateCompanyPhotoProfile(
+    data: File,
+    company_id: string
+  ): Promise<CompanyInterface> {
+    if (!this.options || !this.axiosClient)
+      throw new Error('FileSystem module not initialized');
+    let query = `      
+    id
+    uuid
+    name
+    custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }]) {
+      data {
+        name
+        value
+      }
+    }
+    photo {
+      url
+    }`;
+
+    const formData = new FormData();
+    formData.append(
+      'operations',
+      JSON.stringify({
+        query:
+          'mutation ($file: Upload!) { updateCompanyPhotoProfile(file: $file, id:"' +
+          company_id +
+          '") {' +
+          query +
+          '} }',
+        variables: {
+          file: null,
+        },
+      })
+    );
+    formData.append(
+      'map',
+      JSON.stringify({ '0': ['variables.file'], '1': ['variables.id'] })
+    );
+    formData.append('0', data, data.name);
+    formData.append('1', company_id);
+    let response = await this.axiosClient.post('', formData);
+    if (response.data.errors) {
+      throw new Error(response.data.errors[0].message);
+    }
+    return response.data.data.updatePhotoProfileCompany as CompanyInterface;
   }
 }
