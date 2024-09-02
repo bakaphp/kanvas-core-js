@@ -679,6 +679,9 @@ export const UPDATE_ATTRIBUTES = gql`
         id
         value
       }
+      attribute_type {
+        name
+      }
       created_at
     }
   }
