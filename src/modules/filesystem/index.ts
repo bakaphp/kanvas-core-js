@@ -219,6 +219,6 @@ export class FileSystem {
     if (response.data.errors) {
       throw new Error(response.data.errors[0].message);
     }
-    return response.data.data.updatePhotoProfileCompany as CompanyInterface;
+    return response.data.data.updateCompanyPhotoProfile as CompanyInterface;
   }
 }
