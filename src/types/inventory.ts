@@ -30,6 +30,7 @@ export interface StatusInterface {
   id: string;
   name: string;
   is_default?: boolean;
+  is_published?: boolean;
   slug: string;
 }
 
@@ -47,7 +48,14 @@ export interface AttributesInterface {
   companies: ProductCompany[];
   is_visible: boolean;
   is_searchable: boolean;
-  is_filterable: boolean;
+  is_filtrable: boolean;
+  slug: string;
+  attribute_type: {
+    id: number;
+    name: string;
+    is_defaault: boolean;
+    slug: string;
+  };
   values: {
     id: string;
     value: string | number;
@@ -77,6 +85,11 @@ export interface RegionsInterface {
   short_slug: string;
   settings: string;
   is_default: boolean;
+  currencies: {
+    code: string;
+    currency: string;
+    id: number;
+  };
   company: ProductCompany;
 }
 
@@ -128,6 +141,9 @@ export interface VariantInterface {
       name: string;
     };
   }[];
+  files: {
+    data: FilesystemInterface[];
+  };
   attributes?: ProductAttributes[];
   product: ProductInterface;
 }
