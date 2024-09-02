@@ -42,7 +42,6 @@ export class Leads {
     return response.data.updateLead;
   }
 
-
   public async deleteLead(id: string): Promise<any> {
     const response = await this.client.mutate({
       mutation: LEAD_DELETE_MUTATION,

@@ -8,6 +8,8 @@ import {
   OrderByMessage,
   WhereCondition,
   MessageUpdateInputInterface,
+  AllMessages,
+  AllMessagesGroupByDate,
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
@@ -104,7 +106,7 @@ export class Messages {
       hasTags?: WhereCondition;
       hasType?: WhereCondition;
     } = {}
-  ): Promise<MessagesInterface[]> {
+  ): Promise<AllMessages> {
     const {
       hasAppModuleMessageWhere,
       search,
@@ -129,7 +131,7 @@ export class Messages {
       },
       fetchPolicy: 'no-cache',
     });
-    return response.data.messages as MessagesInterface[];
+    return response.data;
   }
 
   public async getMessagesGroupByDate(
@@ -141,7 +143,7 @@ export class Messages {
       first?: number,
       page?: number
     } = {}
-  ): Promise<MessagesInterface[]> {
+  ): Promise<AllMessagesGroupByDate> {
     const {
       where,
       hasAppModuleMessageWhere,
@@ -162,7 +164,7 @@ export class Messages {
       },
       fetchPolicy: 'no-cache',
     });
-    return response.data.messagesGroupByDate as MessagesInterface[];
+    return response.data;
   }
 
   public async getMessageByDisplaynameAndSlug(
