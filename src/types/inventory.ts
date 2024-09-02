@@ -235,6 +235,13 @@ export interface InputVariantParams {
       name: string;
       value?: string | number; //Mixed
     }[];
+    channels: {
+      warehouses_id: string | number;
+      price: string;
+      is_published: boolean;
+      channels_id: number,
+      discounted_price?: number;
+    }[]
     warehouse?: {
       warehouse_id: number;
       status?: {
@@ -343,6 +350,7 @@ export interface CreateProductParams {
   price?: number;
   attributes?: ProductAttributes[];
   company_id?: number | string;
+  sku?: string;
 }
 
 export interface InputCategoriesParams {
