@@ -120,7 +120,7 @@ export interface VariantInterface {
   uuid: string;
   ean: string;
   channel: {
-    price: string;
+    price: string | number;
     quantity: string;
   };
   warehouses: {
@@ -253,10 +253,10 @@ export interface InputVariantParams {
     }[];
     channels: {
       warehouses_id: string | number;
-      price: string;
+      price: string | number;
       is_published: boolean;
       channels_id: number,
-      discounted_price?: number;
+      discounted_price?: string | number;
     }[]
     warehouse?: {
       warehouse_id: number;
