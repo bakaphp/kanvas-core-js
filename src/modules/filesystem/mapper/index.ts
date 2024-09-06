@@ -9,7 +9,10 @@ import {
   FILESYSTEM_MAPPER_INPUT,
   FILESYSTEM_IMPORT_INPUT,
   FILESYSTEM_IMPORT,
-} from '../../../types/mapper';
+  WhereCondition,
+} from '../../../types';
+
+import { FILESYSTEM_MAPPER_QUERY } from '../../../queries';
 
 export class FilesystemMapper {
   constructor(private client: any) {}
@@ -38,5 +41,21 @@ export class FilesystemMapper {
     });
 
     return data.filesystemImport;
+  }
+
+  public async getFilesystemMapper(
+    page: number,
+    first: number,
+    where: WhereCondition
+  ): Promise<{ data: FILESYSTEM_MAPPER[]; paginatorInfo: any }> {
+    const { data } = await this.client.query({
+      query: FILESYSTEM_MAPPER_QUERY,
+      variables: {
+        page,
+        first,
+        where,
+      },
+    });
+    return data.filesystemMappers;
   }
 }
