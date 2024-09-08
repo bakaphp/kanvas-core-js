@@ -1,4 +1,3 @@
-import { FILESYSTEM } from '../../../types/filesystem';
 import {
   CREATE_FILESYSTEM_MAPPER_MUTATION,
   FILESYSTEM_IMPORT_MUTATION,
