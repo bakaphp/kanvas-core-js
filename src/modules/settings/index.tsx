@@ -1,4 +1,5 @@
 import {
+  APP_SETTING_QUERY,
   APP_SETTINGS_QUERY,
   AppSettingsQuery,
   COMPANY_SETTING_QUERY,
@@ -6,7 +7,7 @@ import {
   USERS_SETTINGS_QUERY,
 } from '../../queries';
 import {
-  AppSettingsQueryResponse,
+  AdminAppSettingsQueryResponse,
   AppSettingsResponse,
   ClientType,
   CompanySettingsResponse,
@@ -24,9 +25,9 @@ import {
 } from '../../mutations';
 
 export default class Settings {
-  constructor(protected client: ClientType, protected key: string) {}
+  constructor(protected client: ClientType, protected key: string) { }
 
-  async fetchAppSettings(): Promise<AppSettingsQueryResponse | undefined> {
+  async appSettings(): Promise<AdminAppSettingsQueryResponse | undefined> {
     try {
       const { data } = await this.client.query({
         query: APP_SETTINGS_QUERY,
@@ -38,6 +39,31 @@ export default class Settings {
       return undefined;
     }
   }
+
+  async appSetting(name: string): Promise<any | undefined> {
+    try {
+      const { data } = await this.client.query({
+        query: APP_SETTING_QUERY,
+        variables: {
+          key: name,
+        },
+        fetchPolicy: 'network-only',
+        partialRefetch: true,
+      });
+
+      return data.adminAppSetting;
+    } catch {
+      return undefined;
+    }
+  }
+
+  async fetchAppSettings(): Promise<AdminAppSettingsQueryResponse | undefined> {
+    return this.appSettings();
+  }
+
+  /**
+   * @deprecated
+   */
   async getAppSettings(): Promise<SettingsResponse | undefined> {
     try {
       const {
@@ -167,7 +193,7 @@ export default class Settings {
         },
       });
       return response.data.deleteUserSetting;
-    } catch (err){
+    } catch (err) {
       return undefined;
     }
   }
