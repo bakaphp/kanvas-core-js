@@ -20,4 +20,14 @@ describe('Test the Kanvas Company client', () => {
         expect(userCompanies).toBeDefined();
         expect(userCompanies.companies.data[0].name).toBeDefined();
     });
+
+    it('list of users who belong to this company', async () => {
+        const client = getClient();
+
+        //const userCompanies = await client.companies.getCompanies();
+        const companyUsers = await client.companies.getCompanyUsers({});
+        expect(companyUsers.companyUsers).toBeDefined();
+        expect(companyUsers.companyUsers.data.length).toBeGreaterThanOrEqual(0);
+
+    });
 });
