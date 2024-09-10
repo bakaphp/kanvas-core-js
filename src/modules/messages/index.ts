@@ -246,15 +246,16 @@ export class Messages {
     return response.data.shareMessage;
   }
 
-  public async attachFileToMessage(id: string, file: File): Promise<String> {
+  public async attachFileToMessage(id: string,file: File): Promise<MessagesInterface> {
     if (!this.options || !this.axiosClient)
       throw new Error('FileSystem module not initialized');
 
+    const messageOuputData = '{id, uuid, parent_id, slug, user {id, firstname, lastname, displayname},appModuleMessage {entity_id, system_modules},message_types_id, message, reactions_count, comment_count, total_liked, total_saved, parent {id, uuid } }}';
     const formData = new FormData();
     formData.append(
       'operations',
       JSON.stringify({
-        query: `mutation ($file: Upload!) { attachFileToMessage(message_id: ${id},file: $file) {id, uuid, message } }`,
+        query: `mutation ($file: Upload!) { attachFileToMessage(message_id: ${id},file: $file) ${messageOuputData} }`,
         variables: {
           file: null,
         },
@@ -265,8 +266,6 @@ export class Messages {
 
     let response = await this.axiosClient.post('', formData);
 
-    return response.data;
-
-    //  return response.data.messages as MessagesInterface;
+    return response.data.attachFileToMessage as MessagesInterface;
   }
 }
