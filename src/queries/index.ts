@@ -22,3 +22,4 @@ export * from './notification.query';
 export * from './channel.query';
 export * from './tags.query';
 export * from './contact.query';
+export * from './mapper.query';
