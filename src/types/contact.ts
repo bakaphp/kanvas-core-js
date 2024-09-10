@@ -1,3 +1,6 @@
+import { PaginatorInfo } from './paginator';
+import { CompanyInterface } from './companies';
+import { UserInterface } from './users';
 
 export interface ContactInterface {
   value: string;
@@ -6,9 +9,11 @@ export interface ContactInterface {
   type?: ContactTypeInterface;
 }
 
-
 export interface ContactTypeInterface {
+  id: string;
   name: string;
+  company: CompanyInterface;
+  user: UserInterface;
 }
 
 export interface ContactInputInterface {
@@ -28,4 +33,9 @@ export interface AddressInputInterface {
   country?: string;
   country_id?: string;
   is_default?: boolean;
+}
+
+export interface CreatedContactTypes {
+  data: ContactTypeInterface[];
+  paginatorInfo?: PaginatorInfo;
 }

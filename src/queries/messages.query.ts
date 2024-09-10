@@ -4,6 +4,8 @@ export const GET_MESSAGES_QUERY = gql`
   query getMessages(
     $where: QueryMessagesWhereWhereConditions
     $hasAppModuleMessage: QueryMessagesHasAppModuleMessageWhereHasConditions
+    $hasTags: QueryMessagesHasTagsWhereHasConditions
+    $hasType: QueryMessagesHasTypeWhereHasConditions
     $orderBy: [QueryMessagesOrderByOrderByClause!]
     $search: String
     $first: Int! = 25
@@ -12,6 +14,8 @@ export const GET_MESSAGES_QUERY = gql`
     messages(
       where: $where
       hasAppModuleMessage: $hasAppModuleMessage
+      hasTags: $hasTags
+      hasType: $hasType
       orderBy: $orderBy
       search: $search
       first: $first
@@ -47,7 +51,9 @@ export const GET_MESSAGES_QUERY = gql`
         total_view
         tags {
           data {
+              id
               name
+              slug
           }
         }
         parent {
@@ -55,11 +61,13 @@ export const GET_MESSAGES_QUERY = gql`
           uuid
         },
         myInteraction {
-            is_liked,
-            is_saved,
-            is_shared,
+            is_liked
+            is_disliked
+            is_saved
+            is_shared
             is_reported
         }
+        created_at
       }
       paginatorInfo {
         currentPage
@@ -116,15 +124,19 @@ export const GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG = gql`
         }
         tags {
           data {
+              id
               name
+              slug
           }
         }
         myInteraction {
-            is_liked,
-            is_saved,
-            is_shared,
+            is_liked
+            is_disliked
+            is_saved
+            is_shared
             is_reported
         }
+        created_at
       }
     }
   }
@@ -178,15 +190,19 @@ export const GET_MESSAGES_GROUP_BY_DATE_QUERY = gql`
         }
         tags {
           data {
+              id
               name
+              slug
           }
         }
         myInteraction {
-            is_liked,
-            is_saved,
-            is_shared,
+            is_liked
+            is_disliked
+            is_saved
+            is_shared
             is_reported
         }
+        created_at
       }
       paginatorInfo {
         currentPage

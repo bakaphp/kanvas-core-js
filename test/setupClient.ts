@@ -5,7 +5,7 @@ dotenv.config();
 
 let client: KanvasCore;
 
-export const initializeClient = async () => {
+export const initializeClient = async (adminKey?: string) => {
     const getKey = async (): Promise<string | null> => {
         return localStorage.getItem("token") || null; // wherever you have saved the user token
     };
@@ -35,6 +35,7 @@ export const initializeClient = async () => {
     client = new KanvasCore({
         url: process.env.KANVAS_URL!,
         key: process.env.KANVAS_APP_KEY!,
+        ...(adminKey && { adminKey }), // Add adminKey only if it is provided
         middlewares: [genericAuthMiddleware(getKey)],
     });
 
@@ -44,3 +45,7 @@ export const initializeClient = async () => {
 };
 
 export const getClient = () => client;
+
+export const createMockFile = (content: string, name: string, type: string): File => {
+    return new File([content], name, { type });
+};

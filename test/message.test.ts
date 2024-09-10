@@ -1,4 +1,4 @@
-import { HasAppModuleMessageWhereConditions, WhereCondition } from '../src';
+import { WhereCondition } from '../src';
 import { initializeClient, getClient } from './setupClient';
 
 beforeAll(async () => {
@@ -23,20 +23,48 @@ describe('Test the Social Messages', () => {
     it('get messages', async () => {
         const client = getClient();
         const messages = client.messages;
-        const recentMessages = await messages.getMessages(
-            {} as WhereCondition,
-            {} as HasAppModuleMessageWhereConditions,
-            [{ column: 'CREATED_AT', order: 'DESC' }],
-            '',
-            25,
-            1
+        const recentMessages = await messages.getMessages({
+            orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
+            first: 25,
+            page: 1
+        }
         );
         expect(recentMessages).toBeDefined();
-        //console.log(recentMessages);
-        //const { data } = recentMessages;
+        expect(recentMessages.messages.data).toBeDefined();
+        expect(recentMessages.messages.data.length).toBeGreaterThan(0);
     });
 
-    it('get message by type', async () => {
+    it('get message by id', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const whereCondition: WhereCondition = {
+            column: 'ID',
+            operator: 'EQ',
+            value: newMessage.id,
+        }
+        const recentMessages = await messages.getMessages({
+            where: whereCondition,
+            orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
+            first: 1,
+            page: 1
+        });
+        expect(recentMessages).toBeDefined();
+        expect(recentMessages.messages.data).toBeDefined();
+        expect(recentMessages.messages.data[0]).toBeDefined();
+        expect(recentMessages.messages.data[0].id).toBeDefined();
+    });
+
+    it('get message by type id', async () => {
         const client = getClient();
 
         const messages = client.messages;
@@ -50,28 +78,97 @@ describe('Test the Social Messages', () => {
         expect(newMessage.id).toBeDefined();
         expect(newMessage.message).toBe(messageContent);
 
-        const recentMessages = await messages.getMessages(
-            {
-                column: 'MESSAGE_TYPES_ID',
+        const recentMessages = await messages.getMessages({
+            hasType: {
+                column: 'VERB',
                 operator: 'EQ',
-                value: 'post2',
-                AND: [
-                    {
-                        column: 'USERS_ID',
-                        operator: 'EQ',
-                        value: newMessage.user.id,
-                    }
-                ],
-            } as WhereCondition,
-            {} as HasAppModuleMessageWhereConditions,
-            [{ column: 'CREATED_AT', order: 'DESC' }],
-            '',
-            25,
-            1
-        );
+                value: 'post2'
+            },
+            orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
+            first: 25,
+            page: 1
+        });
         expect(recentMessages).toBeDefined();
-        //console.log(recentMessages);
-        //const { data } = recentMessages;
+        expect(recentMessages.messages.data).toBeDefined();
+        expect(recentMessages.messages.data.length).toBeGreaterThan(0);
+    });
+
+    it('get message by type verb', async () => {
+        const client = getClient();
+
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post2',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const recentMessages = await messages.getMessages({
+            where: {
+                column: 'USERS_ID',
+                operator: 'EQ',
+                value: newMessage.user.id,
+
+            } as WhereCondition,
+            orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
+            first: 25,
+            page: 1,
+            hasType: { column: 'VERB', operator: 'EQ', value: 'post2' } as WhereCondition
+        });
+        expect(recentMessages).toBeDefined();
+        expect(recentMessages.messages.data).toBeDefined();
+        expect(recentMessages.messages.data.length).toBeGreaterThan(0);
+    });
+
+    it('get message by tag', async () => {
+        const client = getClient();
+
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post2',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const recentMessages = await messages.getMessages({
+            orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
+            first: 25,
+            page: 1,
+            hasTags: { column: 'SLUG', operator: 'EQ', value: 'post2' } as WhereCondition,
+        });
+        expect(recentMessages).toBeDefined();
+        expect(recentMessages.messages.data).toBeDefined();
+        expect(recentMessages.messages.data.length).toBeGreaterThanOrEqual(0);
+    });
+
+    it('search by message', async () => {
+        const client = getClient();
+
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post2',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const recentMessages = await messages.getMessages({
+            search: 'Kanvas'
+        });
+        expect(recentMessages).toBeDefined();
+        expect(recentMessages.messages.data).toBeDefined();
+        expect(recentMessages.messages.data.length).toBeGreaterThanOrEqual(0);
     });
 
     it('like a message', async () => {
@@ -170,17 +267,14 @@ describe('Test the Social Messages', () => {
     it('get messages group by date', async () => {
         const client = getClient();
         const messages = client.messages;
-        const recentMessages = await messages.getMessagesGroupByDate(
-            {} as WhereCondition,
-            {} as HasAppModuleMessageWhereConditions,
-            [{ column: 'CREATED_AT', order: 'DESC' }],
-            '',
-            25,
-            1
-        );
+        const recentMessages = await messages.getMessagesGroupByDate({
+            orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
+            first: 25,
+            page: 1
+        });
         expect(recentMessages).toBeDefined();
-        //console.log(recentMessages);
-        //const { data } = recentMessages;
+        expect(recentMessages.messagesGroupByDate.data).toBeDefined();
+        expect(recentMessages.messagesGroupByDate.data.length).toBeGreaterThan(0);
     });
 
     it('delete message', async () => {

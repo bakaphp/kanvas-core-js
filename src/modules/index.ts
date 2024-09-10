@@ -24,3 +24,4 @@ export * from './channels';
 export * from './organization';
 export * from './tags';
 export * from './receiver';
+export * from './contact';

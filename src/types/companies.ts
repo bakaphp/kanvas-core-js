@@ -20,6 +20,9 @@ export interface CompanyInterface {
   created_at?: string;
   updated_at?: string;
   branches: CompanyBranchInterface[];
+  photo?: {
+    url: string;
+  };
 }
 
 export interface CompanyGroup {

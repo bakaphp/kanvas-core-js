@@ -46,3 +46,9 @@ export const APP_SETTINGS_QUERY = gql`
   }
 `;
 
+export const APP_SETTING_QUERY = gql`
+  query adminAppSetting($key: String!) {
+    adminAppSetting(key: $key)
+  }
+`;
+

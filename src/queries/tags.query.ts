@@ -1,8 +1,13 @@
 import { gql } from '@apollo/client/core';
 
 export const GET_TAGS = gql`
-  query($where: QueryTagsWhereWhereConditions) {
-    tags(where: $where) {
+  query(
+    $first: Int
+    $page: Int
+    $where: QueryTagsWhereWhereConditions
+    $search: String
+  ) {
+    tags(first: $first, page: $page, where: $where, search: $search) {
       data {
         id
         user {

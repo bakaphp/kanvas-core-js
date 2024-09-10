@@ -1,4 +1,5 @@
 import { UserInterface } from './index';
+import { PaginatorInfo } from './paginator';
 export interface MessagesInterface {
   id: string;
   parent_id?: string;
@@ -18,7 +19,30 @@ export interface MessagesInterface {
   message_types_id: string;
   user: UserInterface;
   tags: string[];
+  myInteraction: MyInteractionInterface;
+  created_at: string;
   appModuleMessage: AppModuleMessage;
+}
+
+interface MyInteractionInterface {
+  is_liked: boolean;
+  is_disliked: boolean;
+  is_saved: boolean;
+  is_shared: boolean;
+  is_reported: boolean;
+}
+
+export interface AllMessages {
+  messages: {
+    data: MessagesInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
+}
+export interface AllMessagesGroupByDate {
+  messagesGroupByDate: {
+    data: MessagesInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
 }
 
 interface AppModuleMessage {

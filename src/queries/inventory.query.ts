@@ -100,11 +100,13 @@ export const GET_PRODUCTS = gql`
           }
           attributes {
             name
+            slug
             value
           }
         }
         attributes {
           name
+          slug
           value
         }
         productsTypes {

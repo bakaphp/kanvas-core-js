@@ -30,6 +30,7 @@ jobs:
           echo "KANVAS_APP_KEY=${{ secrets.KANVAS_APP_KEY }}" >> $GITHUB_ENV
           echo "KANVAS_TEST_USER=${{ secrets.KANVAS_TEST_USER }}" >> $GITHUB_ENV
           echo "KANVAS_TEST_PASSWORD=${{ secrets.KANVAS_TEST_PASSWORD }}" >> $GITHUB_ENV
+          echo "KANVAS_APP_SECRET=${{ secrets.KANVAS_APP_SECRET }}" >> $GITHUB_ENV
 
       - run: yarn install --frozen-lockfile
       
