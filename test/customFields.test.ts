@@ -62,7 +62,21 @@ describe('Test the Kanvas Custom Fields', () => {
         expect(newSetting).toBeTruthy();
 
         const result = await client.settings.appSetting('test_key');
-        console.log(result);
         expect(result).toBe('new value');
+    });
+
+    it('delete app setting', async () => {
+        const client = getClient();
+
+        const newSetting = await client.settings.setAppSetting({
+            key: 'test_key_delete',
+            value: 'new value',
+            public: true
+        } as ConfigInput);
+
+        expect(newSetting).toBeTruthy();
+
+        const deleted = await client.settings.deleteAppSetting('test_key_delete');
+        expect(deleted).toBeTruthy();
     });
 });
