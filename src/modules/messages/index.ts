@@ -1,5 +1,6 @@
 import { ClientType } from '../../index';
-
+import axios from 'axios';
+import FormData from 'form-data';
 import {
   MessageInputInterface,
   MessagesInterface,
@@ -24,179 +25,230 @@ import {
   DISLIKE_MESSAGE_MUTATION,
 } from '../../mutations';
 
+interface Options {
+  url: string;
+  key: string;
+  adminKey?: string;
+  authAxiosMiddleware?: any;
+}
+
 import { GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG, GET_MESSAGES_GROUP_BY_DATE_QUERY, GET_MESSAGES_QUERY } from '../../queries';
 import { MessagesComments } from '../messages-comments';
 export class Messages {
-  public comments: MessagesComments;
+         public comments: MessagesComments;
+         protected axiosClient: any;
 
-  constructor(protected client: ClientType) {
-    this.comments = new MessagesComments(client);
-  }
+         constructor(protected client: ClientType, protected options?: Options) {
+           this.comments = new MessagesComments(client);
+           if (this.options) {
+             this.axiosClient = axios.create({
+               baseURL: this.options.url,
+               headers: {
+                 'X-Kanvas-App': this.options.key,
+                 ...(this.options.adminKey && {
+                   'X-Kanvas-Key': this.options.adminKey,
+                 }),
+               },
+             });
 
-  public async createMessage(
-    input: MessageInputInterface
-  ): Promise<MessagesInterface> {
-    const response = this.client.mutate({
-      mutation: CREATE_MESSAGE_MUTATION,
-      variables: { input: input },
-    });
-    return (await response).data.createMessage as MessagesInterface;
-  }
+             this.axiosClient.interceptors.request.use(
+               this.options.authAxiosMiddleware,
+               function(error: any) {
+                 return Promise.reject(error);
+               }
+             );
+           }
+         }
 
-  public async updateMessage(
-    id: string,
-    input: MessageUpdateInputInterface
-  ): Promise<MessagesInterface> {
-    const response = await this.client.mutate({
-      mutation: UPDATE_MESSAGE_MUTATION,
-      variables: { input: input, id: id },
-    });
-    return response.data.updateMessage as MessagesInterface;
-  }
+         public async createMessage(
+           input: MessageInputInterface
+         ): Promise<MessagesInterface> {
+           const response = this.client.mutate({
+             mutation: CREATE_MESSAGE_MUTATION,
+             variables: { input: input },
+           });
+           return (await response).data.createMessage as MessagesInterface;
+         }
 
-  public async deleteMessage(id: string): Promise<Boolean> {
-    await this.client.mutate({
-      mutation: DELETE_MESSAGE_MUTATION,
-      variables: { id: id },
-    });
-    return true;
-  }
+         public async updateMessage(
+           id: string,
+           input: MessageUpdateInputInterface
+         ): Promise<MessagesInterface> {
+           const response = await this.client.mutate({
+             mutation: UPDATE_MESSAGE_MUTATION,
+             variables: { input: input, id: id },
+           });
+           return response.data.updateMessage as MessagesInterface;
+         }
 
-  public async deleteMultipleMessage(ids: [string]): Promise<Boolean> {
-    await this.client.mutate({
-      mutation: DELETE_MULTIPLE_MESSAGE_MUTATION,
-      variables: { ids: ids },
-    });
-    return true;
-  }
+         public async deleteMessage(id: string): Promise<Boolean> {
+           await this.client.mutate({
+             mutation: DELETE_MESSAGE_MUTATION,
+             variables: { id: id },
+           });
+           return true;
+         }
 
-  public async deleteAllMessages(): Promise<Boolean> {
-    await this.client.mutate({
-      mutation: DELETE_ALL_MESSAGE_MUTATION,
-      variables: {},
-    });
-    return true;
-  }
+         public async deleteMultipleMessage(ids: [string]): Promise<Boolean> {
+           await this.client.mutate({
+             mutation: DELETE_MULTIPLE_MESSAGE_MUTATION,
+             variables: { ids: ids },
+           });
+           return true;
+         }
 
-  public async interactionMessage(
-    id: string,
-    type: InteractionTypeInput
-  ): Promise<MessagesInterface> {
-    const response = this.client.mutate({
-      mutation: INTERACTION_MESSAGE_MUTATION,
-      variables: { id: id, type: type },
-    });
-    return (await response).data.interactionMessage as MessagesInterface;
-  }
+         public async deleteAllMessages(): Promise<Boolean> {
+           await this.client.mutate({
+             mutation: DELETE_ALL_MESSAGE_MUTATION,
+             variables: {},
+           });
+           return true;
+         }
 
-  public async getMessages(
-    where: WhereCondition,
-    hasAppModuleMessageWhere: HasAppModuleMessageWhereConditions,
-    orderBy: Array<OrderByMessage>,
-    search: string,
-    first: number,
-    page: number
-  ): Promise<MessagesInterface[]> {
-    const response = await this.client.query({
-      query: GET_MESSAGES_QUERY,
-      variables: {
-        where,
-        hasAppModuleMessageWhere,
-        orderBy,
-        search,
-        first,
-        page,
-      },
-      fetchPolicy: 'no-cache',
-    });
-    return response.data.messages as MessagesInterface[];
-  }
+         public async interactionMessage(
+           id: string,
+           type: InteractionTypeInput
+         ): Promise<MessagesInterface> {
+           const response = this.client.mutate({
+             mutation: INTERACTION_MESSAGE_MUTATION,
+             variables: { id: id, type: type },
+           });
+           return (await response).data.interactionMessage as MessagesInterface;
+         }
 
-  public async getMessagesGroupByDate(
-    where: WhereCondition,
-    hasAppModuleMessageWhere: HasAppModuleMessageWhereConditions,
-    orderBy: Array<OrderByMessage>,
-    search: string,
-    first: number,
-    page: number
-  ): Promise<MessagesInterface[]> {
-    const response = await this.client.query({
-      query: GET_MESSAGES_GROUP_BY_DATE_QUERY,
-      variables: {
-        where,
-        hasAppModuleMessageWhere,
-        orderBy,
-        search,
-        first,
-        page,
-      },
-      fetchPolicy: 'no-cache',
-    });
-    return response.data.messagesGroupByDate as MessagesInterface[];
-  }
+         public async getMessages(
+           where: WhereCondition,
+           hasAppModuleMessageWhere: HasAppModuleMessageWhereConditions,
+           orderBy: Array<OrderByMessage>,
+           search: string,
+           first: number,
+           page: number
+         ): Promise<MessagesInterface[]> {
+           const response = await this.client.query({
+             query: GET_MESSAGES_QUERY,
+             variables: {
+               where,
+               hasAppModuleMessageWhere,
+               orderBy,
+               search,
+               first,
+               page,
+             },
+             fetchPolicy: 'no-cache',
+           });
+           return response.data.messages as MessagesInterface[];
+         }
 
-  public async getMessageByDisplaynameAndSlug(
-    displayname: string,
-    slug: string
-  ): Promise<MessagesInterface> {
-    const response = await this.client.query({
-      query: GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG,
-      variables: { displayname: displayname, slug: slug },
-    });
-    return response.data.messages as MessagesInterface;
-  }
-  
+         public async getMessagesGroupByDate(
+           where: WhereCondition,
+           hasAppModuleMessageWhere: HasAppModuleMessageWhereConditions,
+           orderBy: Array<OrderByMessage>,
+           search: string,
+           first: number,
+           page: number
+         ): Promise<MessagesInterface[]> {
+           const response = await this.client.query({
+             query: GET_MESSAGES_GROUP_BY_DATE_QUERY,
+             variables: {
+               where,
+               hasAppModuleMessageWhere,
+               orderBy,
+               search,
+               first,
+               page,
+             },
+             fetchPolicy: 'no-cache',
+           });
+           return response.data.messagesGroupByDate as MessagesInterface[];
+         }
 
-  public async attachTopicToMessage(
-    messageId: string,
-    topicId: string
-  ): Promise<void> {
-    await this.client.mutate({
-      mutation: ATTACH_TOPIC_TO_MESSAGE_MUTATION,
-      variables: { message_id: messageId, topic_id: topicId },
-    });
-  }
+         public async getMessageByDisplaynameAndSlug(
+           displayname: string,
+           slug: string
+         ): Promise<MessagesInterface> {
+           const response = await this.client.query({
+             query: GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG,
+             variables: { displayname: displayname, slug: slug },
+           });
+           return response.data.messages as MessagesInterface;
+         }
 
-  public async detachTopicToMessage(
-    messageId: string,
-    topicId: string
-  ): Promise<void> {
-    await this.client.mutate({
-      mutation: DETACH_TOPIC_TO_MESSAGE_MUTATION,
-      variables: { message_id: messageId, topic_id: topicId },
-    });
-  }
+         public async attachTopicToMessage(
+           messageId: string,
+           topicId: string
+         ): Promise<void> {
+           await this.client.mutate({
+             mutation: ATTACH_TOPIC_TO_MESSAGE_MUTATION,
+             variables: { message_id: messageId, topic_id: topicId },
+           });
+         }
 
-  public async likeMessage(id: string): Promise<Boolean> {
-    await this.client.mutate({
-      mutation: LIKE_MESSAGE_MUTATION,
-      variables: { id: id },
-    });
-    return true;
-  }
+         public async detachTopicToMessage(
+           messageId: string,
+           topicId: string
+         ): Promise<void> {
+           await this.client.mutate({
+             mutation: DETACH_TOPIC_TO_MESSAGE_MUTATION,
+             variables: { message_id: messageId, topic_id: topicId },
+           });
+         }
 
-  public async disLikeMessage(id: string): Promise<Boolean> {
-    await this.client.mutate({
-      mutation: DISLIKE_MESSAGE_MUTATION,
-      variables: { id: id },
-    });
-    return true;
-  }
+         public async likeMessage(id: string): Promise<Boolean> {
+           await this.client.mutate({
+             mutation: LIKE_MESSAGE_MUTATION,
+             variables: { id: id },
+           });
+           return true;
+         }
 
-  public async viewMessage(id: string): Promise<Boolean> {
-    await this.client.mutate({
-      mutation: VIEW_MESSAGE_MUTATION,
-      variables: { id: id },
-    });
-    return true;
-  }
+         public async disLikeMessage(id: string): Promise<Boolean> {
+           await this.client.mutate({
+             mutation: DISLIKE_MESSAGE_MUTATION,
+             variables: { id: id },
+           });
+           return true;
+         }
 
-  public async shareMessage(id: string): Promise<string> {
-    const response = await this.client.mutate({
-      mutation: SHARE_MESSAGE_MUTATION,
-      variables: { id: id },
-    });
+         public async viewMessage(id: string): Promise<Boolean> {
+           await this.client.mutate({
+             mutation: VIEW_MESSAGE_MUTATION,
+             variables: { id: id },
+           });
+           return true;
+         }
 
-    return response.data.shareMessage;
-  }
-}
+         public async shareMessage(id: string): Promise<string> {
+           const response = await this.client.mutate({
+             mutation: SHARE_MESSAGE_MUTATION,
+             variables: { id: id },
+           });
+
+           return response.data.shareMessage;
+         }
+
+         public async attachFileToMessage(id: string, file: File): Promise<String> {
+          
+           if (!this.options || !this.axiosClient)
+             throw new Error('FileSystem module not initialized');
+
+           const formData = new FormData();
+           formData.append(
+             'operations',
+             JSON.stringify({
+               query:
+                 `mutation ($file: Upload!) { attachFileToMessage(message_id: ${id},file: $file) {id, uuid, message } }`,
+               variables: {
+                 file: null,
+               },
+             })
+           );
+           formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+           formData.append('0', JSON.stringify(file),file.name);
+
+           let response = await this.axiosClient.post('', formData);
+
+           return response.data;
+
+          //  return response.data.messages as MessagesInterface;
+         }
+       }

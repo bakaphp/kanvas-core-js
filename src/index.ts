@@ -145,7 +145,7 @@ export default class KanvasCore {
     this.cart = new Cart(this.client);
     this.order = new Order(this.client);
     this.usersLists = new UsersLists(this.client);
-    this.messages = new Messages(this.client);
+    this.messages = new Messages(this.client,this.options);
     this.roles = new Roles(this.client);
     this.messagesTypes = new MessagesTypes(this.client);
     this.filesystem = new FileSystem(this.client, this.options);
