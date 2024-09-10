@@ -141,7 +141,7 @@ export default class Settings {
       return undefined;
     }
   }
-  async setAppSettings(input: ConfigInput) {
+  async setAppSetting(input: ConfigInput): Promise<boolean | undefined> {
     try {
       await this.client.mutate({
         mutation: SET_APP_SETTINGS_MUTATION,
@@ -153,6 +153,14 @@ export default class Settings {
     } catch {
       return undefined;
     }
+  }
+
+  /**
+   * 
+   * @deprecated
+   */
+  async setAppSettings(input: ConfigInput): Promise<boolean | undefined> {
+    return this.setAppSetting(input);
   }
 
   async setCompanySettings(input: ConfigInput): Promise<boolean | undefined> {
