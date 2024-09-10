@@ -4,7 +4,6 @@ import FormData from 'form-data';
 import {
   MessageInputInterface,
   MessagesInterface,
-  InteractionTypeInput,
   HasAppModuleMessageWhereConditions,
   OrderByMessage,
   WhereCondition,
@@ -14,7 +13,6 @@ import {
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
-  INTERACTION_MESSAGE_MUTATION,
   ATTACH_TOPIC_TO_MESSAGE_MUTATION,
   DETACH_TOPIC_TO_MESSAGE_MUTATION,
   UPDATE_MESSAGE_MUTATION,
