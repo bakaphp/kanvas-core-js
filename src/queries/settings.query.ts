@@ -16,7 +16,7 @@ export const AppSettingsQuery = gql`
   }
 `;
 
-export const COMPANY_SETTING_QUERY = gql`
+export const ADMIN_COMPANY_SETTINGS_QUERY = gql`
 query adminCompanySettings($entityUUID: String!) {
   adminCompanySettings(entity_uuid: $entityUUID) {
     key
@@ -24,6 +24,12 @@ query adminCompanySettings($entityUUID: String!) {
     public
   }
 }
+`;
+
+export const ADMIN_COMPANY_SETTING_QUERY = gql`
+  query adminCompanySetting($entityUUID: String!, $key: String!) {
+    adminCompanySetting(entity_uuid: $entityUUID, key: $key)
+  }
 `;
 
 export const USERS_SETTINGS_QUERY = gql`

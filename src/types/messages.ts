@@ -16,6 +16,7 @@ export interface MessagesInterface {
   total_saved: number;
   total_shared: number;
   total_view: number;
+  total_children: number;
   message_types_id: string;
   user: UserInterface;
   tags: string[];

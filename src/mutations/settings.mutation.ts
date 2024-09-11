@@ -12,6 +12,12 @@ export const SET_APP_SETTINGS_MUTATION = gql`
   }
 `;
 
+export const DELETE_APP_SETTINGS_MUTATION = gql`
+  mutation deleteAppSetting($key: String!) {
+    deleteAppSetting(key: $key)
+  }
+`;
+
 export const SET_COMPANY_SETTINGS_MUTATION = gql`
   mutation setCompanySetting($input: ModuleConfigInput!) {
     setCompanySetting(input: $input)
