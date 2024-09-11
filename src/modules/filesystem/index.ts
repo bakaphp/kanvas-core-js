@@ -22,7 +22,7 @@ import {
   DETACH_FILE_MUTATION,
 } from '../../mutations';
 import { ENTITY_FILES_QUERY } from '../../queries';
-
+export { FilesystemMapper } from './mapper/index';
 export class FileSystem {
   protected axiosClient: any;
   constructor(protected client: ClientType, protected options?: Options) {
@@ -103,6 +103,27 @@ export class FileSystem {
     let response = await this.axiosClient.post('', formData);
 
     return response.data.data.upload as UPLOAD_INTERFACE;
+  }
+
+  public async uploadFileCsv(data: File): Promise<JSON> {
+    if (!this.options || !this.axiosClient)
+      throw new Error('FileSystem module not initialized');
+
+    const formData = new FormData();
+    formData.append(
+      'operations',
+      JSON.stringify({
+        query: 'mutation ($file: Upload!) { uploadCsv(file: $file) }',
+        variables: {
+          file: null,
+        },
+      })
+    );
+    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+    formData.append('0', data, data.name);
+    let response = await this.axiosClient.post('', formData);
+
+    return response.data.data.upload as JSON;
   }
 
   public async updatePhotoProfile(

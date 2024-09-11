@@ -25,3 +25,4 @@ export * from './people';
 export * from './contact';
 export * from './message-comment';
 export * from './notification';
+export * from './mapper';
