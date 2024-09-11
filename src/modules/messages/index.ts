@@ -255,7 +255,7 @@ export class Messages {
     formData.append(
       'operations',
       JSON.stringify({
-        query: `mutation ($file: Upload!) { attachFileToMessage(message_id: ${id},file: $file) ${messageOuputData} }`,
+        query: `mutation ($file: Upload!) { attachFileToMessage(message_id: ${id},file: $file) ${messageOuputData}`,
         variables: {
           file: null,
         },
@@ -266,6 +266,6 @@ export class Messages {
 
     let response = await this.axiosClient.post('', formData);
 
-    return response.data.attachFileToMessage as MessagesInterface;
+    return response.data as MessagesInterface;
   }
 }
