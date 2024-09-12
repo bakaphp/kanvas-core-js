@@ -28,6 +28,5 @@ describe('Test the Kanvas Company client', () => {
         const companyUsers = await client.companies.getCompanyUsers({});
         expect(companyUsers.companyUsers).toBeDefined();
         expect(companyUsers.companyUsers.data.length).toBeGreaterThanOrEqual(0);
-
     });
 });
