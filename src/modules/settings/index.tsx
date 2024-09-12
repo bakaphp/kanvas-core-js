@@ -1,8 +1,9 @@
 import {
+  ADMIN_COMPANY_SETTING_QUERY,
+  ADMIN_COMPANY_SETTINGS_QUERY,
   APP_SETTING_QUERY,
   APP_SETTINGS_QUERY,
   AppSettingsQuery,
-  COMPANY_SETTING_QUERY,
   ConfigInput,
   USERS_SETTINGS_QUERY,
 } from '../../queries';
@@ -16,6 +17,7 @@ import {
   UserSettingsResponse,
 } from '../../index';
 import {
+  DELETE_APP_SETTINGS_MUTATION,
   DELETE_COMPANY_SETTINGS_MUTATION,
   DELETE_USER_SETTINGS_MUTATION,
   SET_APP_SETTINGS_MUTATION,
@@ -82,9 +84,15 @@ export default class Settings {
   async getCompanySettings(
     entity_uuid: string
   ): Promise<CompanySettingsResponse | undefined> {
+    return this.companySettings(entity_uuid);
+  }
+
+  async companySettings(
+    entity_uuid: string
+  ): Promise<CompanySettingsResponse | undefined> {
     try {
       const { data } = await this.client.query<CompanySettingsResponse>({
-        query: COMPANY_SETTING_QUERY,
+        query: ADMIN_COMPANY_SETTINGS_QUERY,
         variables: {
           entityUUID: entity_uuid,
         },
@@ -92,6 +100,27 @@ export default class Settings {
         partialRefetch: true,
       });
       return data;
+    } catch {
+      return undefined;
+    }
+  }
+
+  async companySetting(
+    entity_uuid: string,
+    key: string
+  ): Promise<any | undefined> {
+    try {
+      const { data } = await this.client.query({
+        query: ADMIN_COMPANY_SETTING_QUERY,
+        variables: {
+          entityUUID: entity_uuid,
+          key: key
+        },
+        fetchPolicy: 'network-only',
+        partialRefetch: true,
+      });
+
+      return data.adminCompanySetting;
     } catch {
       return undefined;
     }
@@ -141,7 +170,7 @@ export default class Settings {
       return undefined;
     }
   }
-  async setAppSettings(input: ConfigInput) {
+  async setAppSetting(input: ConfigInput): Promise<boolean | undefined> {
     try {
       await this.client.mutate({
         mutation: SET_APP_SETTINGS_MUTATION,
@@ -153,6 +182,28 @@ export default class Settings {
     } catch {
       return undefined;
     }
+  }
+
+  async deleteAppSetting(key: String): Promise<boolean | undefined> {
+    try {
+      const { data } = await this.client.mutate({
+        mutation: DELETE_APP_SETTINGS_MUTATION,
+        variables: {
+          key: key
+        },
+      });
+      return data.deleteAppSetting;
+    } catch {
+      return undefined;
+    }
+  }
+
+  /**
+   * 
+   * @deprecated
+   */
+  async setAppSettings(input: ConfigInput): Promise<boolean | undefined> {
+    return this.setAppSetting(input);
   }
 
   async setCompanySettings(input: ConfigInput): Promise<boolean | undefined> {

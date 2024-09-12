@@ -8,7 +8,7 @@ export interface AppSettingsResponse<T = any> {
 }
 
 export interface CompanySettingsResponse {
-  adminCompanySettings: Array<{ key: string; value: any; public?: boolean }>
+  adminCompanySettings: HashTableResponse[];
 }
 
 export interface UserSettingsResponse {
@@ -18,12 +18,12 @@ export interface UserSettingsResponse {
 export interface AppSettingsQueryResponse {
   appSettings: Array<{ key: string; value: any; public?: boolean }>;
 }
-export interface AdminAppSetting {
+export interface HashTableResponse {
   key: string;
   value: any;
   public?: boolean;
 }
 
 export interface AdminAppSettingsQueryResponse {
-  adminAppSettings: AdminAppSetting[];
+  adminAppSettings: HashTableResponse[];
 }
