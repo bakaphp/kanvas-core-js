@@ -1,19 +1,19 @@
-import { ClientType } from '../../index';
-
+import { ClientType, Options } from '../../index';
+import axios from 'axios';
+import FormData from 'form-data';
 import {
   MessageInputInterface,
   MessagesInterface,
-  InteractionTypeInput,
   HasAppModuleMessageWhereConditions,
   OrderByMessage,
   WhereCondition,
   MessageUpdateInputInterface,
   AllMessages,
   AllMessagesGroupByDate,
+  MessageUploadFiles,
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
-  INTERACTION_MESSAGE_MUTATION,
   ATTACH_TOPIC_TO_MESSAGE_MUTATION,
   DETACH_TOPIC_TO_MESSAGE_MUTATION,
   UPDATE_MESSAGE_MUTATION,
@@ -31,12 +31,32 @@ import {
   GET_MESSAGES_GROUP_BY_DATE_QUERY,
   GET_MESSAGES_QUERY,
 } from '../../queries';
+
 import { MessagesComments } from '../messages-comments';
 export class Messages {
   public comments: MessagesComments;
+  protected axiosClient: any;
 
-  constructor(protected client: ClientType) {
+  constructor(protected client: ClientType, protected options?: Options) {
     this.comments = new MessagesComments(client);
+    if (this.options) {
+      this.axiosClient = axios.create({
+        baseURL: this.options.url,
+        headers: {
+          'X-Kanvas-App': this.options.key,
+          ...(this.options.adminKey && {
+            'X-Kanvas-Key': this.options.adminKey,
+          }),
+        },
+      });
+
+      this.axiosClient.interceptors.request.use(
+        this.options.authAxiosMiddleware,
+        function (error: any) {
+          return Promise.reject(error);
+        }
+      );
+    }
   }
 
   public async createMessage(
@@ -82,17 +102,6 @@ export class Messages {
       variables: {},
     });
     return true;
-  }
-
-  public async interactionMessage(
-    id: string,
-    type: InteractionTypeInput
-  ): Promise<MessagesInterface> {
-    const response = this.client.mutate({
-      mutation: INTERACTION_MESSAGE_MUTATION,
-      variables: { id: id, type: type },
-    });
-    return (await response).data.interactionMessage as MessagesInterface;
   }
 
   public async getMessages(
@@ -141,7 +150,7 @@ export class Messages {
       orderBy?: Array<OrderByMessage>,
       search?: string,
       first?: number,
-      page?: number
+      page?: number,
     } = {}
   ): Promise<AllMessagesGroupByDate> {
     const {
@@ -151,7 +160,7 @@ export class Messages {
       search,
       first,
       page,
-    } = options
+    } = options;
     const response = await this.client.query({
       query: GET_MESSAGES_GROUP_BY_DATE_QUERY,
       variables: {
@@ -229,5 +238,29 @@ export class Messages {
     });
 
     return response.data.shareMessage;
+  }
+
+  public async attachFileToMessage(id: string, file: File): Promise<MessageUploadFiles> {
+    if (!this.options || !this.axiosClient)
+      throw new Error('FileSystem module not initialized');
+
+    const messageOutputData =
+      '{id, uuid, parent_id, slug, user {id, firstname, lastname, displayname},appModuleMessage {entity_id, system_modules},message_types_id, message, reactions_count, comment_count, total_liked, total_saved, parent {id, uuid } files {data {id, uuid,name, url }}}}';
+    const formData = new FormData();
+    formData.append(
+      'operations',
+      JSON.stringify({
+        query: `mutation ($file: Upload!) { attachFileToMessage(message_id: ${id},file: $file) ${messageOutputData}`,
+        variables: {
+          file: null,
+        },
+      })
+    );
+    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+    formData.append('0', JSON.stringify(file), file.name);
+
+    let response = await this.axiosClient.post('', formData);
+
+    return response.data.data;
   }
 }
