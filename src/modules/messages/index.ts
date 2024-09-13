@@ -1,4 +1,4 @@
-import { ClientType } from '../../index';
+import { ClientType, Options } from '../../index';
 import axios from 'axios';
 import FormData from 'form-data';
 import {
@@ -10,6 +10,7 @@ import {
   MessageUpdateInputInterface,
   AllMessages,
   AllMessagesGroupByDate,
+  MessageUploadFiles,
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
@@ -24,13 +25,6 @@ import {
   VIEW_MESSAGE_MUTATION,
   DISLIKE_MESSAGE_MUTATION,
 } from '../../mutations';
-
-interface Options {
-  url: string;
-  key: string;
-  adminKey?: string;
-  authAxiosMiddleware?: any;
-}
 
 import {
   GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG,
@@ -58,7 +52,7 @@ export class Messages {
 
       this.axiosClient.interceptors.request.use(
         this.options.authAxiosMiddleware,
-        function(error: any) {
+        function (error: any) {
           return Promise.reject(error);
         }
       );
@@ -151,12 +145,12 @@ export class Messages {
 
   public async getMessagesGroupByDate(
     options: {
-      where?: WhereCondition;
-      hasAppModuleMessageWhere?: HasAppModuleMessageWhereConditions;
-      orderBy?: Array<OrderByMessage>;
-      search?: string;
-      first?: number;
-      page?: number;
+      where?: WhereCondition,
+      hasAppModuleMessageWhere?: HasAppModuleMessageWhereConditions,
+      orderBy?: Array<OrderByMessage>,
+      search?: string,
+      first?: number,
+      page?: number,
     } = {}
   ): Promise<AllMessagesGroupByDate> {
     const {
@@ -246,17 +240,17 @@ export class Messages {
     return response.data.shareMessage;
   }
 
-  public async attachFileToMessage(id: string,file: File): Promise<MessagesInterface> {
+  public async attachFileToMessage(id: string, file: File): Promise<MessageUploadFiles> {
     if (!this.options || !this.axiosClient)
       throw new Error('FileSystem module not initialized');
 
-    const messageOuputData =
-      '{id, uuid, parent_id, slug, user {id, firstname, lastname, displayname},appModuleMessage {entity_id, system_modules},message_types_id, message, reactions_count, comment_count, total_liked, total_saved, parent {id, uuid } files {data {id, uuid,name, url, file_type }}}}';
+    const messageOutputData =
+      '{id, uuid, parent_id, slug, user {id, firstname, lastname, displayname},appModuleMessage {entity_id, system_modules},message_types_id, message, reactions_count, comment_count, total_liked, total_saved, parent {id, uuid } files {data {id, uuid,name, url }}}}';
     const formData = new FormData();
     formData.append(
       'operations',
       JSON.stringify({
-        query: `mutation ($file: Upload!) { attachFileToMessage(message_id: ${id},file: $file) ${messageOuputData}`,
+        query: `mutation ($file: Upload!) { attachFileToMessage(message_id: ${id},file: $file) ${messageOutputData}`,
         variables: {
           file: null,
         },
@@ -267,6 +261,6 @@ export class Messages {
 
     let response = await this.axiosClient.post('', formData);
 
-    return response.data as MessagesInterface;
+    return response.data.data;
   }
 }
