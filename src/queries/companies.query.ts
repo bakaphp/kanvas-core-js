@@ -127,6 +127,15 @@ export const COMPANY_USERS_QUERY = gql`
           name
           companies_id
         }
+        custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }]) {
+          data {
+            name
+            value
+          }
+        }
+        photo {
+          url
+        }
         created_at
         updated_at
       }

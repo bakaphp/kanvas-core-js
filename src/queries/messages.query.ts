@@ -49,6 +49,7 @@ export const GET_MESSAGES_QUERY = gql`
         total_saved
         total_shared
         total_view
+        total_children
         tags {
           data {
               id
@@ -118,6 +119,7 @@ export const GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG = gql`
         total_saved
         total_shared
         total_view
+        total_children
         parent {
           id
           uuid
@@ -184,6 +186,7 @@ export const GET_MESSAGES_GROUP_BY_DATE_QUERY = gql`
         total_saved
         total_shared
         total_view
+        total_children
         parent {
           id
           uuid

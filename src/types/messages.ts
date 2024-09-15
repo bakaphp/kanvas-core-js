@@ -1,4 +1,4 @@
-import { UserInterface } from './index';
+import { FilesystemInterface, UserInterface } from './index';
 import { PaginatorInfo } from './paginator';
 export interface MessagesInterface {
   id: string;
@@ -16,12 +16,16 @@ export interface MessagesInterface {
   total_saved: number;
   total_shared: number;
   total_view: number;
+  total_children: number;
   message_types_id: string;
   user: UserInterface;
   tags: string[];
   myInteraction: MyInteractionInterface;
   created_at: string;
   appModuleMessage: AppModuleMessage;
+  files: {
+    data: FilesystemInterface[];
+  };
 }
 
 interface MyInteractionInterface {
@@ -43,6 +47,10 @@ export interface AllMessagesGroupByDate {
     data: MessagesInterface[];
     paginatorInfo?: PaginatorInfo;
   };
+}
+
+export interface MessageUploadFiles {
+  attachFileToMessage: MessagesInterface;
 }
 
 interface AppModuleMessage {
