@@ -107,7 +107,7 @@ export class FileSystem {
     return response.data.data.upload as UPLOAD_INTERFACE;
   }
 
-  public async uploadFileCsv(data: File | string): Promise<JSON> {
+  public async uploadFileCsv(data: File): Promise<JSON> {
     if (!this.options || !this.axiosClient)
       throw new Error('FileSystem module not initialized');
 
@@ -122,22 +122,13 @@ export class FileSystem {
       })
     );
     formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
-
-    if (typeof data === 'string') {
-      // For Node.js testing
-      formData.append('0', fs.createReadStream(data), path.basename(data));
-    } else {
-      // For browser
-      formData.append('0', data, data.name);
-    }
-
+    formData.append('0', data, data.name);
     let response = await this.axiosClient.post('', formData, {
       headers: formData.getHeaders(),
     });
 
     return response.data.data;
   }
-
   public async updatePhotoProfile(
     data: File,
     users_id: string
