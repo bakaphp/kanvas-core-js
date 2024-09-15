@@ -1,5 +1,7 @@
 import axios from 'axios';
 import FormData from 'form-data';
+import fs from 'fs';
+import path from 'path';
 import { ClientType } from './../../index';
 interface Options {
   url: string;
@@ -39,7 +41,7 @@ export class FileSystem {
 
       this.axiosClient.interceptors.request.use(
         this.options.authAxiosMiddleware,
-        function (error: any) {
+        function(error: any) {
           return Promise.reject(error);
         }
       );
@@ -105,7 +107,7 @@ export class FileSystem {
     return response.data.data.upload as UPLOAD_INTERFACE;
   }
 
-  public async uploadFileCsv(data: File): Promise<JSON> {
+  public async uploadFileCsv(data: File | string): Promise<JSON> {
     if (!this.options || !this.axiosClient)
       throw new Error('FileSystem module not initialized');
 
@@ -120,10 +122,20 @@ export class FileSystem {
       })
     );
     formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
-    formData.append('0', data, data.name);
-    let response = await this.axiosClient.post('', formData);
 
-    return response.data.data.upload as JSON;
+    if (typeof data === 'string') {
+      // For Node.js testing
+      formData.append('0', fs.createReadStream(data), path.basename(data));
+    } else {
+      // For browser
+      formData.append('0', data, data.name);
+    }
+
+    let response = await this.axiosClient.post('', formData, {
+      headers: formData.getHeaders(),
+    });
+
+    return response.data.data;
   }
 
   public async updatePhotoProfile(
