@@ -123,7 +123,7 @@ export class FileSystem {
     formData.append('0', data, data.name);
     let response = await this.axiosClient.post('', formData);
 
-    return response.data.data.upload as JSON;
+    return response.data.data.uploadCsv as JSON;
   }
 
   public async updatePhotoProfile(
