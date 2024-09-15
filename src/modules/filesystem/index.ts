@@ -121,9 +121,7 @@ export class FileSystem {
     );
     formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
     formData.append('0', data, data.name);
-    let response = await this.axiosClient.post('', formData, {
-      headers: formData.getHeaders(),
-    });
+    let response = await this.axiosClient.post('', formData);
 
     return response.data.data;
   }
