@@ -137,7 +137,7 @@ export class FileSystem {
 
     return response.data.data;
   }
-  
+
   public async updatePhotoProfile(
     data: File,
     users_id: string
