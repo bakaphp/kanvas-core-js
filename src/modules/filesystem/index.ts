@@ -1,9 +1,7 @@
 import axios from 'axios';
 import FormData from 'form-data';
-import { ReadStream } from 'fs';
-import { ClientType } from './../../index';
-import path from 'path';
-import fs from 'fs';
+import { ClientType, isNode } from './../../index';
+
 interface Options {
   url: string;
   key: string;
@@ -109,7 +107,7 @@ export class FileSystem {
     return response.data.data.upload as UPLOAD_INTERFACE;
   }
 
-  public async uploadFileCsv(data: File | ReadStream): Promise<UPLOAD_CSV_INTERFACE> {
+  public async uploadFileCsv(data: File | any): Promise<UPLOAD_CSV_INTERFACE> {
     if (!this.options || !this.axiosClient)
       throw new Error('FileSystem module not initialized');
 
@@ -125,21 +123,35 @@ export class FileSystem {
     );
 
     formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
-    formData.append(
-      '0',
-      data,
-      data instanceof File
-        ? data.name
-        : data instanceof fs.ReadStream && typeof data.path === 'string'
-          ? path.basename(data.path) // Ensure path is a string
-          : 'uploaded_file.csv'
-    );
+
+    if (isNode()) {
+      // Conditionally require fs and path in Node.js
+      const fs = require('fs');
+      const path = require('path');
+
+      formData.append(
+        '0',
+        data,
+        data instanceof File
+          ? data.name
+          : data instanceof fs.ReadStream && typeof data.path === 'string'
+            ? path.basename(data.path) // Ensure path is a string
+            : 'uploaded_file.csv'
+      );
+    } else {
+      // Running in a browser
+      if (data instanceof File) {
+        formData.append('0', data, data.name); // Use File object in the browser
+      } else {
+        throw new Error('Invalid file type for browser environment');
+      }
+    }
 
     let response = await this.axiosClient.post('', formData);
 
     return response.data.data;
   }
-  
+
   public async updatePhotoProfile(
     data: File,
     users_id: string

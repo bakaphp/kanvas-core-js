@@ -87,6 +87,7 @@ export function locationMiddleware(
     return { headers };
   });
 }
+
 export async function authAxiosMiddleware(
   fn: () => Promise<string | null | undefined>
 ) {
@@ -95,6 +96,11 @@ export async function authAxiosMiddleware(
     Authorization: key ? `Bearer ${key}` : '',
   };
 }
+
+export function isNode(): boolean {
+  return typeof process !== 'undefined' && process.versions != null && process.versions.node != null;
+}
+
 export default class KanvasCore {
   public client: ClientType;
   public auth: Auth;
