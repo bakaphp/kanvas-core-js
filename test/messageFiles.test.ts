@@ -1,4 +1,6 @@
 import { initializeClient, getClient } from './setupClient';
+import path from 'path';
+import fs from 'fs';
 
 beforeAll(async () => {
     await initializeClient(process.env.KANVAS_APP_SECRET!);
@@ -9,6 +11,8 @@ describe('Test the Social Messages Upload', () => {
         const client = getClient();
         const messages = client.messages;
         const messageContent = 'Hello, Kanvas!';
+        
+        // Create a new message
         const newMessage = await messages.createMessage({
             message_verb: 'post',
             message: messageContent,
@@ -18,14 +22,19 @@ describe('Test the Social Messages Upload', () => {
         expect(newMessage.id).toBeDefined();
         expect(newMessage.message).toBe(messageContent);
 
-        const file = new File(['This is some content'], 'file.txt', {
-            type: 'text/plain',
-        });
+        // Path to the file you want to attach
+        const filePath = path.join(__dirname, '/files', 'file.txt'); // Adjust the file path as needed
 
-        const attachFileToMessage = await messages.attachFileToMessage(newMessage.id, file);
+        // Use fs.createReadStream to create a ReadStream for the file
+        const fileStream = fs.createReadStream(filePath);
+
+        // Attach the file stream to the message
+        const attachFileToMessage = await messages.attachFileToMessage(newMessage.id, fileStream);
+
+        // Assertions to check the response
         expect(attachFileToMessage.attachFileToMessage.id).toBeDefined();
         expect(attachFileToMessage.attachFileToMessage.message).toBe(messageContent);
         expect(attachFileToMessage.attachFileToMessage.files.data.length).toBe(1);
-        expect(attachFileToMessage.attachFileToMessage.files.data[0].name).toBe('file.txt');
+        expect(attachFileToMessage.attachFileToMessage.files.data[0].name).toBe(path.basename(filePath)); // Expect 'file.txt'
     });
 });

@@ -1,6 +1,10 @@
 import { ClientType, Options } from '../../index';
 import axios from 'axios';
 import FormData from 'form-data';
+import path from 'path';
+import fs from 'fs';
+import { ReadStream } from 'fs';
+
 import {
   MessageInputInterface,
   MessagesInterface,
@@ -240,7 +244,7 @@ export class Messages {
     return response.data.shareMessage;
   }
 
-  public async attachFileToMessage(id: string, file: File): Promise<MessageUploadFiles> {
+  public async attachFileToMessage(id: string, file: File | ReadStream): Promise<MessageUploadFiles> {
     if (!this.options || !this.axiosClient)
       throw new Error('FileSystem module not initialized');
 
@@ -257,7 +261,15 @@ export class Messages {
       })
     );
     formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
-    formData.append('0', JSON.stringify(file), file.name);
+    formData.append(
+      '0',
+      file,
+      file instanceof File
+        ? file.name
+        : file instanceof fs.ReadStream && typeof file.path === 'string'
+          ? path.basename(file.path) // Ensure path is a string
+          : 'uploaded_file.csv'
+    );
 
     let response = await this.axiosClient.post('', formData);
 

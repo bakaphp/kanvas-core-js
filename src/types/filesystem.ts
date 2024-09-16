@@ -5,6 +5,14 @@ export interface UPLOAD_INTERFACE {
   url: string;
 }
 
+export interface UPLOAD_CSV_INTERFACE {
+  uploadCsv: {
+    filesystem_id: string;
+    row: { [key: string]: string };
+    header: Array<string>;
+  }
+}
+
 export interface FILESYSTEM_ATTACH_INPUT {
   filesystem_uuid: string;
   field_name: string;
