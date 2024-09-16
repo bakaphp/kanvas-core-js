@@ -77,6 +77,21 @@ export interface DistributionInputInterface {
   followers: Array<string>;
 }
 
+export interface MessageSearchSuggestionInterface {
+  objectID: string;
+  _highlightResult: {
+    query: {
+      value: string;
+      matchLevel: string;
+      matchedWords: string[];
+    };
+  };
+}
+
+export interface MessageSearchSuggestions {
+  messageSearchSuggestions: MessageSearchSuggestionInterface[];
+}
+
 export interface MessageWhereConditions {
   column?: string;
   operator?: string;

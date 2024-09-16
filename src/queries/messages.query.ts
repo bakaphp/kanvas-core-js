@@ -214,3 +214,9 @@ export const GET_MESSAGES_GROUP_BY_DATE_QUERY = gql`
     }
   }
 `;
+
+export const GET_MESSAGE_SEARCH_SUGGESTIONS_QUERY = gql`
+  query messageSearchSuggestions($search: String!) {
+    messageSearchSuggestions(search: $search)
+  }
+`;
