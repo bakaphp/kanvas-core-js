@@ -1,9 +1,5 @@
 import axios from 'axios';
 import FormData from 'form-data';
-import { ReadStream } from 'fs';
-import { ClientType } from './../../index';
-import path from 'path';
-import fs from 'fs';
 interface Options {
   url: string;
   key: string;
@@ -26,6 +22,7 @@ import {
   DETACH_FILE_MUTATION,
 } from '../../mutations';
 import { ENTITY_FILES_QUERY } from '../../queries';
+import { ClientType } from './../../index';
 export { FilesystemMapper } from './mapper/index';
 export class FileSystem {
   protected axiosClient: any;
@@ -43,7 +40,7 @@ export class FileSystem {
 
       this.axiosClient.interceptors.request.use(
         this.options.authAxiosMiddleware,
-        function (error: any) {
+        function(error: any) {
           return Promise.reject(error);
         }
       );
@@ -109,37 +106,48 @@ export class FileSystem {
     return response.data.data.upload as UPLOAD_INTERFACE;
   }
 
-  public async uploadFileCsv(data: File | ReadStream): Promise<UPLOAD_CSV_INTERFACE> {
-    if (!this.options || !this.axiosClient)
+  /**
+   * Uploads a CSV file to the server.
+   * @param data The file to upload (File in browser, Buffer in Node.js)
+   * @returns Promise resolving to the upload result
+   * @throws Error if the module is not initialized or if the input is invalid
+   */
+  public async uploadFileCsv(
+    data: File | Buffer
+  ): Promise<UPLOAD_CSV_INTERFACE> {
+    if (!this.options || !this.axiosClient) {
       throw new Error('FileSystem module not initialized');
+    }
 
-    const formData = new FormData();
+    const isBrowser = typeof window !== 'undefined';
+    let formData: FormData = new FormData();
+
+    if (isBrowser) {
+      formData.append('0', data as File, (data as File).name);
+    } else {
+      // Node.js environment
+      if (!Buffer.isBuffer(data)) {
+        throw new Error('Expected a Buffer in Node.js');
+      }
+      formData.append('0', data, { filename: 'uploaded_file.csv' });
+    }
+
+    // Append GraphQL mutation data
     formData.append(
       'operations',
       JSON.stringify({
         query: 'mutation ($file: Upload!) { uploadCsv(file: $file) }',
-        variables: {
-          file: null,
-        },
+        variables: { file: null },
       })
     );
-
     formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
-    formData.append(
-      '0',
-      data,
-      data instanceof File
-        ? data.name
-        : data instanceof fs.ReadStream && typeof data.path === 'string'
-          ? path.basename(data.path) // Ensure path is a string
-          : 'uploaded_file.csv'
-    );
 
-    let response = await this.axiosClient.post('', formData);
+    // Make the API request
+    const headers = isBrowser ? {} : (formData as any).getHeaders();
+    const response = await this.axiosClient.post('', formData, { headers });
 
     return response.data.data;
   }
-  
   public async updatePhotoProfile(
     data: File,
     users_id: string
