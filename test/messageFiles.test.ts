@@ -32,10 +32,11 @@ describe('Test the Social Messages Upload', () => {
       buffer = Buffer.concat([buffer, chunk]);
     }
     // Attach the file stream to the message
+    
     const attachFileToMessage = await messages.attachFileToMessage(
       newMessage.id,
       buffer,
-      "file.txt"
+      'file.txt'
     );
 
     // Assertions to check the response

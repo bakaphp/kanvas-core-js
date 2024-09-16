@@ -255,13 +255,47 @@ export class Messages {
     const isBrowser = typeof window !== 'undefined';
     const formData = new FormData();
 
-    const messageOutputData =
-      '{id, uuid, parent_id, slug, user {id, firstname, lastname, displayname},appModuleMessage {entity_id, system_modules},message_types_id, message, reactions_count, comment_count, total_liked, total_saved, parent {id, uuid } files {data {id, uuid,name, url }}}';
+    const messageOutputData = `{
+      id
+      uuid
+      parent_id
+      slug
+      user {
+        id
+        firstname
+        lastname
+        displayname
+      }
+      appModuleMessage {
+        entity_id
+        system_modules
+      }
+      message_types_id
+      message
+      reactions_count
+      comment_count
+      total_liked
+      total_saved
+      parent {
+        id
+        uuid
+      }
+      files {
+        data {
+          id
+          uuid
+          name
+          url
+        }
+      }
+    }`;
 
     formData.append(
       'operations',
       JSON.stringify({
-        query: `mutation ($file: Upload!) { attachFileToMessage(message_id: ${id},file: $file) ${messageOutputData}`,
+        query: `mutation ($file: Upload!) {
+          attachFileToMessage(message_id: "${id}", file: $file) ${messageOutputData}
+        }`,
         variables: {
           file: null,
         },
@@ -283,7 +317,6 @@ export class Messages {
 
     const headers = isBrowser ? {} : (formData as any).getHeaders();
     const response = await this.axiosClient.post('', formData, { headers });
-
     return response.data.data;
   }
   public async getMessageSearchSuggestions(
