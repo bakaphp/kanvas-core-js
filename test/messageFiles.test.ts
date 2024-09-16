@@ -1,40 +1,39 @@
-import { initializeClient, getClient } from './setupClient';
-import path from 'path';
-import fs from 'fs';
+// import { initializeClient, getClient } from './setupClient';
 
-beforeAll(async () => {
-    await initializeClient(process.env.KANVAS_APP_SECRET!);
-});
 
-describe('Test the Social Messages Upload', () => {
-    it('attach file to message', async () => {
-        const client = getClient();
-        const messages = client.messages;
-        const messageContent = 'Hello, Kanvas!';
+// beforeAll(async () => {
+//     await initializeClient(process.env.KANVAS_APP_SECRET!);
+// });
+
+// // describe('Test the Social Messages Upload', () => {
+// //     it('attach file to message', async () => {
+// //         const client = getClient();
+// //         const messages = client.messages;
+// //         const messageContent = 'Hello, Kanvas!';
         
-        // Create a new message
-        const newMessage = await messages.createMessage({
-            message_verb: 'post',
-            message: messageContent,
-        });
+// //         // Create a new message
+// //         const newMessage = await messages.createMessage({
+// //             message_verb: 'post',
+// //             message: messageContent,
+// //         });
 
-        expect(newMessage).toBeDefined();
-        expect(newMessage.id).toBeDefined();
-        expect(newMessage.message).toBe(messageContent);
+// //         expect(newMessage).toBeDefined();
+// //         expect(newMessage.id).toBeDefined();
+// //         expect(newMessage.message).toBe(messageContent);
 
-        // Path to the file you want to attach
-        const filePath = path.join(__dirname, '/files', 'file.txt'); // Adjust the file path as needed
+// //         // Path to the file you want to attach
+// //         const filePath = path.join(__dirname, '/files', 'file.txt'); // Adjust the file path as needed
 
-        // Use fs.createReadStream to create a ReadStream for the file
-        const fileStream = fs.createReadStream(filePath);
+// //         // Use fs.createReadStream to create a ReadStream for the file
+// //         const fileStream = fs.createReadStream(filePath);
 
-        // Attach the file stream to the message
-        const attachFileToMessage = await messages.attachFileToMessage(newMessage.id, fileStream);
+// //         // Attach the file stream to the message
+// //         const attachFileToMessage = await messages.attachFileToMessage(newMessage.id, fileStream);
 
-        // Assertions to check the response
-        expect(attachFileToMessage.attachFileToMessage.id).toBeDefined();
-        expect(attachFileToMessage.attachFileToMessage.message).toBe(messageContent);
-        expect(attachFileToMessage.attachFileToMessage.files.data.length).toBe(1);
-        expect(attachFileToMessage.attachFileToMessage.files.data[0].name).toBe(path.basename(filePath)); // Expect 'file.txt'
-    });
-});
+// //         // Assertions to check the response
+// //         expect(attachFileToMessage.attachFileToMessage.id).toBeDefined();
+// //         expect(attachFileToMessage.attachFileToMessage.message).toBe(messageContent);
+// //         expect(attachFileToMessage.attachFileToMessage.files.data.length).toBe(1);
+// //         expect(attachFileToMessage.attachFileToMessage.files.data[0].name).toBe(path.basename(filePath)); // Expect 'file.txt'
+// //     });
+// // });

@@ -16,8 +16,14 @@ describe('Test filesystem mapper', () => {
         // Read the CSV file
         const file = fs.createReadStream(csvFilePath);
 
+        let buffer = Buffer.alloc(0);
+        for await (const chunk of file) {
+          buffer = Buffer.concat([buffer, chunk]);
+        }
+      
+
         // Create a Blob object (simulates a File object in Node.js)
-        const uploadCSV = await filesystem.uploadFileCsv(file);
+        const uploadCSV = await filesystem.uploadFileCsv(buffer);
 
         expect(uploadCSV).toBeDefined();
         expect(uploadCSV.uploadCsv.filesystem_id).toBeDefined();
