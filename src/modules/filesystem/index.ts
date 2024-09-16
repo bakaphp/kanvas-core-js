@@ -1,8 +1,9 @@
 import axios from 'axios';
 import FormData from 'form-data';
-import fs from 'fs';
-import path from 'path';
+import { ReadStream } from 'fs';
 import { ClientType } from './../../index';
+import path from 'path';
+import fs from 'fs';
 interface Options {
   url: string;
   key: string;
@@ -17,6 +18,7 @@ import {
   FILESYSTEM_ATTACH_INPUT,
   UserData,
   CompanyInterface,
+  UPLOAD_CSV_INTERFACE,
 } from '../../types';
 import {
   ATTACH_FILE_MUTATION,
@@ -41,7 +43,7 @@ export class FileSystem {
 
       this.axiosClient.interceptors.request.use(
         this.options.authAxiosMiddleware,
-        function(error: any) {
+        function (error: any) {
           return Promise.reject(error);
         }
       );
@@ -107,7 +109,7 @@ export class FileSystem {
     return response.data.data.upload as UPLOAD_INTERFACE;
   }
 
-  public async uploadFileCsv(data: File | string): Promise<JSON> {
+  public async uploadFileCsv(data: File | ReadStream): Promise<UPLOAD_CSV_INTERFACE> {
     if (!this.options || !this.axiosClient)
       throw new Error('FileSystem module not initialized');
 
@@ -121,19 +123,19 @@ export class FileSystem {
         },
       })
     );
+
     formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+    formData.append(
+      '0',
+      data,
+      data instanceof File
+        ? data.name
+        : data instanceof fs.ReadStream && typeof data.path === 'string'
+          ? path.basename(data.path) // Ensure path is a string
+          : 'uploaded_file.csv'
+    );
 
-    if (typeof data === 'string') {
-      // For Node.js testing
-      formData.append('0', fs.createReadStream(data), path.basename(data));
-    } else {
-      // For browser
-      formData.append('0', data, data.name);
-    }
-
-    let response = await this.axiosClient.post('', formData, {
-      headers: formData.getHeaders(),
-    });
+    let response = await this.axiosClient.post('', formData);
 
     return response.data.data;
   }
