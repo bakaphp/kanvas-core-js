@@ -366,7 +366,6 @@ describe('Test the Social Messages', () => {
         expect(newMessage.message).toBe(messageContent);
 
         const suggestions = await messages.getMessageSearchSuggestions("prom");
-        console.log(suggestions);
         expect(suggestions).toBeDefined();
         expect(suggestions.messageSearchSuggestions).toBeDefined();
         expect(suggestions.messageSearchSuggestions.length).toBeGreaterThanOrEqual(0);
