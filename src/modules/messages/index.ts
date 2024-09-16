@@ -12,6 +12,7 @@ import {
   AllMessages,
   AllMessagesGroupByDate,
   MessageUploadFiles,
+  MessageSearchSuggestions,
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
@@ -28,6 +29,7 @@ import {
 } from '../../mutations';
 
 import {
+  GET_MESSAGE_SEARCH_SUGGESTIONS_QUERY,
   GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG,
   GET_MESSAGES_GROUP_BY_DATE_QUERY,
   GET_MESSAGES_QUERY,
@@ -284,5 +286,18 @@ export class Messages {
     let response = await this.axiosClient.post('', formData);
 
     return response.data.data;
+  }
+
+  public async getMessageSearchSuggestions(
+    search: string
+  ): Promise<MessageSearchSuggestions> {
+    const response = await this.client.query({
+      query: GET_MESSAGE_SEARCH_SUGGESTIONS_QUERY,
+      variables: {
+        search
+      },
+    });
+
+    return response.data;
   }
 }

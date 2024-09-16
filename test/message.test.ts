@@ -351,4 +351,24 @@ describe('Test the Social Messages', () => {
         const deleted = await messages.deleteAllMessages();
         expect(deleted).toBe(true);
     });
+
+    it('test message search suggestions', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const suggestions = await messages.getMessageSearchSuggestions("prom");
+        console.log(suggestions);
+        expect(suggestions).toBeDefined();
+        expect(suggestions.messageSearchSuggestions).toBeDefined();
+        expect(suggestions.messageSearchSuggestions.length).toBeGreaterThanOrEqual(0);
+    });
 });

@@ -42,6 +42,7 @@ export interface AllMessages {
     paginatorInfo?: PaginatorInfo;
   };
 }
+
 export interface AllMessagesGroupByDate {
   messagesGroupByDate: {
     data: MessagesInterface[];
@@ -51,6 +52,21 @@ export interface AllMessagesGroupByDate {
 
 export interface MessageUploadFiles {
   attachFileToMessage: MessagesInterface;
+}
+
+export interface MessageSearchSuggestionInterface {
+  objectID: string;
+  _highlightResult: {
+    query: {
+      value: string;
+      matchLevel: string;
+      matchedWords: string[];
+    };
+  };
+}
+
+export interface MessageSearchSuggestions {
+  messageSearchSuggestions: MessageSearchSuggestionInterface[];
 }
 
 interface AppModuleMessage {
