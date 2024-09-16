@@ -55,7 +55,7 @@ export class Messages {
 
       this.axiosClient.interceptors.request.use(
         this.options.authAxiosMiddleware,
-        function (error: any) {
+        function(error: any) {
           return Promise.reject(error);
         }
       );
@@ -148,12 +148,12 @@ export class Messages {
 
   public async getMessagesGroupByDate(
     options: {
-      where?: WhereCondition,
-      hasAppModuleMessageWhere?: HasAppModuleMessageWhereConditions,
-      orderBy?: Array<OrderByMessage>,
-      search?: string,
-      first?: number,
-      page?: number,
+      where?: WhereCondition;
+      hasAppModuleMessageWhere?: HasAppModuleMessageWhereConditions;
+      orderBy?: Array<OrderByMessage>;
+      search?: string;
+      first?: number;
+      page?: number;
     } = {}
   ): Promise<AllMessagesGroupByDate> {
     const {
@@ -243,13 +243,21 @@ export class Messages {
     return response.data.shareMessage;
   }
 
-  public async attachFileToMessage(id: string, file: File | any): Promise<MessageUploadFiles> {
-    if (!this.options || !this.axiosClient)
+  public async attachFileToMessage(
+    id: string,
+    file: File | Buffer,
+    fileName?: string
+  ): Promise<MessageUploadFiles> {
+    if (!this.options || !this.axiosClient) {
       throw new Error('FileSystem module not initialized');
+    }
+
+    const isBrowser = typeof window !== 'undefined';
+    const formData = new FormData();
 
     const messageOutputData =
-      '{id, uuid, parent_id, slug, user {id, firstname, lastname, displayname},appModuleMessage {entity_id, system_modules},message_types_id, message, reactions_count, comment_count, total_liked, total_saved, parent {id, uuid } files {data {id, uuid,name, url }}}}';
-    const formData = new FormData();
+      '{id, uuid, parent_id, slug, user {id, firstname, lastname, displayname},appModuleMessage {entity_id, system_modules},message_types_id, message, reactions_count, comment_count, total_liked, total_saved, parent {id, uuid } files {data {id, uuid,name, url }}}';
+
     formData.append(
       'operations',
       JSON.stringify({
@@ -259,21 +267,32 @@ export class Messages {
         },
       })
     );
-    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
-    formData.append('0', JSON.stringify(file), file.name);
 
-    let response = await this.axiosClient.post('', formData);
+    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+
+    if (isBrowser && file instanceof File) {
+      formData.append('0', file, file.name);
+    } else if (Buffer.isBuffer(file)) {
+      if (!fileName) {
+        throw new Error('fileName is required when uploading a Buffer');
+      }
+      formData.append('0', file, { filename: fileName });
+    } else {
+      throw new Error('Invalid file type: expected File or Buffer');
+    }
+
+    const headers = isBrowser ? {} : (formData as any).getHeaders();
+    const response = await this.axiosClient.post('', formData, { headers });
 
     return response.data.data;
   }
-
   public async getMessageSearchSuggestions(
     search: string
   ): Promise<MessageSearchSuggestions> {
     const response = await this.client.query({
       query: GET_MESSAGE_SEARCH_SUGGESTIONS_QUERY,
       variables: {
-        search
+        search,
       },
     });
 
