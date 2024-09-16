@@ -120,19 +120,15 @@ export class FileSystem {
     }
 
     const isBrowser = typeof window !== 'undefined';
-    let formData: FormData;
+    let formData: FormData = new FormData();
 
     if (isBrowser) {
-      // Browser environment
-      formData = new FormData();
       formData.append('0', data as File, (data as File).name);
     } else {
       // Node.js environment
       if (!Buffer.isBuffer(data)) {
         throw new Error('Expected a Buffer in Node.js');
       }
-      const FormData = (await import('form-data')).default;
-      formData = new FormData();
       formData.append('0', data, { filename: 'uploaded_file.csv' });
     }
 
