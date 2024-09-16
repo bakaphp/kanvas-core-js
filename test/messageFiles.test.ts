@@ -1,6 +1,4 @@
-import { initializeClient, getClient } from './setupClient';
-import path from 'path';
-import fs from 'fs';
+import { initializeClient } from './setupClient';
 
 beforeAll(async () => {
     await initializeClient(process.env.KANVAS_APP_SECRET!);
