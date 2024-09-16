@@ -369,5 +369,5 @@ describe('Test the Social Messages', () => {
         expect(suggestions).toBeDefined();
         expect(suggestions.messageSearchSuggestions).toBeDefined();
         expect(suggestions.messageSearchSuggestions.length).toBeGreaterThanOrEqual(0);
-    });
+    }, 5000);
 });
