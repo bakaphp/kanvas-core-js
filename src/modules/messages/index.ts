@@ -55,7 +55,7 @@ export class Messages {
 
       this.axiosClient.interceptors.request.use(
         this.options.authAxiosMiddleware,
-        function(error: any) {
+        function (error: any) {
           return Promise.reject(error);
         }
       );
@@ -319,13 +319,14 @@ export class Messages {
     const response = await this.axiosClient.post('', formData, { headers });
     return response.data.data;
   }
+
   public async getMessageSearchSuggestions(
     search: string
   ): Promise<MessageSearchSuggestions> {
     const response = await this.client.query({
       query: GET_MESSAGE_SEARCH_SUGGESTIONS_QUERY,
       variables: {
-        search,
+        search: search,
       },
     });
 
