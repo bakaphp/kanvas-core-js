@@ -117,6 +117,14 @@ export const GET_PRODUCTS = gql`
           description
           slug
           weight
+          products_attributes {
+            id
+            name
+            values {
+              id
+              value
+            }
+          }
         }
         companies {
           id
