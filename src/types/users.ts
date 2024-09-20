@@ -98,13 +98,15 @@ export interface UserData {
   displayname: string;
   default_company: number;
   default_company_branch: number;
+  default_company_uuid: string;
+  default_company_branch_uuid: string;
   email: string;
   mainRole: string;
   social: {
     total_message: number;
     total_followers: number;
     total_following: number;
-  }
+  };
   branches: {
     id: string;
     name: string;
