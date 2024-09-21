@@ -39,7 +39,7 @@ import {
 } from '../../types';
 
 export class Users {
-  constructor(protected client: ClientType) { }
+  constructor(protected client: ClientType) {}
 
   public async register(
     userData: UserInterface | CreateUserParams
@@ -71,7 +71,7 @@ export class Users {
     const response = await this.client.query({
       query: GET_USER_BY_DISPLAYNAME,
       variables: {
-        displayName
+        displayName,
       },
       fetchPolicy: 'no-cache',
     });
@@ -100,7 +100,9 @@ export class Users {
     withSocial: boolean = false
   ): Promise<UserData> {
     const response = await this.client.mutate({
-      mutation: !withSocial ? UPDATE_USER_MUTATION : UPDATE_USER_SOCIAL_MUTATION,
+      mutation: !withSocial
+        ? UPDATE_USER_MUTATION
+        : UPDATE_USER_SOCIAL_MUTATION,
       variables: {
         id,
         data: updatedUser,
@@ -169,8 +171,10 @@ export class Users {
         first,
         page,
         orderBy: sort,
-        where
+        where,
       },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
 
     return page ? response.data.usersInvites : response.data.usersInvites.data;
@@ -191,6 +195,8 @@ export class Users {
     const response = await this.client.query({
       query: GET_USERS_INVITES_BY_ROLE_ID_QUERY,
       variables: { where, first, orderBy },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
     });
 
     return response.data.usersInvites.data;
@@ -210,6 +216,7 @@ export class Users {
     const response = await this.client.mutate({
       mutation: DELETE_INVITE_MUTATION,
       variables: { id },
+      fetchPolicy: 'network-only'
     });
 
     return response.data;
@@ -234,9 +241,7 @@ export class Users {
     return this.socialLogin(input);
   }
 
-  public async socialLogin(
-    input: SocialLoginParams
-  ): Promise<SocialLoginData> {
+  public async socialLogin(input: SocialLoginParams): Promise<SocialLoginData> {
     const response = await this.client.mutate({
       mutation: SOCIAL_LOGIN_MUTATTION,
       variables: { input },
@@ -250,5 +255,4 @@ export class Users {
     });
     return response.data;
   }
-
 }
