@@ -67,10 +67,7 @@ describe('Test filesystem create and update mapper', () => {
         country: 'country',
         dob: 'dob',
       },
-      configuration: {
-        delimiter: ',',
-        has_header: true,
-      },
+      configuration: "Configuration",
     };
     const filesytem = await filesystemMapper.createFilesystemMapper(input);
     expect(filesytem).toBeDefined();
