@@ -1,6 +1,8 @@
 import {
   CREATE_FILESYSTEM_MAPPER_MUTATION,
   FILESYSTEM_IMPORT_MUTATION,
+  UPDATE_FILESYSTEM_MAPPER_MUTATION,
+  DELETE_FILESYSTEM_MAPPER_MUTATION,
 } from '../../../mutations';
 
 import {
@@ -8,6 +10,7 @@ import {
   FILESYSTEM_MAPPER_INPUT,
   FILESYSTEM_IMPORT_INPUT,
   FILESYSTEM_IMPORT,
+  UPDATE_FILESYSTEM_MAPPER_INPUT,
   WhereCondition,
 } from '../../../types';
 
@@ -27,6 +30,30 @@ export class FilesystemMapper {
     });
 
     return data.createFilesystemMapper;
+  }
+
+  public async updateFilesystemMapper(
+    input: UPDATE_FILESYSTEM_MAPPER_INPUT
+  ): Promise<FILESYSTEM_MAPPER> {
+    const { data } = await this.client.mutate({
+      mutation: UPDATE_FILESYSTEM_MAPPER_MUTATION,
+      variables: {
+        input,
+      },
+    });
+
+    return data.updateFilesystemMapper;
+  }
+
+  public async deleteFilesystemMapper(id: string): Promise<boolean> {
+    const { data } = await this.client.mutate({
+      mutation: DELETE_FILESYSTEM_MAPPER_MUTATION,
+      variables: {
+        id,
+      },
+    });
+
+    return data.deleteFilesystemMapper as boolean;
   }
 
   public async filesystemImport(

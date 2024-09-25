@@ -33,3 +33,50 @@ describe('Test filesystem mapper', () => {
         expect(uploadCSV.uploadCsv.header.length).toBeGreaterThan(0);
     });
 });
+
+describe('Test filesystem create and update mapper', () => {
+    it('create filesystem mapper', async () => {
+        const client = getClient();
+        const filesystemMapper = client.filesystemMapper;
+
+        const input = {
+            name: 'Test Mapper',
+            system_module_id: '1',
+            file_header: {
+                "List Number": "list_number",
+                "First Name": "first_name",
+                "Last Name": "last_name",
+                "Email": "email",
+                "Phone": "phone",
+                "Address": "address",
+                "City": "city",
+                "State": "state",
+                "Zip": "zip",
+                "Country": "country",
+                "Date of Birth": "dob",
+            },
+            mapping: {
+                "list_number": "list_number",
+                "first_name": "first_name",
+                "last_name": "last_name",
+                "email": "email",
+                "phone": "phone",
+                "address": "address",
+                "city": "city",
+                "state": "state",
+                "zip": "zip",
+                "country": "country",
+                "dob": "dob",
+            },
+            configuration: {
+                "delimiter": ",",
+                "has_header": true,
+            }
+        };
+        const filesytem = await filesystemMapper.createFilesystemMapper(input);
+        expect(filesytem).toBeDefined();
+        expect(filesytem.name).toBe(input.name);
+        expect(filesytem.file_header).toEqual(input.file_header);
+        expect(filesytem.mapping).toEqual(input.mapping);
+    });
+});

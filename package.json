@@ -1,5 +1,5 @@
 {
-  "version": "0.10.4",
+  "version": "0.10.5",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -69,5 +69,6 @@
     "form-data": "^4.0.0",
     "graphql": "^16.6.0",
     "typescript-transform-paths": "^3.4.6"
-  }
+  },
+  "packageManager": "yarn@4.5.0+sha512.837566d24eec14ec0f5f1411adb544e892b3454255e61fdef8fd05f3429480102806bac7446bc9daff3896b01ae4b62d00096c7e989f1596f2af10b927532f39"
 }
