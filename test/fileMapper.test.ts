@@ -38,10 +38,10 @@ describe('Test filesystem create and update mapper', () => {
     it('create filesystem mapper', async () => {
         const client = getClient();
         const filesystemMapper = client.filesystemMapper;
-
+        const systemModules = client.systemModules.getSystemModules();
         const input = {
             name: 'Test Mapper',
-            system_module_id: '1',
+            system_module_id: systemModules[0].id,
             file_header: {
                 "List Number": "list_number",
                 "First Name": "first_name",
