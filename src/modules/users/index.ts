@@ -159,18 +159,17 @@ export class Users {
   }: {
     first: number;
     page?: number;
-    order?: 'DESC' | 'ASC';
+    order?: { column: string; order: string }[] | undefined;
     where?: WhereCondition;
   }) {
-    const sort = order
-      ? [{ column: 'ID', order: order }]
-      : [{ column: 'ID', order: 'DESC' }];
     const response = await this.client.query({
       query: GET_USERS_INVITES_QUERY,
       variables: {
         first,
         page,
-        orderBy: sort,
+        ...(order && {
+          orderBy: order,
+        }),
         where,
       },
       fetchPolicy: 'network-only',
@@ -216,7 +215,7 @@ export class Users {
     const response = await this.client.mutate({
       mutation: DELETE_INVITE_MUTATION,
       variables: { id },
-      fetchPolicy: 'network-only'
+      fetchPolicy: 'network-only',
     });
 
     return response.data;
