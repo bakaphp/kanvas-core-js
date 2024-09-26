@@ -24,7 +24,7 @@ export interface FILESYSTEM_MAPPER_INPUT {
   configuration: any;
 }
 
-export interface UPDATE_FILESYSTEM_MAPPER_INPUT {
+export interface UpdateFilesystemMapperInput{
   mapper_id: string;
   name: string;
   file_header: any;

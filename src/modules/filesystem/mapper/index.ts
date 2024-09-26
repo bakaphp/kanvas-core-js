@@ -10,7 +10,7 @@ import {
   FILESYSTEM_MAPPER_INPUT,
   FILESYSTEM_IMPORT_INPUT,
   FILESYSTEM_IMPORT,
-  UPDATE_FILESYSTEM_MAPPER_INPUT,
+  UpdateFilesystemMapperInput,
   WhereCondition,
 } from '../../../types';
 
@@ -33,7 +33,7 @@ export class FilesystemMapper {
   }
 
   public async updateFilesystemMapper(
-    input: UPDATE_FILESYSTEM_MAPPER_INPUT
+    input: UpdateFilesystemMapperInput
   ): Promise<FILESYSTEM_MAPPER> {
     const { data } = await this.client.mutate({
       mutation: UPDATE_FILESYSTEM_MAPPER_MUTATION,
