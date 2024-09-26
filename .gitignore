@@ -5,3 +5,4 @@ dist
 directory-test
 .env
 coverage
+.yarn
