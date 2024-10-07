@@ -106,6 +106,8 @@ export const GET_USER_SOCIAL_DATA_QUERY = gql`
       displayname
       default_company
       default_company_branch
+      default_company_branch_uuid
+      default_company_uuid
       email
       welcome
       mainRole
