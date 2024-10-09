@@ -24,6 +24,7 @@ import {
 import { ENTITY_FILES_QUERY } from '../../queries';
 import { ClientType } from './../../index';
 export { FilesystemMapper } from './mapper/index';
+export { Options };
 export class FileSystem {
   protected axiosClient: any;
   constructor(protected client: ClientType, protected options?: Options) {
