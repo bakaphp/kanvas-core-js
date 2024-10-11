@@ -50,7 +50,7 @@ export const FILESYSTEM_IMPORT_MUTATION = gql`
 `;
 
 export const UPDATE_FILESYSTEM_MAPPER_MUTATION = gql`
-  mutation updateFilesystemMapper($input: FilesystemMapperInput!) {
+  mutation updateFilesystemMapper($input: UpdateFilesystemImportInput!) {
     updateFilesystemMapper(input: $input) {
       id
       name
