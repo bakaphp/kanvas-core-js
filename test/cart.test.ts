@@ -9,7 +9,7 @@ describe('Test the Commerce', () => {
         const client = getClient();
         const cart = client.cart;
         const getCart = await cart.getCart();
-        console.log(getCart);
+
         expect(getCart).toBeDefined();
         expect(getCart.cart.id).toBeDefined();
         expect(getCart.cart.items).toBeInstanceOf(Array);
