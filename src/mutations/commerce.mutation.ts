@@ -22,3 +22,20 @@ export const CLEAR_CART_MUTATION = gql`
     clearCart
   }
 `;
+
+
+export const GET_CART_QUERY = gql`
+  query {
+    cart {
+      id
+      total
+      items {
+        id
+        name
+        price
+        quantity
+        attributes
+      }
+    }
+  }
+`;
