@@ -46,7 +46,7 @@ export const CREATE_COMPANY_MUTATION = gql`
 `;
 
 export const UPDATE_COMPANY_MUTATION = gql`
-  mutation updateCompany($id: ID!, $input: CompanyInput) {
+  mutation updateCompany($id: ID!, $input: UpdateCompanyInput!) {
     updateCompany(id: $id, input: $input) {
       id
       name

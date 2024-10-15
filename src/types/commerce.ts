@@ -16,6 +16,20 @@ export interface CartItemData {
   };
 }
 
+export interface CartData {
+  cart: {
+    id: number;
+    total: number;
+    items: {
+      id: number;
+      name: string;
+      price: number;
+      quantity: number;
+      attributes: string;
+    }[];
+  };
+}
+
 export interface OrderItemInput {
   input: {
     cartId: 'default';
