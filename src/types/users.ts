@@ -19,7 +19,7 @@ export interface UserInterface {
   email: string;
   contact_email: string;
   firstname: string;
-  description: string;
+  description?: string;
   interest: string;
   karma: string;
   language: string;
@@ -71,6 +71,11 @@ export interface UserInterface {
   manager_id?: string;
   user_activation_key: string;
   user_activation_forgot: boolean | null;
+  social: {
+    total_message: number;
+    total_followers: number;
+    total_following: number;
+  };
   // social_links: SocialLinkInterface[];
   custom_fields?: CustomFieldInput[];
 }

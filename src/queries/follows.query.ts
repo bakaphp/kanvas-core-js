@@ -15,6 +15,7 @@ export const GET_FOLLOWERS_QUERY = gql`
         firstname
         lastname
         displayname
+        description
         default_company
         default_company_branch
         email
@@ -31,6 +32,11 @@ export const GET_FOLLOWERS_QUERY = gql`
         contact {
           phone_number
           cell_phone_number
+        }
+        social {
+          total_message
+          total_followers
+          total_following
         }
         roles
         abilities
@@ -57,6 +63,7 @@ export const GET_FOLLOWING_QUERY = gql`
         firstname
         lastname
         displayname
+        description
         default_company
         default_company_branch
         email
@@ -73,6 +80,11 @@ export const GET_FOLLOWING_QUERY = gql`
         contact {
           phone_number
           cell_phone_number
+        }
+        social {
+          total_message
+          total_followers
+          total_following
         }
         roles
         abilities
@@ -104,6 +116,7 @@ export const GET_FOLLOWING_ENTITY_QUERY = gql`
           firstname
           lastname
           displayname
+          description
           default_company
           default_company_branch
           email
@@ -120,6 +133,11 @@ export const GET_FOLLOWING_ENTITY_QUERY = gql`
           contact {
             phone_number
             cell_phone_number
+          }
+          social {
+            total_message
+            total_followers
+            total_following
           }
           roles
           abilities
