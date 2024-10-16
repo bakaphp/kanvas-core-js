@@ -21,6 +21,7 @@ import {
   REQUEST_DELETED_ACCOUNT_MUTATION,
   UPDATE_DISPLAY_NAME_MUTATION,
   UPDATE_USER_SOCIAL_MUTATION,
+  SHARE_USER_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -270,7 +271,8 @@ export class Users {
 
   public async shareUserById(id: number): Promise<string> {
     const response = await this.client.mutate({
-      mutation: REQUEST_DELETED_ACCOUNT_MUTATION,
+      mutation: SHARE_USER_MUTATION,
+      variables: { id },
     });
     return response.data.shareUser;
   }

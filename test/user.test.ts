@@ -44,6 +44,8 @@ describe('Test the KanvasCore client', () => {
     const userById = await client.users.getUserById(userInfo.id);
     expect(userInfo).toBeDefined();
     expect(userInfo.id).toBeDefined();
+    expect(userById).toBeDefined();
+    expect(userById.id).toBeDefined();
   });
 
   it('gets user info social', async () => {
