@@ -7,6 +7,7 @@ import {
   GET_FOLLOWERS_QUERY,
   GET_FOLLOWING_QUERY,
   GET_TOTAL_FOLLOWERS_QUERY,
+  GET_FOLLOWING_ENTITY_QUERY,
 } from '../../queries/follows.query';
 
 import { UserInterface, FollowingInterface } from '../../types';
@@ -45,9 +46,17 @@ export class Follow {
     return response.data.getFollowers.data as UserInterface[];
   }
 
-  public async getFollowing(user_id: number|string): Promise<FollowingInterface[]> {
+  public async getFollowing(user_id: number|string): Promise<UserInterface[]> {
     const response = await this.client.query({
       query: GET_FOLLOWING_QUERY,
+      variables: { user_id: user_id },
+    });
+    return response.data.getFollowers.data as UserInterface[];
+  }
+
+  public async getFollowingEntity(user_id: number|string): Promise<FollowingInterface[]> {
+    const response = await this.client.query({
+      query: GET_FOLLOWING_ENTITY_QUERY,
       variables: { user_id: user_id },
     });
     return response.data.getFollowing.data as FollowingInterface[];
