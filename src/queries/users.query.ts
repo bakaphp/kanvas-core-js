@@ -48,6 +48,55 @@ export const GET_USER_BY_DISPLAYNAME = gql`
   }
 `;
 
+export const GET_USER_BY_ID = gql`
+  query getUserById(
+    $id: ID!
+  ) {
+   user(id: $id) {
+      id
+      uuid
+      firstname
+      lastname
+      displayname
+      description
+      default_company
+      default_company_branch
+      email
+      welcome
+      mainRole
+      branches {
+        id
+        name
+        phone
+      }
+      companies {
+        id
+        name
+        uuid
+      }
+      contact {
+        phone_number
+        cell_phone_number
+      }
+      roles
+      abilities
+      custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }]) {
+        data {
+          name
+          value
+        }
+      }
+      photo {
+        url
+      }
+      social {
+        total_followers
+        total_following
+      }
+    }
+  }
+`;
+
 export const GET_USER_DATA_QUERY = gql`
   query {
     me {

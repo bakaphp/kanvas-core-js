@@ -96,6 +96,7 @@ export interface UserData {
   firstname: string;
   lastname: string;
   displayname: string;
+  description?: string;
   default_company: number;
   default_company_branch: number;
   default_company_uuid: string;
@@ -203,4 +204,4 @@ export interface SocialLoginParams {
   provider: string;
 }
 
-export interface SocialLoginData extends InviteProcessData {}
+export interface SocialLoginData extends InviteProcessData { }

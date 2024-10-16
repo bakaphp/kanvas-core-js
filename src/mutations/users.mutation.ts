@@ -75,10 +75,13 @@ export const UPDATE_USER_SOCIAL_MUTATION = gql`
       firstname
       lastname
       displayname
+      description
       default_company
       default_company_branch
       social {
         total_message
+        total_followers
+        total_following
       }
       email
       branches {
@@ -183,5 +186,11 @@ export const SOCIAL_LOGIN_MUTATTION = gql`
 export const REQUEST_DELETED_ACCOUNT_MUTATION = gql`
   mutation requestDeleteAccount {
     requestDeleteAccount
+  }
+`;
+
+export const SHARE_USER_MUTATION = gql`
+  mutation shareUser($id: ID!) {
+    shareUser(id: $id)
   }
 `;
