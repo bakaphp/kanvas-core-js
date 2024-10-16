@@ -6,6 +6,7 @@ import {
   GET_USERS_INVITES_BY_ROLE_ID_QUERY,
   GET_USER_SOCIAL_DATA_QUERY,
   GET_USER_BY_DISPLAYNAME,
+  GET_USER_BY_ID,
 } from '../../queries';
 import {
   REGISTER_MUTATTION,
@@ -20,6 +21,7 @@ import {
   REQUEST_DELETED_ACCOUNT_MUTATION,
   UPDATE_DISPLAY_NAME_MUTATION,
   UPDATE_USER_SOCIAL_MUTATION,
+  SHARE_USER_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -39,7 +41,7 @@ import {
 } from '../../types';
 
 export class Users {
-  constructor(protected client: ClientType) {}
+  constructor(protected client: ClientType) { }
 
   public async register(
     userData: UserInterface | CreateUserParams
@@ -77,6 +79,18 @@ export class Users {
     });
 
     return response.data.userByDisplayName;
+  }
+
+  public async getUserById(id: number): Promise<UserData> {
+    const response = await this.client.query({
+      query: GET_USER_BY_ID,
+      variables: {
+        id,
+      },
+      fetchPolicy: 'no-cache',
+    });
+
+    return response.data.user;
   }
 
   public async getRoleIdByName(name: string): Promise<RoleData> {
@@ -253,5 +267,13 @@ export class Users {
       mutation: REQUEST_DELETED_ACCOUNT_MUTATION,
     });
     return response.data;
+  }
+
+  public async shareUserById(id: number): Promise<string> {
+    const response = await this.client.mutate({
+      mutation: SHARE_USER_MUTATION,
+      variables: { id },
+    });
+    return response.data.shareUser;
   }
 }

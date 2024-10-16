@@ -37,6 +37,17 @@ describe('Test the KanvasCore client', () => {
     expect(userInfo.id).toBeDefined();
   });
 
+  it('gets user info by id', async () => {
+    const client = getClient();
+    const userInfo = await client.users.getUserByDisplayName('test');
+
+    const userById = await client.users.getUserById(userInfo.id);
+    expect(userInfo).toBeDefined();
+    expect(userInfo.id).toBeDefined();
+    expect(userById).toBeDefined();
+    expect(userById.id).toBeDefined();
+  });
+
   it('gets user info social', async () => {
     const client = getClient();
     const userInfo = await client.users.getUserData(true);
@@ -85,5 +96,12 @@ describe('Test the KanvasCore client', () => {
     expect(userInfo).toBeDefined();
     expect(userInfo.id).toBeDefined();
     expect(userInfo.social.total_followers).toBeDefined();
+  });
+
+  it('share user profile', async () => {
+    const client = getClient();
+    const userInfo = await client.users.getUserData();
+    const sharedProfile = await client.users.shareUserById(userInfo.id);
+    expect(sharedProfile).toBeDefined();
   });
 });
