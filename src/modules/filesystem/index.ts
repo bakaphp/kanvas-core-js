@@ -155,40 +155,45 @@ export class FileSystem {
     if (!this.options || !this.axiosClient)
       throw new Error('FileSystem module not initialized');
     let query = `      
-    id
-    uuid
-    firstname
-    lastname
-    displayname
-    default_company
-    default_company_branch
-    email
-    mainRole
-    branches {
       id
-      name
-      phone
-    }
-    companies {
-      id
-      name
       uuid
-    }
-    contact {
-      phone_number
-      cell_phone_number
-    }
-    roles
-    abilities
-    custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }]) {
-      data {
+      firstname
+      lastname
+      displayname
+      description
+      default_company
+      default_company_branch
+      email
+      mainRole
+      branches {
+        id
         name
-        value
+        phone
       }
-    }
-    photo {
-      url
-    }`;
+      companies {
+        id
+        name
+        uuid
+      }
+      contact {
+        phone_number
+        cell_phone_number
+      }
+      social {
+        total_followers
+        total_following
+      }
+      roles
+      abilities
+      custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }]) {
+        data {
+          name
+          value
+        }
+      }
+      photo {
+        url
+      }`;
     const formData = new FormData();
     formData.append(
       'operations',
