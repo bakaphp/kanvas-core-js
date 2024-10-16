@@ -91,8 +91,8 @@ export const GET_FOLLOWING_QUERY = gql`
 `;
 
 export const GET_FOLLOWING_ENTITY_QUERY = gql`
-  query getFollowing($user_id: ID!) {
-    getFollowing(user_id: $user_id) {
+  query getFollowingEntity($user_id: ID!) {
+    getFollowingEntity(user_id: $user_id) {
       data {
         id
         users_id

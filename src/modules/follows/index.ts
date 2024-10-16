@@ -51,7 +51,7 @@ export class Follow {
       query: GET_FOLLOWING_QUERY,
       variables: { user_id: user_id },
     });
-    return response.data.getFollowers.data as UserInterface[];
+    return response.data.getFollowing.data as UserInterface[];
   }
 
   public async getFollowingEntity(user_id: number|string): Promise<FollowingInterface[]> {
@@ -59,7 +59,7 @@ export class Follow {
       query: GET_FOLLOWING_ENTITY_QUERY,
       variables: { user_id: user_id },
     });
-    return response.data.getFollowing.data as FollowingInterface[];
+    return response.data.getFollowingEntity.data as FollowingInterface[];
   }
 
   public async getTotalFollowers(user_id: number|string): Promise<number> {
