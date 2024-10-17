@@ -19,10 +19,15 @@ export interface AppUserInterface {
   user_active: boolean;
   roles: string[];
   address: AddressInterface;
-  contact: ContantInterface;
+  contact: ContactInterface;
   is_active: boolean;
   companies: CompanyInterface[];
   branches: BranchInterface[];
+  social: {
+    total_message: number;
+    total_followers: number;
+    total_following: number;
+  };
   created_at: string;
   updated_at: string;
 }
@@ -52,7 +57,7 @@ export interface AddressInterface {
   } | null;
 }
 
-interface ContantInterface {
+interface ContactInterface {
   phone_number: string | null;
   cell_phone_number: string | null;
 }

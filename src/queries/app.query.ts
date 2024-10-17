@@ -22,6 +22,7 @@ export const GET_APP_USERS = gql`
         displayname
         lastname
         firstname
+        description
         default_company
         default_company_branch
         sex
@@ -73,6 +74,11 @@ export const GET_APP_USERS = gql`
           id
           name
           companies_id
+        }
+        social {
+          total_message
+          total_followers
+          total_following
         }
         created_at
         updated_at
