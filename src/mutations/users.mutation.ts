@@ -82,6 +82,7 @@ export const UPDATE_USER_SOCIAL_MUTATION = gql`
         total_message
         total_followers
         total_following
+        is_following
       }
       email
       branches {

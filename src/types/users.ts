@@ -76,6 +76,7 @@ export interface UserInterface {
     total_message: number;
     total_followers: number;
     total_following: number;
+    is_following: number;
   };
   // social_links: SocialLinkInterface[];
   custom_fields?: CustomFieldInput[];
@@ -113,6 +114,7 @@ export interface UserData {
     total_message: number;
     total_followers: number;
     total_following: number;
+    is_following: number;
   };
   branches: {
     id: string;
