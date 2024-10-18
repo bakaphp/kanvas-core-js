@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { CustomFieldData, CustomFieldInput } from './custom-fields';
+import { PaginatorInfo } from './paginator';
 
 export interface UserInterface {
   id: number;
@@ -210,3 +211,10 @@ export interface SocialLoginParams {
 }
 
 export interface SocialLoginData extends InviteProcessData { }
+
+export interface AllBlockedUsersInterface {
+  blockedUsers: {
+    data: UserInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
+}

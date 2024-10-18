@@ -7,6 +7,7 @@ import {
   GET_USER_SOCIAL_DATA_QUERY,
   GET_USER_BY_DISPLAYNAME,
   GET_USER_BY_ID,
+  GET_BLOCKED_USERS,
 } from '../../queries';
 import {
   REGISTER_MUTATTION,
@@ -22,6 +23,8 @@ import {
   UPDATE_DISPLAY_NAME_MUTATION,
   UPDATE_USER_SOCIAL_MUTATION,
   SHARE_USER_MUTATION,
+  BLOCK_USER_MUTATION,
+  UNBLOCK_USER_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -38,6 +41,8 @@ import {
   InviteData,
   SocialLoginData,
   SocialLoginParams,
+  OrderBy,
+  AllBlockedUsersInterface,
 } from '../../types';
 
 export class Users {
@@ -215,6 +220,36 @@ export class Users {
     return response.data.usersInvites.data;
   }
 
+  public async getBlockedUsers(
+    options: {
+      first?: number;
+      page?: number;
+      whereCondition?: WhereCondition;
+      orderByCondition?: OrderBy[];
+    } = {}
+  ): Promise<AllBlockedUsersInterface> {
+    const {
+      first,
+      page,
+      whereCondition,
+      orderByCondition,
+    } = options;
+
+    const response = await this.client.query({
+      query: GET_BLOCKED_USERS,
+      variables: {
+        first,
+        page,
+        whereCondition,
+        orderByCondition
+      },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
+    });
+
+    return response.data;
+  }
+
   public async processInvite(
     input: InviteProcessParams
   ): Promise<InviteProcessData> {
@@ -275,5 +310,21 @@ export class Users {
       variables: { id },
     });
     return response.data.shareUser;
+  }
+
+  public async blockUser(id: number | string): Promise<boolean> {
+    const response = await this.client.mutate({
+      mutation: BLOCK_USER_MUTATION,
+      variables: { id },
+    });
+    return response.data.blockUser;
+  }
+
+  public async unBlockUser(id: number | string): Promise<boolean> {
+    const response = await this.client.mutate({
+      mutation: UNBLOCK_USER_MUTATION,
+      variables: { id },
+    });
+    return response.data.unBlockUser;
   }
 }

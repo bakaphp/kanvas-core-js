@@ -30,7 +30,7 @@ describe('Test the KanvasCore client', () => {
 
   it('gets user info', async () => {
     const client = getClient();
-    
+
     //if you pass anything with been a app owner it will return your user
     const userInfo = await client.users.getUserByDisplayName('test');
     expect(userInfo).toBeDefined();
@@ -103,5 +103,30 @@ describe('Test the KanvasCore client', () => {
     const userInfo = await client.users.getUserData();
     const sharedProfile = await client.users.shareUserById(userInfo.id);
     expect(sharedProfile).toBeDefined();
+  });
+
+  it('test block user by id', async () => {
+    const client = getClient();
+    const userInfo = await client.users.getUserByDisplayName('test');
+
+    const blockedUser = await client.users.blockUser(userInfo.id);
+
+    expect(blockedUser).toBeDefined();
+  });
+
+  it('test unblock user by id', async () => {
+    const client = getClient();
+    const userInfo = await client.users.getUserByDisplayName('test');
+
+    const unblockedUser = await client.users.unBlockUser(userInfo.id);
+
+    expect(unblockedUser).toBeDefined();
+  });
+
+  it('test get blocked users', async () => {
+    const client = getClient();
+    const blockedUsers = await client.users.getBlockedUsers();
+
+    expect(blockedUsers.blockedUsers.data).toBeDefined();
   });
 });

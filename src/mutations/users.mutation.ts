@@ -194,3 +194,15 @@ export const SHARE_USER_MUTATION = gql`
     shareUser(id: $id)
   }
 `;
+
+export const BLOCK_USER_MUTATION = gql`
+  mutation blockUser($id: ID!) {
+    blockUser(id: $id)
+  }
+`;
+
+export const UNBLOCK_USER_MUTATION = gql`
+  mutation unBlockUser($id: ID!) {
+    unBlockUser(id: $id)
+  }
+`;
