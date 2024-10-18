@@ -252,3 +252,61 @@ export const GET_USERS_INVITES_BY_ROLE_ID_QUERY = gql`
     }
   }
 `;
+
+
+export const GET_BLOCKED_USERS = gql`
+  query getBlockedUsers(
+    $first: Int
+    $page: Int
+    $whereCondition: QueryBlockedUsersWhereWhereConditions
+    $orderBy: [QueryBlockedUsersOrderByOrderByClause!]
+  ) {
+    blockedUsers(
+      first: $first
+      page: $page
+      where: $whereCondition
+      orderBy: $orderBy
+    ) {
+      data {
+        id
+        uuid
+        email
+        displayname
+        lastname
+        firstname
+        description
+        default_company
+        default_company_branch
+        sex
+        user_active
+        roles
+        is_active
+        contact {
+          phone_number
+          cell_phone_number
+        }
+        photo {
+          url
+        }
+        social {
+          total_message
+          total_followers
+          total_following
+          is_following
+        }
+        created_at
+        updated_at
+      }
+      paginatorInfo {
+        currentPage
+        perPage
+        firstItem
+        lastItem
+        total
+        count
+        lastPage
+        hasMorePages
+      }
+    }
+  }
+`;

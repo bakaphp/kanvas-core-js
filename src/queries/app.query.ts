@@ -79,6 +79,7 @@ export const GET_APP_USERS = gql`
           total_message
           total_followers
           total_following
+          is_following
         }
         created_at
         updated_at

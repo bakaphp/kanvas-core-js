@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { CustomFieldData, CustomFieldInput } from './custom-fields';
+import { PaginatorInfo } from './paginator';
 
 export interface UserInterface {
   id: number;
@@ -75,6 +76,7 @@ export interface UserInterface {
     total_message: number;
     total_followers: number;
     total_following: number;
+    is_following: number;
   };
   // social_links: SocialLinkInterface[];
   custom_fields?: CustomFieldInput[];
@@ -112,6 +114,7 @@ export interface UserData {
     total_message: number;
     total_followers: number;
     total_following: number;
+    is_following: number;
   };
   branches: {
     id: string;
@@ -210,3 +213,10 @@ export interface SocialLoginParams {
 }
 
 export interface SocialLoginData extends InviteProcessData { }
+
+export interface AllBlockedUsersInterface {
+  blockedUsers: {
+    data: UserInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
+}

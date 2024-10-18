@@ -82,6 +82,7 @@ export const UPDATE_USER_SOCIAL_MUTATION = gql`
         total_message
         total_followers
         total_following
+        is_following
       }
       email
       branches {
@@ -192,5 +193,17 @@ export const REQUEST_DELETED_ACCOUNT_MUTATION = gql`
 export const SHARE_USER_MUTATION = gql`
   mutation shareUser($id: ID!) {
     shareUser(id: $id)
+  }
+`;
+
+export const BLOCK_USER_MUTATION = gql`
+  mutation blockUser($id: ID!) {
+    blockUser(id: $id)
+  }
+`;
+
+export const UNBLOCK_USER_MUTATION = gql`
+  mutation unBlockUser($id: ID!) {
+    unBlockUser(id: $id)
   }
 `;
