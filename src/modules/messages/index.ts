@@ -13,6 +13,7 @@ import {
   AllMessagesGroupByDate,
   MessageUploadFiles,
   MessageSearchSuggestions,
+  AllLikedMessagesByUser,
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
@@ -32,6 +33,7 @@ import {
   GET_MESSAGE_SEARCH_SUGGESTIONS_QUERY,
   GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG,
   GET_MESSAGES_GROUP_BY_DATE_QUERY,
+  GET_MESSAGES_LIKED_BY_USER,
   GET_MESSAGES_QUERY,
 } from '../../queries';
 
@@ -188,6 +190,33 @@ export class Messages {
       variables: { displayname: displayname, slug: slug },
     });
     return response.data.messages as MessagesInterface;
+  }
+
+
+  public async getMessagesLikedByUser(
+    userId: number,
+    options: {
+      where?: WhereCondition;
+      orderBy?: Array<OrderByMessage>;
+      first?: number;
+      page?: number;
+    } = {}
+  ): Promise<AllLikedMessagesByUser> {
+    const { where, orderBy, first, page } = options;
+
+    const response = await this.client.query({
+      query: GET_MESSAGES_LIKED_BY_USER,
+      variables: {
+        id: userId,
+        where,
+        orderBy,
+        first,
+        page,
+      },
+      fetchPolicy: 'no-cache',
+    });
+
+    return response.data;
   }
 
   public async attachTopicToMessage(

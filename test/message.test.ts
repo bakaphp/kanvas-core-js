@@ -213,6 +213,28 @@ describe('Test the Social Messages', () => {
         expect(likedMessage).toBeDefined();
     });
 
+    it('get liked messages', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const likedMessage = await messages.likeMessage(newMessage.id);
+        expect(likedMessage).toBeDefined();
+
+        const likedMessages = await messages.getMessagesLikedByUser(newMessage.user.id);
+        expect(likedMessages).toBeDefined();
+        expect(likedMessages.messagesLikedByUser.data).toBeDefined();
+        expect(likedMessages.messagesLikedByUser.data.length).toBeGreaterThan(0);
+    });
+
     it('dislike a message', async () => {
         const client = getClient();
         const messages = client.messages;

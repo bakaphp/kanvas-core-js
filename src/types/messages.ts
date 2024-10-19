@@ -42,6 +42,12 @@ export interface AllMessages {
     paginatorInfo?: PaginatorInfo;
   };
 }
+export interface AllLikedMessagesByUser {
+  messagesLikedByUser: {
+    data: MessagesInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
+}
 export interface AllMessagesGroupByDate {
   messagesGroupByDate: {
     data: MessagesInterface[];
