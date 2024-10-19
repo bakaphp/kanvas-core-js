@@ -174,26 +174,26 @@ describe('Test the Social Messages', () => {
     });
 
     it('search by message', async () => {
-        /*  const client = getClient();
- 
-         const messages = client.messages;
-         const messageContent = 'Hello, Kanvas!';
-         const newMessage = await messages.createMessage({
-             message_verb: 'post2',
-             message: messageContent,
-         });
- 
-         expect(newMessage).toBeDefined();
-         expect(newMessage.id).toBeDefined();
-         expect(newMessage.message).toBe(messageContent);
- 
-         const recentMessages = await messages.getMessages({
-             search: 'Kanvas'
-         });
-         console.log(recentMessages);
-         expect(recentMessages).toBeDefined();
-         expect(recentMessages.messages.data).toBeDefined();
-         expect(recentMessages.messages.data.length).toBeGreaterThanOrEqual(0); */
+        const client = getClient();
+
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post2',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const recentMessages = await messages.getMessages({
+            search: 'Kanvas'
+        });
+        console.log(recentMessages);
+        expect(recentMessages).toBeDefined();
+        expect(recentMessages.messages.data).toBeDefined();
+        expect(recentMessages.messages.data.length).toBeGreaterThanOrEqual(0);
     });
 
     it('like a message', async () => {
