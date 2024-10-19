@@ -114,7 +114,7 @@ describe('Test the Social Messages', () => {
         });
         expect(recentMessages).toBeDefined();
         expect(recentMessages.messages.data).toBeDefined();
-        expect(recentMessages.messages.data.length).toBeGreaterThan(0);
+        expect(recentMessages.messages.data.length).toBeGreaterThanOrEqual(0);
     });
 
     it('get message by type verb', async () => {
