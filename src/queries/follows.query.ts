@@ -38,6 +38,7 @@ export const GET_FOLLOWERS_QUERY = gql`
           total_followers
           total_following
           is_following
+          is_blocked
         }
         roles
         abilities
@@ -87,6 +88,7 @@ export const GET_FOLLOWING_QUERY = gql`
           total_followers
           total_following
           is_following
+          is_blocked
         }
         roles
         abilities

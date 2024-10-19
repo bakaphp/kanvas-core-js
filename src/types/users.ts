@@ -76,7 +76,8 @@ export interface UserInterface {
     total_message: number;
     total_followers: number;
     total_following: number;
-    is_following: number;
+    is_following: boolean;
+    is_blocked: boolean;
   };
   // social_links: SocialLinkInterface[];
   custom_fields?: CustomFieldInput[];

@@ -83,6 +83,7 @@ export const UPDATE_USER_SOCIAL_MUTATION = gql`
         total_followers
         total_following
         is_following
+        is_blocked
       }
       email
       branches {
