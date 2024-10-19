@@ -26,3 +26,4 @@ export * from './contact';
 export * from './message-comment';
 export * from './notification';
 export * from './mapper';
+export * from './events';

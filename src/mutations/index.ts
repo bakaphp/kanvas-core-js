@@ -23,3 +23,4 @@ export * from './settings.mutation';
 export * from './organization.mutation'
 export * from './tags.mutation';
 export * from './mapper.mutation';
+export * from './event.mutation';

@@ -37,6 +37,7 @@ import {
   Receiver,
   Contact,
   FilesystemMapper,
+  Event,
 } from './modules';
 
 import { setContext } from '@apollo/client/link/context';
@@ -128,6 +129,7 @@ export default class KanvasCore {
   public receiver: Receiver;
   public contact: Contact;
   public filesystemMapper: FilesystemMapper;
+  public event: Event;
 
   constructor(protected options: Options) {
     this.client = new ApolloClient({
@@ -166,6 +168,7 @@ export default class KanvasCore {
     this.receiver = new Receiver(this.options.url, this.options.key);
     this.contact = new Contact(this.client);
     this.filesystemMapper = new FilesystemMapper(this.client);
+    this.event = new Event(this.client);
   }
   protected generateURL() {
     return new HttpLink({ uri: this.options.url });

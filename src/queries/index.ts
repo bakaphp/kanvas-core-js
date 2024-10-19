@@ -23,3 +23,4 @@ export * from './channel.query';
 export * from './tags.query';
 export * from './contact.query';
 export * from './mapper.query';
+export * from './event.query';

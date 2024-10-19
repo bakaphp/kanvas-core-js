@@ -25,3 +25,4 @@ export * from './organization';
 export * from './tags';
 export * from './receiver';
 export * from './contact';
+export * from './event';
