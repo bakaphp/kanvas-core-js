@@ -293,6 +293,7 @@ export const GET_BLOCKED_USERS = gql`
           total_followers
           total_following
           is_following
+          is_blocked
         }
         created_at
         updated_at

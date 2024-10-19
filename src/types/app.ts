@@ -27,7 +27,8 @@ export interface AppUserInterface {
     total_message: number;
     total_followers: number;
     total_following: number;
-    is_following: number;
+    is_following: boolean;
+    is_blocked: boolean;
   };
   created_at: string;
   updated_at: string;
