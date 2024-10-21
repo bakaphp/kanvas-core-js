@@ -35,6 +35,10 @@ export const GET_MESSAGES_QUERY = gql`
           photo {
             url
           }
+          social {
+            is_blocked
+            is_following
+          }
         }
         appModuleMessage {
           entity_id
