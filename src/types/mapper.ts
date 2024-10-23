@@ -43,5 +43,5 @@ export interface FILESYSTEM_IMPORT {
   id: string;
   filesystemMapper: FILESYSTEM_MAPPER;
   filesystem: FILESYSTEM;
-  results: any;
+  results: Record<string, any>;
 }
