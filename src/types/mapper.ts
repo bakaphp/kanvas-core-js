@@ -36,6 +36,7 @@ export interface FILESYSTEM_IMPORT_INPUT {
   regions_id: string;
   filesystem_mapper_id: string;
   filesystem_id: string;
+  extra: any;
 }
 
 export interface FILESYSTEM_IMPORT {
