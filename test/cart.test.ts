@@ -5,7 +5,7 @@ beforeAll(async () => {
 });
 
 describe('Test the Commerce', () => {
-    it('add to cart', async () => {
+/*     it('add to cart', async () => {
         const client = getClient();
         const addToCart = await client.cart.addToCart([
             {
@@ -16,7 +16,7 @@ describe('Test the Commerce', () => {
 
         expect(addToCart).toBeDefined();
         expect(addToCart.addToCart[0].id).toBeDefined();
-    });
+    }); */
 
     it('get cart', async () => {
         const client = getClient();

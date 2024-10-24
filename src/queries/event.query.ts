@@ -33,14 +33,6 @@ export const EVENT_QUERY = gql`
             total_attendees
           }
         }
-        category {
-          id
-          name
-          slug
-          position
-          created_at
-          updated_at
-        }
         description
       }
       paginatorInfo {
@@ -56,17 +48,6 @@ export const EVENT_QUERY = gql`
 export const EVENT_TYPES_QUERY = gql`
   query EventCategories {
     eventTypes {
-      data {
-        id
-        name
-      }
-    }
-  }
-`;
-
-export const EVENT_CATEGORIES_QUERY = gql`
-  query EventCategories {
-    eventCategories {
       data {
         id
         name

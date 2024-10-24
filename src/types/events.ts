@@ -18,7 +18,6 @@ export interface EventInterface {
   description: string;
   type: EventTypeInterface;
   eventStatus: EventStatusInterface;
-  category: EventCategoryInterface;
   created_at?: string;
   updated_at?: string;
 }

@@ -1,5 +1,4 @@
 import {
-  EVENT_CATEGORIES_QUERY,
   EVENT_PARTICIPANTS_QUERY,
   EVENT_QUERY,
   EVENT_TYPES_QUERY,
@@ -14,7 +13,6 @@ import {
   GetEventResponse,
   OrderBy,
   EventTypeInterface,
-  EventCategoryInterface,
 } from '../../types';
 
 import { CREATE_EVENT_MUTATION } from '../../mutations';
@@ -56,15 +54,6 @@ export class Event {
       partialRefetch: true,
     });
     return response.data.eventTypes.data;
-  }
-
-  public async getEventCategories(): Promise<EventCategoryInterface[]> {
-    const response = await this.client.query({
-      query: EVENT_CATEGORIES_QUERY,
-      fetchPolicy: 'network-only',
-      partialRefetch: true,
-    });
-    return response.data.eventCategories.data;
   }
 
   public async getParticipantsByEventId(
