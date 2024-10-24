@@ -1,19 +1,15 @@
 export interface CartItemInput {
-  input: {
-    quantity: number;
-    variant_id: number;
-  }[];
+  quantity: number;
+  variant_id: number;
 }
 
 export interface CartItemData {
-  data: {
-    addToCart: {
-      id: number;
-      name: string;
-      price: number;
-      quantity: number;
-    }[];
-  };
+  addToCart: {
+    id: number;
+    name: string;
+    price: number;
+    quantity: number;
+  }[];
 }
 
 export interface CartData {
