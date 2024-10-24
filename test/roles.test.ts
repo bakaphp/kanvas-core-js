@@ -29,7 +29,7 @@ describe('Test the Roles', () => {
 
       await roles.deleteRole(newRole.id);
     } catch (error) {
-      if (error.message.includes('The name has already been taken')) {
+      if (error instanceof Error && error.message.includes('The name has already been taken')) {
         console.warn(`Skipping role creation: ${error.message}`);
         expect(true).toBe(true); // Consider the test passed if the role already exists
       } else {
@@ -41,9 +41,15 @@ describe('Test the Roles', () => {
   it('get roles', async () => {
     const client = getClient();
     const roles = client.roles;
-    const createdRoles = await roles.getRoles();
-    expect(createdRoles).toBeDefined();
-    expect(createdRoles.roles.data).toBeInstanceOf(Array);
+
+    try {
+      const createdRoles = await roles.getRoles();
+      expect(createdRoles).toBeDefined();
+      expect(createdRoles.roles.data).toBeInstanceOf(Array);
+    } catch (error) {
+      console.error(`Failed to get roles: ${(error as Error).message}`);
+      throw error; // Rethrow the error if something else goes wrong
+    }
   });
 
   it('update a role', async () => {
@@ -65,7 +71,7 @@ describe('Test the Roles', () => {
 
       await roles.deleteRole(updatedRole.id);
     } catch (error) {
-      if (error.message.includes('The name has already been taken')) {
+      if (error instanceof Error && error.message.includes('The name has already been taken')) {
         console.warn(`Skipping role update: ${error.message}`);
         expect(true).toBe(true); // Consider the test passed if the role already exists
       } else {
@@ -85,7 +91,7 @@ describe('Test the Roles', () => {
       const deletedRole = await roles.deleteRole(createdRole.id);
       expect(deletedRole.deleteRole).toBe(true);
     } catch (error) {
-      if (error.message.includes('The name has already been taken')) {
+      if (error instanceof Error && error.message.includes('The name has already been taken')) {
         console.warn(`Skipping role deletion: ${error.message}`);
         expect(true).toBe(true); // Consider the test passed if the role already exists
       } else {
