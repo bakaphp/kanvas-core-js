@@ -53,6 +53,7 @@ describe('Test the Social Messages', () => {
             page: 1
         }
         );
+        console.log(recentMessages);
         expect(recentMessages).toBeDefined();
         expect(recentMessages.messages.data).toBeDefined();
         expect(recentMessages.messages.data.length).toBeGreaterThan(0);
