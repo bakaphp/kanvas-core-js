@@ -190,7 +190,7 @@ describe('Test the Social Messages', () => {
         const recentMessages = await messages.getMessages({
             search: 'Kanvas'
         });
-        console.log(recentMessages);
+        //console.log(recentMessages);
         expect(recentMessages).toBeDefined();
         expect(recentMessages.messages.data).toBeDefined();
         expect(recentMessages.messages.data.length).toBeGreaterThanOrEqual(0);
