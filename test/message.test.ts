@@ -1,5 +1,5 @@
-// import { WhereCondition } from '../src';
-import { initializeClient, } from './setupClient';
+import { WhereCondition } from '../src';
+import { getClient, initializeClient, } from './setupClient';
 
 beforeAll(async () => {
     await initializeClient();
