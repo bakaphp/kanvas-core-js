@@ -42,6 +42,7 @@ export class Follow {
     const response = await this.client.query({
       query: GET_FOLLOWERS_QUERY,
       variables: { user_id },
+      fetchPolicy: 'no-cache',
     });
     return response.data.getFollowers.data;
   }
@@ -50,6 +51,7 @@ export class Follow {
     const response = await this.client.query({
       query: GET_FOLLOWING_QUERY,
       variables: { user_id: user_id },
+      fetchPolicy: 'no-cache',
     });
     return response.data.getFollowing.data;
   }
