@@ -20,20 +20,12 @@ export const EVENT_QUERY = gql`
         versions {
           data {
             id
-            name
-            agenda
-            description
-            slug
             dates {
-              id
               date
-              start_time
-              end_time
             }
             total_attendees
           }
         }
-        description
       }
       paginatorInfo {
         total
