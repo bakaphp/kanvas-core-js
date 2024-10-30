@@ -43,6 +43,7 @@ export const GET_USER_BY_DISPLAYNAME = gql`
       social {
         total_followers
         total_following
+        total_blocked
       }
     }
   }
@@ -92,6 +93,7 @@ export const GET_USER_BY_ID = gql`
       social {
         total_followers
         total_following
+        total_blocked
       }
     }
   }
@@ -140,6 +142,7 @@ export const GET_USER_DATA_QUERY = gql`
       social {
         total_followers
         total_following
+        total_blocked
       }
     }
   }
@@ -294,6 +297,7 @@ export const GET_BLOCKED_USERS = gql`
           total_following
           is_following
           is_blocked
+          total_blocked
         }
         created_at
         updated_at
