@@ -168,6 +168,7 @@ export const GET_USER_SOCIAL_DATA_QUERY = gql`
         total_message
         total_followers
         total_following
+        total_blocked
       }
       branches {
         id
