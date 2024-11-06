@@ -14,6 +14,7 @@ import {
   MessageUploadFiles,
   MessageSearchSuggestions,
   AllLikedMessagesByUser,
+  AllForYouMessages,
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
@@ -30,6 +31,7 @@ import {
 } from '../../mutations';
 
 import {
+  GET_FOR_YOU_MESSAGES_QUERY,
   GET_MESSAGE_SEARCH_SUGGESTIONS_QUERY,
   GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG,
   GET_MESSAGES_GROUP_BY_DATE_QUERY,
@@ -136,6 +138,42 @@ export class Messages {
       variables: {
         where,
         hasAppModuleMessageWhere,
+        hasTags,
+        hasType,
+        orderBy,
+        search,
+        first,
+        page,
+      },
+      fetchPolicy: 'no-cache',
+    });
+    return response.data;
+  }
+
+  public async getForYouMessages(
+    options: {
+      where?: WhereCondition;
+      orderBy?: Array<OrderByMessage>;
+      search?: string;
+      first?: number;
+      page?: number;
+      hasTags?: WhereCondition;
+      hasType?: WhereCondition;
+    } = {}
+  ): Promise<AllForYouMessages> {
+    const {
+      search,
+      hasTags,
+      hasType,
+      where,
+      orderBy,
+      first,
+      page,
+    } = options;
+    const response = await this.client.query({
+      query: GET_FOR_YOU_MESSAGES_QUERY,
+      variables: {
+        where,
         hasTags,
         hasType,
         orderBy,

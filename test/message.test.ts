@@ -324,6 +324,19 @@ describe('Test the Social Messages', () => {
         expect(recentMessages.messagesGroupByDate.data.length).toBeGreaterThan(0);
     });
 
+    it('get message for you' , async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const recentMessages = await messages.getForYouMessages({
+            orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
+            first: 25,
+            page: 1
+        });
+        expect(recentMessages).toBeDefined();
+        expect(recentMessages.forYouMessages.data).toBeDefined();
+        expect(recentMessages.forYouMessages.data.length).toBeGreaterThan(0);
+    });
+
     it('delete message', async () => {
         const client = getClient();
         const messages = client.messages;
