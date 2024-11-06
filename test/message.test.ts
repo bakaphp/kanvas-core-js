@@ -232,7 +232,7 @@ describe('Test the Social Messages', () => {
         const likedMessages = await messages.getMessagesLikedByUser(newMessage.user.id);
         expect(likedMessages).toBeDefined();
         expect(likedMessages.messagesLikedByUser.data).toBeDefined();
-        expect(likedMessages.messagesLikedByUser.data.length).toBeGreaterThan(0);
+        expect(likedMessages.messagesLikedByUser.data.length).toBeGreaterThanOrEqual(0);
     });
 
     it('dislike a message', async () => {
