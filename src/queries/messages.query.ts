@@ -82,6 +82,84 @@ export const GET_MESSAGES_QUERY = gql`
   }
 `;
 
+export const GET_FOR_YOU_MESSAGES_QUERY = gql`
+  query forYouMessages(
+    $where: QueryForYouMessagesWhereWhereConditions
+    $hasTags: QueryForYouMessagesHasTagsWhereHasConditions
+    $hasType: QueryForYouMessagesHasTypeWhereHasConditions
+    $orderBy: [QueryForYouMessagesOrderByOrderByClause!]
+    $first: Int! = 25
+    $page: Int
+  ) {
+    forYouMessages(
+      where: $where
+      hasTags: $hasTags
+      hasType: $hasType
+      orderBy: $orderBy
+      first: $first
+      page: $page
+    ) {
+      data {
+        id
+        uuid
+        message
+        parent_id
+        slug
+        user {
+          id
+          firstname
+          lastname
+          displayname
+          photo {
+            url
+          }
+          social {
+            is_blocked
+            is_following
+          }
+        }
+        appModuleMessage {
+          entity_id
+          system_modules
+        }
+        message_types_id
+        message
+        reactions_count
+        comment_count
+        total_liked
+        total_disliked
+        total_saved
+        total_shared
+        total_view
+        total_children
+        tags {
+          data {
+              id
+              name
+              slug
+          }
+        }
+        parent {
+          id
+          uuid
+        },
+        myInteraction {
+            is_liked
+            is_disliked
+            is_saved
+            is_shared
+            is_reported
+        }
+        created_at
+      }
+      paginatorInfo {
+        currentPage
+        lastPage
+      }
+    }
+  }
+`;
+
 export const GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG = gql`
   query getMessages(
     $slug: Mixed!

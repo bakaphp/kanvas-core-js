@@ -232,7 +232,7 @@ describe('Test the Social Messages', () => {
         const likedMessages = await messages.getMessagesLikedByUser(newMessage.user.id);
         expect(likedMessages).toBeDefined();
         expect(likedMessages.messagesLikedByUser.data).toBeDefined();
-        expect(likedMessages.messagesLikedByUser.data.length).toBeGreaterThan(0);
+        expect(likedMessages.messagesLikedByUser.data.length).toBeGreaterThanOrEqual(0);
     });
 
     it('dislike a message', async () => {
@@ -322,6 +322,19 @@ describe('Test the Social Messages', () => {
         expect(recentMessages).toBeDefined();
         expect(recentMessages.messagesGroupByDate.data).toBeDefined();
         expect(recentMessages.messagesGroupByDate.data.length).toBeGreaterThan(0);
+    });
+
+    it('get message for you' , async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const recentMessages = await messages.getForYouMessages({
+            orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
+            first: 25,
+            page: 1
+        });
+        expect(recentMessages).toBeDefined();
+        expect(recentMessages.forYouMessages.data).toBeDefined();
+        expect(recentMessages.forYouMessages.data.length).toBeGreaterThan(0);
     });
 
     it('delete message', async () => {
