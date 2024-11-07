@@ -1,6 +1,13 @@
 import { ClientType } from '../../../index';
-import { CREATE_ORDER_MUTATION } from '../../../mutations';
-import { OrderItemData, OrderItemInput } from '../../../types/commerce';
+import {
+  CREATE_ORDER_MUTATION,
+  GENERATE_ORDER_PAYMENT_INTENT_MUTATION,
+} from '../../../mutations';
+import {
+  OrderItemData,
+  OrderItemInput,
+  GeneratePaymentIntentResult,
+} from '../../../types/commerce';
 
 export class Order {
   constructor(protected client: ClientType) {}
@@ -12,5 +19,16 @@ export class Order {
     });
 
     return response.data;
+  }
+
+  public async generatePaymentIntent(
+    id: string
+  ): Promise<GeneratePaymentIntentResult> {
+    const response = await this.client.mutate({
+      mutation: GENERATE_ORDER_PAYMENT_INTENT_MUTATION,
+      variables: { id },
+    });
+
+    return response.data as GeneratePaymentIntentResult;
   }
 }

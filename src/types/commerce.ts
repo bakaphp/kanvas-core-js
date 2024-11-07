@@ -50,3 +50,9 @@ export interface OrderItemData {
     };
   };
 }
+
+export interface GeneratePaymentIntentResult {
+  client_secret: string;
+  status?: string;
+  message?: any;
+}
