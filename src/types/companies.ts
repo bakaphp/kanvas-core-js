@@ -23,6 +23,14 @@ export interface CompanyInterface {
   photo?: {
     url: string;
   };
+  address_2?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  zip?: string;
+  countries: Countries;
+  states: State;
+  cities: City;
 }
 
 export interface CompanyGroup {
@@ -35,6 +43,24 @@ export interface CompanyGroup {
   country_code?: string;
   created_at?: string;
   updated_at?: string;
+}
+
+export interface State {
+  id: string;
+  name: string;
+  code: string;
+}
+export interface Countries {
+  id: string;
+  name: string;
+  code: string;
+  states: Array<State>;
+}
+
+export interface City {
+  id: string;
+  name: string;
+  state_id: string;
 }
 
 export interface CompanyInput {
@@ -50,6 +76,14 @@ export interface CompanyInput {
   files?: File[];
   is_active?: boolean;
   users_id: number;
+  countries_id?: string;
+  states_id?: string;
+  cities_id?: string;
+  address_2?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  zip?: string;
 }
 
 export interface QueryCompaniesWhereWhereConditions {
