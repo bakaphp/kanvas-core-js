@@ -30,12 +30,12 @@ export const CREATE_ORDER_FROM_CART = gql`
         total_gross_amount
         fulfillment_status
         items {
-            id
-            product_name
-            product_sku
-            quantity
-            unit_price_gross_amount
-            variant_name
+          id
+          product_name
+          product_sku
+          quantity
+          unit_price_gross_amount
+          variant_name
         }
       }
       message
@@ -45,7 +45,7 @@ export const CREATE_ORDER_FROM_CART = gql`
 
 export const GENERATE_ORDER_PAYMENT_INTENT_MUTATION = gql`
   mutation($id: ID!) {
-    generatePaymentIntent(id: $id) {
+    generateOrderPaymentIntent(id: $id) {
       client_secret
       status
       message
