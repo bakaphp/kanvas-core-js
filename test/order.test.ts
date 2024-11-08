@@ -4,14 +4,10 @@ beforeAll(async () => {
     await initializeClient();
 });
 
-
 describe('Test Commerce orders', () => {
-
     it('create order from cart', async () => {
         const client = getClient();
-
         const order = client.order;
-
         const result = await order.createOrderFromCart({
             input: {
                 cartId: 'default',
@@ -26,5 +22,4 @@ describe('Test Commerce orders', () => {
             error_message: "Cart is empty"
         });
     });
-
 });
