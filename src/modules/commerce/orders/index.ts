@@ -13,7 +13,7 @@ import {
 } from '../../../types/commerce';
 
 export class Order {
-  constructor(protected client: ClientType) { }
+  constructor(protected client: ClientType) {}
 
   public async createOrder(input: OrderItemInput): Promise<OrderItemData> {
     const response = await this.client.mutate({
@@ -29,7 +29,7 @@ export class Order {
   ): Promise<OrderFromCartResults> {
     const response = await this.client.mutate({
       mutation: CREATE_ORDER_FROM_CART,
-      variables: { ... input },
+      variables: { ...input },
     });
 
     return response.data;
@@ -43,6 +43,7 @@ export class Order {
       variables: { id },
     });
 
-    return response.data as GeneratePaymentIntentResult;
+    return response.data
+      .generateOrderPaymentIntent as GeneratePaymentIntentResult;
   }
 }
