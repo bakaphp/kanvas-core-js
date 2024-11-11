@@ -84,7 +84,7 @@ export interface MessageUpdateInputInterface {
   is_public?: number;
   is_deleted?: number;
 }
-s
+
 export interface DistributionInputInterface {
   distributionType: string;
   channels: Array<string>;
