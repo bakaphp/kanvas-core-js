@@ -81,8 +81,10 @@ export interface MessageInputInterface {
 
 export interface MessageUpdateInputInterface {
   message: string;
+  is_public?: number;
+  is_deleted?: number;
 }
-
+s
 export interface DistributionInputInterface {
   distributionType: string;
   channels: Array<string>;
