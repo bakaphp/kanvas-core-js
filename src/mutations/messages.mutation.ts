@@ -70,6 +70,12 @@ export const DELETE_MESSAGE_MUTATION = gql`
   }
 `;
 
+export const RESTORE_MESSAGE_MUTATION = gql`
+  mutation restoreMessage($id: ID!) {
+    restoreMessage(id: $id)
+  }
+`;
+
 export const DELETE_MULTIPLE_MESSAGE_MUTATION = gql`
   mutation deleteMultipleMessages($ids: [ID!]!) {
     deleteMultipleMessages(ids: $ids)

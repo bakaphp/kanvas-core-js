@@ -28,6 +28,7 @@ import {
   SHARE_MESSAGE_MUTATION,
   VIEW_MESSAGE_MUTATION,
   DISLIKE_MESSAGE_MUTATION,
+  RESTORE_MESSAGE_MUTATION,
 } from '../../mutations';
 
 import {
@@ -90,6 +91,14 @@ export class Messages {
   public async deleteMessage(id: string): Promise<Boolean> {
     await this.client.mutate({
       mutation: DELETE_MESSAGE_MUTATION,
+      variables: { id: id },
+    });
+    return true;
+  }
+
+  public async restoreMessage(id: string): Promise<Boolean> {
+    await this.client.mutate({
+      mutation: RESTORE_MESSAGE_MUTATION,
       variables: { id: id },
     });
     return true;
