@@ -81,6 +81,8 @@ export interface MessageInputInterface {
 
 export interface MessageUpdateInputInterface {
   message: string;
+  is_public?: number;
+  is_deleted?: number;
 }
 
 export interface DistributionInputInterface {
