@@ -7,6 +7,9 @@ export const CREATE_PEOPLE_MUTATION = gql`
       name
       firstname
       lastname
+      organizations {
+        name
+      }
       company {
         id
         name
@@ -45,6 +48,9 @@ export const UPDATE_PEOPLE_MUTATION = gql`
       name
       firstname
       lastname
+      organizations {
+        name
+      }
       company {
         id
         name
