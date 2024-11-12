@@ -16,7 +16,7 @@ export interface PeopleInputInterface {
   firstname: string;
   middlename?: string;
   lastname: string;
-  organization: string;
+  organization?: string;
   facebook_contact_id?: string;
   twitter_contact_id?: string;
   linkedin_contact_id?: string;
