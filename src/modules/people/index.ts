@@ -28,7 +28,7 @@ export class People {
   ): Promise<PeopleInterface> {
     const response = await this.client.mutate({
       mutation: CREATE_PEOPLE_MUTATION,
-      variables: { input: input },
+      variables: { input },
     });
     return response.data.createPeople as PeopleInterface;
   }
@@ -39,7 +39,7 @@ export class People {
   ): Promise<PeopleInterface> {
     const response = await this.client.mutate({
       mutation: UPDATE_PEOPLE_MUTATION,
-      variables: { id: id, input: input },
+      variables: { id, input },
     });
     return response.data.updatePeople as PeopleInterface;
   }
@@ -47,7 +47,7 @@ export class People {
   public async deletePeople(id: string): Promise<Boolean> {
     const response = await this.client.mutate({
       mutation: DELETE_PEOPLE_MUTATION,
-      variables: { id: id },
+      variables: { id },
     });
     return response.data.deletePeople as Boolean;
   }
@@ -55,7 +55,7 @@ export class People {
   public async restorePeople(id: string): Promise<Boolean> {
     const response = await this.client.mutate({
       mutation: RESTORE_PEOPLE_MUTATION,
-      variables: { id: id },
+      variables: { id },
     });
     return response.data.restorePeople as Boolean;
   }

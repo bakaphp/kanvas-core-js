@@ -16,6 +16,7 @@ export interface PeopleInputInterface {
   firstname: string;
   middlename?: string;
   lastname: string;
+  organization: string;
   facebook_contact_id?: string;
   twitter_contact_id?: string;
   linkedin_contact_id?: string;
@@ -49,6 +50,7 @@ export interface PeopleInterface {
   name: string;
   firstname: string;
   lastname: string;
+  organizations: OrganizationInterface[];
   company?: CompanyInterface;
   contacts: ContactInterface[];
   address?: AddressInterface[];

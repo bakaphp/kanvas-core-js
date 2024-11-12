@@ -29,6 +29,9 @@ export const PEOPLE_QUERY = gql`
         name
         firstname
         lastname
+        organizations {
+          name
+        }
         company {
           id
           name
