@@ -354,6 +354,25 @@ describe('Test the Social Messages', () => {
         expect(deleted).toBe(true);
     });
 
+    it('restore message', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const deleted = await messages.deleteMessage(newMessage.id);
+        const restore = await messages.restoreMessage(newMessage.id);
+        expect(deleted).toBe(true);
+        expect(restore).toBe(true);
+    });
+
     it('delete multiple messages', async () => {
         const client = getClient();
         const messages = client.messages;
