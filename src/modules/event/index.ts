@@ -13,6 +13,7 @@ import {
   GetEventResponse,
   OrderBy,
   EventTypeInterface,
+  getParticipantsByEventIdProps,
 } from '../../types';
 
 import { CREATE_EVENT_MUTATION } from '../../mutations';
@@ -56,14 +57,19 @@ export class Event {
     return response.data.eventTypes.data;
   }
 
-  public async getParticipantsByEventId(
-    eventId: string
-  ): Promise<GetParticipantsByEventId> {
+  public async getParticipantsByEventId({
+    eventId,
+    first,
+    page,
+  }: getParticipantsByEventIdProps): Promise<GetParticipantsByEventId> {
+    const where = {
+      column: 'EVENT_VERSION_ID',
+      operator: 'EQ',
+      value: eventId,
+    };
     const { data } = await this.client.query({
       query: EVENT_PARTICIPANTS_QUERY,
-      variables: {
-        where: { column: 'EVENT_VERSION_ID', operator: 'EQ', value: eventId },
-      },
+      variables: { where, first, page },
       fetchPolicy: 'network-only',
       partialRefetch: true,
     });

@@ -50,9 +50,11 @@ export const EVENT_TYPES_QUERY = gql`
 
 export const EVENT_PARTICIPANTS_QUERY = gql`
   query EventVersionParticipants(
+    $first: Int
+    $page: Int
     $where: QueryEventVersionParticipantsWhereWhereConditions
   ) {
-    eventVersionParticipants(where: $where) {
+    eventVersionParticipants(first: $first, page: $page, where: $where) {
       data {
         participant {
           id
