@@ -67,6 +67,12 @@ export type GetParticipantsByEventId = {
   paginatorInfo?: PaginatorInfo;
 }[];
 
+export type getParticipantsByEventIdProps = {
+  eventId?: number | undefined;
+  first?: number;
+  page?: number;
+}
+
 export interface EventCategoryInterface {
   id: string;
   name: string;
