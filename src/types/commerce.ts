@@ -92,6 +92,7 @@ export interface OrderCartInput {
       country: string;
       postal_code: string;
     };
+    metadata?: any;
   };
 }
 
