@@ -27,7 +27,7 @@ export interface OrderFromCartResults {
 }
 
 export interface OrderFromAppleInAppPurchaseResults {
-  createOrderFromAppleInAppPurchase: OrderResult;
+  createOrderFromAppleInAppPurchase: Order;
 }
 
 export interface OrderItem {

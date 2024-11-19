@@ -46,7 +46,6 @@ export const CREATE_ORDER_FROM_CART = gql`
 export const CREATE_ORDER_FROM_APPLE_IN_APP_PURCHASE = gql`
   mutation($input: AppleInAppPurchaseReceipt!) {
     createOrderFromAppleInAppPurchase(input: $input) {
-      order {
         id
         uuid
         user_email
@@ -64,8 +63,6 @@ export const CREATE_ORDER_FROM_APPLE_IN_APP_PURCHASE = gql`
           variant_name
         }
       }
-      message
-    }
   }
 `;
 
