@@ -35,6 +35,7 @@ describe('Test Commerce orders', () => {
             }
         });
 
-        expect(result.createOrderFromAppleInAppPurchase.order.id).toBeDefined();
+        expect(result.createOrderFromAppleInAppPurchase.id).toBeDefined();
+        expect(result.createOrderFromAppleInAppPurchase.uuid).toBeDefined();
     });
 });
