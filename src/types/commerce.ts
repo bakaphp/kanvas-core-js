@@ -26,6 +26,10 @@ export interface OrderFromCartResults {
   createOrderFromCart: OrderResult;
 }
 
+export interface OrderFromAppleInAppPurchaseResults {
+  createOrderFromAppleInAppPurchase: OrderResult;
+}
+
 export interface OrderItem {
   id: number;
   product_name: string;
@@ -38,6 +42,16 @@ export interface OrderItem {
 export interface CartItemInput {
   quantity: number;
   variant_id: number;
+}
+
+export interface AppleInAppPurchaseReceipt {
+  input: {
+    product_id: string;
+    transaction_id: string;
+    receipt: string;
+    transaction_date: string;
+    region_id?: number;
+  };
 }
 
 export interface CartItemData {
