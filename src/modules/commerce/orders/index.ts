@@ -43,7 +43,7 @@ export class Order {
   ): Promise<OrderFromAppleInAppPurchaseResults> {
     const response = await this.client.mutate({
       mutation: CREATE_ORDER_FROM_APPLE_IN_APP_PURCHASE,
-      variables: { input },
+      variables: { ...input },
     });
 
     return response.data;
