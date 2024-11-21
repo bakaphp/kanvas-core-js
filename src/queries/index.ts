@@ -24,3 +24,4 @@ export * from './tags.query';
 export * from './contact.query';
 export * from './mapper.query';
 export * from './event.query';
+export * from './commerce.query'

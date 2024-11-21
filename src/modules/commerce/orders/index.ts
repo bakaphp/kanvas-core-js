@@ -1,4 +1,4 @@
-import { ClientType } from '../../../index';
+import { ClientType, GET_ORDERS, OrderBy, WhereCondition } from '../../../index';
 import {
   CREATE_ORDER_FROM_APPLE_IN_APP_PURCHASE,
   CREATE_ORDER_FROM_CART,
@@ -13,6 +13,7 @@ import {
   OrderFromCartResults,
   AppleInAppPurchaseReceipt,
   OrderFromAppleInAppPurchaseResults,
+  CreatedOrders,
 } from '../../../types/commerce';
 
 export class Order {
@@ -60,4 +61,24 @@ export class Order {
     return response.data
       .generateOrderPaymentIntent as GeneratePaymentIntentResult;
   }
+  public async getOrders(
+    options: {
+      first?: number;
+      page?: number;
+      where?: WhereCondition;
+      orderBy?: OrderBy[];
+      search?: string;
+    } = {}
+  ): Promise<CreatedOrders> {
+    const { first, page, where, orderBy, search } = options;
+
+    const response = await this.client.query({
+      query: GET_ORDERS,
+      variables: { where, first, page, orderBy, search },
+      fetchPolicy: 'network-only',
+      partialRefetch: true,
+    });
+    return response.data;
+  }
+  
 }
