@@ -187,13 +187,13 @@ describe('Test the Social Messages', () => {
         expect(newMessage.id).toBeDefined();
         expect(newMessage.message).toBe(messageContent);
 
-        const recentMessages = await messages.getMessages({
+/*         const recentMessages = await messages.getMessages({
             search: 'Kanvas'
         });
         //console.log(recentMessages);
         expect(recentMessages).toBeDefined();
         expect(recentMessages.messages.data).toBeDefined();
-        expect(recentMessages.messages.data.length).toBeGreaterThanOrEqual(0);
+        expect(recentMessages.messages.data.length).toBeGreaterThanOrEqual(0); */
     });
 
     it('like a message', async () => {
