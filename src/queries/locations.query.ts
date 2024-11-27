@@ -11,6 +11,7 @@ export const COUNTRIES_QUERY = gql`
       data {
         id
         name
+        flag
         code
       }
       paginatorInfo {
