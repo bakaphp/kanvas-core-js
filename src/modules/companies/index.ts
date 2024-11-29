@@ -40,7 +40,7 @@ export class Companies {
     const response = await this.client.query({
       query: COMPANIES_QUERY,
       variables: { where, first, page, orderBy, search },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
     return response.data;

@@ -98,7 +98,7 @@ export class People {
         hasTags,
         hasCustomFields,
       },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
     return response.data.peoples;
@@ -107,7 +107,7 @@ export class People {
   public async getPeopleCount(): Promise<number> {
     const response = await this.client.query({
       query: PEOPLE_COUNT,
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
     return response.data.peopleCount;
@@ -117,7 +117,7 @@ export class People {
     const response = await this.client.query({
       query: PEOPLE_COUNT_BY_TAG,
       variables: { tag },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
     return response.data.peopleCountByTag;

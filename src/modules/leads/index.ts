@@ -54,7 +54,7 @@ export class Leads {
     const response = await this.client.query({
       query: GET_ALL_LEADS_QUERY,
       variables: { first, page },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
     return response.data;
@@ -86,7 +86,7 @@ export class Leads {
     const response = await this.client.query({
       query: GET_LEAD_BY_UUID_QUERY,
       variables: { where },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
 

@@ -42,7 +42,7 @@ export class Event {
     const response = await this.client.query({
       query: EVENT_QUERY,
       variables: { first, page, orderBy },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
     return response.data.events;
@@ -51,7 +51,7 @@ export class Event {
   public async getEventTypes(): Promise<EventTypeInterface[]> {
     const response = await this.client.query({
       query: EVENT_TYPES_QUERY,
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
     return response.data.eventTypes.data;
@@ -70,7 +70,7 @@ export class Event {
     const { data } = await this.client.query({
       query: EVENT_PARTICIPANTS_QUERY,
       variables: { where, first, page },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
     return data.eventVersionParticipants as GetParticipantsByEventId;
