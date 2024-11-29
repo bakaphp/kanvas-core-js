@@ -75,7 +75,7 @@ export class Order {
     const response = await this.client.query({
       query: GET_ORDERS,
       variables: { where, first, page, orderBy, search },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
     return response.data;

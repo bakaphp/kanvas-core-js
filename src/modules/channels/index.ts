@@ -25,7 +25,7 @@ export class Channels {
     const response = await this.client.query({
       query: GET_CHANNEL_SOCIAL_CHANNELS,
       variables: { whereCondition: where, first, page },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
     return response.data.socialChannels.data as ChannelInterface[];

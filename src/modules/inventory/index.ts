@@ -151,7 +151,7 @@ export class Inventory {
         hasAttributesCondition,
         search,
       },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
 
@@ -279,7 +279,7 @@ export class Inventory {
   public async productDashboard(): Promise<ProductDashboardInterface> {
     const response = await this.client.query({
       query: PRODUCT_DASHBOARD,
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
 
@@ -302,7 +302,7 @@ export class Inventory {
   > {
     const response = await this.client.query({
       query: PRODUCT_ADMIN_DASHBOARD,
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
 
@@ -330,7 +330,7 @@ export class Inventory {
         orderByCondition,
         search,
       },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
 
@@ -382,7 +382,7 @@ export class Inventory {
         search,
         orderByCondition,
       },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
 

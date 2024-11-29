@@ -36,7 +36,7 @@ export class CompaniesBranches {
     const response = await this.client.query({
       query: COMPANIES_BRANCHES_QUERY,
       variables: { where, orderBy, first, page, search },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
     return response.data 
@@ -54,7 +54,7 @@ export class CompaniesBranches {
     const response = await this.client.query({
       query: COMPANIES_BRANCHES_USER_QUERY,
       variables: { where, first, page },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
     return response.data as UserInterface;
