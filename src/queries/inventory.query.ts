@@ -425,6 +425,7 @@ export const GET_VARIANTS_BY_STATUS = gql`
         attributes {
           name
           value
+          slug
         }
 
         product {
