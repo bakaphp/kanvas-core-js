@@ -25,6 +25,7 @@ export interface DeletedCustomField {
 export interface CustomFieldInput {
   name: string;
   data: any;
+  public?: boolean;
 }
 
 export interface CustomFieldData {
