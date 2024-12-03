@@ -403,6 +403,7 @@ export const GET_VARIANTS_BY_STATUS = gql`
         status {
           id
           name
+          slug
         }
         warehouses {
           warehouses_id
