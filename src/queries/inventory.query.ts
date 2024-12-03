@@ -312,6 +312,7 @@ export const GET_VARIANTS = gql`
         status {
           id
           name
+          slug
         }
         warehouses {
           warehouses_id
@@ -334,6 +335,7 @@ export const GET_VARIANTS = gql`
         attributes {
           name
           value
+          slug
         }
         product {
           id
