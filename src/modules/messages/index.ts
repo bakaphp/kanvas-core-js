@@ -130,6 +130,10 @@ export class Messages {
       page?: number;
       hasTags?: WhereCondition;
       hasType?: WhereCondition;
+      childrenOptions?: {
+        alias?: string; // Alias for children field
+        first?: number; // Limit for children
+      };
     } = {}
   ): Promise<AllMessages> {
     const {
@@ -139,11 +143,15 @@ export class Messages {
       hasType,
       where,
       orderBy,
-      first,
+      first = 25,
       page,
+      childrenOptions = {},
     } = options;
+  
+    const { alias = 'children', first: childrenFirst } = childrenOptions;
+  
     const response = await this.client.query({
-      query: GET_MESSAGES_QUERY,
+      query: GET_MESSAGES_QUERY(childrenFirst !== undefined, alias),
       variables: {
         where,
         hasAppModuleMessageWhere,
@@ -153,9 +161,11 @@ export class Messages {
         search,
         first,
         page,
+        ...(childrenFirst !== undefined && { childrenFirst }),
       },
       fetchPolicy: 'no-cache',
     });
+  
     return response.data;
   }
 
@@ -168,6 +178,10 @@ export class Messages {
       page?: number;
       hasTags?: WhereCondition;
       hasType?: WhereCondition;
+      childrenOptions?: {
+        alias?: string; // Alias for the children field
+        first?: number; // Limit for children
+      };
     } = {}
   ): Promise<AllForYouMessages> {
     const {
@@ -176,11 +190,15 @@ export class Messages {
       hasType,
       where,
       orderBy,
-      first,
+      first = 25,
       page,
+      childrenOptions = {},
     } = options;
+  
+    const { alias = 'children', first: childrenFirst } = childrenOptions;
+  
     const response = await this.client.query({
-      query: GET_FOR_YOU_MESSAGES_QUERY,
+      query: GET_FOR_YOU_MESSAGES_QUERY(childrenFirst !== undefined, alias),
       variables: {
         where,
         hasTags,
@@ -189,9 +207,11 @@ export class Messages {
         search,
         first,
         page,
+        ...(childrenFirst !== undefined && { childrenFirst }),
       },
       fetchPolicy: 'no-cache',
     });
+  
     return response.data;
   }
 

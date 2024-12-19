@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client/core';
 
-export const GET_MESSAGES_QUERY = gql`
+export const GET_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => gql`
   query getMessages(
     $where: QueryMessagesWhereWhereConditions
     $hasAppModuleMessage: QueryMessagesHasAppModuleMessageWhereHasConditions
@@ -10,6 +10,7 @@ export const GET_MESSAGES_QUERY = gql`
     $search: String
     $first: Int! = 25
     $page: Int
+    ${includeChildren ? `$childrenFirst: Int!` : ''}
   ) {
     messages(
       where: $where
@@ -72,6 +73,13 @@ export const GET_MESSAGES_QUERY = gql`
             is_shared
             is_reported
         }
+        ${includeChildren ? `${alias}: children(first: $childrenFirst) {
+          data {
+            id
+            uuid
+            message
+          }
+        }` : ''}
         created_at
       }
       paginatorInfo {
@@ -82,7 +90,7 @@ export const GET_MESSAGES_QUERY = gql`
   }
 `;
 
-export const GET_FOR_YOU_MESSAGES_QUERY = gql`
+export const GET_FOR_YOU_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => gql`
   query forYouMessages(
     $where: QueryForYouMessagesWhereWhereConditions
     $hasTags: QueryForYouMessagesHasTagsWhereHasConditions
@@ -90,6 +98,7 @@ export const GET_FOR_YOU_MESSAGES_QUERY = gql`
     $orderBy: [QueryForYouMessagesOrderByOrderByClause!]
     $first: Int! = 25
     $page: Int
+    ${includeChildren ? `$childrenFirst: Int!` : ''}
   ) {
     forYouMessages(
       where: $where
@@ -150,6 +159,13 @@ export const GET_FOR_YOU_MESSAGES_QUERY = gql`
             is_shared
             is_reported
         }
+        ${includeChildren ? `${alias}: children(first: $childrenFirst) {
+          data {
+            id
+            uuid
+            message
+          }
+        }` : ''}
         created_at
       }
       paginatorInfo {

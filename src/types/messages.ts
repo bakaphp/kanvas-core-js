@@ -20,6 +20,8 @@ export interface MessagesInterface {
   message_types_id: string;
   user: UserInterface;
   tags: string[];
+  children: MessagesInterface[];
+  [alias: string]: MessagesInterface[] | any; // Allow dynamic alias for children
   myInteraction: MyInteractionInterface;
   created_at: string;
   appModuleMessage: AppModuleMessage;
