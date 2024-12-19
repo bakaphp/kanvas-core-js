@@ -81,6 +81,7 @@ export interface MessageInputInterface {
 
 export interface MessageUpdateInputInterface {
   message: string;
+  message_verb?: string;
   is_public?: number;
   is_deleted?: number;
 }
