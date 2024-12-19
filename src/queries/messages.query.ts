@@ -78,6 +78,20 @@ export const GET_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => g
             id
             uuid
             message
+            slug
+            user {
+              id
+              firstname
+              lastname
+              displayname
+              photo {
+                url
+              }
+              social {
+                is_blocked
+                is_following
+              }
+            }
           }
         }` : ''}
         created_at
@@ -164,6 +178,20 @@ export const GET_FOR_YOU_MESSAGES_QUERY = (includeChildren: boolean, alias: stri
             id
             uuid
             message
+            slug
+            user {
+              id
+              firstname
+              lastname
+              displayname
+              photo {
+                url
+              }
+              social {
+                is_blocked
+                is_following
+              }
+            }
           }
         }` : ''}
         created_at
