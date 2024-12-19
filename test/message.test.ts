@@ -20,6 +20,30 @@ describe('Test the Social Messages', () => {
         expect(newMessage.message).toBe(messageContent);
     });
 
+    it('update a message', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const messageContent = 'Hello, Kanvas!';
+        const newMessage = await messages.createMessage({
+            message_verb: 'post',
+            message: messageContent,
+        });
+
+        expect(newMessage).toBeDefined();
+        expect(newMessage.id).toBeDefined();
+        expect(newMessage.message).toBe(messageContent);
+
+        const updatedMessage = await messages.updateMessage(newMessage.id, {
+            message: 'Hello, Kanvas! Updated',
+            message_verb: 'post2',
+        });
+
+        expect(updatedMessage).toBeDefined();
+        expect(updatedMessage.id).toBeDefined();
+        expect(updatedMessage.message).toBe('Hello, Kanvas! Updated');
+        expect(updatedMessage.message_types_id).not.toBe(newMessage.message_types_id);
+    });
+
     it('create a message with parent id', async () => {
         const client = getClient();
         const messages = client.messages;
