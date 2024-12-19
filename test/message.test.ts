@@ -211,13 +211,13 @@ describe('Test the Social Messages', () => {
         expect(newMessage.id).toBeDefined();
         expect(newMessage.message).toBe(messageContent);
 
-/*         const recentMessages = await messages.getMessages({
-            search: 'Kanvas'
-        });
-        //console.log(recentMessages);
-        expect(recentMessages).toBeDefined();
-        expect(recentMessages.messages.data).toBeDefined();
-        expect(recentMessages.messages.data.length).toBeGreaterThanOrEqual(0); */
+        /*         const recentMessages = await messages.getMessages({
+                    search: 'Kanvas'
+                });
+                //console.log(recentMessages);
+                expect(recentMessages).toBeDefined();
+                expect(recentMessages.messages.data).toBeDefined();
+                expect(recentMessages.messages.data.length).toBeGreaterThanOrEqual(0); */
     });
 
     it('like a message', async () => {
@@ -348,7 +348,7 @@ describe('Test the Social Messages', () => {
         expect(recentMessages.messagesGroupByDate.data.length).toBeGreaterThan(0);
     });
 
-    it('get message for you' , async () => {
+    it('get message for you', async () => {
         const client = getClient();
         const messages = client.messages;
         const recentMessages = await messages.getForYouMessages({
@@ -359,6 +359,44 @@ describe('Test the Social Messages', () => {
         expect(recentMessages).toBeDefined();
         expect(recentMessages.forYouMessages.data).toBeDefined();
         expect(recentMessages.forYouMessages.data.length).toBeGreaterThan(0);
+    });
+
+    it('test get messages with children', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const recentMessages = await messages.getMessages({
+            orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
+            first: 25,
+            page: 1,
+            childrenOptions: {
+                alias: "children_alias",
+                first: 1,
+            }
+        });
+
+        expect(recentMessages).toBeDefined();
+        expect(recentMessages.messages.data).toBeDefined();
+        expect(recentMessages.messages.data.length).toBeGreaterThan(0);
+        expect(recentMessages.messages.data[0].children_alias).toBeDefined();
+    });
+
+    it('test for you get messages with children', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const recentMessages = await messages.getForYouMessages({
+            orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
+            first: 25,
+            page: 1,
+            childrenOptions: {
+                alias: "children_alias",
+                first: 1,
+            }
+        });
+        expect(recentMessages).toBeDefined();
+        expect(recentMessages.forYouMessages.data).toBeDefined();
+        expect(recentMessages.forYouMessages.data.length).toBeGreaterThan(0);
+        expect(recentMessages.forYouMessages.data[0].children_alias).toBeDefined();
+
     });
 
     it('delete message', async () => {
