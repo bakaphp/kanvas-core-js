@@ -36,6 +36,7 @@ interface MyInteractionInterface {
   is_saved: boolean;
   is_shared: boolean;
   is_reported: boolean;
+  is_purchased: boolean;
 }
 
 export interface AllMessages {
