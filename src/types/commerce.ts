@@ -1,4 +1,5 @@
 import { CompanyInterface } from "./companies";
+import { CustomFieldInput } from "./custom-fields";
 import { PaginatorInfo } from "./paginator";
 import { PeopleInterface } from "./people";
 import { UserInterface } from "./users";
@@ -35,7 +36,7 @@ export interface Order {
   weight?: number;
   checkout_token?: string;
   currency: string;
-  metadata: string; 
+  metadata: string;
   private_metadata?: string;
   is_deleted: boolean;
   created_at: string;
@@ -77,6 +78,7 @@ export interface AppleInAppPurchaseReceipt {
     receipt: string;
     transaction_date: string;
     region_id?: number;
+    custom_fields?: CustomFieldInput[];
   };
 }
 
