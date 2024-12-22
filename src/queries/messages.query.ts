@@ -270,6 +270,78 @@ export const GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG = gql`
   }
 `;
 
+export const GET_CHANNEL_MESSAGES_QUERY = gql`
+  query channelMessages(
+    $channel_uuid: String
+    $channel_slug: String
+    $where: [QueryChannelMessagesWhereWhereConditions!]
+    $orderBy: [QueryChannelMessagesOrderByOrderByClause!]
+    $first: Int! = 25
+    $page: Int
+  ) {
+    channelMessages(
+      channel_uuid: $channel_uuid
+      channel_slug: $channel_slug
+      where: $where
+      orderBy: $orderBy
+      search: $search
+      first: $first
+      page: $page
+    ) {
+      data {
+        id
+        uuid
+        message
+        parent_id
+        additional_field
+        slug
+        user {
+          id
+          firstname
+          lastname
+          displayname
+          photo {
+            url
+          }
+        }
+        message_types_id
+        message
+        reactions_count
+        comment_count
+        total_liked
+        total_disliked
+        total_saved
+        total_shared
+        total_view
+        total_children
+        parent {
+          id
+          uuid
+        }
+        tags {
+          data {
+            id
+            name
+            slug
+          }
+        }
+        myInteraction {
+          is_liked
+          is_disliked
+          is_saved
+          is_shared
+          is_reported
+        }
+        created_at
+      }
+      paginatorInfo {
+        currentPage
+        lastPage
+      }
+    }
+  }
+`;
+
 export const GET_MESSAGES_GROUP_BY_DATE_QUERY = gql`
   query messagesGroupByDate(
     $where: QueryMessagesGroupByDateWhereWhereConditions

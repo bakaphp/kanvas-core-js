@@ -51,6 +51,12 @@ export interface AllForYouMessages {
     paginatorInfo?: PaginatorInfo;
   };
 }
+export interface AllChannelMessages {
+  channelMessages: {
+    data: MessagesInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
+}
 export interface AllLikedMessagesByUser {
   messagesLikedByUser: {
     data: MessagesInterface[];

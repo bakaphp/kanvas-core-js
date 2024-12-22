@@ -15,6 +15,7 @@ import {
   MessageSearchSuggestions,
   AllLikedMessagesByUser,
   AllForYouMessages,
+  AllChannelMessages,
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
@@ -32,6 +33,7 @@ import {
 } from '../../mutations';
 
 import {
+  GET_CHANNEL_MESSAGES_QUERY,
   GET_FOR_YOU_MESSAGES_QUERY,
   GET_MESSAGE_SEARCH_SUGGESTIONS_QUERY,
   GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG,
@@ -147,9 +149,9 @@ export class Messages {
       page,
       childrenOptions = {},
     } = options;
-  
+
     const { alias = 'children', first: childrenFirst } = childrenOptions;
-  
+
     const response = await this.client.query({
       query: GET_MESSAGES_QUERY(childrenFirst !== undefined, alias),
       variables: {
@@ -165,7 +167,7 @@ export class Messages {
       },
       fetchPolicy: 'no-cache',
     });
-  
+
     return response.data;
   }
 
@@ -194,9 +196,9 @@ export class Messages {
       page,
       childrenOptions = {},
     } = options;
-  
+
     const { alias = 'children', first: childrenFirst } = childrenOptions;
-  
+
     const response = await this.client.query({
       query: GET_FOR_YOU_MESSAGES_QUERY(childrenFirst !== undefined, alias),
       variables: {
@@ -211,7 +213,40 @@ export class Messages {
       },
       fetchPolicy: 'no-cache',
     });
-  
+
+    return response.data;
+  }
+
+  public async getChannelMessages(
+    options: {
+      channel_uuid?: string;
+      channel_slug?: string;
+      where?: Array<WhereCondition>;
+      orderBy?: Array<OrderByMessage>;
+      first?: number;
+      page?: number;
+    } = {}
+  ): Promise<AllChannelMessages> {
+    const {
+      channel_uuid,
+      channel_slug,
+      where,
+      orderBy,
+      first,
+      page,
+    } = options;
+    const response = await this.client.query({
+      query: GET_CHANNEL_MESSAGES_QUERY,
+      variables: {
+        channel_uuid,
+        channel_slug,
+        where,
+        orderBy,
+        first,
+        page,
+      },
+      fetchPolicy: 'no-cache',
+    });
     return response.data;
   }
 
