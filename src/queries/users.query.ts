@@ -137,6 +137,7 @@ export const GET_USER_DATA_QUERY = gql`
         }
       }
       photo {
+        uuid
         url
       }
       social {
@@ -193,6 +194,7 @@ export const GET_USER_SOCIAL_DATA_QUERY = gql`
         }
       }
       photo {
+        uuid
         url
       }
     }
