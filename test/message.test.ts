@@ -361,6 +361,19 @@ describe('Test the Social Messages', () => {
         expect(recentMessages.forYouMessages.data.length).toBeGreaterThan(0);
     });
 
+    it('get message from channel', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const recentMessages = await messages.getChannelMessages({
+            channel_slug: 'general',
+            orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
+            first: 25,
+            page: 1
+        });
+        expect(recentMessages).toBeDefined();
+        expect(recentMessages.channelMessages.data).toBeDefined();
+    });
+
     it('test get messages with children', async () => {
         const client = getClient();
         const messages = client.messages;
