@@ -287,7 +287,6 @@ export const GET_CHANNEL_MESSAGES_QUERY = gql`
       channel_slug: $channel_slug
       where: $where
       orderBy: $orderBy
-      search: $search
       first: $first
       page: $page
     ) {
