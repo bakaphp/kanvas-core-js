@@ -277,7 +277,7 @@ export const GET_CHANNEL_MESSAGES_QUERY = gql`
   query channelMessages(
     $channel_uuid: String
     $channel_slug: String
-    $where: [QueryChannelMessagesWhereWhereConditions!]
+    $where: QueryChannelMessagesWhereWhereConditions
     $orderBy: [QueryChannelMessagesOrderByOrderByClause!]
     $first: Int! = 25
     $page: Int
