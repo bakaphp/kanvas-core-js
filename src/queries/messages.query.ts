@@ -273,7 +273,7 @@ export const GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG = gql`
   }
 `;
 
-export const GET_CHANNEL_MESSAGES_QUERY = gql`
+export const GET_CHANNEL_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => gql`
   query channelMessages(
     $channel_uuid: String
     $channel_slug: String
@@ -281,6 +281,7 @@ export const GET_CHANNEL_MESSAGES_QUERY = gql`
     $orderBy: [QueryChannelMessagesOrderByOrderByClause!]
     $first: Int! = 25
     $page: Int
+    ${includeChildren ? `$childrenFirst: Int!` : ''}
   ) {
     channelMessages(
       channel_uuid: $channel_uuid
@@ -335,6 +336,23 @@ export const GET_CHANNEL_MESSAGES_QUERY = gql`
           is_reported
           is_purchased
         }
+        ${includeChildren ? `${alias}: children(first: $childrenFirst) {
+          data {
+            id
+            uuid
+            message
+            slug
+            user {
+              id
+              firstname
+              lastname
+              displayname
+              photo {
+                url
+              }
+            }
+          }
+        }` : ''}
         created_at
       }
       paginatorInfo {

@@ -225,6 +225,10 @@ export class Messages {
       orderBy?: Array<OrderByMessage>;
       first?: number;
       page?: number;
+      childrenOptions?: {
+        alias?: string; // Alias for the children field
+        first?: number; // Limit for children
+      };
     } = {}
   ): Promise<AllChannelMessages> {
     const {
@@ -232,11 +236,15 @@ export class Messages {
       channel_slug,
       where,
       orderBy,
-      first,
+      first = 25,
       page,
+      childrenOptions = {},
     } = options;
+
+    const { alias = 'children', first: childrenFirst } = childrenOptions;
+
     const response = await this.client.query({
-      query: GET_CHANNEL_MESSAGES_QUERY,
+      query: GET_CHANNEL_MESSAGES_QUERY(childrenFirst !== undefined, alias),
       variables: {
         channel_uuid,
         channel_slug,
@@ -244,9 +252,11 @@ export class Messages {
         orderBy,
         first,
         page,
+        ...(childrenFirst !== undefined && { childrenFirst }),
       },
       fetchPolicy: 'no-cache',
     });
+
     return response.data;
   }
 
