@@ -72,6 +72,7 @@ export const GET_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => g
             is_saved
             is_shared
             is_reported
+            is_purchased
         }
         ${includeChildren ? `${alias}: children(first: $childrenFirst) {
           data {
@@ -172,6 +173,7 @@ export const GET_FOR_YOU_MESSAGES_QUERY = (includeChildren: boolean, alias: stri
             is_saved
             is_shared
             is_reported
+            is_purchased
         }
         ${includeChildren ? `${alias}: children(first: $childrenFirst) {
           data {
@@ -263,6 +265,7 @@ export const GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG = gql`
             is_saved
             is_shared
             is_reported
+            is_purchased
         }
         created_at
       }
@@ -331,6 +334,7 @@ export const GET_CHANNEL_MESSAGES_QUERY = gql`
           is_saved
           is_shared
           is_reported
+          is_purchased
         }
         created_at
       }
@@ -402,6 +406,7 @@ export const GET_MESSAGES_GROUP_BY_DATE_QUERY = gql`
             is_saved
             is_shared
             is_reported
+            is_purchased
         }
         created_at
       }
@@ -479,6 +484,7 @@ export const GET_MESSAGES_LIKED_BY_USER = gql`
           is_saved
           is_shared
           is_reported
+          is_purchased
         }
         created_at
       }
