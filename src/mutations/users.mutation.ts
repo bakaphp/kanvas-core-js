@@ -208,3 +208,9 @@ export const UNBLOCK_USER_MUTATION = gql`
     unBlockUser(id: $id)
   }
 `;
+
+export const UPDATE_EMAIL_MUTATION = gql`
+  mutation updateEmail($email: String!) {
+    updateEmail(email: $email)
+  }
+`;
