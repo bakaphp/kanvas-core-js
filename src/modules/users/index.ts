@@ -25,6 +25,7 @@ import {
   SHARE_USER_MUTATION,
   BLOCK_USER_MUTATION,
   UNBLOCK_USER_MUTATION,
+  UPDATE_EMAIL_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -326,5 +327,13 @@ export class Users {
       variables: { id },
     });
     return response.data.unBlockUser;
+  }
+
+  public async updateEmail(email: string): Promise<boolean > {
+    const response = await this.client.mutate({
+      mutation: UPDATE_EMAIL_MUTATION,
+      variables: { email },
+    });
+    return response.data;
   }
 }
