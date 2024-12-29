@@ -42,6 +42,7 @@ import {
 
 import { setContext } from '@apollo/client/link/context';
 import Settings from './modules/settings';
+import { Workflow } from 'modules/workflow';
 
 export * from './types';
 export * from './queries';
@@ -130,6 +131,7 @@ export default class KanvasCore {
   public contact: Contact;
   public filesystemMapper: FilesystemMapper;
   public event: Event;
+  public workflow: Workflow;
 
   constructor(protected options: Options) {
     this.client = new ApolloClient({
@@ -169,6 +171,7 @@ export default class KanvasCore {
     this.contact = new Contact(this.client);
     this.filesystemMapper = new FilesystemMapper(this.client);
     this.event = new Event(this.client);
+    this.workflow = new Workflow(this.client, this.options);
   }
   protected generateURL() {
     return new HttpLink({ uri: this.options.url });
