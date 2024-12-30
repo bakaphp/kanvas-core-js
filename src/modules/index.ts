@@ -26,3 +26,4 @@ export * from './tags';
 export * from './receiver';
 export * from './contact';
 export * from './event';
+export * from './workflow';

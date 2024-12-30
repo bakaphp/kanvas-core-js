@@ -38,11 +38,11 @@ import {
   Contact,
   FilesystemMapper,
   Event,
+  Workflow,
 } from './modules';
 
 import { setContext } from '@apollo/client/link/context';
 import Settings from './modules/settings';
-import { Workflow } from 'modules/workflow';
 
 export * from './types';
 export * from './queries';
