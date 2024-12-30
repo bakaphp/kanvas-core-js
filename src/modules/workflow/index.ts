@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-import { RunWorkflowFromEntity, WorkflowFromEntity } from 'types/workflow';
+import { WorkflowFromEntity, RunWorkflowFromEntity } from '../../types';
+import { RUN_WORKFLOW_FROM_ENTITY } from '../../mutations';
+
 import { ClientType, Options } from '../../index';
 
-import { RUN_WORKFLOW_FROM_ENTITY } from 'mutations/workflow';
 
 export class Workflow {
   protected axiosClient: any;
