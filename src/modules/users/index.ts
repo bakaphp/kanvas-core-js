@@ -69,7 +69,7 @@ export class Users {
   public async getUserData(withSocial: boolean = false): Promise<UserData> {
     const response = await this.client.query({
       query: !withSocial ? GET_USER_DATA_QUERY : GET_USER_SOCIAL_DATA_QUERY,
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
     });
 
     return response.data.me;

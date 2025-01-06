@@ -82,6 +82,26 @@ describe('Test the KanvasCore client', () => {
     expect(updateUser.firstname).toBe('Max');
   });
 
+  it('update custom field', async () => {
+    const client = getClient();
+    const userInfo = await client.users.getUserData();
+    const updatedUserInfo: UpdateUserParams = {
+      firstname: userInfo.firstname,
+      lastname: userInfo.lastname,
+      phone_number: userInfo.contact.phone_number,
+      cell_phone_number: userInfo.contact.cell_phone_number,
+      custom_fields: [{ name: 'test_custom_fields', data: '0', public: true }]
+    };
+
+    const updateUser = await client.users.updateUserData(
+      userInfo.id,
+      updatedUserInfo
+    );
+    console.log(updateUser.custom_fields);
+    expect(updateUser).toBeDefined();
+    expect(updateUser.firstname).toBe('Max');
+  });
+
   it('gets user total following', async () => {
     const client = getClient();
     const userInfo = await client.users.getUserData(true);
