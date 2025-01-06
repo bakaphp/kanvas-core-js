@@ -1,4 +1,4 @@
-import { UpdateUserParams } from '../src';
+import { SourceSite, UpdateUserParams } from '../src';
 import { initializeClient, getClient } from './setupClient';
 import dotenv from 'dotenv';
 
@@ -97,7 +97,6 @@ describe('Test the KanvasCore client', () => {
       userInfo.id,
       updatedUserInfo
     );
-    console.log(updateUser.custom_fields);
     expect(updateUser).toBeDefined();
     expect(updateUser.firstname).toBe('Max');
   });
@@ -148,5 +147,27 @@ describe('Test the KanvasCore client', () => {
     const blockedUsers = await client.users.getBlockedUsers();
 
     expect(blockedUsers.blockedUsers.data).toBeDefined();
+  });
+
+  it('test link device', async () => {
+    const client = getClient();
+    const deviceParams = {
+      device_id: '123456',
+      source_site: SourceSite.IOSApp,
+    };
+    const linkedDevice = await client.users.linkDevice(deviceParams);
+
+    expect(linkedDevice).toBeTruthy();
+  });
+
+  it('test unlink device', async () => {
+    const client = getClient();
+    const deviceParams = {
+      device_id: '123456',
+      source_site: SourceSite.IOSApp,
+    };
+    const unlinkedDevice = await client.users.unLinkDevice(deviceParams);
+
+    expect(unlinkedDevice).toBeTruthy();
   });
 });
