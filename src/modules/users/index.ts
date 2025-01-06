@@ -340,7 +340,6 @@ export class Users {
     return response.data;
   }
 
-
   public async linkDevice(input: DeviceParams): Promise<boolean> {
     const response = await this.client.mutate({
       mutation: LINK_DEVICE_MUTATION,
