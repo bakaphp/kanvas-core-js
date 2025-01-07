@@ -15,13 +15,8 @@ describe('Test the KanvasCore client', () => {
 
   it('Fetches channel products by channel ID', async () => {
     const client = getClient();
-    const channelId = "test-channel-id";
-    try {
-      const channelProducts = await client.channels.getChannelProducts(channelId);
-      expect(channelProducts).toBeDefined();
-    } catch (error) {
-      console.error('Error fetching channel products:', error);
-      expect(error).toBeUndefined();
-    }
+    const channelId = 'yourChannelId'; // Replace with actual channel ID
+    const channelProducts = await client.channels.getChannelProducts(channelId);
+    expect(channelProducts).toBeDefined();
   });
 });
