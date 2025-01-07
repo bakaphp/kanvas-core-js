@@ -2,7 +2,7 @@ import { MessagesInterface } from './messages';
 import { UserInterface } from './users';
 import { SystemModuleInterface } from './system-module';
 
-export interface  ChannelInterface {
+export interface ChannelInterface {
   id: string;
   name: string;
   slug: string;
