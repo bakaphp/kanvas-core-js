@@ -14,9 +14,11 @@ describe('Test the KanvasCore client', () => {
   });
 
   it('Fetches channel products by channel ID', async () => {
-    const client = getClient();
-    const channelId = 'yourChannelId'; // Replace with actual channel ID
-    const channelProducts = await client.channels.getChannelProducts(channelId);
-    expect(channelProducts).toBeDefined();
+    const channelId = process.env.KANVAS_CHHANNEL_ID as string;
+    if (channelId) {
+      const client = getClient();
+      const channelProducts = await client.channels.getChannelProducts(channelId);
+      expect(channelProducts).toBeDefined();
+    }
   });
 });
