@@ -214,3 +214,15 @@ export const UPDATE_EMAIL_MUTATION = gql`
     updateEmail(email: $email)
   }
 `;
+
+export const LINK_DEVICE_MUTATION = gql`
+  mutation linkDevice($data: DeviceInput!) {
+    linkDevice(data: $data)
+  }
+`;
+
+export const UNLINK_DEVICE_MUTATION = gql`
+  mutation unLinkDevice($data: DeviceInput!) {
+    unLinkDevice(data: $data)
+  }
+`;

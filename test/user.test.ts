@@ -1,4 +1,4 @@
-import { UpdateUserParams } from '../src';
+import { SourceSite, UpdateUserParams } from '../src';
 import { initializeClient, getClient } from './setupClient';
 import dotenv from 'dotenv';
 
@@ -82,6 +82,25 @@ describe('Test the KanvasCore client', () => {
     expect(updateUser.firstname).toBe('Max');
   });
 
+  it('update custom field', async () => {
+    const client = getClient();
+    const userInfo = await client.users.getUserData();
+    const updatedUserInfo: UpdateUserParams = {
+      firstname: userInfo.firstname,
+      lastname: userInfo.lastname,
+      phone_number: userInfo.contact.phone_number,
+      cell_phone_number: userInfo.contact.cell_phone_number,
+      custom_fields: [{ name: 'test_custom_fields', data: '0', public: true }]
+    };
+
+    const updateUser = await client.users.updateUserData(
+      userInfo.id,
+      updatedUserInfo
+    );
+    expect(updateUser).toBeDefined();
+    expect(updateUser.firstname).toBe('Max');
+  });
+
   it('gets user total following', async () => {
     const client = getClient();
     const userInfo = await client.users.getUserData(true);
@@ -128,5 +147,27 @@ describe('Test the KanvasCore client', () => {
     const blockedUsers = await client.users.getBlockedUsers();
 
     expect(blockedUsers.blockedUsers.data).toBeDefined();
+  });
+
+  it('test link device', async () => {
+    const client = getClient();
+    const deviceParams = {
+      device_id: '123456',
+      source_site: SourceSite.IOSApp,
+    };
+    const linkedDevice = await client.users.linkDevice(deviceParams);
+
+    expect(linkedDevice).toBeTruthy();
+  });
+
+  it('test unlink device', async () => {
+    const client = getClient();
+    const deviceParams = {
+      device_id: '123456',
+      source_site: SourceSite.IOSApp,
+    };
+    const unlinkedDevice = await client.users.unLinkDevice(deviceParams);
+
+    expect(unlinkedDevice).toBeTruthy();
   });
 });

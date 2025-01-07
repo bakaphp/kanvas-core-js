@@ -222,3 +222,14 @@ export interface AllBlockedUsersInterface {
     paginatorInfo?: PaginatorInfo;
   };
 }
+
+export enum SourceSite {
+  AndroidApp = "androidapp",
+  IOSApp = "iosapp",
+}
+
+export interface DeviceParams {
+  device_id: string;
+  source_site: SourceSite; // Use the enum here
+  source_username?: string;
+}
