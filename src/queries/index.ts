@@ -20,6 +20,7 @@ export * from './people.query';
 export * from './message-comment.query';
 export * from './notification.query';
 export * from './channel.query';
+export * from './channel-products.query';
 export * from './tags.query';
 export * from './contact.query';
 export * from './mapper.query';
