@@ -26,6 +26,8 @@ import {
   BLOCK_USER_MUTATION,
   UNBLOCK_USER_MUTATION,
   UPDATE_EMAIL_MUTATION,
+  LINK_DEVICE_MUTATION,
+  UNLINK_DEVICE_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -44,6 +46,7 @@ import {
   SocialLoginParams,
   OrderBy,
   AllBlockedUsersInterface,
+  DeviceParams,
 } from '../../types';
 
 export class Users {
@@ -69,7 +72,7 @@ export class Users {
   public async getUserData(withSocial: boolean = false): Promise<UserData> {
     const response = await this.client.query({
       query: !withSocial ? GET_USER_DATA_QUERY : GET_USER_SOCIAL_DATA_QUERY,
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
     });
 
     return response.data.me;
@@ -329,11 +332,27 @@ export class Users {
     return response.data.unBlockUser;
   }
 
-  public async updateEmail(email: string): Promise<boolean > {
+  public async updateEmail(email: string): Promise<boolean> {
     const response = await this.client.mutate({
       mutation: UPDATE_EMAIL_MUTATION,
       variables: { email },
     });
     return response.data;
+  }
+
+  public async linkDevice(input: DeviceParams): Promise<boolean> {
+    const response = await this.client.mutate({
+      mutation: LINK_DEVICE_MUTATION,
+      variables: { data: input },
+    });
+    return response.data.linkDevice;
+  }
+
+  public async unLinkDevice(input: DeviceParams): Promise<boolean> {
+    const response = await this.client.mutate({
+      mutation: UNLINK_DEVICE_MUTATION,
+      variables: { data: input },
+    });
+    return response.data.unLinkDevice;
   }
 }
