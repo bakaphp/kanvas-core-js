@@ -1,8 +1,8 @@
 import { VariantInterface } from './inventory';
 
-export type ChannelProductsInterface = {
+export interface ChannelProductsInterface {
   id: string;
   name: string;
   description: string;
   variants?: VariantInterface[];
-};
+}
