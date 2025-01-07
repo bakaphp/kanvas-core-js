@@ -7,6 +7,10 @@ export const GET_CHANNEL_PRODUCTS = gql`
         id
         name
         description
+        attributes {
+          name
+          value
+        }
         variants {
           id
           name
