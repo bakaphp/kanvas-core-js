@@ -1,7 +1,6 @@
 import { MessagesInterface } from './messages';
 import { UserInterface } from './users';
 import { SystemModuleInterface } from './system-module';
-import { VariantInterface } from './inventory';
 
 export interface ChannelInterface {
   id: string;
@@ -14,7 +13,6 @@ export interface ChannelInterface {
   messages: Array<MessagesInterface>;
   users: Array<UserInterface>;
   systemModule: SystemModuleInterface;
-  variants?: VariantInterface[];
 }
 
 export interface ChannelInputInterface {
