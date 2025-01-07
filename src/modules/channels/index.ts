@@ -13,6 +13,8 @@ import {
 } from '../../mutations';
 
 import { GET_CHANNEL_SOCIAL_CHANNELS } from '../../queries';
+import { GET_CHANNEL_PRODUCTS } from '../../queries';
+import { ChannelProductsInterface } from 'types/channel-products';
 
 export class Channels {
   constructor(protected client: ClientType) {}
@@ -29,6 +31,16 @@ export class Channels {
       partialRefetch: true,
     });
     return response.data.socialChannels.data as ChannelInterface[];
+  }
+
+  public async getChannelProducts(id: string): Promise<ChannelProductsInterface[]> {
+    const response = await this.client.query({
+      query: GET_CHANNEL_PRODUCTS,
+      variables: { id },
+      fetchPolicy: 'no-cache',
+      partialRefetch: true,
+    });
+    return response.data.channelProducts.data as ChannelInterface[];
   }
 
   public async createChannel(
