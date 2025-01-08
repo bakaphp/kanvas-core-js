@@ -1,6 +1,5 @@
 import { initializeClient, getClient } from './setupClient';
 import dotenv from 'dotenv';
-import { WhereCondition } from '../dist/types/leads';
 
 dotenv.config();
 
