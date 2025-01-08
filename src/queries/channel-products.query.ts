@@ -1,8 +1,18 @@
 import { gql } from '@apollo/client/core';
 
 export const GET_CHANNEL_PRODUCTS = gql`
-  query GetChannelProducts($id: String!, $first: Int!, $whereCondition: QueryChannelProductsWhereWhereConditions) {
-    channelProducts(id: $id, first: $first, where: $whereCondition) {
+  query GetChannelProducts(
+    $id: String!
+    $first: Int!
+    $whereCondition: QueryChannelProductsWhereWhereConditions
+    $page: Int
+  ) {
+    channelProducts(
+      id: $id
+      first: $first
+      where: $whereCondition
+      page: $page
+    ) {
       data {
         id
         uuid
@@ -20,6 +30,13 @@ export const GET_CHANNEL_PRODUCTS = gql`
           name
           value
         }
+      }
+      paginatorInfo {
+        count
+        currentPage
+        lastPage
+        perPage
+        total
       }
     }
   }

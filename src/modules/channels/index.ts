@@ -14,7 +14,10 @@ import {
 
 import { GET_CHANNEL_SOCIAL_CHANNELS } from '../../queries';
 import { GET_CHANNEL_PRODUCTS } from '../../queries';
-import { ChannelProductsInterface } from 'types/channel-products';
+import {
+  ChannelProductsInterface,
+  ChannelProductsProps,
+} from 'types/channel-products';
 
 export class Channels {
   constructor(protected client: ClientType) {}
@@ -33,18 +36,19 @@ export class Channels {
     return response.data.socialChannels.data as ChannelInterface[];
   }
 
-  public async getChannelProducts(
-    id: string,
-    first: number,
-    whereCondition: WhereCondition
-  ): Promise<ChannelProductsInterface[]> {
+  public async getChannelProducts({
+    id,
+    first,
+    whereCondition,
+    page,
+  }: ChannelProductsProps): Promise<ChannelProductsInterface> {
     const response = await this.client.query({
       query: GET_CHANNEL_PRODUCTS,
-      variables: { id, first, whereCondition },
+      variables: { id, first, whereCondition, page },
       fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
-    return response.data.channelProducts.data;
+    return response.data.channelProducts;
   }
 
   public async createChannel(
