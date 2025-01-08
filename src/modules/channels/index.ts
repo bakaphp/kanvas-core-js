@@ -33,10 +33,14 @@ export class Channels {
     return response.data.socialChannels.data as ChannelInterface[];
   }
 
-  public async getChannelProducts(id: string): Promise<ChannelProductsInterface[]> {
+  public async getChannelProducts(
+    id: string,
+    first: number,
+    whereCondition: WhereCondition
+  ): Promise<ChannelProductsInterface[]> {
     const response = await this.client.query({
       query: GET_CHANNEL_PRODUCTS,
-      variables: { id },
+      variables: { id, first, whereCondition },
       fetchPolicy: 'no-cache',
       partialRefetch: true,
     });

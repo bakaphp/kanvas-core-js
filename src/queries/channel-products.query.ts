@@ -1,22 +1,24 @@
 import { gql } from '@apollo/client/core';
 
 export const GET_CHANNEL_PRODUCTS = gql`
-  query GetChannelProducts($id: String!) {
-    channelProducts(id: $id) {
+  query GetChannelProducts($id: String!, $first: Int!, $whereCondition: QueryChannelProductsWhereWhereConditions) {
+    channelProducts(id: $id, first: $first, where: $whereCondition) {
       data {
         id
+        uuid
         name
         description
-        attributes {
-          name
-          value
-        }
         variants {
           id
           name
           channel {
             price
           }
+        }
+        attributes {
+          slug
+          name
+          value
         }
       }
     }
