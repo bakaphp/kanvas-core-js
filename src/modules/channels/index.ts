@@ -40,7 +40,7 @@ export class Channels {
       fetchPolicy: 'no-cache',
       partialRefetch: true,
     });
-    return response.data.channelProducts.data as ChannelInterface[];
+    return response.data.channelProducts.data;
   }
 
   public async createChannel(
