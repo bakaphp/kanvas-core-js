@@ -1,16 +1,23 @@
 import { gql } from '@apollo/client/core';
 
 export const GET_CHANNEL_PRODUCTS = gql`
-  query GetChannelProducts($id: String!) {
-    channelProducts(id: $id) {
+  query GetChannelProducts(
+    $id: String!
+    $first: Int!
+    $whereCondition: QueryChannelProductsWhereWhereConditions
+    $page: Int
+  ) {
+    channelProducts(
+      id: $id
+      first: $first
+      where: $whereCondition
+      page: $page
+    ) {
       data {
         id
+        uuid
         name
         description
-        attributes {
-          name
-          value
-        }
         variants {
           id
           name
@@ -18,6 +25,18 @@ export const GET_CHANNEL_PRODUCTS = gql`
             price
           }
         }
+        attributes {
+          slug
+          name
+          value
+        }
+      }
+      paginatorInfo {
+        count
+        currentPage
+        lastPage
+        perPage
+        total
       }
     }
   }

@@ -1,12 +1,14 @@
-import { VariantInterface } from './inventory';
+import { ProductInterface } from './inventory';
+import { PaginatorInfo } from './paginator';
+import { WhereCondition } from './index';
 
-export interface ChannelProductsInterface {
+export type ChannelProductsProps = {
   id: string;
-  name: string;
-  description: string;
-  variants?: VariantInterface[];
-  attributes: {
-    name: string;
-    value: string;
-  }
+  first: number;
+  whereCondition: WhereCondition;
+  page: number;
+};
+export interface ChannelProductsInterface {
+  data: ProductInterface[];
+  paginatorInfo?: PaginatorInfo;
 }
