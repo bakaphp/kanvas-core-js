@@ -17,6 +17,7 @@ export const GET_CHANNEL_PRODUCTS = gql`
         id
         uuid
         name
+        slug
         description
         variants {
           id
@@ -29,6 +30,12 @@ export const GET_CHANNEL_PRODUCTS = gql`
           slug
           name
           value
+        }
+        files {
+          data {
+            name
+            url
+          }
         }
       }
       paginatorInfo {
