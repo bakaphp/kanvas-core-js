@@ -105,6 +105,20 @@ export interface CartData {
   };
 }
 
+export interface CartDataDiscount {
+  cartDiscountCodesUpdate: {
+    id: string;
+    total: number;
+    items: {
+      id: number;
+      name: string;
+      price: number;
+      quantity: number;
+      attributes: string;
+    }[];
+  };
+}
+
 export interface OrderItemInput {
   input: {
     cartId: 'default';

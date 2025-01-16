@@ -1,6 +1,11 @@
 import { ClientType } from '../../../index';
-import { ADD_TO_CART_MUTATION, CLEAR_CART_MUTATION, GET_CART_QUERY } from '../../../mutations';
-import { CartData, CartItemData, CartItemInput } from '../../../types/commerce';
+import {
+  ADD_TO_CART_MUTATION,
+  CLEAR_CART_MUTATION,
+  GET_CART_QUERY,
+  CART_DISCOUNT_CODES_UPDATE
+} from '../../../mutations';
+import { CartData, CartDataDiscount, CartItemData, CartItemInput } from '../../../types/commerce';
 
 export class Cart {
   constructor(protected client: ClientType) { }
@@ -10,7 +15,7 @@ export class Cart {
       mutation: ADD_TO_CART_MUTATION,
       variables: { input },
     });
-  
+
     return response.data;
   }
 
@@ -27,6 +32,15 @@ export class Cart {
       query: GET_CART_QUERY,
     });
 
+    return response.data;
+  }
+
+  public async updateDiscountCodes(discountCodes: string[]): Promise<CartDataDiscount> {
+    const response = await this.client.mutate({
+      mutation: CART_DISCOUNT_CODES_UPDATE,
+      variables: { discountCodes },
+    });
+  
     return response.data;
   }
 }
