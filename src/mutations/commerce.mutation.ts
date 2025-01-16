@@ -97,3 +97,19 @@ export const GET_CART_QUERY = gql`
     }
   }
 `;
+
+export const CART_DISCOUNT_CODES_UPDATE = gql`
+  mutation($discountCodes: [String!]!) {
+    cartDiscountCodesUpdate(discountCodes: $discountCodes) {
+      id
+      total
+      items {
+        id
+        name
+        price
+        quantity
+        attributes
+      }
+    }
+  }
+`;
