@@ -93,7 +93,7 @@ export interface CartItemData {
 
 export interface CartData {
   cart: {
-    id: number;
+    id: string;
     total: number;
     total_discount: number;
     items: CartItem[];
@@ -117,7 +117,7 @@ export interface CartDiscount {
 
 export interface CartDataDiscount {
   cartDiscountCodesUpdate: {
-    id: number;
+    id: string;
     total: number;
     total_discount: number;
     items: CartItem[];
