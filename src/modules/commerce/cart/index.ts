@@ -30,6 +30,8 @@ export class Cart {
   public async getCart(): Promise<CartData> {
     const response = await this.client.query({
       query: GET_CART_QUERY,
+      fetchPolicy: 'no-cache',
+      partialRefetch: true,
     });
 
     return response.data;
