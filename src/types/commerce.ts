@@ -93,29 +93,35 @@ export interface CartItemData {
 
 export interface CartData {
   cart: {
-    id: number;
+    id: string;
     total: number;
-    items: {
-      id: number;
-      name: string;
-      price: number;
-      quantity: number;
-      attributes: string;
-    }[];
+    total_discount: number;
+    items: CartItem[];
+    discounts: CartDiscount[];
   };
+}
+
+export interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  attributes: Record<string, string>;
+}
+
+export interface CartDiscount {
+  code: string;
+  amount: string;
+  total: number | null;
 }
 
 export interface CartDataDiscount {
   cartDiscountCodesUpdate: {
     id: string;
     total: number;
-    items: {
-      id: number;
-      name: string;
-      price: number;
-      quantity: number;
-      attributes: string;
-    }[];
+    total_discount: number;
+    items: CartItem[];
+    discounts: CartDiscount[];
   };
 }
 
