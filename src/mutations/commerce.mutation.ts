@@ -87,6 +87,12 @@ export const GET_CART_QUERY = gql`
     cart {
       id
       total
+      total_discount
+      discounts {
+          code
+          amount
+          total
+      }
       items {
         id
         name
@@ -103,6 +109,12 @@ export const CART_DISCOUNT_CODES_UPDATE = gql`
     cartDiscountCodesUpdate(discountCodes: $discountCodes) {
       id
       total
+      total_discount
+      discounts {
+          code
+          amount
+          total
+      }
       items {
         id
         name
