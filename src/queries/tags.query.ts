@@ -5,9 +5,10 @@ export const GET_TAGS = gql`
     $first: Int
     $page: Int
     $where: QueryTagsWhereWhereConditions
+    $orderBy: [QueryTagsOrderByOrderByClause!]
     $search: String
   ) {
-    tags(first: $first, page: $page, where: $where, search: $search) {
+    tags(first: $first, page: $page, where: $where, search: $search, orderBy: $orderBy) {
       data {
         id
         user {
@@ -16,6 +17,7 @@ export const GET_TAGS = gql`
         slug
         name
         weight
+        is_feature
         created_at
         updated_at
       }
