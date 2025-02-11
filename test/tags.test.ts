@@ -13,7 +13,5 @@ describe('Test the Soc', () => {
         });
 
         expect(tagList).toBeDefined();
-        //console.log(recentMessages);
-        //const { data } = recentMessages;
     });
 });
