@@ -9,7 +9,8 @@ describe('Test the Soc', () => {
         const client = getClient();
         const tags = client.tags;
         const tagList = await tags.getTags({
-            where: { column: 'IS_FEATURE', operator: 'EQ', value: 1 }
+            where: { column: 'IS_FEATURE', operator: 'EQ', value: 1 },
+            orderBy: [{ column: 'WEIGHT', order: 'ASC' }],
         });
 
         expect(tagList).toBeDefined();

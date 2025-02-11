@@ -21,7 +21,7 @@ export class Tags {
       first?: number;
       page?: number;
       where?: WhereCondition;
-      orderBy?: OrderBy;
+      orderBy?: OrderBy[];
       search?: string;
     } = {}
   ): Promise<CreatedTags> {
