@@ -15,7 +15,7 @@ import {
 } from 'types/tags';
 
 export class Tags {
-  constructor(protected client: ClientType) {}
+  constructor(protected client: ClientType) { }
   public async getTags(
     options: {
       first?: number;
@@ -25,8 +25,8 @@ export class Tags {
       search?: string;
     } = {}
   ): Promise<CreatedTags> {
-      
-      const { first, page, where, search, orderBy } = options;
+
+    const { first, page, where, search, orderBy } = options;
 
     const response = await this.client.query({
       query: GET_TAGS,
