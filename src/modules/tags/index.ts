@@ -6,7 +6,7 @@ import {
   UPDATE_TAG,
 } from '../../mutations';
 import { GET_TAGS } from '../../queries';
-import { WhereCondition } from '../../types';
+import { OrderBy, WhereCondition } from '../../types';
 import {
   AttachTagEntityInput,
   CreatedTags,
@@ -21,15 +21,17 @@ export class Tags {
       first?: number;
       page?: number;
       where?: WhereCondition;
+      orderBy?: OrderBy;
       search?: string;
     } = {}
   ): Promise<CreatedTags> {
       
-      const { first,page, where, search } = options;
+      const { first, page, where, search, orderBy } = options;
 
     const response = await this.client.query({
       query: GET_TAGS,
-      variables: { first,page, where, search },
+      variables: { first, page, where, search, orderBy },
+      fetchPolicy: 'no-cache',
     });
     return response.data.tags;
   }
