@@ -15,18 +15,18 @@ import {
 } from 'types/tags';
 
 export class Tags {
-  constructor(protected client: ClientType) {}
+  constructor(protected client: ClientType) { }
   public async getTags(
     options: {
       first?: number;
       page?: number;
       where?: WhereCondition;
-      orderBy?: OrderBy;
+      orderBy?: OrderBy[];
       search?: string;
     } = {}
   ): Promise<CreatedTags> {
-      
-      const { first, page, where, search, orderBy } = options;
+
+    const { first, page, where, search, orderBy } = options;
 
     const response = await this.client.query({
       query: GET_TAGS,
