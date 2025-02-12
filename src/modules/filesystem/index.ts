@@ -269,4 +269,48 @@ export class FileSystem {
     }
     return response.data.data.updateCompanyPhotoProfile as CompanyInterface;
   }
+
+  public async updateCompanyBranchPhotoProfile(
+    data: File,
+    branch_id: string
+  ): Promise<any> {
+    if (!this.options || !this.axiosClient) {
+      throw new Error('FileSystem module not initialized');
+    }
+
+    const query = `
+      id
+      uuid
+      name
+      custom_fields(orderBy: [{ column: UPDATED_AT, order: DESC }]) {
+        data {
+          name
+          value
+        }
+      }
+      photo {
+        url
+      }
+    `;
+
+    const operations = {
+      query: `mutation ($file: Upload!) {
+        updateCompanyPhotoProfile(file: $file, id: "${branch_id}") { ${query} }
+      }`,
+      variables: { file: null },
+    };
+
+    const formData = new FormData();
+    formData.append('operations', JSON.stringify(operations));
+    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+    formData.append('0', data, data.name);
+
+    const response = await this.axiosClient.post('', formData);
+
+    if (response.data.errors) {
+      throw new Error(response.data.errors[0].message);
+    }
+
+    return response.data;
+  }
 }
