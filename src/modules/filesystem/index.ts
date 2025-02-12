@@ -295,7 +295,7 @@ export class FileSystem {
 
     const operations = {
       query: `mutation ($file: Upload!) {
-        updateCompanyPhotoProfile(file: $file, id: "${branch_id}") { ${query} }
+        updatePhotoProfileToCompanyBranch(file: $file, id: "${branch_id}") { ${query} }
       }`,
       variables: { file: null },
     };
