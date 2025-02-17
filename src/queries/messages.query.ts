@@ -5,6 +5,7 @@ export const GET_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => g
     $where: QueryMessagesWhereWhereConditions
     $hasAppModuleMessage: QueryMessagesHasAppModuleMessageWhereHasConditions
     $hasTags: QueryMessagesHasTagsWhereHasConditions
+    $requiredTags: [String!]
     $hasType: QueryMessagesHasTypeWhereHasConditions
     $orderBy: [QueryMessagesOrderByOrderByClause!]
     $search: String
@@ -16,6 +17,7 @@ export const GET_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => g
       where: $where
       hasAppModuleMessage: $hasAppModuleMessage
       hasTags: $hasTags
+      requiredTags: $requiredTags
       hasType: $hasType
       orderBy: $orderBy
       search: $search

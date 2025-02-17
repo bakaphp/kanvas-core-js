@@ -20,7 +20,7 @@ describe('Test the Commerce', () => {
         const cart = client.cart;
         
         // Test adding discount codes
-        const updatedCart = await cart.updateDiscountCodes(['TEST_CODE']);
+        const updatedCart = await cart.updateDiscountCodes(['KANVAS']);
         expect(updatedCart).toBeDefined();
         expect(updatedCart.cartDiscountCodesUpdate.id).toBeDefined();
         expect(updatedCart.cartDiscountCodesUpdate.items).toBeInstanceOf(Array);

@@ -131,6 +131,7 @@ export class Messages {
       first?: number;
       page?: number;
       hasTags?: WhereCondition;
+      requiredTags?: string[]; // New requiredTags filter
       hasType?: WhereCondition;
       childrenOptions?: {
         alias?: string; // Alias for children field
@@ -142,6 +143,7 @@ export class Messages {
       hasAppModuleMessageWhere,
       search,
       hasTags,
+      requiredTags,
       hasType,
       where,
       orderBy,
@@ -158,6 +160,7 @@ export class Messages {
         where,
         hasAppModuleMessageWhere,
         hasTags,
+        requiredTags,
         hasType,
         orderBy,
         search,
