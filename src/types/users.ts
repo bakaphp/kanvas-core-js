@@ -233,3 +233,10 @@ export interface DeviceParams {
   source_site: SourceSite; // Use the enum here
   source_username?: string;
 }
+
+export interface AllUsers {
+  users: {
+    data: UserInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
+}
