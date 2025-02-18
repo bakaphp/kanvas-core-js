@@ -318,3 +318,109 @@ export const GET_BLOCKED_USERS = gql`
     }
   }
 `;
+
+export const GET_All_USERS = gql`
+query users(
+  $first: Int
+  $page: Int
+  $search: String
+  $whereCondition: QueryUsersWhereWhereConditions
+  $orderBy: [QueryUsersOrderByOrderByClause!]
+) {
+  users(
+      first: $first
+      page: $page
+      search: $search
+      where: $whereCondition
+      orderBy: $orderBy
+    )  {
+    data {
+      id
+      uuid
+      email
+      displayname
+      lastname
+      firstname
+      default_company
+      default_company_branch
+      sex
+      description
+      user_active
+      roles
+      is_active,
+      social{
+        is_following
+      }
+      address {
+        address_1
+        address_2
+        city {
+          id
+          name
+          latitude
+          longitude
+          states_id
+          countries_id
+          __typename
+        }
+        country {
+          id
+          name
+          code
+          flag
+          __typename
+        }
+        zip_code
+        state {
+          id
+          code
+          name
+          __typename
+        }
+        __typename
+      }
+      contact {
+        phone_number
+        cell_phone_number
+        __typename
+      }
+      companies {
+        id
+        uuid
+        name
+        user {
+          firstname
+          roles
+          __typename
+        }
+        __typename
+      }
+      photo {
+        url
+        __typename
+      }
+      branches {
+        id
+        name
+        companies_id
+        __typename
+      }
+      created_at
+      updated_at
+      __typename
+    }
+    paginatorInfo {
+      currentPage
+      perPage
+      firstItem
+      lastItem
+      total
+      count
+      lastPage
+      hasMorePages
+      __typename
+    }
+    __typename
+    }
+  }
+`;
