@@ -51,18 +51,6 @@ export class Order {
   }
 
   public async generatePaymentIntent(
-    id: string
-  ): Promise<GeneratePaymentIntentResult> {
-    const response = await this.client.mutate({
-      mutation: GENERATE_ORDER_PAYMENT_INTENT_MUTATION,
-      variables: { id },
-    });
-
-    return response.data
-      .generateOrderPaymentIntent as GeneratePaymentIntentResult;
-  }
-
-  public async generateStripePaymentIntent(
     amount: number
   ): Promise<GeneratePaymentIntentResult> {
     const response = await this.client.mutate({
