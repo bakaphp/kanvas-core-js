@@ -8,6 +8,7 @@ import {
   GET_USER_BY_DISPLAYNAME,
   GET_USER_BY_ID,
   GET_BLOCKED_USERS,
+  GET_All_USERS,
 } from '../../queries';
 import {
   REGISTER_MUTATTION,
@@ -47,6 +48,7 @@ import {
   OrderBy,
   AllBlockedUsersInterface,
   DeviceParams,
+  AllUsers,
 } from '../../types';
 
 export class Users {
@@ -228,6 +230,7 @@ export class Users {
     options: {
       first?: number;
       page?: number;
+      search?: String
       whereCondition?: WhereCondition;
       orderByCondition?: OrderBy[];
     } = {}
@@ -235,6 +238,7 @@ export class Users {
     const {
       first,
       page,
+      search,
       whereCondition,
       orderByCondition,
     } = options;
@@ -244,6 +248,7 @@ export class Users {
       variables: {
         first,
         page,
+        search,
         whereCondition,
         orderByCondition
       },
@@ -354,5 +359,37 @@ export class Users {
       variables: { data: input },
     });
     return response.data.unLinkDevice;
+  }
+
+  public async getUsers(
+    options: {
+      search?: string;
+      where?: WhereCondition;
+      orderBy?: Array<OrderBy>;
+      first?: number;
+      page?: number;
+    } = {}
+  ): Promise<AllUsers> {
+    const {
+      search,
+      where,
+      orderBy,
+      first = 25,
+      page,
+    } = options;
+
+    const response = await this.client.query({
+      query: GET_All_USERS,
+      variables: {
+        where,
+        orderBy,
+        search,
+        first,
+        page,
+      },
+      fetchPolicy: 'no-cache',
+    });
+
+    return response.data;
   }
 }
