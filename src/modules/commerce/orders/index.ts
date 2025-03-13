@@ -61,6 +61,19 @@ export class Order {
     return response.data
       .generateOrderPaymentIntent as GeneratePaymentIntentResult;
   }
+
+  public async generateStripePaymentIntent(
+    amount: number
+  ): Promise<GeneratePaymentIntentResult> {
+    const response = await this.client.mutate({
+      mutation: GENERATE_ORDER_PAYMENT_INTENT_MUTATION,
+      variables: { amount },
+    });
+
+    return response.data
+      .generateOrderPaymentIntent as GeneratePaymentIntentResult;
+  }
+
   public async getOrders(
     options: {
       first?: number;

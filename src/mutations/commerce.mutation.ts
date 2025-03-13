@@ -67,8 +67,8 @@ export const CREATE_ORDER_FROM_APPLE_IN_APP_PURCHASE = gql`
 `;
 
 export const GENERATE_ORDER_PAYMENT_INTENT_MUTATION = gql`
-  mutation($id: ID!) {
-    generateOrderPaymentIntent(id: $id) {
+  mutation($amount: Money!) {
+    generateOrderPaymentIntent(amount: $amount) {
       client_secret
       status
       message
