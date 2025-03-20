@@ -36,7 +36,7 @@ export interface Order {
   weight?: number;
   checkout_token?: string;
   currency: string;
-  metadata: string;
+  metadata?: string;
   private_metadata?: string;
   is_deleted: boolean;
   created_at: string;

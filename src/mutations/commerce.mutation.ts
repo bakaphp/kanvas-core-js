@@ -29,6 +29,7 @@ export const CREATE_ORDER_FROM_CART = gql`
         status
         total_gross_amount
         fulfillment_status
+        metadata
         items {
           id
           product_name
