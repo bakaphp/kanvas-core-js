@@ -57,6 +57,7 @@ export const GET_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => g
         total_shared
         total_view
         total_children
+        is_public
         tags {
           data {
               id
@@ -158,6 +159,7 @@ export const GET_FOR_YOU_MESSAGES_QUERY = (includeChildren: boolean, alias: stri
         total_shared
         total_view
         total_children
+        is_public
         tags {
           data {
               id
@@ -250,6 +252,7 @@ export const GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG = gql`
         total_shared
         total_view
         total_children
+        is_public
         parent {
           id
           uuid
@@ -319,6 +322,7 @@ export const GET_CHANNEL_MESSAGES_QUERY = (includeChildren: boolean, alias: stri
         total_shared
         total_view
         total_children
+        is_public
         parent {
           id
           uuid
@@ -408,6 +412,7 @@ export const GET_MESSAGES_GROUP_BY_DATE_QUERY = gql`
         total_shared
         total_view
         total_children
+        is_public
         parent {
           id
           uuid
@@ -486,6 +491,7 @@ export const GET_MESSAGES_LIKED_BY_USER = gql`
         total_shared
         total_view
         total_children
+        is_public
         tags {
           data {
             id
