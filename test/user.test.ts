@@ -170,4 +170,19 @@ describe('Test the KanvasCore client', () => {
 
     expect(unlinkedDevice).toBeTruthy();
   });
+
+  it('get all users', async () => {
+    const client = getClient();
+    const options ={
+      first: 10,
+      page: 1,
+      search: 'testUser',
+    }
+    const allUsers = await client.users.getUsers(options);
+
+    console.log(allUsers);
+
+    expect(allUsers).toBeDefined();
+    expect(allUsers.users.data).toBeDefined();
+  });
 });
