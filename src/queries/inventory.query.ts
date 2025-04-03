@@ -8,6 +8,7 @@ export const GET_PRODUCTS = gql`
     $orderByCondition: [QueryProductsOrderByOrderByClause!]
     $hasCategoriesCondition: QueryProductsHasCategoriesWhereHasConditions
     $hasAttributesCondition: QueryProductsHasAttributesWhereHasConditions
+    $hasVariantsCondition: QueryProductsHasVariantsWhereHasConditions
     $search: String
   ) {
     products(
@@ -17,6 +18,7 @@ export const GET_PRODUCTS = gql`
       orderBy: $orderByCondition
       hasCategories: $hasCategoriesCondition
       hasAttributes: $hasAttributesCondition
+      hasVariants: $hasVariantsCondition
       search: $search
     ) {
       data {

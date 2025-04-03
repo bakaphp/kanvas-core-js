@@ -96,7 +96,7 @@ import {
 } from '../../types';
 
 export class Inventory {
-  constructor(protected client: ClientType) {}
+  constructor(protected client: ClientType) { }
 
   public async createProduct(
     data: ProductInterface | CreateProductParams
@@ -126,6 +126,7 @@ export class Inventory {
       orderByCondition?: OrderBy[];
       hasCategoriesCondition?: WhereCondition;
       hasAttributesCondition?: WhereCondition;
+      hasVariantsCondition?: WhereCondition;
       search?: string;
     } = {}
   ): Promise<AllCreatedProducts> {
@@ -136,6 +137,7 @@ export class Inventory {
       orderByCondition,
       hasCategoriesCondition,
       hasAttributesCondition,
+      hasVariantsCondition, 
       search,
     } = options;
 
@@ -149,6 +151,7 @@ export class Inventory {
         orderByCondition,
         hasCategoriesCondition,
         hasAttributesCondition,
+        hasVariantsCondition,
         search,
       },
       fetchPolicy: 'no-cache',
@@ -157,6 +160,7 @@ export class Inventory {
 
     return response.data;
   }
+
   public async getProductTypes(
     whereCondition?: WhereCondition
   ): Promise<CreatedProductTypes> {
@@ -356,9 +360,9 @@ export class Inventory {
       search?: string;
       orderByCondition?: OrderBy[];
     } = {
-      warehouse_id: 0,
-      status_id: '',
-    }
+        warehouse_id: 0,
+        status_id: '',
+      }
   ): Promise<AllCreatedVariantsbyStatus> {
     const {
       warehouse_id,
