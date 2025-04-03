@@ -40,7 +40,7 @@ export class FileSystem {
 
       this.axiosClient.interceptors.request.use(
         this.options.authAxiosMiddleware,
-        function(error: any) {
+        function (error: any) {
           return Promise.reject(error);
         }
       );
@@ -101,7 +101,11 @@ export class FileSystem {
     );
     formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
     formData.append('0', data, data.name);
-    let response = await this.axiosClient.post('', formData);
+    let response = await this.axiosClient.post('', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
 
     return response.data.data.upload as UPLOAD_INTERFACE;
   }
@@ -215,7 +219,11 @@ export class FileSystem {
     );
     formData.append('0', data, data.name);
     formData.append('1', users_id);
-    let response = await this.axiosClient.post('', formData);
+    let response = await this.axiosClient.post('', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     if (response.data.errors) {
       throw new Error(response.data.errors[0].message);
     }
@@ -263,7 +271,11 @@ export class FileSystem {
     );
     formData.append('0', data, data.name);
     formData.append('1', company_id);
-    let response = await this.axiosClient.post('', formData);
+    let response = await this.axiosClient.post('', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     if (response.data.errors) {
       throw new Error(response.data.errors[0].message);
     }
@@ -305,8 +317,11 @@ export class FileSystem {
     formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
     formData.append('0', data, data.name);
 
-    const response = await this.axiosClient.post('', formData);
-
+    let response = await this.axiosClient.post('', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     if (response.data.errors) {
       throw new Error(response.data.errors[0].message);
     }
