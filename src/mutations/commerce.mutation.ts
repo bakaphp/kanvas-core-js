@@ -67,6 +67,29 @@ export const CREATE_ORDER_FROM_APPLE_IN_APP_PURCHASE = gql`
   }
 `;
 
+export const CREATE_ORDER_FROM_GOOGLE_PLAY_IN_APP_PURCHASE = gql`
+  mutation($input: GooglePlayInAppPurchaseReceipt!) {
+    createOrderFromGooglePlayInAppPurchase(input: $input) {
+        id
+        uuid
+        user_email
+        user_phone
+        order_number
+        status
+        total_gross_amount
+        fulfillment_status
+        items {
+          id
+          product_name
+          product_sku
+          quantity
+          unit_price_gross_amount
+          variant_name
+        }
+      }
+  }
+`;
+
 export const GENERATE_ORDER_PAYMENT_INTENT_MUTATION = gql`
   mutation($amount: Money!) {
     generateOrderPaymentIntent(amount: $amount) {

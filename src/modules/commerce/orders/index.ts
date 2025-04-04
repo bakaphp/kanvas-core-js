@@ -1,6 +1,7 @@
 import { ClientType, GET_ORDERS, OrderBy, WhereCondition } from '../../../index';
 import {
   CREATE_ORDER_FROM_APPLE_IN_APP_PURCHASE,
+  CREATE_ORDER_FROM_GOOGLE_PLAY_IN_APP_PURCHASE,
   CREATE_ORDER_FROM_CART,
   CREATE_ORDER_MUTATION,
   GENERATE_ORDER_PAYMENT_INTENT_MUTATION,
@@ -12,7 +13,9 @@ import {
   OrderCartInput,
   OrderFromCartResults,
   AppleInAppPurchaseReceipt,
+  GooglePlayInAppPurchaseReceipt,
   OrderFromAppleInAppPurchaseResults,
+  OrderFromGooglePlayInAppPurchaseResults,
   CreatedOrders,
 } from '../../../types/commerce';
 
@@ -44,6 +47,17 @@ export class Order {
   ): Promise<OrderFromAppleInAppPurchaseResults> {
     const response = await this.client.mutate({
       mutation: CREATE_ORDER_FROM_APPLE_IN_APP_PURCHASE,
+      variables: { ...input },
+    });
+
+    return response.data;
+  }
+
+  public async createOrderFromGooglePlayInAppPurchaseReceipt(
+    input: GooglePlayInAppPurchaseReceipt
+  ): Promise<OrderFromGooglePlayInAppPurchaseResults> {
+    const response = await this.client.mutate({
+      mutation: CREATE_ORDER_FROM_GOOGLE_PLAY_IN_APP_PURCHASE,
       variables: { ...input },
     });
 
