@@ -57,6 +57,11 @@ export interface OrderFromAppleInAppPurchaseResults {
   createOrderFromAppleInAppPurchase: Order;
 }
 
+export interface OrderFromGooglePlayInAppPurchaseResults {
+  createOrderFromGooglePlayInAppPurchase: Order;
+}
+
+
 export interface OrderItem {
   id: number;
   product_name: string;
@@ -77,6 +82,16 @@ export interface AppleInAppPurchaseReceipt {
     transaction_id: string;
     receipt: string;
     transaction_date: string;
+    region_id?: number;
+    custom_fields?: CustomFieldInput[];
+  };
+}
+
+export interface GooglePlayInAppPurchaseReceipt {
+  input: {
+    product_id: string;
+    order_id: string;
+    purchase_token: string;
     region_id?: number;
     custom_fields?: CustomFieldInput[];
   };

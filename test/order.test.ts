@@ -44,4 +44,22 @@ describe('Test Commerce orders', () => {
         expect(result.createOrderFromAppleInAppPurchase.id).toBeDefined();
         expect(result.createOrderFromAppleInAppPurchase.uuid).toBeDefined();
     });
+
+    it('create order from google play in app purchase', async () => {
+        const client = getClient();
+        const order = client.order;
+        await expect(order.createOrderFromGooglePlayInAppPurchaseReceipt({
+            input: {
+                product_id: 'premium_prompt_10',
+                order_id: 'GPA.3339-7776-6046-73659',
+                purchase_token: 'ohbnkhkhlajafkcamjodgjmp.AO-J1OyuQqNGaOjwEx2UH0rMV67gM0H9QH_dkTf3KOZvYvZwXSHWWKBq2H-muArJUIiVKUn42cgEinMwPZZQgLRxiCRbd-9CuQ',
+                custom_fields: [
+                    {
+                        name: 'message_id',
+                        value: '1',
+                    },
+                ],
+            }
+        })).rejects.toThrow("Receipt is in canceled state");
+    });
 });
