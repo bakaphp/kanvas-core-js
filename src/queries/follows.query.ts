@@ -165,3 +165,35 @@ export const GET_TOTAL_FOLLOWERS_QUERY = gql`
     getTotalFollowers(user_id: $user_id)
   }
 `;
+
+export const USER_RECOMMENDATIONS_QUERY = gql`
+  query getWhoToFollow($user_id: ID!, $static_recommendations: Boolean) {
+    getWhoToFollow(user_id: $user_id, static_recommendations: $static_recommendations) {
+      data {
+            id
+            uuid
+            firstname
+            lastname
+            displayname
+            description
+            dob
+            default_company
+            default_company_uuid
+            default_company_branch
+            default_company_branch_uuid
+            email
+            is_active
+            verify_two_factor
+            sex
+            user_active
+            timezone
+            abilities
+            roles
+            mainRole
+            welcome
+            created_at
+            updated_at
+        }
+    }
+  }
+`;
