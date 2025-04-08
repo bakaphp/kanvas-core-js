@@ -167,8 +167,8 @@ export const GET_TOTAL_FOLLOWERS_QUERY = gql`
 `;
 
 export const USER_RECOMMENDATIONS_QUERY = gql`
-  query getWhoToFollow($user_id: ID!, $static_recommendations: Boolean) {
-    getWhoToFollow(user_id: $user_id, static_recommendations: $static_recommendations) {
+  query getWhoToFollow($user_id: ID!, $static_recommendation: Boolean!) {
+    getWhoToFollow(user_id: $user_id, static_recommendation: $static_recommendation) {
       data {
             id
             uuid
