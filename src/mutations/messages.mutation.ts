@@ -32,6 +32,52 @@ export const CREATE_MESSAGE_MUTATION = gql`
   }
 `;
 
+export const CREATE_MESSAGE_MUTATION_V2 = gql`
+  mutation($file: Upload!) {
+    createMessage(
+      input: {
+        message_verb: "EXE"
+        message: {
+          name: "John Doe"
+          for_review: true
+          is_reviewed: false
+          text: "Sample message text"
+        }
+        entity_id: "550e8400-e29b-41d4-a716-446655440000"
+        tags: [{ name: "test" }, { name: "test2" }]
+        is_public: 1
+        files: [$file]
+      }
+    ) {
+      id
+      message
+      user {
+        id
+      }
+      parent {
+        id
+      }
+      messageType {
+        id
+      }
+      reactions_count
+      tags {
+        data {
+          name
+        }
+      }
+      files {
+        data {
+          id
+          uuid
+          name
+          url
+        }
+      }
+    }
+  }
+`;
+
 export const UPDATE_MESSAGE_MUTATION = gql`
   mutation updateMessage($id: ID!, $input: MessageUpdateInput!) {
     updateMessage(id: $id, input: $input) {
