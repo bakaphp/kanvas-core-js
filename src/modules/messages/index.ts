@@ -62,7 +62,7 @@ export class Messages {
 
       this.axiosClient.interceptors.request.use(
         this.options.authAxiosMiddleware,
-        function (error: any) {
+        function(error: any) {
           return Promise.reject(error);
         }
       );
@@ -77,6 +77,44 @@ export class Messages {
       variables: { input: input },
     });
     return (await response).data.createMessage as MessagesInterface;
+  }
+
+  public async createMessageWithFile(file: File, input: any): Promise<any> {
+    if (!this.options || !this.axiosClient)
+      throw new Error('FileSystem module not initialized');
+
+    const formData = new FormData();
+
+    formData.append(
+      'operations',
+      JSON.stringify({
+        query: `
+          mutation ($file: Upload!, $input: CreateMessageInput!) {
+            createMessage(input: $input) {
+              id
+              message
+              user { id }
+              parent { id }
+              messageType { id }
+              reactions_count
+              tags { data { name } }
+              files { data { id, uuid, name, url } }
+            }
+          }
+        `,
+        variables: {
+          file: null,
+          input,
+        },
+      })
+    );
+
+    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+    formData.append('0', file, file.name);
+
+    const response = await this.axiosClient.post('', formData);
+
+    return response.data.data.createMessage;
   }
 
   public async updateMessage(
@@ -306,7 +344,6 @@ export class Messages {
     });
     return response.data.messages as MessagesInterface;
   }
-
 
   public async getMessagesLikedByUser(
     userId: number,
