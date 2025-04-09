@@ -89,7 +89,7 @@ export class Messages {
       'operations',
       JSON.stringify({
         query: `
-          mutation ($file: Upload!, $input: CreateMessageInput!) {
+          mutation ($file: Upload!, $input: MessageInput!) {
             createMessage(input: $input) {
               id
               message
