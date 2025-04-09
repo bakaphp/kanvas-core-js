@@ -90,7 +90,19 @@ export class Messages {
       JSON.stringify({
         query: `
           mutation ($file: Upload!, $input: MessageInput!) {
-            createMessage(input: $input) {
+            createMessage(input: {
+              message_verb: $input.message_verb,
+              message: {
+                name: $input.message.name,
+                for_review: $input.message.for_review,
+                is_reviewed: $input.message.is_reviewed,
+                text: $input.message.text
+              },
+              entity_id: $input.entity_id,
+              tags: $input.tags,
+              is_public: $input.is_public,
+              files: [$file]
+            }) {
               id
               message
               user { id }
@@ -99,8 +111,8 @@ export class Messages {
               reactions_count
               tags { data { name } }
               files { data { id, uuid, name, url } }
-            }
           }
+        }
         `,
         variables: {
           file: null,
