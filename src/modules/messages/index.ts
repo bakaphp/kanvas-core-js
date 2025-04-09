@@ -114,7 +114,7 @@ export class Messages {
 
     const response = await this.axiosClient.post('', formData);
 
-    return response.data.data.createMessage;
+    return response;
   }
 
   public async updateMessage(
