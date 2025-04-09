@@ -89,6 +89,16 @@ export interface MessageInputInterface {
   distribution?: DistributionInputInterface;
 }
 
+export interface MessageWithFileInputInterface {
+  message_verb: string;
+  message: any;
+  system_modules_id?: string;
+  entity_id?: string;
+  parent_id?: string;
+  distribution?: DistributionInputInterface;
+  files: File[];
+}
+
 export interface MessageUpdateInputInterface {
   message: string;
   message_verb?: string;

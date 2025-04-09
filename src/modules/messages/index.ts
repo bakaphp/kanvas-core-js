@@ -16,6 +16,7 @@ import {
   AllLikedMessagesByUser,
   AllForYouMessages,
   AllChannelMessages,
+  MessageWithFileInputInterface,
 } from '../../types';
 import {
   CREATE_MESSAGE_MUTATION,
@@ -30,6 +31,7 @@ import {
   VIEW_MESSAGE_MUTATION,
   DISLIKE_MESSAGE_MUTATION,
   RESTORE_MESSAGE_MUTATION,
+  CREATE_MESSAGE_WITH_FILE_MUTATION,
 } from '../../mutations';
 
 import {
@@ -79,7 +81,10 @@ export class Messages {
     return (await response).data.createMessage as MessagesInterface;
   }
 
-  public async createMessageWithFile(file: File, input: any): Promise<any> {
+  public async createMessageWithFile(
+    file: File,
+    input: MessageWithFileInputInterface
+  ): Promise<any> {
     if (!this.options || !this.axiosClient)
       throw new Error('FileSystem module not initialized');
 
@@ -88,28 +93,17 @@ export class Messages {
     formData.append(
       'operations',
       JSON.stringify({
-        query: `
-          mutation ($file: Upload!, $input: MessageInput!) {
-            createMessage(input: $input) {
-              id
-              message
-              user { id }
-              parent { id }
-              messageType { id }
-              reactions_count
-              tags { data { name } }
-              files { data { id, uuid, name, url } }
-            }
-          }
-        `,
+        query: CREATE_MESSAGE_WITH_FILE_MUTATION,
         variables: {
-          file: null,
-          input,
+          input: {
+            ...input,
+            files: null,
+          },
         },
       })
     );
 
-    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+    formData.append('map', JSON.stringify({ '0': ['variables.input.files'] }));
     formData.append('0', file, file.name);
 
     const response = await this.axiosClient.post('', formData);

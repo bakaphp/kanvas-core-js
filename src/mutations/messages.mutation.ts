@@ -32,35 +32,36 @@ export const CREATE_MESSAGE_MUTATION = gql`
   }
 `;
 
-export const CREATE_MESSAGE_MUTATION_V2 = gql`
-  mutation($file: Upload!) {
-    createMessage(
-      input: {
-        message_verb: "EXE"
-        message: {
-          name: "John Doe"
-          for_review: true
-          is_reviewed: false
-          text: "Sample message text"
-        }
-        entity_id: "550e8400-e29b-41d4-a716-446655440000"
-        tags: [{ name: "test" }, { name: "test2" }]
-        is_public: 1
-        files: [$file]
-      }
-    ) {
+export const CREATE_MESSAGE_WITH_FILE_MUTATION = `
+  mutation createMessage($input: MessageInput!) {
+    createMessage(input: $input) {
       id
+      uuid
+      slug
       message
+      parent_id
+      total_liked
+      total_saved
+      comment_count
+      message_types_id
+      reactions_count
       user {
         id
+        firstname
+        lastname
+        displayname
+      }
+      appModuleMessage {
+        entity_id
+        system_modules
       }
       parent {
         id
+        uuid
       }
       messageType {
         id
       }
-      reactions_count
       tags {
         data {
           name
