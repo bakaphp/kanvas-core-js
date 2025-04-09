@@ -49,4 +49,22 @@ describe('Test the Social Messages', () => {
 
         expect(isFollowing).toBeDefined();
     });
+
+    it('get follow user recommendations', async () => {
+        const client = getClient();
+        const userInfo = await client.users.getUserByDisplayName('test');
+
+        const getFollowRecomendations = await client.follow.getFollowRecomendations(userInfo.id, false);
+
+        expect(getFollowRecomendations).toBeDefined();
+    });
+
+    it('get static user follow recommendations', async () => {
+        const client = getClient();
+        const userInfo = await client.users.getUserByDisplayName('test');
+
+        const getFollowRecomendations = await client.follow.getFollowRecomendations(userInfo.id, true);
+
+        expect(getFollowRecomendations).toBeDefined();
+    });
 });
