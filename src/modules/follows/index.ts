@@ -8,6 +8,7 @@ import {
   GET_FOLLOWING_QUERY,
   GET_TOTAL_FOLLOWERS_QUERY,
   GET_FOLLOWING_ENTITY_QUERY,
+  USER_RECOMMENDATIONS_QUERY,
 } from '../../queries/follows.query';
 
 import { UserInterface, FollowingInterface } from '../../types';
@@ -70,5 +71,13 @@ export class Follow {
       variables: { user_id },
     });
     return response.data.getTotalFollowers;
+  }
+
+  public async getFollowRecomendations(user_id: number | string, static_recommendation: boolean): Promise<UserInterface[]> {
+    const response = await this.client.query({
+      query: USER_RECOMMENDATIONS_QUERY,
+      variables: { user_id, static_recommendation },
+    });
+    return response.data.getWhoToFollow.data;
   }
 }
