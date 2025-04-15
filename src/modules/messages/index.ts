@@ -106,16 +106,10 @@ export class Messages {
     formData.append('map', JSON.stringify({ '0': ['variables.input.files'] }));
     formData.append('0', file, file.name);
 
-    // Get authorization headers before making the request
-    // This ensures the user auth token is included, not just admin keys
-    const authHeaders = await this.options.authAxiosMiddleware();
+    // The Authorization header should be added by the interceptor
+    // that was set up in the constructor
+    const response = await this.axiosClient.post('', formData);
 
-    const response = await this.axiosClient.post('', formData, {
-      headers: {
-        ...authHeaders, // Include the authorization headers explicitly
-      }
-    });
-    
     return response;
   }
 
