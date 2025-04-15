@@ -64,7 +64,7 @@ export class Messages {
 
       this.axiosClient.interceptors.request.use(
         this.options.authAxiosMiddleware,
-        function(error: any) {
+        function (error: any) {
           return Promise.reject(error);
         }
       );
@@ -106,8 +106,16 @@ export class Messages {
     formData.append('map', JSON.stringify({ '0': ['variables.input.files'] }));
     formData.append('0', file, file.name);
 
-    const response = await this.axiosClient.post('', formData);
+    // Get authorization headers before making the request
+    // This ensures the user auth token is included, not just admin keys
+    const authHeaders = await this.options.authAxiosMiddleware();
 
+    const response = await this.axiosClient.post('', formData, {
+      headers: {
+        ...authHeaders, // Include the authorization headers explicitly
+      }
+    });
+    
     return response;
   }
 
