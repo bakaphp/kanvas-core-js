@@ -83,7 +83,8 @@ export class Messages {
 
   public async createMessageWithFile(
     file: File,
-    input: MessageWithFileInputInterface
+    input: MessageWithFileInputInterface,
+    token?: string // Optional token parameter
   ): Promise<any> {
     if (!this.options || !this.axiosClient)
       throw new Error('FileSystem module not initialized');
@@ -106,23 +107,18 @@ export class Messages {
     formData.append('map', JSON.stringify({ '0': ['variables.input.files'] }));
     formData.append('0', file, file.name);
 
-    // Use the existing authAxiosMiddleware function to get the authorization headers
-    // This ensures we use the same token retrieval logic as the rest of the application
-    let additionalHeaders = {};
-    if (this.options.authAxiosMiddleware) {
-      try {
-        additionalHeaders = await this.options.authAxiosMiddleware();
-      } catch (error) {
-        console.error('Error getting auth headers:', error);
-      }
+    // Create headers object
+    const headers: Record<string, string> = {
+      'Content-Type': 'multipart/form-data',
+    };
+
+    // Add Authorization header if token is provided
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
     }
 
-    const response = await this.axiosClient.post('', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        ...additionalHeaders
-      }
-    });
+    // Make the request with our headers
+    const response = await this.axiosClient.post('', formData, { headers });
 
     return response;
   }
