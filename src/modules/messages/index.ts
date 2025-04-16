@@ -106,9 +106,16 @@ export class Messages {
     formData.append('map', JSON.stringify({ '0': ['variables.input.files'] }));
     formData.append('0', file, file.name);
 
-    // The Authorization header should be added by the interceptor
-    // that was set up in the constructor
-    const response = await this.axiosClient.post('', formData);
+    // Get the auth token from localStorage
+    const authToken = localStorage.getItem("token") || null;
+
+    // Use inline config with Content-Type and Authorization if available
+    const response = await this.axiosClient.post('', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        ...(authToken && { 'Authorization': `Bearer ${authToken}` })
+      },
+    });
 
     return response;
   }
