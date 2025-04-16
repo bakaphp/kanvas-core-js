@@ -106,15 +106,22 @@ export class Messages {
     formData.append('map', JSON.stringify({ '0': ['variables.input.files'] }));
     formData.append('0', file, file.name);
 
-    // Get the auth token from localStorage
-    const authToken = localStorage.getItem("token") || null;
+    // Use the existing authAxiosMiddleware function to get the authorization headers
+    // This ensures we use the same token retrieval logic as the rest of the application
+    let additionalHeaders = {};
+    if (this.options.authAxiosMiddleware) {
+      try {
+        additionalHeaders = await this.options.authAxiosMiddleware();
+      } catch (error) {
+        console.error('Error getting auth headers:', error);
+      }
+    }
 
-    // Use inline config with Content-Type and Authorization if available
     const response = await this.axiosClient.post('', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        ...(authToken && { 'Authorization': `Bearer ${authToken}` })
-      },
+        ...additionalHeaders
+      }
     });
 
     return response;
