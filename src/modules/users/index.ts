@@ -28,6 +28,7 @@ import {
   UPDATE_EMAIL_MUTATION,
   LINK_DEVICE_MUTATION,
   UNLINK_DEVICE_MUTATION,
+  SAVE_USER_APP_PREFERENCES_MUTATION,
 } from '../../mutations';
 import {
   UserInterface,
@@ -354,5 +355,13 @@ export class Users {
       variables: { data: input },
     });
     return response.data.unLinkDevice;
+  }
+
+  public async saveUserAppPreferences(preferences: object): Promise<boolean> {
+    const response = await this.client.mutate({
+      mutation: SAVE_USER_APP_PREFERENCES_MUTATION,
+      variables: { preferences: preferences },
+    });
+    return response.data.saveUserAppPreferences;
   }
 }

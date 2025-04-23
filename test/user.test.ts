@@ -170,4 +170,16 @@ describe('Test the KanvasCore client', () => {
 
     expect(unlinkedDevice).toBeTruthy();
   });
+
+  it('test save user app preferences', async () => {
+    const client = getClient();
+    const preferences = {
+      preference_1: 1,
+      preference_2: 0,
+      preference_3: 1
+    };
+    const saveUserAppPreferences = await client.users.saveUserAppPreferences(preferences);
+    
+    expect(saveUserAppPreferences).toBeTruthy();
+  });
 });

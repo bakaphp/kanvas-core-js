@@ -226,3 +226,9 @@ export const UNLINK_DEVICE_MUTATION = gql`
     unLinkDevice(data: $data)
   }
 `;
+
+export const SAVE_USER_APP_PREFERENCES_MUTATION = gql`
+  mutation saveUserAppPreferences($preferences: Mixed!) {
+    saveUserAppPreferences(preferences: $preferences)
+  }
+`;
