@@ -316,6 +316,10 @@ export const GET_VARIANTS = gql`
           name
           slug
         }
+        channel {
+            price
+            quantity
+        }
         warehouses {
           warehouses_id
           status_history {
@@ -408,6 +412,10 @@ export const GET_VARIANTS_BY_STATUS = gql`
           id
           name
           slug
+        }
+        channel {
+            price
+            quantity
         }
         warehouses {
           warehouses_id
