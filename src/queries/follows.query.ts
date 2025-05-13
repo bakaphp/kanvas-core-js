@@ -193,6 +193,9 @@ export const USER_RECOMMENDATIONS_QUERY = gql`
             welcome
             created_at
             updated_at
+            photo {
+                url
+            }
         }
     }
   }
