@@ -196,6 +196,16 @@ export const USER_RECOMMENDATIONS_QUERY = gql`
             photo {
                 url
             }
+            social{
+                total_message
+                total_like
+                total_followers
+                total_following
+                total_blocked
+                total_lists
+                is_following
+                is_blocked
+            }
         }
     }
   }
