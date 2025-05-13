@@ -19,6 +19,7 @@ export const GET_CHANNEL_PRODUCTS = gql`
         name
         slug
         description
+        html_description
         categories {
           id
           name
