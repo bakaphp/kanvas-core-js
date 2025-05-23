@@ -28,6 +28,11 @@ export const GET_CHANNEL_PRODUCTS = gql`
         variants {
           id
           name
+          attributes{
+            id
+            name
+            value
+          }
           channel {
             price
           }
