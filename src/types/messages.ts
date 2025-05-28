@@ -86,6 +86,7 @@ export interface MessageInputInterface {
   system_modules_id?: string;
   entity_id?: string;
   parent_id?: string;
+  channel_slug?: string;
   distribution?: DistributionInputInterface;
 }
 
