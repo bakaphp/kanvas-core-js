@@ -128,6 +128,8 @@ export class Inventory {
       hasAttributesCondition?: WhereCondition;
       hasVariantsCondition?: WhereCondition;
       search?: string;
+      translate?: string;
+      withTranslate?: boolean;
     } = {}
   ): Promise<AllCreatedProducts> {
     const {
@@ -139,6 +141,8 @@ export class Inventory {
       hasAttributesCondition,
       hasVariantsCondition, 
       search,
+      translate,
+      withTranslate,
     } = options;
 
     const response = await this.client.query({
@@ -153,6 +157,8 @@ export class Inventory {
         hasAttributesCondition,
         hasVariantsCondition,
         search,
+        withTranslate,
+        translate,
       },
       fetchPolicy: 'no-cache',
       partialRefetch: true,
@@ -320,9 +326,11 @@ export class Inventory {
       whereCondition?: WhereCondition;
       orderByCondition?: OrderBy[];
       search?: string;
+      translations?: string;
+      withTranslate?: boolean;
     } = {}
   ): Promise<AllCreatedVariants> {
-    const { first, page, whereCondition, orderByCondition, search } = options;
+    const { first, page, whereCondition, orderByCondition, search, translations, withTranslate } = options;
 
     const response = await this.client.query({
       query: GET_VARIANTS,
@@ -333,6 +341,8 @@ export class Inventory {
         whereCondition,
         orderByCondition,
         search,
+        translations,
+        withTranslate,
       },
       fetchPolicy: 'no-cache',
       partialRefetch: true,
