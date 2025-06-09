@@ -10,6 +10,8 @@ export const GET_PRODUCTS = gql`
     $hasAttributesCondition: QueryProductsHasAttributesWhereHasConditions
     $hasVariantsCondition: QueryProductsHasVariantsWhereHasConditions
     $search: String
+    $withTranslate: Boolean! = false
+    $translate: String! = "en"
   ) {
     products(
       first: $first
@@ -35,6 +37,14 @@ export const GET_PRODUCTS = gql`
         is_published
         created_at
         updated_at
+        translation(languageCode: $translate) @include(if: $withTranslate) {
+          name
+          description
+          html_description
+          language {
+            code
+          }
+        }
         files {
           data {
             id
@@ -291,6 +301,8 @@ export const GET_VARIANTS = gql`
     $whereCondition: QueryVariantsWhereWhereConditions
     $orderByCondition: [QueryVariantsOrderByOrderByClause!]
     $search: String
+    $withTranslate: Boolean! = false
+    $translate: String! = "en"
   ) {
     variants(
       first: $first
@@ -311,6 +323,14 @@ export const GET_VARIANTS = gql`
         html_description
         sku
         ean
+        translation(languageCode: $translate) @include(if: $withTranslate) {
+          name
+          description
+          html_description
+          language {
+            code
+          }
+        }
         status {
           id
           name
