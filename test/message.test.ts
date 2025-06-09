@@ -379,11 +379,32 @@ describe('Test the Social Messages', () => {
         const recentMessages = await messages.getForYouMessages({
             orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
             first: 25,
-            page: 1
+            page: 1,
+            childrenOptions: {
+                alias: "children",
+                first: 10,
+            }
         });
         expect(recentMessages).toBeDefined();
         expect(recentMessages.forYouMessages.data).toBeDefined();
         expect(recentMessages.forYouMessages.data.length).toBeGreaterThan(0);
+    });
+
+    it('get following feed messages', async () => {
+        const client = getClient();
+        const messages = client.messages;
+        const recentMessages = await messages.getFollowingFeedMessages({
+            orderBy: [{ column: 'CREATED_AT', order: 'DESC' }],
+            first: 25,
+            page: 1,
+            childrenOptions: {
+                alias: "children",
+                first: 10,
+            }
+        });
+        expect(recentMessages).toBeDefined();
+        expect(recentMessages.followingFeedMessages.data).toBeDefined();
+        expect(recentMessages.followingFeedMessages.data.length).toBeGreaterThan(0);
     });
 
     it('get message from channel', async () => {

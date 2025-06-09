@@ -520,3 +520,105 @@ export const GET_MESSAGES_LIKED_BY_USER = gql`
     }
   }
 `;
+
+export const GET_FOLLOWING_FEED_QUERY = (includeChildren: boolean, alias: string) => gql`
+  query followingFeedMessages(
+    $where: QueryFollowingFeedMessagesWhereWhereConditions
+    $hasTags: QueryFollowingFeedMessagesHasTagsWhereHasConditions
+    $hasType: QueryFollowingFeedMessagesHasTypeWhereHasConditions
+    $orderBy: [QueryFollowingFeedMessagesOrderByOrderByClause!]
+    $first: Int! = 25
+    $page: Int
+    ${includeChildren ? `$childrenFirst: Int!` : ''}
+  ) {
+    followingFeedMessages(
+      where: $where
+      hasTags: $hasTags
+      hasType: $hasType
+      orderBy: $orderBy
+      first: $first
+      page: $page
+    ) {
+      data {
+        id
+        uuid
+        message
+        parent_id
+        slug
+        user {
+          id
+          firstname
+          lastname
+          displayname
+          photo {
+            url
+          }
+          social {
+            is_blocked
+            is_following
+          }
+        }
+        appModuleMessage {
+          entity_id
+          system_modules
+        }
+        message_types_id
+        message
+        reactions_count
+        comment_count
+        total_liked
+        total_disliked
+        total_saved
+        total_shared
+        total_view
+        total_children
+        is_public
+        tags {
+          data {
+              id
+              name
+              slug
+          }
+        }
+        parent {
+          id
+          uuid
+        },
+        myInteraction {
+            is_liked
+            is_disliked
+            is_saved
+            is_shared
+            is_reported
+            is_purchased
+        }
+        ${includeChildren ? `${alias}: children(first: $childrenFirst) {
+          data {
+            id
+            uuid
+            message
+            slug
+            user {
+              id
+              firstname
+              lastname
+              displayname
+              photo {
+                url
+              }
+              social {
+                is_blocked
+                is_following
+              }
+            }
+          }
+        }` : ''}
+        created_at
+      }
+      paginatorInfo {
+        currentPage
+        lastPage
+      }
+    }
+  }
+`;
