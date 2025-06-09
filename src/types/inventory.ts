@@ -146,6 +146,14 @@ export interface VariantInterface {
   };
   attributes?: ProductAttributes[];
   product: ProductInterface;
+  translation?: {
+    name: string;
+    description: string;
+    html_description: string;
+    language: {
+      code: string;
+    };  
+  };
 }
 
 export interface ProductTypeInterface {
@@ -197,6 +205,14 @@ export interface ProductInterface {
   productsTypes: ProductTypeInterface;
   status: StatusInterface;
   companies: ProductCompany;
+  translation?: {
+    name: string;
+    description: string;
+    html_description: string;
+    language: {
+      code: string;
+    };
+  };
 }
 
 export interface ChannelsInterface {
