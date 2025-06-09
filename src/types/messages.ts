@@ -52,6 +52,13 @@ export interface AllForYouMessages {
     paginatorInfo?: PaginatorInfo;
   };
 }
+
+export interface AllFollowingFeedMessages {
+  followingFeedMessages: {
+    data: MessagesInterface[];
+    paginatorInfo?: PaginatorInfo;
+  };
+}
 export interface AllChannelMessages {
   channelMessages: {
     data: MessagesInterface[];
@@ -140,6 +147,7 @@ export interface HasAppModuleMessageWhereConditions {
   operator: string;
   value: string;
 }
+
 
 export interface OrderByMessage {
   column: string;

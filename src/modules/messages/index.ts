@@ -15,6 +15,7 @@ import {
   MessageSearchSuggestions,
   AllLikedMessagesByUser,
   AllForYouMessages,
+  AllFollowingFeedMessages,
   AllChannelMessages,
   MessageWithFileInputInterface,
 } from '../../types';
@@ -42,6 +43,7 @@ import {
   GET_MESSAGES_GROUP_BY_DATE_QUERY,
   GET_MESSAGES_LIKED_BY_USER,
   GET_MESSAGES_QUERY,
+  GET_FOLLOWING_FEED_QUERY
 } from '../../queries';
 
 import { MessagesComments } from '../messages-comments';
@@ -248,6 +250,52 @@ export class Messages {
 
     const response = await this.client.query({
       query: GET_FOR_YOU_MESSAGES_QUERY(childrenFirst !== undefined, alias),
+      variables: {
+        where,
+        hasTags,
+        hasType,
+        orderBy,
+        search,
+        first,
+        page,
+        ...(childrenFirst !== undefined && { childrenFirst }),
+      },
+      fetchPolicy: 'no-cache',
+    });
+
+    return response.data;
+  }
+
+  public async getFollowingFeedMessages(
+    options: {
+      where?: WhereCondition;
+      orderBy?: Array<OrderByMessage>;
+      search?: string;
+      first?: number;
+      page?: number;
+      hasTags?: WhereCondition;
+      hasType?: WhereCondition;
+      childrenOptions?: {
+        alias?: string; // Alias for the children field
+        first?: number; // Limit for children
+      };
+    } = {}
+  ): Promise<AllFollowingFeedMessages> {
+    const {
+      search,
+      hasTags,
+      hasType,
+      where,
+      orderBy,
+      first = 25,
+      page,
+      childrenOptions = {},
+    } = options;
+
+    const { alias = 'children', first: childrenFirst } = childrenOptions;
+
+    const response = await this.client.query({
+      query: GET_FOLLOWING_FEED_QUERY(childrenFirst !== undefined, alias),
       variables: {
         where,
         hasTags,
