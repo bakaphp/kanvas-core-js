@@ -12,6 +12,8 @@ import {
   NotificationChannelInterface,
   NotificationEntityFilterInputInterface,
   NotificationTypeFilterInputInterface,
+  SystemModuleFilterInputInterface,
+  InteractionsFilterInputInterface,
   WhereCondition,
 } from '../../types';
 
@@ -29,12 +31,14 @@ export class Notifications {
     where: WhereCondition,
     whereEntity: NotificationEntityFilterInputInterface,
     whereType: NotificationTypeFilterInputInterface,
+    whereSystemModule: SystemModuleFilterInputInterface,
+    whereInteraction: InteractionsFilterInputInterface,
     first: number,
     page: number
   ): Promise<NotificationInterface[]> {
     const response = await this.client.query({
       query: NOTIFICATION_QUERY,
-      variables: { where, first, page, whereEntity, whereType },
+      variables: { where, first, page, whereEntity, whereSystemModule, whereInteraction, whereType },
     });
     return response.data.notifications.data as NotificationInterface[];
   }

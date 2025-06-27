@@ -6,6 +6,8 @@ export const NOTIFICATION_QUERY = gql`
     $whereEntity: NotificationEntityFilterInput
     $whereType: NotificationTypeFilterInput
     $orderBy: [QueryNotificationsOrderByOrderByClause!]
+    $whereSystemModule: SystemModuleFilterInput
+    $whereInteraction: InteractionsFilterInput
     $first: Int
     $page: Int
   ) {
@@ -14,6 +16,8 @@ export const NOTIFICATION_QUERY = gql`
       whereEntity: $whereEntity
       whereType: $whereType
       orderBy: $orderBy
+      whereSystemModule: $whereSystemModule
+      whereInteraction: $whereInteraction
       first: $first
       page: $page
     ) {
