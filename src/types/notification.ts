@@ -55,3 +55,12 @@ export interface NotificationMessageResponseInterface {
   sent: boolean;
   message: string;
 }
+
+export interface SystemModuleFilterInputInterface {
+  slug: string;
+  message_type_verb: string;
+}
+
+export interface InteractionsFilterInputInterface {
+  name: string;
+}
