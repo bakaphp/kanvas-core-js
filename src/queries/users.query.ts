@@ -144,6 +144,7 @@ export const GET_USER_DATA_QUERY = gql`
         total_followers
         total_following
         total_blocked
+        unread_notifications
       }
     }
   }
