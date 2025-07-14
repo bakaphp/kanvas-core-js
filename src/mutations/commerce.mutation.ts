@@ -93,6 +93,7 @@ export const CREATE_ORDER_FROM_GOOGLE_PLAY_IN_APP_PURCHASE = gql`
 export const GENERATE_ORDER_PAYMENT_INTENT_MUTATION = gql`
   mutation($amount: Money!) {
     generateOrderPaymentIntent(amount: $amount) {
+      id
       client_secret
       status
       message

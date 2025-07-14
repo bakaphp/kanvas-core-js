@@ -186,6 +186,7 @@ export interface OrderItemData {
 }
 
 export interface GeneratePaymentIntentResult {
+  id: string;
   client_secret: string;
   status?: string;
   message?: any;
