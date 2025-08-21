@@ -406,18 +406,25 @@ export class Messages {
       orderBy?: Array<OrderByMessage>;
       first?: number;
       page?: number;
+      childrenOptions?: {
+        alias?: string; // Alias for the children field
+        first?: number; // Limit for children
+      };
     } = {}
   ): Promise<AllLikedMessagesByUser> {
-    const { where, orderBy, first, page } = options;
+    const { where, orderBy, first, page , childrenOptions = {}} = options;
+
+    const { alias = 'children', first: childrenFirst } = childrenOptions;
 
     const response = await this.client.query({
-      query: GET_MESSAGES_LIKED_BY_USER,
+      query: GET_MESSAGES_LIKED_BY_USER(childrenFirst !== undefined, alias),
       variables: {
         id: userId,
         where,
         orderBy,
         first,
         page,
+        ...(childrenFirst !== undefined && { childrenFirst }),
       },
       fetchPolicy: 'no-cache',
     });
