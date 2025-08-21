@@ -448,13 +448,14 @@ export const GET_MESSAGE_SEARCH_SUGGESTIONS_QUERY = gql`
   }
 `;
 
-export const GET_MESSAGES_LIKED_BY_USER = gql`
+export const GET_MESSAGES_LIKED_BY_USER = (includeChildren: boolean, alias: string) => gql`
   query messagesLikedByUser(
     $id: ID!
     $first: Int! = 25
     $page: Int
     $where: QueryMessagesLikedByUserWhereWhereConditions
     $orderBy: [QueryMessagesLikedByUserOrderByOrderByClause!]
+    ${includeChildren ? `$childrenFirst: Int!` : ''}
   ) {
     messagesLikedByUser(
       id: $id
@@ -511,6 +512,27 @@ export const GET_MESSAGES_LIKED_BY_USER = gql`
           is_reported
           is_purchased
         }
+        ${includeChildren ? `${alias}: children(first: $childrenFirst) {
+          data {
+            id
+            uuid
+            message
+            slug
+            user {
+              id
+              firstname
+              lastname
+              displayname
+              photo {
+                url
+              }
+              social {
+                is_blocked
+                is_following
+              }
+            }
+          }
+        }` : ''}
         created_at
       }
       paginatorInfo {
