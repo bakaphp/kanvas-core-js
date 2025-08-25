@@ -113,6 +113,7 @@ export const GET_USER_DATA_QUERY = gql`
       default_company_uuid
       email
       welcome
+      is_verified
       mainRole
       branches {
         id
@@ -166,6 +167,7 @@ export const GET_USER_SOCIAL_DATA_QUERY = gql`
       email
       welcome
       mainRole
+      is_verified
       social {
         total_message
         total_followers
