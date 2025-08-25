@@ -2,8 +2,10 @@ import {
   FilesystemInterface,
   FilesystemInputUrl,
   CompanyInterface,
-  UserInterface
+  UserInterface,
 } from 'index';
+
+import { Countries, State, City } from './companies';
 
 export interface CompanyBranchInput {
   name: string;
@@ -18,6 +20,14 @@ export interface CompanyBranchInput {
   timezone?: string;
   phone?: string;
   files?: Array<FilesystemInputUrl>;
+  countries_id?: string;
+  states_id?: string;
+  cities_id?: string;
+  address_2?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  zip?: string;
 }
 export interface CompanyBranchInterface {
   id: string;
@@ -29,13 +39,24 @@ export interface CompanyBranchInterface {
   phone?: string;
   photo?: FilesystemInterface;
   zipcode?: number;
-  total_users:number;
+  total_users: number;
   is_active: boolean;
-  user: UserInterface
+  user: UserInterface;
   address: string;
   is_default: Boolean;
   created_at?: string;
   updated_at?: string;
+  countries_id?: string;
+  states_id?: string;
+  cities_id?: string;
+  address_2?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  zip?: string;
+  countries: Countries;
+  states: State;
+  cities: City;
 }
 
 export interface QueryBranchesWhereWhereConditions {
