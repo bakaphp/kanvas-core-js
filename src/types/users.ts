@@ -133,6 +133,7 @@ export interface UserData {
   };
   roles: string[];
   is_active: boolean;
+  is_verified: boolean;
   abilities: string[];
   custom_fields: CustomFieldData;
   photo?: {
