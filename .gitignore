@@ -6,3 +6,4 @@ directory-test
 .env
 coverage
 .yarn
+test-app
