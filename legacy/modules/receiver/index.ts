@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export class Receiver {
   private baseUrl: string;
@@ -8,10 +8,10 @@ export class Receiver {
     this.baseUrl = this.extractOrigin(url);
     this.key = key;
   }
-  
+
   private extractOrigin(url: string): string {
     const match = url.match(/^(https?:\/\/[^\/]+)/i);
-    return match ? match[1] : '';
+    return match ? match[1] : "";
   }
   /**
    * Submit receiver data to the Kanvas API
@@ -21,15 +21,15 @@ export class Receiver {
    */
   async submitReceiverData(
     uuid: string,
-    data: Record<string | number, any>
+    data: Record<string | number, any>,
   ): Promise<any> {
     const url = `${this.baseUrl}/v1/receiver/${uuid}`;
 
     try {
       const response = await axios.post(url, data, {
         headers: {
-          'Content-Type': 'application/json',
-          'X-Kanvas-App': this.key,
+          "Content-Type": "application/json",
+          "X-Kanvas-App": this.key,
         },
       });
 
@@ -37,7 +37,7 @@ export class Receiver {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         throw new Error(
-          `API error: ${error.response?.status} ${error.response?.statusText}`
+          `API error: ${error.response?.status} ${error.response?.statusText}`,
         );
       }
       throw error;

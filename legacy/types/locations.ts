@@ -15,22 +15,20 @@ interface State extends Location {
   cities: Array<City>;
 }
 
-interface City extends Omit<Location, 'code'> {
+interface City extends Omit<Location, "code"> {
   country_id: number;
 }
 
 export interface CountriesResponse {
   countries: {
     data: Location[];
-    paginatorInfo: PaginatorInfo
-  }
-
+    paginatorInfo: PaginatorInfo;
+  };
 }
 
 export interface StateResponse {
   data: {
-    states: Location[]
-    paginatorInfo: PaginatorInfo
-
-  }
+    states: Location[];
+    paginatorInfo: PaginatorInfo;
+  };
 }

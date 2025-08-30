@@ -1,27 +1,27 @@
-import { ClientType } from '../../__index';
+import { ClientType } from "../../__index";
 import {
-  CREATE_COMPANY_MUTATION,
-  UPDATE_COMPANY_MUTATION,
-  DELETE_COMPANY_MUTATION,
   ADD_USER_TO_COMPANY,
+  CREATE_COMPANY_MUTATION,
+  DELETE_COMPANY_MUTATION,
   REMOVE_USER_FROM_COMPANY,
-} from '../../mutations';
+  UPDATE_COMPANY_MUTATION,
+} from "../../mutations";
 import {
   COMPANIES_QUERY,
-  COMPANY_USERS_QUERY,
   COMPANY_SETTINGS_QUERY,
-} from '../../queries';
+  COMPANY_USERS_QUERY,
+} from "../../queries";
 
 import {
   CompanyInput,
   CompanyInterface,
   CompanySettings,
-  WhereCondition,
-  OrderBy,
   CreatedCompanies,
-  InputCompanyParams,
   CreatedCompanyUsers,
-} from '../../types';
+  InputCompanyParams,
+  OrderBy,
+  WhereCondition,
+} from "../../types";
 
 export class Companies {
   constructor(protected client: ClientType) {}
@@ -33,14 +33,14 @@ export class Companies {
       where?: WhereCondition;
       orderBy?: OrderBy[];
       search?: string;
-    } = {}
+    } = {},
   ): Promise<CreatedCompanies> {
     const { first, page, where, orderBy, search } = options;
 
     const response = await this.client.query({
       query: COMPANIES_QUERY,
       variables: { where, first, page, orderBy, search },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
     return response.data;
@@ -52,10 +52,8 @@ export class Companies {
       page?: number;
       where?: WhereCondition;
       orderBy?: OrderBy[];
-
-    } = {}
+    } = {},
   ): Promise<CreatedCompanyUsers> {
-
     const { first, page, where, orderBy } = options;
 
     const response = await this.client.query({
@@ -101,28 +99,26 @@ export class Companies {
 
   public async addUserToCompany(
     options: {
-      id: string,
-      user_id: string,
-      rol_id?: string
+      id: string;
+      user_id: string;
+      rol_id?: string;
     } = {
-      id: '',
-      user_id: '',
-    }    
-    
-    ): Promise<Boolean> {
-      const { id, user_id, rol_id} = options
+      id: "",
+      user_id: "",
+    },
+  ): Promise<Boolean> {
+    const { id, user_id, rol_id } = options;
 
     const response = await this.client.mutate({
-
       mutation: ADD_USER_TO_COMPANY,
-      variables: { id: id, user_id: user_id, rol_id: rol_id},
+      variables: { id: id, user_id: user_id, rol_id: rol_id },
     });
     return response.data.addUserToCompany as Boolean;
   }
 
   public async removeUserFromCompany(
     id: string,
-    user_id: string
+    user_id: string,
   ): Promise<Boolean> {
     const response = await this.client.mutate({
       mutation: REMOVE_USER_FROM_COMPANY,

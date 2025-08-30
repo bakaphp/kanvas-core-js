@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { CustomFieldInput, CustomFieldData } from './custom-fields';
-import { PaginatorInfo } from './paginator';
+import { CustomFieldData, CustomFieldInput } from "./custom-fields";
+import { PaginatorInfo } from "./paginator";
 import {
-  PeopleInterface,
   ChannelInterface,
-  SystemModuleInterface,
   PeopleInputInterface,
-} from './index';
+  PeopleInterface,
+  SystemModuleInterface,
+} from "./index";
 // interface Contact {
 //   value: string;
 //   contacts_types_id?: number;
@@ -103,7 +103,7 @@ export interface CreateLeadData {
   pipeline?: Pipeline | null;
   people?: PeopleInterface;
   followers?: { data: Follower[] };
-  branch?:{id:number, uuid:string}
+  branch?: { id: number; uuid: string };
   paginatorInfo?: PaginatorInfo;
   files?: { data: LeadAttachment[] };
   channels?: ChannelInterface[];

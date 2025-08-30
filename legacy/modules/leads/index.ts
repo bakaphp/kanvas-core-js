@@ -1,26 +1,26 @@
 import {
   GET_ALL_LEADS_QUERY,
-  GET_LEADS_DASHBOARD_QUERY,
   GET_LEAD_BY_UUID_QUERY,
+  GET_LEADS_DASHBOARD_QUERY,
   LEAD_DELETE_MUTATION,
-} from '../../queries';
-import { ClientType } from '../../__index';
-import { CREATE_LEAD_MUTATION, UPDATE_LEAD_MUTATION } from '../../mutations';
+} from "../../queries";
+import { ClientType } from "../../__index";
+import { CREATE_LEAD_MUTATION, UPDATE_LEAD_MUTATION } from "../../mutations";
 import {
   CreateLeadData,
   CreateLeadParams,
   LeadInput,
   LeadsDashboardData,
-  WhereCondition,
   LeadsData,
   UpdateLeadInput,
-} from '../../types';
+  WhereCondition,
+} from "../../types";
 
 export class Leads {
   constructor(protected client: ClientType) {}
 
   public async createLead(
-    leadData: CreateLeadParams | LeadInput
+    leadData: CreateLeadParams | LeadInput,
   ): Promise<CreateLeadData> {
     const response = await this.client.mutate({
       mutation: CREATE_LEAD_MUTATION,
@@ -32,13 +32,13 @@ export class Leads {
 
   public async updateLead(
     leadId: string,
-    leadData: UpdateLeadInput
+    leadData: UpdateLeadInput,
   ): Promise<any> {
     const response = await this.client.mutate({
       mutation: UPDATE_LEAD_MUTATION,
       variables: { id: leadId, input: leadData },
     });
-  
+
     return response.data.updateLead;
   }
 
@@ -54,7 +54,7 @@ export class Leads {
     const response = await this.client.query({
       query: GET_ALL_LEADS_QUERY,
       variables: { first, page },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
     return response.data;
@@ -63,8 +63,8 @@ export class Leads {
   public async getLeadsDashboard(userID: number): Promise<LeadsDashboardData> {
     const first: number = 1;
     const where: WhereCondition = {
-      column: 'USERS_ID',
-      operator: 'EQ',
+      column: "USERS_ID",
+      operator: "EQ",
       value: userID,
     };
 
@@ -78,15 +78,15 @@ export class Leads {
 
   public async getLeadByUUID(uuid: string): Promise<LeadsData> {
     const where: WhereCondition = {
-      column: 'UUID',
-      operator: 'EQ',
+      column: "UUID",
+      operator: "EQ",
       value: uuid,
     };
 
     const response = await this.client.query({
       query: GET_LEAD_BY_UUID_QUERY,
       variables: { where },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
 

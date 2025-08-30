@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const CREATE_FILESYSTEM_MAPPER_MUTATION = gql`
   mutation createFilesystemMapper($input: FilesystemMapperInput!) {

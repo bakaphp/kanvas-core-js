@@ -1,7 +1,7 @@
-import { ClientType } from '../../__index';
+import { ClientType } from "../../__index";
 
-import { GET_CONTACT_TYPES } from '../../queries';
-import { CreatedContactTypes, OrderBy, WhereCondition } from '../../types';
+import { GET_CONTACT_TYPES } from "../../queries";
+import { CreatedContactTypes, OrderBy, WhereCondition } from "../../types";
 
 export class Contact {
   constructor(protected client: ClientType) {}
@@ -11,7 +11,7 @@ export class Contact {
       page?: number;
       where?: WhereCondition;
       orderBy?: OrderBy[];
-    } = {}
+    } = {},
   ): Promise<CreatedContactTypes> {
     const { first, page, where, orderBy } = options;
 

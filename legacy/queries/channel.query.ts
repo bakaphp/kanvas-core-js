@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const GET_CHANNEL_SOCIAL_CHANNELS = gql`
   query getChannelSocialChannels(

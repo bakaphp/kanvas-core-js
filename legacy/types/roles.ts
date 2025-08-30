@@ -1,12 +1,12 @@
-import { PaginatorInfo } from './paginator';
+import { PaginatorInfo } from "./paginator";
 
 export enum RolesEnum {
-  OWNER = 'Owner',
-  ADMIN = 'Admin',
-  USER = 'Users',
-  AGENT = 'Agents',
-  DEVELOPER = 'Developer',
-  MANAGER = 'Managers',
+  OWNER = "Owner",
+  ADMIN = "Admin",
+  USER = "Users",
+  AGENT = "Agents",
+  DEVELOPER = "Developer",
+  MANAGER = "Managers",
 }
 
 export interface RolesInterface {

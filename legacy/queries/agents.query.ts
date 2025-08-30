@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const GET_ALL_AGENTS_QUERY = gql`
   query GetAgents($first: Int, $page: Int) {

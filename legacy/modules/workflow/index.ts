@@ -1,10 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { WorkflowFromEntity, RunWorkflowFromEntity } from '../../types';
-import { RUN_WORKFLOW_FROM_ENTITY } from '../../mutations';
+import { RunWorkflowFromEntity, WorkflowFromEntity } from "../../types";
+import { RUN_WORKFLOW_FROM_ENTITY } from "../../mutations";
 
-import { ClientType, Options } from '../../__index';
-
+import { ClientType, Options } from "../../__index";
 
 export class Workflow {
   protected axiosClient: any;
@@ -13,9 +12,9 @@ export class Workflow {
       this.axiosClient = axios.create({
         baseURL: this.options.url,
         headers: {
-          'X-Kanvas-App': this.options.key,
+          "X-Kanvas-App": this.options.key,
           ...(this.options.adminKey && {
-            'X-Kanvas-Key': this.options.adminKey,
+            "X-Kanvas-Key": this.options.adminKey,
           }),
         },
       });
@@ -24,17 +23,17 @@ export class Workflow {
         this.options.authAxiosMiddleware,
         function (error: any) {
           return Promise.reject(error);
-        }
+        },
       );
     }
   }
 
   public async runWorkflowFromEntity(
-    input: WorkflowFromEntity
+    input: WorkflowFromEntity,
   ): Promise<RunWorkflowFromEntity> {
     const response = await this.client.mutate({
       mutation: RUN_WORKFLOW_FROM_ENTITY,
-      variables: { input: input }
+      variables: { input: input },
     });
 
     return response.data;

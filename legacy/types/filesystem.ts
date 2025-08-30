@@ -10,7 +10,7 @@ export interface UPLOAD_CSV_INTERFACE {
     filesystem_id: string;
     row: { [key: string]: string };
     header: Array<string>;
-  }
+  };
 }
 
 export interface FILESYSTEM_ATTACH_INPUT {

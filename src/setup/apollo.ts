@@ -1,18 +1,39 @@
 import {
-    ApolloClient,
-    ApolloClientOptions,
-    HttpLink,
-    HttpOptions,
-    InMemoryCache,
-    InMemoryCacheConfig,
+  ApolloClient,
+  HttpLink,
+  InMemoryCache,
+  InMemoryCacheConfig,
 } from "@apollo/client";
 
-export const CreateApolloClient = <TCacheShape = any>(
-    options: ApolloClientOptions<TCacheShape>,
+import { SetContextLink } from "@apollo/client/link/context";
+import { HeaderConstructor } from "@/types/app";
+
+export const CreateApolloClient = (
+  options: ApolloClient.Options,
 ) => new ApolloClient(options);
 
-export const GetMemoryCache = (config?: InMemoryCacheConfig | undefined) =>
-    new InMemoryCache(config);
+export const CreateMemoryCache = (config?: InMemoryCacheConfig | undefined) =>
+  new InMemoryCache(config);
 
-export const GetUrl = (options?: HttpOptions | undefined) =>
-    new HttpLink(options);
+export const CreateUrl = (options?: HttpLink.Options | undefined) =>
+  new HttpLink(options);
+
+export function CreateHeaders(
+  headers: HeaderConstructor,
+) {
+  return new SetContextLink(async (prevContext) => {
+    const newHeaders = Object.fromEntries(
+      await Promise.all(
+        Object.entries(headers).map(async ([key, fn]) => [key, await fn()]),
+      ),
+    );
+
+    return {
+      ...prevContext,
+      headers: {
+        ...prevContext.headers,
+        ...newHeaders,
+      },
+    };
+  });
+}

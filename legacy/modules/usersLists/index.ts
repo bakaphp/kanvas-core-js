@@ -1,15 +1,15 @@
-import { ClientType } from '../../__index';
+import { ClientType } from "../../__index";
 
 import {
-  CREATE_USER_LIST,
-  UPDATE_USER_LIST,
-  DELETE_USER_LIST,
   ADD_USER_LIST_ITEM,
+  CREATE_USER_LIST,
+  DELETE_USER_LIST,
   REMOVE_USER_LIST_ITEM,
-} from '../../mutations';
+  UPDATE_USER_LIST,
+} from "../../mutations";
 
-import { UserListInput, UserList, WhereCondition } from '../../types';
-import { GET_USERS_LISTS } from '../../queries';
+import { UserList, UserListInput, WhereCondition } from "../../types";
+import { GET_USERS_LISTS } from "../../queries";
 
 export class UsersLists {
   constructor(protected client: ClientType) {}
@@ -24,7 +24,7 @@ export class UsersLists {
 
   public async updateUserList(
     id: string,
-    input: UserListInput
+    input: UserListInput,
   ): Promise<UserList> {
     const response = await this.client.mutate({
       mutation: UPDATE_USER_LIST,
@@ -43,7 +43,7 @@ export class UsersLists {
 
   public async addUserListItem(
     userListId: string,
-    messageId: string
+    messageId: string,
   ): Promise<Boolean> {
     const response = await this.client.mutate({
       mutation: ADD_USER_LIST_ITEM,
@@ -54,7 +54,7 @@ export class UsersLists {
 
   public async removeUserListItem(
     userListId: string,
-    messageId: string
+    messageId: string,
   ): Promise<Boolean> {
     const response = await this.client.mutate({
       mutation: REMOVE_USER_LIST_ITEM,
@@ -66,7 +66,7 @@ export class UsersLists {
   public async getUsersLists(
     where: WhereCondition,
     page: number,
-    first: number
+    first: number,
   ): Promise<UserList[]> {
     const response = await this.client.query({
       query: GET_USERS_LISTS,

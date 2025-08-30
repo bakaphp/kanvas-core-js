@@ -1,28 +1,28 @@
-import { ClientType } from '__index';
+import { ClientType } from "__index";
 
 import {
+  NOTIFICATION_CHANNEL_QUERY,
   NOTIFICATION_QUERY,
   NOTIFICATION_TYPE_QUERY,
-  NOTIFICATION_CHANNEL_QUERY,
-} from '../../queries';
+} from "../../queries";
 
 import {
-  NotificationInterface,
-  NotificationTypeInterface,
+  InteractionsFilterInputInterface,
   NotificationChannelInterface,
   NotificationEntityFilterInputInterface,
+  NotificationInterface,
   NotificationTypeFilterInputInterface,
+  NotificationTypeInterface,
   SystemModuleFilterInputInterface,
-  InteractionsFilterInputInterface,
   WhereCondition,
-} from '../../types';
+} from "../../types";
 
 import {
   READ_ALL_NOTIFICATIONS_MUTATION,
+  SEND_ANONYMOUS_NOTIFICATION_MUTATION,
   SEND_NOTIFICATION_BASE_TEMPLATE_MUTATION,
   SEND_NOTIFICATION_BY_MESSAGE_MUTATION,
-  SEND_ANONYMOUS_NOTIFICATION_MUTATION,
-} from '../../mutations';
+} from "../../mutations";
 
 export class Notifications {
   constructor(protected client: ClientType) {}
@@ -34,11 +34,19 @@ export class Notifications {
     whereSystemModule: SystemModuleFilterInputInterface,
     whereInteraction: InteractionsFilterInputInterface,
     first: number,
-    page: number
+    page: number,
   ): Promise<NotificationInterface[]> {
     const response = await this.client.query({
       query: NOTIFICATION_QUERY,
-      variables: { where, first, page, whereEntity, whereSystemModule, whereInteraction, whereType },
+      variables: {
+        where,
+        first,
+        page,
+        whereEntity,
+        whereSystemModule,
+        whereInteraction,
+        whereType,
+      },
     });
     return response.data.notifications.data as NotificationInterface[];
   }
@@ -46,7 +54,7 @@ export class Notifications {
   public async getNotificationTypes(
     where: WhereCondition,
     first: number,
-    page: number
+    page: number,
   ): Promise<NotificationTypeInterface[]> {
     const response = await this.client.query({
       query: NOTIFICATION_TYPE_QUERY,
@@ -58,7 +66,7 @@ export class Notifications {
   public async getNotificationChannels(
     where: WhereCondition,
     first: number,
-    page: number
+    page: number,
   ): Promise<NotificationChannelInterface[]> {
     const response = await this.client.query({
       query: NOTIFICATION_CHANNEL_QUERY,
@@ -79,7 +87,7 @@ export class Notifications {
     template_name: string,
     data: any,
     via: string[],
-    users: number | string[]
+    users: number | string[],
   ): Promise<boolean> {
     const response = await this.client.mutate({
       mutation: SEND_NOTIFICATION_BASE_TEMPLATE_MUTATION,
@@ -91,7 +99,7 @@ export class Notifications {
   public async sendNotificationByMessage(
     message: string,
     via: string[],
-    users_id: number[]
+    users_id: number[],
   ): Promise<boolean> {
     const response = await this.client.mutate({
       mutation: SEND_NOTIFICATION_BY_MESSAGE_MUTATION,
@@ -104,7 +112,7 @@ export class Notifications {
     template_name: string,
     data: any,
     email: string,
-    subject: string
+    subject: string,
   ): Promise<boolean> {
     const response = await this.client.mutate({
       mutation: SEND_ANONYMOUS_NOTIFICATION_MUTATION,

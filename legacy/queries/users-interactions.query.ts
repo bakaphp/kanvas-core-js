@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const GET_USERS_INTERACTIONS_QUERY = gql`
     query GetUsersInteractions($where: QueryGetUsersInteractionsWhereWhereConditions) {

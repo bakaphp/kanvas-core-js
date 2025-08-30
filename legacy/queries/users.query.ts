@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const GET_USER_BY_DISPLAYNAME = gql`
   query getUserByDisplayName(
@@ -262,7 +262,6 @@ export const GET_USERS_INVITES_BY_ROLE_ID_QUERY = gql`
     }
   }
 `;
-
 
 export const GET_BLOCKED_USERS = gql`
   query getBlockedUsers(

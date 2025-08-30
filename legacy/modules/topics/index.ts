@@ -1,22 +1,22 @@
-import { ClientType } from '../../__index';
+import { ClientType } from "../../__index";
 
 import {
   CREATE_TOPIC_MUTATION,
-  UPDATE_TOPIC_MUTATION,
   FOLLOW_TOPIC_MUTATION,
   UNFOLLOW_TOPIC_MUTATION,
-} from '../../mutations/';
-import { GET_TOPICS } from '../../queries/';
+  UPDATE_TOPIC_MUTATION,
+} from "../../mutations/";
+import { GET_TOPICS } from "../../queries/";
 import {
+  QueryGetTopicsWhereInterface,
   TopicInputInterface,
   TopicsInterface,
-  QueryGetTopicsWhereInterface,
-} from '../../types/';
+} from "../../types/";
 export class Topics {
   constructor(protected client: ClientType) {}
 
   public async createTopic(
-    input: TopicInputInterface
+    input: TopicInputInterface,
   ): Promise<TopicsInterface> {
     const response = await this.client.mutate({
       mutation: CREATE_TOPIC_MUTATION,
@@ -28,7 +28,7 @@ export class Topics {
 
   public async updateTopic(
     id: string,
-    input: TopicInputInterface
+    input: TopicInputInterface,
   ): Promise<TopicsInterface> {
     const response = await this.client.mutate({
       mutation: UPDATE_TOPIC_MUTATION,
@@ -39,7 +39,7 @@ export class Topics {
   }
 
   public async getTopics(
-    where: QueryGetTopicsWhereInterface
+    where: QueryGetTopicsWhereInterface,
   ): Promise<TopicsInterface[]> {
     const response = await this.client.query({
       query: GET_TOPICS,

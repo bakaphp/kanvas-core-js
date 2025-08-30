@@ -1,4 +1,4 @@
-import { UserInterface, CompanyInterface, MessagesInterface } from './index';
+import { CompanyInterface, MessagesInterface, UserInterface } from "./index";
 
 export interface MessageCommentInputInterface {
   message_id: string;

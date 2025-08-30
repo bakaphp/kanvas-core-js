@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const CREATE_MESSAGE_MUTATION = gql`
   mutation createMessage($input: MessageInput!) {

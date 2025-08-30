@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { CustomFieldData, CustomFieldInput } from './custom-fields';
-import { PaginatorInfo } from './paginator';
+import { CustomFieldData, CustomFieldInput } from "./custom-fields";
+import { PaginatorInfo } from "./paginator";
 
 export interface UserInterface {
   id: number;
@@ -215,7 +215,7 @@ export interface SocialLoginParams {
   provider: string;
 }
 
-export interface SocialLoginData extends InviteProcessData { }
+export interface SocialLoginData extends InviteProcessData {}
 
 export interface AllBlockedUsersInterface {
   blockedUsers: {

@@ -1,14 +1,19 @@
-import { ClientType } from '../../../__index';
+import { ClientType } from "../../../__index";
 import {
   ADD_TO_CART_MUTATION,
+  CART_DISCOUNT_CODES_UPDATE,
   CLEAR_CART_MUTATION,
   GET_CART_QUERY,
-  CART_DISCOUNT_CODES_UPDATE
-} from '../../../mutations';
-import { CartData, CartDataDiscount, CartItemData, CartItemInput } from '../../../types/commerce';
+} from "../../../mutations";
+import {
+  CartData,
+  CartDataDiscount,
+  CartItemData,
+  CartItemInput,
+} from "../../../types/commerce";
 
 export class Cart {
-  constructor(protected client: ClientType) { }
+  constructor(protected client: ClientType) {}
 
   public async addToCart(input: CartItemInput[]): Promise<CartItemData> {
     const response = await this.client.mutate({
@@ -30,19 +35,21 @@ export class Cart {
   public async getCart(): Promise<CartData> {
     const response = await this.client.query({
       query: GET_CART_QUERY,
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
 
     return response.data;
   }
 
-  public async updateDiscountCodes(discountCodes: string[]): Promise<CartDataDiscount> {
+  public async updateDiscountCodes(
+    discountCodes: string[],
+  ): Promise<CartDataDiscount> {
     const response = await this.client.mutate({
       mutation: CART_DISCOUNT_CODES_UPDATE,
       variables: { discountCodes },
     });
-  
+
     return response.data;
   }
 }

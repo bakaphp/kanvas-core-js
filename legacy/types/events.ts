@@ -27,8 +27,9 @@ export interface GetEventResponse {
   paginatorInfo?: PaginatorInfo;
 }
 
-export type CreateEventResponse = Partial<EventInterface> &
-  Partial<{
+export type CreateEventResponse =
+  & Partial<EventInterface>
+  & Partial<{
     errors: {
       message: string;
       path: string[];
@@ -41,7 +42,7 @@ export type ParticipantInterface = {
     name: string;
     contacts: {
       type: {
-        name: string
+        name: string;
       };
       value: string | number;
     }[];
@@ -71,7 +72,7 @@ export type getParticipantsByEventIdProps = {
   eventId?: number | undefined;
   first?: number;
   page?: number;
-}
+};
 
 export interface EventCategoryInterface {
   id: string;

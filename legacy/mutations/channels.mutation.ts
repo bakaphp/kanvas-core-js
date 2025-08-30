@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const CREATE_SOCIAL_CHANNEL_MUTATION = gql`
   mutation createSocialChannel($input: SocialChannelInput!) {

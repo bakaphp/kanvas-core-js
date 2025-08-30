@@ -1,6 +1,7 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
-export const GET_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => gql`
+export const GET_MESSAGES_QUERY = (includeChildren: boolean, alias: string) =>
+  gql`
   query getMessages(
     $where: QueryMessagesWhereWhereConditions
     $hasAppModuleMessage: QueryMessagesHasAppModuleMessageWhereHasConditions
@@ -11,7 +12,7 @@ export const GET_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => g
     $search: String
     $first: Int! = 25
     $page: Int
-    ${includeChildren ? `$childrenFirst: Int!` : ''}
+    ${includeChildren ? `$childrenFirst: Int!` : ""}
   ) {
     messages(
       where: $where
@@ -77,7 +78,9 @@ export const GET_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => g
             is_reported
             is_purchased
         }
-        ${includeChildren ? `${alias}: children(first: $childrenFirst) {
+        ${
+    includeChildren
+      ? `${alias}: children(first: $childrenFirst) {
           data {
             id
             uuid
@@ -97,7 +100,9 @@ export const GET_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => g
               }
             }
           }
-        }` : ''}
+        }`
+      : ""
+  }
         created_at
       }
       paginatorInfo {
@@ -108,7 +113,11 @@ export const GET_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => g
   }
 `;
 
-export const GET_FOR_YOU_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => gql`
+export const GET_FOR_YOU_MESSAGES_QUERY = (
+  includeChildren: boolean,
+  alias: string,
+) =>
+  gql`
   query forYouMessages(
     $where: QueryForYouMessagesWhereWhereConditions
     $hasTags: QueryForYouMessagesHasTagsWhereHasConditions
@@ -116,7 +125,7 @@ export const GET_FOR_YOU_MESSAGES_QUERY = (includeChildren: boolean, alias: stri
     $orderBy: [QueryForYouMessagesOrderByOrderByClause!]
     $first: Int! = 25
     $page: Int
-    ${includeChildren ? `$childrenFirst: Int!` : ''}
+    ${includeChildren ? `$childrenFirst: Int!` : ""}
   ) {
     forYouMessages(
       where: $where
@@ -179,7 +188,9 @@ export const GET_FOR_YOU_MESSAGES_QUERY = (includeChildren: boolean, alias: stri
             is_reported
             is_purchased
         }
-        ${includeChildren ? `${alias}: children(first: $childrenFirst) {
+        ${
+    includeChildren
+      ? `${alias}: children(first: $childrenFirst) {
           data {
             id
             uuid
@@ -199,7 +210,9 @@ export const GET_FOR_YOU_MESSAGES_QUERY = (includeChildren: boolean, alias: stri
               }
             }
           }
-        }` : ''}
+        }`
+      : ""
+  }
         created_at
       }
       paginatorInfo {
@@ -278,7 +291,11 @@ export const GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG = gql`
   }
 `;
 
-export const GET_CHANNEL_MESSAGES_QUERY = (includeChildren: boolean, alias: string) => gql`
+export const GET_CHANNEL_MESSAGES_QUERY = (
+  includeChildren: boolean,
+  alias: string,
+) =>
+  gql`
   query channelMessages(
     $channel_uuid: String
     $channel_slug: String
@@ -286,7 +303,7 @@ export const GET_CHANNEL_MESSAGES_QUERY = (includeChildren: boolean, alias: stri
     $orderBy: [QueryChannelMessagesOrderByOrderByClause!]
     $first: Int! = 25
     $page: Int
-    ${includeChildren ? `$childrenFirst: Int!` : ''}
+    ${includeChildren ? `$childrenFirst: Int!` : ""}
   ) {
     channelMessages(
       channel_uuid: $channel_uuid
@@ -342,7 +359,9 @@ export const GET_CHANNEL_MESSAGES_QUERY = (includeChildren: boolean, alias: stri
           is_reported
           is_purchased
         }
-        ${includeChildren ? `${alias}: children(first: $childrenFirst) {
+        ${
+    includeChildren
+      ? `${alias}: children(first: $childrenFirst) {
           data {
             id
             uuid
@@ -358,7 +377,9 @@ export const GET_CHANNEL_MESSAGES_QUERY = (includeChildren: boolean, alias: stri
               }
             }
           }
-        }` : ''}
+        }`
+      : ""
+  }
         created_at
       }
       paginatorInfo {
@@ -448,14 +469,18 @@ export const GET_MESSAGE_SEARCH_SUGGESTIONS_QUERY = gql`
   }
 `;
 
-export const GET_MESSAGES_LIKED_BY_USER = (includeChildren: boolean, alias: string) => gql`
+export const GET_MESSAGES_LIKED_BY_USER = (
+  includeChildren: boolean,
+  alias: string,
+) =>
+  gql`
   query messagesLikedByUser(
     $id: ID!
     $first: Int! = 25
     $page: Int
     $where: QueryMessagesLikedByUserWhereWhereConditions
     $orderBy: [QueryMessagesLikedByUserOrderByOrderByClause!]
-    ${includeChildren ? `$childrenFirst: Int!` : ''}
+    ${includeChildren ? `$childrenFirst: Int!` : ""}
   ) {
     messagesLikedByUser(
       id: $id
@@ -512,7 +537,9 @@ export const GET_MESSAGES_LIKED_BY_USER = (includeChildren: boolean, alias: stri
           is_reported
           is_purchased
         }
-        ${includeChildren ? `${alias}: children(first: $childrenFirst) {
+        ${
+    includeChildren
+      ? `${alias}: children(first: $childrenFirst) {
           data {
             id
             uuid
@@ -532,7 +559,9 @@ export const GET_MESSAGES_LIKED_BY_USER = (includeChildren: boolean, alias: stri
               }
             }
           }
-        }` : ''}
+        }`
+      : ""
+  }
         created_at
       }
       paginatorInfo {
@@ -543,7 +572,11 @@ export const GET_MESSAGES_LIKED_BY_USER = (includeChildren: boolean, alias: stri
   }
 `;
 
-export const GET_FOLLOWING_FEED_QUERY = (includeChildren: boolean, alias: string) => gql`
+export const GET_FOLLOWING_FEED_QUERY = (
+  includeChildren: boolean,
+  alias: string,
+) =>
+  gql`
   query followingFeedMessages(
     $where: QueryFollowingFeedMessagesWhereWhereConditions
     $hasTags: QueryFollowingFeedMessagesHasTagsWhereHasConditions
@@ -551,7 +584,7 @@ export const GET_FOLLOWING_FEED_QUERY = (includeChildren: boolean, alias: string
     $orderBy: [QueryFollowingFeedMessagesOrderByOrderByClause!]
     $first: Int! = 25
     $page: Int
-    ${includeChildren ? `$childrenFirst: Int!` : ''}
+    ${includeChildren ? `$childrenFirst: Int!` : ""}
   ) {
     followingFeedMessages(
       where: $where
@@ -614,7 +647,9 @@ export const GET_FOLLOWING_FEED_QUERY = (includeChildren: boolean, alias: string
             is_reported
             is_purchased
         }
-        ${includeChildren ? `${alias}: children(first: $childrenFirst) {
+        ${
+    includeChildren
+      ? `${alias}: children(first: $childrenFirst) {
           data {
             id
             uuid
@@ -634,7 +669,9 @@ export const GET_FOLLOWING_FEED_QUERY = (includeChildren: boolean, alias: string
               }
             }
           }
-        }` : ''}
+        }`
+      : ""
+  }
         created_at
       }
       paginatorInfo {

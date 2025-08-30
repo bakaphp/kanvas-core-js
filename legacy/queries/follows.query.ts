@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const IS_FOLLOWING_QUERY = gql`
   query isFollowing($user_id: ID!) {

@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const CREATE_LEAD_MUTATION = gql`
   mutation createLead($input: LeadInput!) {

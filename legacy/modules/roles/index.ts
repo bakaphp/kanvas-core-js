@@ -1,9 +1,9 @@
-import { ClientType } from '../../__index';
-import { GET_ROLES } from '../../queries';
+import { ClientType } from "../../__index";
+import { GET_ROLES } from "../../queries";
 import {
   AssignRoleUser,
-  CreateRoleParams,
   CreatedRoles,
+  CreateRoleParams,
   DeleteRole,
   OrderBy,
   RemoveRoleUser,
@@ -11,7 +11,7 @@ import {
   UpdateRoleParams,
   UserRoleParams,
   WhereCondition,
-} from '../../types';
+} from "../../types";
 import {
   ASSIGN_ROLE_USER,
   CREATE_ROLE,
@@ -19,7 +19,7 @@ import {
   GIVE_PERMISSION_ROLE_MUTATION,
   REMOVE_ROLE_USER,
   UPDATE_ROLE,
-} from '../../mutations';
+} from "../../mutations";
 
 export class Roles {
   constructor(protected client: ClientType) {}
@@ -29,7 +29,7 @@ export class Roles {
       where?: WhereCondition;
       orderBy?: OrderBy[];
       search?: string;
-    } = {}
+    } = {},
   ): Promise<CreatedRoles> {
     const { where, orderBy, search } = options;
 
@@ -40,7 +40,7 @@ export class Roles {
         orderBy,
         search,
       },
-      fetchPolicy: 'network-only',
+      fetchPolicy: "network-only",
       partialRefetch: true,
     });
     return response.data;
@@ -78,7 +78,7 @@ export class Roles {
     return response.data.updateRole;
   }
 
-  public async deleteRole(id: RolesInterface['id']): Promise<DeleteRole> {
+  public async deleteRole(id: RolesInterface["id"]): Promise<DeleteRole> {
     const response = await this.client.mutate({
       mutation: DELETE_ROLE,
       variables: { id },
@@ -88,7 +88,7 @@ export class Roles {
   public async givePermissionUser(
     role: string,
     permission: string,
-    systemModule: string
+    systemModule: string,
   ): Promise<boolean> {
     const response = await this.client.mutate({
       mutation: GIVE_PERMISSION_ROLE_MUTATION,

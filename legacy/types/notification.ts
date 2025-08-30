@@ -1,6 +1,6 @@
-import { UserInterface } from './users';
-import { CompanyInterface } from './companies';
-import { SystemModuleInterface } from './system-module';
+import { UserInterface } from "./users";
+import { CompanyInterface } from "./companies";
+import { SystemModuleInterface } from "./system-module";
 
 export interface NotificationInterface {
   id: string;

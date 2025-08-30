@@ -1,7 +1,7 @@
-import { Companies } from 'modules/companies';
-import { UserData } from './users';
-import { SystemModules } from 'modules/system-modules';
-import { FILESYSTEM } from './filesystem';
+import { Companies } from "modules/companies";
+import { UserData } from "./users";
+import { SystemModules } from "modules/system-modules";
+import { FILESYSTEM } from "./filesystem";
 
 export interface FILESYSTEM_MAPPER {
   id: string;

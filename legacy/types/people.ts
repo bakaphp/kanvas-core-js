@@ -1,16 +1,15 @@
-
 import {
-  ContactInputInterface,
   AddressInputInterface,
-  CompanyInterface,
-  CustomFieldInput,
-  ContactInterface,
   AddressInterface,
+  CompanyInterface,
+  ContactInputInterface,
+  ContactInterface,
   CustomFieldData,
-} from './index';
-import { OrganizationInterface } from './organization';
-import { PaginatorInfo } from './paginator';
-import { CreatedTags, TagInput } from './tags';
+  CustomFieldInput,
+} from "./index";
+import { OrganizationInterface } from "./organization";
+import { PaginatorInfo } from "./paginator";
+import { CreatedTags, TagInput } from "./tags";
 
 export interface PeopleInputInterface {
   firstname: string;
@@ -27,22 +26,19 @@ export interface PeopleInputInterface {
   custom_fields?: [CustomFieldInput];
   tags?: [TagInput];
   created_at?: string;
-  updated_at?:string
+  updated_at?: string;
 }
 
-
-
-export interface PeopleEmploymentHistory{
+export interface PeopleEmploymentHistory {
   id: string;
-  organization:OrganizationInterface;
-  people:PeopleInterface;
-  position:string;
-  income:number;
-  start_date:string;
-  end_date:string;
-  status:string;
-  income_type:string;
-
+  organization: OrganizationInterface;
+  people: PeopleInterface;
+  position: string;
+  income: number;
+  start_date: string;
+  end_date: string;
+  status: string;
+  income_type: string;
 }
 export interface PeopleInterface {
   id: string;
@@ -54,16 +50,14 @@ export interface PeopleInterface {
   company?: CompanyInterface;
   contacts: ContactInterface[];
   address?: AddressInterface[];
-  custom_fields?: CustomFieldData
+  custom_fields?: CustomFieldData;
   tags?: CreatedTags;
-  employment_history?:PeopleEmploymentHistory[];
+  employment_history?: PeopleEmploymentHistory[];
   created_at: string;
-  updated_at?:string
+  updated_at?: string;
 }
-
 
 export interface CreatedPeople {
   data: PeopleInterface[];
   paginatorInfo?: PaginatorInfo;
 }
-

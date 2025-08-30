@@ -1,0 +1,36 @@
+import { defineConfig } from "tsup";
+
+export default defineConfig([
+  {
+    dts: true,
+    entry: ["src/core/app"],
+    format: ["esm", "cjs"],
+    minify: true,
+    target: "esnext",
+    outDir: "dist/app",
+    splitting: true,
+    external: [],
+    tsconfig: "./tsconfig.json",
+    bundle: true,
+    cjsInterop: true,
+    clean: true,
+    noExternal: [/.*/],
+    treeshake: true,
+  },
+  {
+    dts: true,
+    entry: ["src/core/auth"],
+    format: ["esm", "cjs"],
+    minify: true,
+    target: "esnext",
+    outDir: "dist/auth",
+    splitting: true,
+    external: [],
+    tsconfig: "./tsconfig.json",
+    bundle: true,
+    cjsInterop: true,
+    clean: true,
+    noExternal: [/.*/],
+    treeshake: true,
+  },
+]);

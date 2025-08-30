@@ -3,51 +3,51 @@ import {
   ApolloLink,
   HttpLink,
   InMemoryCache,
-  RequestHandler,
   NormalizedCacheObject,
-} from '@apollo/client/core';
+  RequestHandler,
+} from "@apollo/client/core";
 
 import {
+  Agents,
   App,
   Auth,
-  Users,
-  CustomFields,
-  Locations,
+  Cart,
+  Channels,
   Companies,
   CompaniesBranches,
-  Leads,
-  Inventory,
-  Agents,
-  Cart,
-  Order,
-  UsersLists,
-  UsersInteractions,
-  Messages,
-  Roles,
-  MessagesTypes,
-  FileSystem,
-  Topics,
-  SystemModules,
-  Follow,
-  People,
-  Notifications,
-  Channels,
-  Organization,
-  Tags,
-  Receiver,
   Contact,
-  FilesystemMapper,
+  CustomFields,
   Event,
+  FileSystem,
+  FilesystemMapper,
+  Follow,
+  Inventory,
+  Leads,
+  Locations,
+  Messages,
+  MessagesTypes,
+  Notifications,
+  Order,
+  Organization,
+  People,
+  Receiver,
+  Roles,
+  SystemModules,
+  Tags,
+  Topics,
+  Users,
+  UsersInteractions,
+  UsersLists,
   Workflow,
-} from './modules';
+} from "./modules";
 
-import { setContext } from '@apollo/client/link/context';
-import Settings from './modules/settings';
+import { setContext } from "@apollo/client/link/context";
+import Settings from "./modules/settings";
 
-export * from './types';
-export * from './queries';
-export * from './mutations';
-export * from './modules';
+export * from "./types";
+export * from "./queries";
+export * from "./mutations";
+export * from "./modules";
 
 type Middleware = ApolloLink | RequestHandler;
 export type ClientType = ApolloClient<NormalizedCacheObject>;
@@ -61,14 +61,14 @@ export interface Options {
 }
 
 export function genericAuthMiddleware(
-  fn: () => Promise<string | null | undefined>
+  fn: () => Promise<string | null | undefined>,
 ) {
   return setContext(async (_, context) => {
     const key = await fn();
 
     const headers = {
       ...context.headers,
-      Authorization: key ? `Bearer ${key}` : '',
+      Authorization: key ? `Bearer ${key}` : "",
     };
 
     return { headers };
@@ -76,25 +76,25 @@ export function genericAuthMiddleware(
 }
 
 export function locationMiddleware(
-  fn: () => Promise<string | null | undefined>
+  fn: () => Promise<string | null | undefined>,
 ) {
   return setContext(async (_, context) => {
     const key = await fn();
 
     const headers = {
       ...context.headers,
-      ...(key && { 'X-Kanvas-Location': key }),
+      ...(key && { "X-Kanvas-Location": key }),
     };
 
     return { headers };
   });
 }
 export async function authAxiosMiddleware(
-  fn: () => Promise<string | null | undefined>
+  fn: () => Promise<string | null | undefined>,
 ) {
   const key = await fn();
   return {
-    Authorization: key ? `Bearer ${key}` : '',
+    Authorization: key ? `Bearer ${key}` : "",
   };
 }
 export default class KanvasCore {
@@ -181,8 +181,8 @@ export default class KanvasCore {
     return setContext(async (_, context) => {
       const headers = {
         ...context.headers,
-        'X-Kanvas-App': this.options.key,
-        ...(this.options.adminKey && { 'X-Kanvas-Key': this.options.adminKey }),
+        "X-Kanvas-App": this.options.key,
+        ...(this.options.adminKey && { "X-Kanvas-Key": this.options.adminKey }),
       };
       return { headers };
     });

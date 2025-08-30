@@ -1,5 +1,5 @@
-import { CompanyBranchInterface, UserInterface } from '__index';
-import { PaginatorInfo } from './paginator';
+import { CompanyBranchInterface, UserInterface } from "__index";
+import { PaginatorInfo } from "./paginator";
 
 export interface CompanyInterface {
   id: string;

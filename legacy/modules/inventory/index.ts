@@ -1,8 +1,8 @@
-import { ClientType } from '../../__index';
+import { ClientType } from "../../__index";
 import {
   GET_ATTRIBUTES,
-  GET_PRODUCTS,
   GET_PRODUCT_TYPES,
+  GET_PRODUCTS,
   GET_REGIONS,
   GET_STATUS,
   GET_VARIANTS,
@@ -10,96 +10,96 @@ import {
   GET_WAREHOUSES,
   PRODUCT_ADMIN_DASHBOARD,
   PRODUCT_DASHBOARD,
-} from '../../queries/inventory.query';
+} from "../../queries/inventory.query";
 import {
-  CREATE_PRODUCT,
-  CREATE_STATUS,
+  CREATE_ATTRIBUTES,
   CREATE_CATEGORIES,
+  CREATE_CHANNELS,
+  CREATE_PRODUCT,
+  CREATE_PRODUCT_TYPE,
+  CREATE_REGION,
+  CREATE_STATUS,
+  CREATE_VARIANT,
+  CREATE_WAREHOUSE,
+  DELETE_ATTRIBUTES,
   DELETE_CATEGORIES,
+  DELETE_CHANNELS,
   DELETE_PRODUCT,
+  DELETE_PRODUCT_TYPE,
+  DELETE_REGION,
+  DELETE_STATUS,
   DELETE_VARIANT,
+  DELETE_WAREHOUSE,
+  UPDATE_ATTRIBUTES,
   UPDATE_CATEGORIES,
+  UPDATE_CHANNELS,
   UPDATE_PRODUCT,
+  UPDATE_PRODUCT_TYPE,
+  UPDATE_REGION,
+  UPDATE_STATUS,
   UPDATE_VARIANT,
   UPDATE_VARIANT_IN_WAREHOUSE,
-  CREATE_PRODUCT_TYPE,
-  UPDATE_PRODUCT_TYPE,
-  DELETE_PRODUCT_TYPE,
-  UPDATE_STATUS,
-  DELETE_STATUS,
   UPDATE_WAREHOUSE,
-  DELETE_WAREHOUSE,
-  CREATE_WAREHOUSE,
-  UPDATE_REGION,
-  CREATE_REGION,
-  DELETE_REGION,
-  UPDATE_CHANNELS,
-  CREATE_CHANNELS,
-  DELETE_CHANNELS,
-  CREATE_VARIANT,
-  DELETE_ATTRIBUTES,
-  CREATE_ATTRIBUTES,
-  UPDATE_ATTRIBUTES
-} from '../../mutations';
+} from "../../mutations";
 import {
-  CreateProductParams,
+  AllCreatedProducts,
+  AllCreatedVariants,
+  AllCreatedVariantsbyStatus,
+  CreatedAttributes,
+  CreatedChannels,
   CreatedProduct,
   CreatedProductTypes,
-  CreatedStatus,
-  CreatedRegions,
-  DeleteProduct,
-  ProductInterface,
-  UpdatedVariant,
-  InputVariantParams,
-  WhereCondition,
-  UpdatedProduct,
-  InputProductParams,
-  InputVariantWarehouseParams,
-  UpdatedVariantWarehouse,
-  AllCreatedProducts,
-  CreatedWarehouses,
-  CreatedAttributes,
-  OrderBy,
-  ProductDashboardInterface,
-  AllCreatedVariants,
-  deleteVariant,
-  AllCreatedVariantsbyStatus,
-  InputStatusParams,
-  ProductAdminDashboardInterface,
-  CreateStatus,
-  DeleteCategories,
-  UpdatedCategory,
-  InputCategoriesParams,
-  InputProductTypeParams,
-  DeleteProductType,
-  UpdatedProductType,
-  DeleteStatus,
-  InputUpdateStatusParams,
-  UpdatedStatus,
-  InputWarehouseParams,
-  DeleteWarehouse,
-  CreatedWarehouse,
-  UpdatedWarehouse,
-  DeleteRegion,
-  UpdatedRegion,
-  InputRegionParams,
   CreatedRegion,
-  DeleteChannels,
-  CreatedChannels,
-  UpdatedChannels,
-  InputChannelsParams,
+  CreatedRegions,
+  CreatedStatus,
   CreatedVariant,
-  InputChannelVariantParams,
-  InputAttributesParams,
+  CreatedWarehouse,
+  CreatedWarehouses,
+  CreateProductParams,
+  CreateStatus,
   DeleteAttribute,
+  DeleteCategories,
+  DeleteChannels,
+  DeleteProduct,
+  DeleteProductType,
+  DeleteRegion,
+  DeleteStatus,
+  deleteVariant,
+  DeleteWarehouse,
+  InputAttributesParams,
+  InputCategoriesParams,
+  InputChannelsParams,
+  InputChannelVariantParams,
+  InputProductParams,
+  InputProductTypeParams,
+  InputRegionParams,
+  InputStatusParams,
+  InputUpdateStatusParams,
+  InputVariantParams,
+  InputVariantWarehouseParams,
+  InputWarehouseParams,
+  OrderBy,
+  ProductAdminDashboardInterface,
+  ProductDashboardInterface,
+  ProductInterface,
   UpdatedAttributes,
-} from '../../types';
+  UpdatedCategory,
+  UpdatedChannels,
+  UpdatedProduct,
+  UpdatedProductType,
+  UpdatedRegion,
+  UpdatedStatus,
+  UpdatedVariant,
+  UpdatedVariantWarehouse,
+  UpdatedWarehouse,
+  WhereCondition,
+} from "../../types";
 
 export class Inventory {
-  constructor(protected client: ClientType) { }
+  constructor(protected client: ClientType) {}
 
   public async createProduct(
-    data: ProductInterface | CreateProductParams
+    data: ProductInterface | CreateProductParams,
   ): Promise<CreatedProduct> {
     const response = await this.client.mutate({
       mutation: CREATE_PRODUCT,
@@ -130,7 +130,7 @@ export class Inventory {
       search?: string;
       translate?: string;
       withTranslate?: boolean;
-    } = {}
+    } = {},
   ): Promise<AllCreatedProducts> {
     const {
       first,
@@ -139,7 +139,7 @@ export class Inventory {
       orderByCondition,
       hasCategoriesCondition,
       hasAttributesCondition,
-      hasVariantsCondition, 
+      hasVariantsCondition,
       search,
       translate,
       withTranslate,
@@ -160,7 +160,7 @@ export class Inventory {
         withTranslate,
         translate,
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
 
@@ -168,7 +168,7 @@ export class Inventory {
   }
 
   public async getProductTypes(
-    whereCondition?: WhereCondition
+    whereCondition?: WhereCondition,
   ): Promise<CreatedProductTypes> {
     const response = await this.client.query({
       query: GET_PRODUCT_TYPES,
@@ -192,7 +192,7 @@ export class Inventory {
       page?: number;
       whereCondition?: WhereCondition;
       orderByCondition?: OrderBy[];
-    } = {}
+    } = {},
   ): Promise<CreatedStatus> {
     const { first, page, whereCondition, orderByCondition } = options;
 
@@ -213,7 +213,7 @@ export class Inventory {
   }
 
   public async getRegions(
-    whereCondition?: WhereCondition
+    whereCondition?: WhereCondition,
   ): Promise<CreatedRegions> {
     const response = await this.client.query({
       query: GET_REGIONS,
@@ -261,13 +261,18 @@ export class Inventory {
   }: InputChannelVariantParams): Promise<UpdatedVariantWarehouse> {
     const response = await this.client.mutate({
       mutation: UPDATE_VARIANT_IN_WAREHOUSE,
-      variables: { variants_id: variants_id, channels_id: channels_id, warehouses_id: warehouses_id, input: input },
+      variables: {
+        variants_id: variants_id,
+        channels_id: channels_id,
+        warehouses_id: warehouses_id,
+        input: input,
+      },
     });
     return response.data;
   }
 
   public async getWareHouses(
-    whereCondition?: WhereCondition
+    whereCondition?: WhereCondition,
   ): Promise<CreatedWarehouses> {
     const response = await this.client.query({
       query: GET_WAREHOUSES,
@@ -277,7 +282,7 @@ export class Inventory {
   }
 
   public async getAttributes(
-    whereCondition?: WhereCondition
+    whereCondition?: WhereCondition,
   ): Promise<CreatedAttributes> {
     const response = await this.client.query({
       query: GET_ATTRIBUTES,
@@ -289,7 +294,7 @@ export class Inventory {
   public async productDashboard(): Promise<ProductDashboardInterface> {
     const response = await this.client.query({
       query: PRODUCT_DASHBOARD,
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
 
@@ -312,7 +317,7 @@ export class Inventory {
   > {
     const response = await this.client.query({
       query: PRODUCT_ADMIN_DASHBOARD,
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
 
@@ -328,9 +333,17 @@ export class Inventory {
       search?: string;
       translations?: string;
       withTranslate?: boolean;
-    } = {}
+    } = {},
   ): Promise<AllCreatedVariants> {
-    const { first, page, whereCondition, orderByCondition, search, translations, withTranslate } = options;
+    const {
+      first,
+      page,
+      whereCondition,
+      orderByCondition,
+      search,
+      translations,
+      withTranslate,
+    } = options;
 
     const response = await this.client.query({
       query: GET_VARIANTS,
@@ -344,7 +357,7 @@ export class Inventory {
         translations,
         withTranslate,
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
 
@@ -370,9 +383,9 @@ export class Inventory {
       search?: string;
       orderByCondition?: OrderBy[];
     } = {
-        warehouse_id: 0,
-        status_id: '',
-      }
+      warehouse_id: 0,
+      status_id: "",
+    },
   ): Promise<AllCreatedVariantsbyStatus> {
     const {
       warehouse_id,
@@ -396,7 +409,7 @@ export class Inventory {
         search,
         orderByCondition,
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
 
@@ -414,7 +427,9 @@ export class Inventory {
     return response.data;
   }
 
-  public async createCategory(data: InputCategoriesParams): Promise<CreateStatus> {
+  public async createCategory(
+    data: InputCategoriesParams,
+  ): Promise<CreateStatus> {
     const response = await this.client.mutate({
       mutation: CREATE_CATEGORIES,
       variables: {
@@ -444,7 +459,9 @@ export class Inventory {
     return response.data;
   }
 
-  public async createProductType(data: InputProductTypeParams): Promise<CreatedProductTypes> {
+  public async createProductType(
+    data: InputProductTypeParams,
+  ): Promise<CreatedProductTypes> {
     const response = await this.client.mutate({
       mutation: CREATE_PRODUCT_TYPE,
       variables: {
@@ -454,7 +471,9 @@ export class Inventory {
     return response.data;
   }
 
-  public async deleteProductType(id: number | string): Promise<DeleteProductType> {
+  public async deleteProductType(
+    id: number | string,
+  ): Promise<DeleteProductType> {
     const response = await this.client.mutate({
       mutation: DELETE_PRODUCT_TYPE,
       variables: { id: id },
@@ -474,7 +493,9 @@ export class Inventory {
     return response.data;
   }
 
-  public async createWarehouse(data: InputWarehouseParams): Promise<CreatedWarehouse> {
+  public async createWarehouse(
+    data: InputWarehouseParams,
+  ): Promise<CreatedWarehouse> {
     const response = await this.client.mutate({
       mutation: CREATE_WAREHOUSE,
       variables: {
@@ -534,7 +555,9 @@ export class Inventory {
     return response.data as UpdatedChannels;
   }
 
-  public async createChannels(data: InputChannelsParams): Promise<CreatedChannels> {
+  public async createChannels(
+    data: InputChannelsParams,
+  ): Promise<CreatedChannels> {
     const response = await this.client.mutate({
       mutation: CREATE_CHANNELS,
       variables: {
@@ -553,7 +576,9 @@ export class Inventory {
     return response.data as DeleteChannels;
   }
 
-  public async createVariant(data: InputVariantParams): Promise<CreatedVariant> {
+  public async createVariant(
+    data: InputVariantParams,
+  ): Promise<CreatedVariant> {
     const response = await this.client.mutate({
       mutation: CREATE_VARIANT,
       variables: {
@@ -571,7 +596,7 @@ export class Inventory {
       mutation: UPDATE_ATTRIBUTES,
       variables: {
         input: input,
-        id: id
+        id: id,
       },
     });
     return response.data;
@@ -586,7 +611,9 @@ export class Inventory {
     return response.data;
   }
 
-  public async createAttribute(data: InputAttributesParams): Promise<CreatedAttributes> {
+  public async createAttribute(
+    data: InputAttributesParams,
+  ): Promise<CreatedAttributes> {
     const response = await this.client.mutate({
       mutation: CREATE_ATTRIBUTES,
       variables: {

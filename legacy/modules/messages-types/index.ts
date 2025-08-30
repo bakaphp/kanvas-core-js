@@ -1,20 +1,20 @@
-import { ClientType } from '__index';
+import { ClientType } from "__index";
 import {
-  MessageTypeInterface,
   MessageTypeInputInterface,
+  MessageTypeInterface,
   WhereCondition,
-} from '../../types';
+} from "../../types";
 import {
   CREATE_MESSAGE_TYPE_MUTATION,
   UPDATE_MESSAGE_TYPE_MUTATION,
-} from '../../mutations';
-import { MESSAGES_TYPES_QUERY } from '../../queries';
+} from "../../mutations";
+import { MESSAGES_TYPES_QUERY } from "../../queries";
 
 export class MessagesTypes {
   constructor(protected client: ClientType) {}
 
   public async createMessageType(
-    input: MessageTypeInputInterface
+    input: MessageTypeInputInterface,
   ): Promise<MessageTypeInterface> {
     const response = await this.client.mutate({
       mutation: CREATE_MESSAGE_TYPE_MUTATION,
@@ -25,7 +25,7 @@ export class MessagesTypes {
 
   public async updateMessageType(
     id: number,
-    input: MessageTypeInputInterface
+    input: MessageTypeInputInterface,
   ): Promise<MessageTypeInterface> {
     const response = await this.client.mutate({
       mutation: UPDATE_MESSAGE_TYPE_MUTATION,
@@ -35,7 +35,7 @@ export class MessagesTypes {
   }
 
   public async getMessageTypes(
-    where?: WhereCondition
+    where?: WhereCondition,
   ): Promise<MessageTypeInterface[]> {
     const response = await this.client.query({
       query: MESSAGES_TYPES_QUERY,

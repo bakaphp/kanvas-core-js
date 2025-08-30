@@ -1,52 +1,52 @@
-import { ClientType, Options } from '../../__index';
-import axios from 'axios';
-import FormData from 'form-data';
+import { ClientType, Options } from "../../__index";
+import axios from "axios";
+import FormData from "form-data";
 
 import {
-  MessageInputInterface,
-  MessagesInterface,
-  HasAppModuleMessageWhereConditions,
-  OrderByMessage,
-  WhereCondition,
-  MessageUpdateInputInterface,
+  AllChannelMessages,
+  AllFollowingFeedMessages,
+  AllForYouMessages,
+  AllLikedMessagesByUser,
   AllMessages,
   AllMessagesGroupByDate,
-  MessageUploadFiles,
+  HasAppModuleMessageWhereConditions,
+  MessageInputInterface,
   MessageSearchSuggestions,
-  AllLikedMessagesByUser,
-  AllForYouMessages,
-  AllFollowingFeedMessages,
-  AllChannelMessages,
+  MessagesInterface,
+  MessageUpdateInputInterface,
+  MessageUploadFiles,
   MessageWithFileInputInterface,
-} from '../../types';
+  OrderByMessage,
+  WhereCondition,
+} from "../../types";
 import {
-  CREATE_MESSAGE_MUTATION,
   ATTACH_TOPIC_TO_MESSAGE_MUTATION,
-  DETACH_TOPIC_TO_MESSAGE_MUTATION,
-  UPDATE_MESSAGE_MUTATION,
+  CREATE_MESSAGE_MUTATION,
+  CREATE_MESSAGE_WITH_FILE_MUTATION,
+  DELETE_ALL_MESSAGE_MUTATION,
   DELETE_MESSAGE_MUTATION,
   DELETE_MULTIPLE_MESSAGE_MUTATION,
-  DELETE_ALL_MESSAGE_MUTATION,
-  LIKE_MESSAGE_MUTATION,
-  SHARE_MESSAGE_MUTATION,
-  VIEW_MESSAGE_MUTATION,
+  DETACH_TOPIC_TO_MESSAGE_MUTATION,
   DISLIKE_MESSAGE_MUTATION,
+  LIKE_MESSAGE_MUTATION,
   RESTORE_MESSAGE_MUTATION,
-  CREATE_MESSAGE_WITH_FILE_MUTATION,
-} from '../../mutations';
+  SHARE_MESSAGE_MUTATION,
+  UPDATE_MESSAGE_MUTATION,
+  VIEW_MESSAGE_MUTATION,
+} from "../../mutations";
 
 import {
   GET_CHANNEL_MESSAGES_QUERY,
+  GET_FOLLOWING_FEED_QUERY,
   GET_FOR_YOU_MESSAGES_QUERY,
   GET_MESSAGE_SEARCH_SUGGESTIONS_QUERY,
   GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG,
   GET_MESSAGES_GROUP_BY_DATE_QUERY,
   GET_MESSAGES_LIKED_BY_USER,
   GET_MESSAGES_QUERY,
-  GET_FOLLOWING_FEED_QUERY
-} from '../../queries';
+} from "../../queries";
 
-import { MessagesComments } from '../messages-comments';
+import { MessagesComments } from "../messages-comments";
 export class Messages {
   public comments: MessagesComments;
   protected axiosClient: any;
@@ -57,9 +57,9 @@ export class Messages {
       this.axiosClient = axios.create({
         baseURL: this.options.url,
         headers: {
-          'X-Kanvas-App': this.options.key,
+          "X-Kanvas-App": this.options.key,
           ...(this.options.adminKey && {
-            'X-Kanvas-Key': this.options.adminKey,
+            "X-Kanvas-Key": this.options.adminKey,
           }),
         },
       });
@@ -68,13 +68,13 @@ export class Messages {
         this.options.authAxiosMiddleware,
         function (error: any) {
           return Promise.reject(error);
-        }
+        },
       );
     }
   }
 
   public async createMessage(
-    input: MessageInputInterface
+    input: MessageInputInterface,
   ): Promise<MessagesInterface> {
     const response = this.client.mutate({
       mutation: CREATE_MESSAGE_MUTATION,
@@ -86,15 +86,16 @@ export class Messages {
   public async createMessageWithFile(
     file: File,
     input: MessageWithFileInputInterface,
-    token?: string // Optional token parameter
+    token?: string, // Optional token parameter
   ): Promise<any> {
-    if (!this.options || !this.axiosClient)
-      throw new Error('FileSystem module not initialized');
+    if (!this.options || !this.axiosClient) {
+      throw new Error("FileSystem module not initialized");
+    }
 
     const formData = new FormData();
 
     formData.append(
-      'operations',
+      "operations",
       JSON.stringify({
         query: CREATE_MESSAGE_WITH_FILE_MUTATION,
         variables: {
@@ -103,31 +104,31 @@ export class Messages {
             files: null,
           },
         },
-      })
+      }),
     );
 
-    formData.append('map', JSON.stringify({ '0': ['variables.input.files'] }));
-    formData.append('0', file, file.name);
+    formData.append("map", JSON.stringify({ "0": ["variables.input.files"] }));
+    formData.append("0", file, file.name);
 
     // Create headers object
     const headers: Record<string, string> = {
-      'Content-Type': 'multipart/form-data',
+      "Content-Type": "multipart/form-data",
     };
 
     // Add Authorization header if token is provided
     if (token) {
-      headers['Authorization'] = `Bearer ${token}`;
+      headers["Authorization"] = `Bearer ${token}`;
     }
 
     // Make the request with our headers
-    const response = await this.axiosClient.post('', formData, { headers });
+    const response = await this.axiosClient.post("", formData, { headers });
 
     return response;
   }
 
   public async updateMessage(
     id: string,
-    input: MessageUpdateInputInterface
+    input: MessageUpdateInputInterface,
   ): Promise<MessagesInterface> {
     const response = await this.client.mutate({
       mutation: UPDATE_MESSAGE_MUTATION,
@@ -183,7 +184,7 @@ export class Messages {
         alias?: string; // Alias for children field
         first?: number; // Limit for children
       };
-    } = {}
+    } = {},
   ): Promise<AllMessages> {
     const {
       hasAppModuleMessageWhere,
@@ -198,7 +199,7 @@ export class Messages {
       childrenOptions = {},
     } = options;
 
-    const { alias = 'children', first: childrenFirst } = childrenOptions;
+    const { alias = "children", first: childrenFirst } = childrenOptions;
 
     const response = await this.client.query({
       query: GET_MESSAGES_QUERY(childrenFirst !== undefined, alias),
@@ -214,7 +215,7 @@ export class Messages {
         page,
         ...(childrenFirst !== undefined && { childrenFirst }),
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     });
 
     return response.data;
@@ -233,7 +234,7 @@ export class Messages {
         alias?: string; // Alias for the children field
         first?: number; // Limit for children
       };
-    } = {}
+    } = {},
   ): Promise<AllForYouMessages> {
     const {
       search,
@@ -246,7 +247,7 @@ export class Messages {
       childrenOptions = {},
     } = options;
 
-    const { alias = 'children', first: childrenFirst } = childrenOptions;
+    const { alias = "children", first: childrenFirst } = childrenOptions;
 
     const response = await this.client.query({
       query: GET_FOR_YOU_MESSAGES_QUERY(childrenFirst !== undefined, alias),
@@ -260,7 +261,7 @@ export class Messages {
         page,
         ...(childrenFirst !== undefined && { childrenFirst }),
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     });
 
     return response.data;
@@ -279,7 +280,7 @@ export class Messages {
         alias?: string; // Alias for the children field
         first?: number; // Limit for children
       };
-    } = {}
+    } = {},
   ): Promise<AllFollowingFeedMessages> {
     const {
       search,
@@ -292,7 +293,7 @@ export class Messages {
       childrenOptions = {},
     } = options;
 
-    const { alias = 'children', first: childrenFirst } = childrenOptions;
+    const { alias = "children", first: childrenFirst } = childrenOptions;
 
     const response = await this.client.query({
       query: GET_FOLLOWING_FEED_QUERY(childrenFirst !== undefined, alias),
@@ -306,7 +307,7 @@ export class Messages {
         page,
         ...(childrenFirst !== undefined && { childrenFirst }),
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     });
 
     return response.data;
@@ -324,7 +325,7 @@ export class Messages {
         alias?: string; // Alias for the children field
         first?: number; // Limit for children
       };
-    } = {}
+    } = {},
   ): Promise<AllChannelMessages> {
     const {
       channel_uuid,
@@ -336,7 +337,7 @@ export class Messages {
       childrenOptions = {},
     } = options;
 
-    const { alias = 'children', first: childrenFirst } = childrenOptions;
+    const { alias = "children", first: childrenFirst } = childrenOptions;
 
     const response = await this.client.query({
       query: GET_CHANNEL_MESSAGES_QUERY(childrenFirst !== undefined, alias),
@@ -349,7 +350,7 @@ export class Messages {
         page,
         ...(childrenFirst !== undefined && { childrenFirst }),
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     });
 
     return response.data;
@@ -363,7 +364,7 @@ export class Messages {
       search?: string;
       first?: number;
       page?: number;
-    } = {}
+    } = {},
   ): Promise<AllMessagesGroupByDate> {
     const {
       where,
@@ -383,14 +384,14 @@ export class Messages {
         first,
         page,
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     });
     return response.data;
   }
 
   public async getMessageByDisplaynameAndSlug(
     displayname: string,
-    slug: string
+    slug: string,
   ): Promise<MessagesInterface> {
     const response = await this.client.query({
       query: GET_MESSAGES_BY_DISPLAYNAME_AND_SLUG,
@@ -410,11 +411,11 @@ export class Messages {
         alias?: string; // Alias for the children field
         first?: number; // Limit for children
       };
-    } = {}
+    } = {},
   ): Promise<AllLikedMessagesByUser> {
-    const { where, orderBy, first, page , childrenOptions = {}} = options;
+    const { where, orderBy, first, page, childrenOptions = {} } = options;
 
-    const { alias = 'children', first: childrenFirst } = childrenOptions;
+    const { alias = "children", first: childrenFirst } = childrenOptions;
 
     const response = await this.client.query({
       query: GET_MESSAGES_LIKED_BY_USER(childrenFirst !== undefined, alias),
@@ -426,7 +427,7 @@ export class Messages {
         page,
         ...(childrenFirst !== undefined && { childrenFirst }),
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     });
 
     return response.data;
@@ -434,7 +435,7 @@ export class Messages {
 
   public async attachTopicToMessage(
     messageId: string,
-    topicId: string
+    topicId: string,
   ): Promise<void> {
     await this.client.mutate({
       mutation: ATTACH_TOPIC_TO_MESSAGE_MUTATION,
@@ -444,7 +445,7 @@ export class Messages {
 
   public async detachTopicToMessage(
     messageId: string,
-    topicId: string
+    topicId: string,
   ): Promise<void> {
     await this.client.mutate({
       mutation: DETACH_TOPIC_TO_MESSAGE_MUTATION,
@@ -488,13 +489,13 @@ export class Messages {
   public async attachFileToMessage(
     id: string,
     file: File | Buffer,
-    fileName?: string
+    fileName?: string,
   ): Promise<MessageUploadFiles> {
     if (!this.options || !this.axiosClient) {
-      throw new Error('FileSystem module not initialized');
+      throw new Error("FileSystem module not initialized");
     }
 
-    const isBrowser = typeof window !== 'undefined';
+    const isBrowser = typeof window !== "undefined";
     const formData = new FormData();
 
     const messageOutputData = `{
@@ -533,7 +534,7 @@ export class Messages {
     }`;
 
     formData.append(
-      'operations',
+      "operations",
       JSON.stringify({
         query: `mutation ($file: Upload!) {
           attachFileToMessage(message_id: "${id}", file: $file) ${messageOutputData}
@@ -541,29 +542,29 @@ export class Messages {
         variables: {
           file: null,
         },
-      })
+      }),
     );
 
-    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+    formData.append("map", JSON.stringify({ "0": ["variables.file"] }));
 
     if (isBrowser && file instanceof File) {
-      formData.append('0', file, file.name);
+      formData.append("0", file, file.name);
     } else if (Buffer.isBuffer(file)) {
       if (!fileName) {
-        throw new Error('fileName is required when uploading a Buffer');
+        throw new Error("fileName is required when uploading a Buffer");
       }
-      formData.append('0', file, { filename: fileName });
+      formData.append("0", file, { filename: fileName });
     } else {
-      throw new Error('Invalid file type: expected File or Buffer');
+      throw new Error("Invalid file type: expected File or Buffer");
     }
 
     const headers = isBrowser ? {} : (formData as any).getHeaders();
-    const response = await this.axiosClient.post('', formData, { headers });
+    const response = await this.axiosClient.post("", formData, { headers });
     return response.data.data;
   }
 
   public async getMessageSearchSuggestions(
-    search: string
+    search: string,
   ): Promise<MessageSearchSuggestions> {
     const response = await this.client.query({
       query: GET_MESSAGE_SEARCH_SUGGESTIONS_QUERY,

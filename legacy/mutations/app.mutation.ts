@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const USER_UPDATE_PASSWORD_MUTATION = gql`
   mutation appUserUpdatePassword($uuid: String!, $password: String!) {
@@ -87,4 +87,3 @@ export const SHOPIFY_SETUP = gql`
     shopifySetup(input: $input)
   }
 `;
-

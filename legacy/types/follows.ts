@@ -1,4 +1,4 @@
-import { UserInterface } from './users';
+import { UserInterface } from "./users";
 
 export interface FollowingInterface {
   id: number;

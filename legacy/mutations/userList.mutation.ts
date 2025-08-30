@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const CREATE_USER_LIST = gql`
   mutation createUserList($input: UserListInput!) {

@@ -1,60 +1,60 @@
-import { ClientType } from '../../__index';
+import { ClientType } from "../../__index";
 import {
-  GET_USER_DATA_QUERY,
+  GET_BLOCKED_USERS,
   GET_ROLE_ID_BY_NAME_QUERY,
-  GET_USERS_INVITES_QUERY,
-  GET_USERS_INVITES_BY_ROLE_ID_QUERY,
-  GET_USER_SOCIAL_DATA_QUERY,
   GET_USER_BY_DISPLAYNAME,
   GET_USER_BY_ID,
-  GET_BLOCKED_USERS,
-} from '../../queries';
+  GET_USER_DATA_QUERY,
+  GET_USER_SOCIAL_DATA_QUERY,
+  GET_USERS_INVITES_BY_ROLE_ID_QUERY,
+  GET_USERS_INVITES_QUERY,
+} from "../../queries";
 import {
-  REGISTER_MUTATTION,
-  FORGOT_PASSWORD_MUTATION,
-  UPDATE_USER_MUTATION,
-  INVITE_USER_MUTATION,
-  SWITCH_COMPANY_BRANCH_MUTATION,
-  GET_INVITE_MUTATION,
-  PROCESS_INVITE_MUTATION,
-  DELETE_INVITE_MUTATION,
-  SOCIAL_LOGIN_MUTATTION,
-  REQUEST_DELETED_ACCOUNT_MUTATION,
-  UPDATE_DISPLAY_NAME_MUTATION,
-  UPDATE_USER_SOCIAL_MUTATION,
-  SHARE_USER_MUTATION,
   BLOCK_USER_MUTATION,
-  UNBLOCK_USER_MUTATION,
-  UPDATE_EMAIL_MUTATION,
+  DELETE_INVITE_MUTATION,
+  FORGOT_PASSWORD_MUTATION,
+  GET_INVITE_MUTATION,
+  INVITE_USER_MUTATION,
   LINK_DEVICE_MUTATION,
-  UNLINK_DEVICE_MUTATION,
+  PROCESS_INVITE_MUTATION,
+  REGISTER_MUTATTION,
+  REQUEST_DELETED_ACCOUNT_MUTATION,
   SAVE_USER_APP_PREFERENCES_MUTATION,
-} from '../../mutations';
+  SHARE_USER_MUTATION,
+  SOCIAL_LOGIN_MUTATTION,
+  SWITCH_COMPANY_BRANCH_MUTATION,
+  UNBLOCK_USER_MUTATION,
+  UNLINK_DEVICE_MUTATION,
+  UPDATE_DISPLAY_NAME_MUTATION,
+  UPDATE_EMAIL_MUTATION,
+  UPDATE_USER_MUTATION,
+  UPDATE_USER_SOCIAL_MUTATION,
+} from "../../mutations";
 import {
-  UserInterface,
-  CreateUserParams,
+  AllBlockedUsersInterface,
   CreatedUser,
-  UserData,
-  UpdateUserParams,
-  WhereCondition,
-  RoleData,
-  RolesEnum,
-  InviteProcessParams,
+  CreateUserParams,
+  DeviceParams,
+  InviteData,
   InviteParams,
   InviteProcessData,
-  InviteData,
+  InviteProcessParams,
+  OrderBy,
+  RoleData,
+  RolesEnum,
   SocialLoginData,
   SocialLoginParams,
-  OrderBy,
-  AllBlockedUsersInterface,
-  DeviceParams,
-} from '../../types';
+  UpdateUserParams,
+  UserData,
+  UserInterface,
+  WhereCondition,
+} from "../../types";
 
 export class Users {
-  constructor(protected client: ClientType) { }
+  constructor(protected client: ClientType) {}
 
   public async register(
-    userData: UserInterface | CreateUserParams
+    userData: UserInterface | CreateUserParams,
   ): Promise<CreatedUser> {
     const response = await this.client.mutate({
       mutation: REGISTER_MUTATTION,
@@ -73,7 +73,7 @@ export class Users {
   public async getUserData(withSocial: boolean = false): Promise<UserData> {
     const response = await this.client.query({
       query: !withSocial ? GET_USER_DATA_QUERY : GET_USER_SOCIAL_DATA_QUERY,
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     });
 
     return response.data.me;
@@ -85,7 +85,7 @@ export class Users {
       variables: {
         displayName,
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     });
 
     return response.data.userByDisplayName;
@@ -97,7 +97,7 @@ export class Users {
       variables: {
         id,
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     });
 
     return response.data.user;
@@ -105,8 +105,8 @@ export class Users {
 
   public async getRoleIdByName(name: string): Promise<RoleData> {
     const where: WhereCondition = {
-      column: 'NAME',
-      operator: 'EQ',
+      column: "NAME",
+      operator: "EQ",
       value: name,
     };
 
@@ -121,7 +121,7 @@ export class Users {
   public async updateUserData(
     id: number,
     updatedUser: UpdateUserParams,
-    withSocial: boolean = false
+    withSocial: boolean = false,
   ): Promise<UserData> {
     const response = await this.client.mutate({
       mutation: !withSocial
@@ -196,7 +196,7 @@ export class Users {
         }),
         where,
       },
-      fetchPolicy: 'network-only',
+      fetchPolicy: "network-only",
       partialRefetch: true,
     });
 
@@ -206,19 +206,19 @@ export class Users {
   // Get invites by role id
   public async getUsersInvitesByRoleID(first: number, role_id: number) {
     const where: WhereCondition = {
-      column: 'ROLE_ID',
-      operator: 'EQ',
+      column: "ROLE_ID",
+      operator: "EQ",
       value: role_id,
     };
 
     const orderBy: { column: string; order: string }[] = [
-      { column: 'ID', order: 'DESC' },
+      { column: "ID", order: "DESC" },
     ];
 
     const response = await this.client.query({
       query: GET_USERS_INVITES_BY_ROLE_ID_QUERY,
       variables: { where, first, orderBy },
-      fetchPolicy: 'network-only',
+      fetchPolicy: "network-only",
       partialRefetch: true,
     });
 
@@ -231,7 +231,7 @@ export class Users {
       page?: number;
       whereCondition?: WhereCondition;
       orderByCondition?: OrderBy[];
-    } = {}
+    } = {},
   ): Promise<AllBlockedUsersInterface> {
     const {
       first,
@@ -246,9 +246,9 @@ export class Users {
         first,
         page,
         whereCondition,
-        orderByCondition
+        orderByCondition,
       },
-      fetchPolicy: 'network-only',
+      fetchPolicy: "network-only",
       partialRefetch: true,
     });
 
@@ -256,7 +256,7 @@ export class Users {
   }
 
   public async processInvite(
-    input: InviteProcessParams
+    input: InviteProcessParams,
   ): Promise<InviteProcessData> {
     const response = await this.client.mutate({
       mutation: PROCESS_INVITE_MUTATION,
@@ -269,7 +269,7 @@ export class Users {
     const response = await this.client.mutate({
       mutation: DELETE_INVITE_MUTATION,
       variables: { id },
-      fetchPolicy: 'network-only',
+      fetchPolicy: "network-only",
     });
 
     return response.data;
@@ -279,7 +279,7 @@ export class Users {
     const roles = user.roles;
     if (Array.isArray(roles)) {
       return roles
-        .map(role => role.toLowerCase())
+        .map((role) => role.toLowerCase())
         .includes(RolesEnum.ADMIN.toLowerCase());
     }
     return false;
@@ -289,7 +289,7 @@ export class Users {
    * @deprecated
    */
   public async socialLoging(
-    input: SocialLoginParams
+    input: SocialLoginParams,
   ): Promise<SocialLoginData> {
     return this.socialLogin(input);
   }

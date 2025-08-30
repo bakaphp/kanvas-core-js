@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node: ['20.x']
+        node: ["20.x"]
         os: [ubuntu-latest, macOS-latest]
 
     steps:
@@ -30,7 +30,7 @@ jobs:
       - name: Run install
         uses: borales/actions-yarn@v4
         with:
-          cmd: 'install'
+          cmd: "install"
 
       - name: Test
         run: yarn test --ci --coverage --maxWorkers=2

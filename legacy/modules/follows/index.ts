@@ -1,19 +1,19 @@
-import { ClientType } from '../../__index';
+import { ClientType } from "../../__index";
 
-import { USER_FOLLOW_MUTATION, USER_UNFOLLOW_MUTATION } from '../../mutations/';
+import { USER_FOLLOW_MUTATION, USER_UNFOLLOW_MUTATION } from "../../mutations/";
 
 import {
-  IS_FOLLOWING_QUERY,
   GET_FOLLOWERS_QUERY,
+  GET_FOLLOWING_ENTITY_QUERY,
   GET_FOLLOWING_QUERY,
   GET_TOTAL_FOLLOWERS_QUERY,
-  GET_FOLLOWING_ENTITY_QUERY,
+  IS_FOLLOWING_QUERY,
   USER_RECOMMENDATIONS_QUERY,
-} from '../../queries/follows.query';
+} from "../../queries/follows.query";
 
-import { UserInterface, FollowingInterface } from '../../types';
+import { FollowingInterface, UserInterface } from "../../types";
 export class Follow {
-  constructor(protected client: ClientType) { }
+  constructor(protected client: ClientType) {}
 
   public async followUser(user_id: number | string): Promise<boolean> {
     const response = await this.client.mutate({
@@ -39,25 +39,31 @@ export class Follow {
     return response.data.isFollowing;
   }
 
-  public async getFollowers(user_id: number | string): Promise<UserInterface[]> {
+  public async getFollowers(
+    user_id: number | string,
+  ): Promise<UserInterface[]> {
     const response = await this.client.query({
       query: GET_FOLLOWERS_QUERY,
       variables: { user_id },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     });
     return response.data.getFollowers.data;
   }
 
-  public async getFollowing(user_id: number | string): Promise<UserInterface[]> {
+  public async getFollowing(
+    user_id: number | string,
+  ): Promise<UserInterface[]> {
     const response = await this.client.query({
       query: GET_FOLLOWING_QUERY,
       variables: { user_id: user_id },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     });
     return response.data.getFollowing.data;
   }
 
-  public async getFollowingEntity(user_id: number | string): Promise<FollowingInterface[]> {
+  public async getFollowingEntity(
+    user_id: number | string,
+  ): Promise<FollowingInterface[]> {
     const response = await this.client.query({
       query: GET_FOLLOWING_ENTITY_QUERY,
       variables: { user_id: user_id },
@@ -73,7 +79,10 @@ export class Follow {
     return response.data.getTotalFollowers;
   }
 
-  public async getFollowRecomendations(user_id: number | string, static_recommendation: boolean): Promise<UserInterface[]> {
+  public async getFollowRecomendations(
+    user_id: number | string,
+    static_recommendation: boolean,
+  ): Promise<UserInterface[]> {
     const response = await this.client.query({
       query: USER_RECOMMENDATIONS_QUERY,
       variables: { user_id, static_recommendation },

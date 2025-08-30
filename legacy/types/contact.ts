@@ -1,6 +1,6 @@
-import { PaginatorInfo } from './paginator';
-import { CompanyInterface } from './companies';
-import { UserInterface } from './users';
+import { PaginatorInfo } from "./paginator";
+import { CompanyInterface } from "./companies";
+import { UserInterface } from "./users";
 
 export interface ContactInterface {
   value: string;

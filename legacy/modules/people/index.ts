@@ -1,30 +1,30 @@
-import { ClientType } from '../../__index';
+import { ClientType } from "../../__index";
 
 import {
+  CreatedPeople,
+  OrderBy,
   PeopleInputInterface,
   PeopleInterface,
   WhereCondition,
-  OrderBy,
-  CreatedPeople,
-} from '../../types';
+} from "../../types";
 
 import {
   CREATE_PEOPLE_MUTATION,
-  UPDATE_PEOPLE_MUTATION,
   DELETE_PEOPLE_MUTATION,
   RESTORE_PEOPLE_MUTATION,
-} from '../../mutations';
+  UPDATE_PEOPLE_MUTATION,
+} from "../../mutations";
 
 import {
   PEOPLE_COUNT,
   PEOPLE_COUNT_BY_TAG,
   PEOPLE_QUERY,
-} from './../../queries/';
+} from "./../../queries/";
 export class People {
   constructor(protected client: ClientType) {}
 
   public async createPeople(
-    input: PeopleInputInterface
+    input: PeopleInputInterface,
   ): Promise<PeopleInterface> {
     const response = await this.client.mutate({
       mutation: CREATE_PEOPLE_MUTATION,
@@ -35,7 +35,7 @@ export class People {
 
   public async updatePeople(
     id: string,
-    input: PeopleInputInterface
+    input: PeopleInputInterface,
   ): Promise<PeopleInterface> {
     const response = await this.client.mutate({
       mutation: UPDATE_PEOPLE_MUTATION,
@@ -71,7 +71,7 @@ export class People {
       hasPhones?: WhereCondition;
       hasTags?: WhereCondition;
       hasCustomFields?: WhereCondition;
-    } = {}
+    } = {},
   ): Promise<CreatedPeople> {
     const {
       first,
@@ -98,7 +98,7 @@ export class People {
         hasTags,
         hasCustomFields,
       },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
     return response.data.peoples;
@@ -107,7 +107,7 @@ export class People {
   public async getPeopleCount(): Promise<number> {
     const response = await this.client.query({
       query: PEOPLE_COUNT,
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
     return response.data.peopleCount;
@@ -117,7 +117,7 @@ export class People {
     const response = await this.client.query({
       query: PEOPLE_COUNT_BY_TAG,
       variables: { tag },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
     return response.data.peopleCountByTag;

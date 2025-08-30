@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const USER_FOLLOW_MUTATION = gql`
   mutation userFollow($user_id: ID!) {

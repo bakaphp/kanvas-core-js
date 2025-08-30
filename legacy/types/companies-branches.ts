@@ -1,9 +1,9 @@
 import {
-  FilesystemInterface,
-  FilesystemInputUrl,
   CompanyInterface,
-  UserInterface
-} from '__index';
+  FilesystemInputUrl,
+  FilesystemInterface,
+  UserInterface,
+} from "__index";
 
 export interface CompanyBranchInput {
   name: string;
@@ -29,9 +29,9 @@ export interface CompanyBranchInterface {
   phone?: string;
   photo?: FilesystemInterface;
   zipcode?: number;
-  total_users:number;
+  total_users: number;
   is_active: boolean;
-  user: UserInterface
+  user: UserInterface;
   address: string;
   is_default: Boolean;
   created_at?: string;

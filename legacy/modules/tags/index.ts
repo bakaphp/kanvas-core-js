@@ -1,21 +1,21 @@
-import { ClientType } from '../../__index';
+import { ClientType } from "../../__index";
 import {
   ATTACH_TAG_TO_ENTITY,
   CREATE_TAG,
   DELETE_TAG,
   UPDATE_TAG,
-} from '../../mutations';
-import { GET_TAGS } from '../../queries';
-import { OrderBy, WhereCondition } from '../../types';
+} from "../../mutations";
+import { GET_TAGS } from "../../queries";
+import { OrderBy, WhereCondition } from "../../types";
 import {
   AttachTagEntityInput,
   CreatedTags,
   TagInput,
   TagInterfce,
-} from 'types/tags';
+} from "types/tags";
 
 export class Tags {
-  constructor(protected client: ClientType) { }
+  constructor(protected client: ClientType) {}
   public async getTags(
     options: {
       first?: number;
@@ -23,15 +23,14 @@ export class Tags {
       where?: WhereCondition;
       orderBy?: OrderBy[];
       search?: string;
-    } = {}
+    } = {},
   ): Promise<CreatedTags> {
-
     const { first, page, where, search, orderBy } = options;
 
     const response = await this.client.query({
       query: GET_TAGS,
       variables: { first, page, where, search, orderBy },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
     });
     return response.data.tags;
   }
@@ -46,7 +45,7 @@ export class Tags {
 
   public async updateTag(
     id: number | string,
-    input: TagInput
+    input: TagInput,
   ): Promise<TagInterfce> {
     const response = await this.client.mutate({
       mutation: UPDATE_TAG,
@@ -64,7 +63,7 @@ export class Tags {
   }
 
   public async attachTagToEntity(
-    input: AttachTagEntityInput
+    input: AttachTagEntityInput,
   ): Promise<boolean> {
     const response = await this.client.mutate({
       mutation: ATTACH_TAG_TO_ENTITY,

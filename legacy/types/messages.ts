@@ -1,5 +1,5 @@
-import { FilesystemInterface, UserInterface } from './index';
-import { PaginatorInfo } from './paginator';
+import { FilesystemInterface, UserInterface } from "./index";
+import { PaginatorInfo } from "./paginator";
 export interface MessagesInterface {
   id: string;
   parent_id?: string;
@@ -147,7 +147,6 @@ export interface HasAppModuleMessageWhereConditions {
   operator: string;
   value: string;
 }
-
 
 export interface OrderByMessage {
   column: string;

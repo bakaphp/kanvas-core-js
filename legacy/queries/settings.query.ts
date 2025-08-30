@@ -1,10 +1,10 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export type ConfigInput = {
   key: string;
   value: any;
   entity_uuid: string;
-  public?: boolean
+  public?: boolean;
 };
 
 export const AppSettingsQuery = gql`
@@ -57,4 +57,3 @@ export const APP_SETTING_QUERY = gql`
     adminAppSetting(key: $key)
   }
 `;
-

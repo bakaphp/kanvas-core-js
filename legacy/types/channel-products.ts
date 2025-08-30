@@ -1,6 +1,6 @@
-import { ProductInterface } from './inventory';
-import { PaginatorInfo } from './paginator';
-import { WhereCondition } from './index';
+import { ProductInterface } from "./inventory";
+import { PaginatorInfo } from "./paginator";
+import { WhereCondition } from "./index";
 
 export type ChannelProductsProps = {
   id: string;

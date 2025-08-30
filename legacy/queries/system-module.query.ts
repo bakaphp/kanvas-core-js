@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 export const SYSTEM_MODULES_QUERY = gql`
   query systemModels(
     $where: QuerySystemModelsWhereWhereConditions
@@ -29,5 +29,3 @@ export const SYSTEM_MODULES_QUERY = gql`
     }
   }
 `;
-
-

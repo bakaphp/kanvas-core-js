@@ -1,4 +1,4 @@
-import { UserInterface, CompanyInterface } from './index';
+import { CompanyInterface, UserInterface } from "./index";
 
 export interface TopicsInterface {
   id: string;

@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const USER_LIKE_ENTITY = gql`
     mutation($input: UserInteractionInput!) {
@@ -12,7 +12,7 @@ export const USER_UNlIKE_ENTITY = gql`
     }
 `;
 
-export const  USER_DISLIKE_ENTITY = gql`
+export const USER_DISLIKE_ENTITY = gql`
     mutation($input: UserInteractionInput!) {
         userDislikeEntity(input: $input)
     }

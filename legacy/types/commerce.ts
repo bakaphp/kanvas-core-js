@@ -61,7 +61,6 @@ export interface OrderFromGooglePlayInAppPurchaseResults {
   createOrderFromGooglePlayInAppPurchase: Order;
 }
 
-
 export interface OrderItem {
   id: number;
   product_name: string;
@@ -142,7 +141,7 @@ export interface CartDataDiscount {
 
 export interface OrderItemInput {
   input: {
-    cartId: 'default';
+    cartId: "default";
     payment: {
       name: string;
       number: string;
@@ -155,7 +154,7 @@ export interface OrderItemInput {
 
 export interface OrderCartInput {
   input: {
-    cartId: 'default';
+    cartId: "default";
     customer: {
       email: string;
       phone?: string;

@@ -1,23 +1,23 @@
-import { ClientType } from '../../__index';
+import { ClientType } from "../../__index";
 
 import {
-  ChannelInterface,
   ChannelInputInterface,
+  ChannelInterface,
   WhereCondition,
-} from '../../types';
+} from "../../types";
 import {
-  CREATE_SOCIAL_CHANNEL_MUTATION,
-  UPDATE_SOCIAL_CHANNEL_MUTATION,
   ATTACH_USER_TO_CHANNEL,
+  CREATE_SOCIAL_CHANNEL_MUTATION,
   DETACH_USER_FROM_CHANNEL,
-} from '../../mutations';
+  UPDATE_SOCIAL_CHANNEL_MUTATION,
+} from "../../mutations";
 
-import { GET_CHANNEL_SOCIAL_CHANNELS } from '../../queries';
-import { GET_CHANNEL_PRODUCTS } from '../../queries';
+import { GET_CHANNEL_SOCIAL_CHANNELS } from "../../queries";
+import { GET_CHANNEL_PRODUCTS } from "../../queries";
 import {
   ChannelProductsInterface,
   ChannelProductsProps,
-} from 'types/channel-products';
+} from "types/channel-products";
 
 export class Channels {
   constructor(protected client: ClientType) {}
@@ -25,12 +25,12 @@ export class Channels {
   public async getChannels(
     where: WhereCondition,
     first: number = 10,
-    page: number = 1
+    page: number = 1,
   ): Promise<ChannelInterface[]> {
     const response = await this.client.query({
       query: GET_CHANNEL_SOCIAL_CHANNELS,
       variables: { whereCondition: where, first, page },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
     return response.data.socialChannels.data as ChannelInterface[];
@@ -45,14 +45,14 @@ export class Channels {
     const response = await this.client.query({
       query: GET_CHANNEL_PRODUCTS,
       variables: { id, first, whereCondition, page },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
     return response.data.channelProducts;
   }
 
   public async createChannel(
-    input: ChannelInputInterface
+    input: ChannelInputInterface,
   ): Promise<ChannelInterface> {
     const response = await this.client.mutate({
       mutation: CREATE_SOCIAL_CHANNEL_MUTATION,
@@ -63,7 +63,7 @@ export class Channels {
 
   public async updateChannel(
     id: string,
-    input: ChannelInputInterface
+    input: ChannelInputInterface,
   ): Promise<ChannelInterface> {
     const response = await this.client.mutate({
       mutation: UPDATE_SOCIAL_CHANNEL_MUTATION,
@@ -74,7 +74,7 @@ export class Channels {
 
   public async attachUserToChannel(
     channelId: string,
-    userId: string
+    userId: string,
   ): Promise<ChannelInterface> {
     const response = await this.client.mutate({
       mutation: ATTACH_USER_TO_CHANNEL,
@@ -85,7 +85,7 @@ export class Channels {
 
   public async detachUserFromChannel(
     channelId: string,
-    userId: string
+    userId: string,
   ): Promise<ChannelInterface> {
     const response = await this.client.mutate({
       mutation: DETACH_USER_FROM_CHANNEL,

@@ -1,10 +1,10 @@
-import { StateResponse, CountriesResponse } from 'types/locations';
-import { ClientType, OrderBy, WhereCondition } from '../../__index';
+import { CountriesResponse, StateResponse } from "types/locations";
+import { ClientType, OrderBy, WhereCondition } from "../../__index";
 import {
   COUNTRIES_QUERY,
   GET_STATES,
   GET_STATES_BY_COUNTRY_QUERY,
-} from '../../queries';
+} from "../../queries";
 
 export class Locations {
   constructor(protected client: ClientType) {}
@@ -16,7 +16,7 @@ export class Locations {
       where?: WhereCondition;
       orderBy?: OrderBy[];
       search?: string;
-    } = {}
+    } = {},
   ): Promise<CountriesResponse> {
     const { first, page, where, orderBy, search } = options;
 
@@ -33,8 +33,8 @@ export class Locations {
       variables: {
         first: 100,
         where: {
-          column: 'ID',
-          operator: 'EQ',
+          column: "ID",
+          operator: "EQ",
           value: id,
         },
       },
@@ -49,7 +49,7 @@ export class Locations {
       where?: WhereCondition;
       orderBy?: OrderBy[];
       search?: string;
-    } = {}
+    } = {},
   ): Promise<StateResponse> {
     const { first, page, where, orderBy, search } = options;
 

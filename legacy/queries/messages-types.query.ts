@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 export const MESSAGES_TYPES_QUERY = gql`
   query messageTypes($where: QueryMessageTypesWhereWhereConditions) {
     messageTypes(where: $where) {

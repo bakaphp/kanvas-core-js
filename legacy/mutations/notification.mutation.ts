@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const READ_ALL_NOTIFICATIONS_MUTATION = gql`
   mutation readAllNotifications {

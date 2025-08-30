@@ -1,26 +1,26 @@
 import {
   CREATE_FILESYSTEM_MAPPER_MUTATION,
+  DELETE_FILESYSTEM_MAPPER_MUTATION,
   FILESYSTEM_IMPORT_MUTATION,
   UPDATE_FILESYSTEM_MAPPER_MUTATION,
-  DELETE_FILESYSTEM_MAPPER_MUTATION,
-} from '../../../mutations';
+} from "../../../mutations";
 
 import {
+  FILESYSTEM_IMPORT,
+  FILESYSTEM_IMPORT_INPUT,
   FILESYSTEM_MAPPER,
   FILESYSTEM_MAPPER_INPUT,
-  FILESYSTEM_IMPORT_INPUT,
-  FILESYSTEM_IMPORT,
   UpdateFilesystemMapperInput,
   WhereCondition,
-} from '../../../types';
+} from "../../../types";
 
-import { FILESYSTEM_MAPPER_QUERY } from '../../../queries';
+import { FILESYSTEM_MAPPER_QUERY } from "../../../queries";
 
 export class FilesystemMapper {
   constructor(private client: any) {}
 
   public async createFilesystemMapper(
-    input: FILESYSTEM_MAPPER_INPUT
+    input: FILESYSTEM_MAPPER_INPUT,
   ): Promise<FILESYSTEM_MAPPER> {
     const { data } = await this.client.mutate({
       mutation: CREATE_FILESYSTEM_MAPPER_MUTATION,
@@ -33,7 +33,7 @@ export class FilesystemMapper {
   }
 
   public async updateFilesystemMapper(
-    input: UpdateFilesystemMapperInput
+    input: UpdateFilesystemMapperInput,
   ): Promise<FILESYSTEM_MAPPER> {
     const { data } = await this.client.mutate({
       mutation: UPDATE_FILESYSTEM_MAPPER_MUTATION,
@@ -57,7 +57,7 @@ export class FilesystemMapper {
   }
 
   public async filesystemImport(
-    input: FILESYSTEM_IMPORT_INPUT
+    input: FILESYSTEM_IMPORT_INPUT,
   ): Promise<FILESYSTEM_IMPORT> {
     const { data } = await this.client.mutate({
       mutation: FILESYSTEM_IMPORT_MUTATION,
@@ -72,7 +72,7 @@ export class FilesystemMapper {
   public async getFilesystemMapper(
     page: number,
     first: number,
-    where: WhereCondition
+    where: WhereCondition,
   ): Promise<{ data: FILESYSTEM_MAPPER[]; paginatorInfo: any }> {
     const { data } = await this.client.query({
       query: FILESYSTEM_MAPPER_QUERY,

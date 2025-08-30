@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const SET_USER_SETTINGS_MUTATION = gql`
   mutation setUserSetting($input: ModuleConfigInput!) {

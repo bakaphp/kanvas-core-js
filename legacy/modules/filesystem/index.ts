@@ -1,5 +1,5 @@
-import axios from 'axios';
-import FormData from 'form-data';
+import axios from "axios";
+import FormData from "form-data";
 interface Options {
   url: string;
   key: string;
@@ -7,23 +7,23 @@ interface Options {
   authAxiosMiddleware?: any;
 }
 import {
-  UPLOAD_INTERFACE,
-  FILESYSTEM,
-  SystemModuleEntityInput,
-  WhereCondition,
-  FILESYSTEM_ATTACH_INPUT,
-  UserData,
   CompanyInterface,
+  FILESYSTEM,
+  FILESYSTEM_ATTACH_INPUT,
+  SystemModuleEntityInput,
   UPLOAD_CSV_INTERFACE,
-} from '../../types';
+  UPLOAD_INTERFACE,
+  UserData,
+  WhereCondition,
+} from "../../types";
 import {
   ATTACH_FILE_MUTATION,
-  DETACH_FILES_MUTATION,
   DETACH_FILE_MUTATION,
-} from '../../mutations';
-import { ENTITY_FILES_QUERY } from '../../queries';
-import { ClientType } from '../../__index';
-export { FilesystemMapper } from './mapper/index';
+  DETACH_FILES_MUTATION,
+} from "../../mutations";
+import { ENTITY_FILES_QUERY } from "../../queries";
+import { ClientType } from "../../__index";
+export { FilesystemMapper } from "./mapper/index";
 export class FileSystem {
   protected axiosClient: any;
   constructor(protected client: ClientType, protected options?: Options) {
@@ -31,9 +31,9 @@ export class FileSystem {
       this.axiosClient = axios.create({
         baseURL: this.options.url,
         headers: {
-          'X-Kanvas-App': this.options.key,
+          "X-Kanvas-App": this.options.key,
           ...(this.options.adminKey && {
-            'X-Kanvas-Key': this.options.adminKey,
+            "X-Kanvas-Key": this.options.adminKey,
           }),
         },
       });
@@ -42,7 +42,7 @@ export class FileSystem {
         this.options.authAxiosMiddleware,
         function (error: any) {
           return Promise.reject(error);
-        }
+        },
       );
     }
   }
@@ -51,7 +51,7 @@ export class FileSystem {
     entity: SystemModuleEntityInput,
     where?: WhereCondition,
     first?: number,
-    page?: number
+    page?: number,
   ): Promise<FILESYSTEM[]> {
     const response = await this.client.query({
       query: ENTITY_FILES_QUERY,
@@ -85,25 +85,26 @@ export class FileSystem {
   }
 
   public async uploadFile(data: File): Promise<UPLOAD_INTERFACE> {
-    if (!this.options || !this.axiosClient)
-      throw new Error('FileSystem module not initialized');
+    if (!this.options || !this.axiosClient) {
+      throw new Error("FileSystem module not initialized");
+    }
 
     const formData = new FormData();
     formData.append(
-      'operations',
+      "operations",
       JSON.stringify({
         query:
-          'mutation ($file: Upload!) { upload(file: $file) {id, uuid, name, url } }',
+          "mutation ($file: Upload!) { upload(file: $file) {id, uuid, name, url } }",
         variables: {
           file: null,
         },
-      })
+      }),
     );
-    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
-    formData.append('0', data, data.name);
-    let response = await this.axiosClient.post('', formData, {
+    formData.append("map", JSON.stringify({ "0": ["variables.file"] }));
+    formData.append("0", data, data.name);
+    let response = await this.axiosClient.post("", formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
     });
 
@@ -117,47 +118,48 @@ export class FileSystem {
    * @throws Error if the module is not initialized or if the input is invalid
    */
   public async uploadFileCsv(
-    data: File | Buffer
+    data: File | Buffer,
   ): Promise<UPLOAD_CSV_INTERFACE> {
     if (!this.options || !this.axiosClient) {
-      throw new Error('FileSystem module not initialized');
+      throw new Error("FileSystem module not initialized");
     }
 
-    const isBrowser = typeof window !== 'undefined';
+    const isBrowser = typeof window !== "undefined";
     let formData: FormData = new FormData();
 
     if (isBrowser) {
-      formData.append('0', data as File, (data as File).name);
+      formData.append("0", data as File, (data as File).name);
     } else {
       // Node.js environment
       if (!Buffer.isBuffer(data)) {
-        throw new Error('Expected a Buffer in Node.js');
+        throw new Error("Expected a Buffer in Node.js");
       }
-      formData.append('0', data, { filename: 'uploaded_file.csv' });
+      formData.append("0", data, { filename: "uploaded_file.csv" });
     }
 
     // Append GraphQL mutation data
     formData.append(
-      'operations',
+      "operations",
       JSON.stringify({
-        query: 'mutation ($file: Upload!) { uploadCsv(file: $file) }',
+        query: "mutation ($file: Upload!) { uploadCsv(file: $file) }",
         variables: { file: null },
-      })
+      }),
     );
-    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
+    formData.append("map", JSON.stringify({ "0": ["variables.file"] }));
 
     // Make the API request
     const headers = isBrowser ? {} : (formData as any).getHeaders();
-    const response = await this.axiosClient.post('', formData, { headers });
+    const response = await this.axiosClient.post("", formData, { headers });
 
     return response.data.data;
   }
   public async updatePhotoProfile(
     data: File,
-    users_id: string
+    users_id: string,
   ): Promise<UserData> {
-    if (!this.options || !this.axiosClient)
-      throw new Error('FileSystem module not initialized');
+    if (!this.options || !this.axiosClient) {
+      throw new Error("FileSystem module not initialized");
+    }
     let query = `      
       id
       uuid
@@ -200,28 +202,28 @@ export class FileSystem {
       }`;
     const formData = new FormData();
     formData.append(
-      'operations',
+      "operations",
       JSON.stringify({
         query:
           'mutation ($file: Upload!) { updatePhotoProfile(file: $file, user_id:"' +
           users_id +
           '") {' +
           query +
-          '} }',
+          "} }",
         variables: {
           file: null,
         },
-      })
+      }),
     );
     formData.append(
-      'map',
-      JSON.stringify({ '0': ['variables.file'], '1': ['variables.user_id'] })
+      "map",
+      JSON.stringify({ "0": ["variables.file"], "1": ["variables.user_id"] }),
     );
-    formData.append('0', data, data.name);
-    formData.append('1', users_id);
-    let response = await this.axiosClient.post('', formData, {
+    formData.append("0", data, data.name);
+    formData.append("1", users_id);
+    let response = await this.axiosClient.post("", formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
     });
     if (response.data.errors) {
@@ -232,10 +234,11 @@ export class FileSystem {
 
   public async updateCompanyPhotoProfile(
     data: File,
-    company_id: string
+    company_id: string,
   ): Promise<CompanyInterface> {
-    if (!this.options || !this.axiosClient)
-      throw new Error('FileSystem module not initialized');
+    if (!this.options || !this.axiosClient) {
+      throw new Error("FileSystem module not initialized");
+    }
     let query = `      
     id
     uuid
@@ -252,28 +255,28 @@ export class FileSystem {
 
     const formData = new FormData();
     formData.append(
-      'operations',
+      "operations",
       JSON.stringify({
         query:
           'mutation ($file: Upload!) { updateCompanyPhotoProfile(file: $file, id:"' +
           company_id +
           '") {' +
           query +
-          '} }',
+          "} }",
         variables: {
           file: null,
         },
-      })
+      }),
     );
     formData.append(
-      'map',
-      JSON.stringify({ '0': ['variables.file'], '1': ['variables.id'] })
+      "map",
+      JSON.stringify({ "0": ["variables.file"], "1": ["variables.id"] }),
     );
-    formData.append('0', data, data.name);
-    formData.append('1', company_id);
-    let response = await this.axiosClient.post('', formData, {
+    formData.append("0", data, data.name);
+    formData.append("1", company_id);
+    let response = await this.axiosClient.post("", formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
     });
     if (response.data.errors) {
@@ -284,10 +287,10 @@ export class FileSystem {
 
   public async updateCompanyBranchPhotoProfile(
     data: File,
-    branch_id: string
+    branch_id: string,
   ): Promise<any> {
     if (!this.options || !this.axiosClient) {
-      throw new Error('FileSystem module not initialized');
+      throw new Error("FileSystem module not initialized");
     }
 
     const query = `
@@ -313,13 +316,13 @@ export class FileSystem {
     };
 
     const formData = new FormData();
-    formData.append('operations', JSON.stringify(operations));
-    formData.append('map', JSON.stringify({ '0': ['variables.file'] }));
-    formData.append('0', data, data.name);
+    formData.append("operations", JSON.stringify(operations));
+    formData.append("map", JSON.stringify({ "0": ["variables.file"] }));
+    formData.append("0", data, data.name);
 
-    let response = await this.axiosClient.post('', formData, {
+    let response = await this.axiosClient.post("", formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
     });
     if (response.data.errors) {

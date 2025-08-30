@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core';
+import { gql } from "@apollo/client/core";
 
 export const REGISTER_MUTATTION = gql`
   mutation register($data: RegisterInput!) {
@@ -115,12 +115,11 @@ export const UPDATE_USER_SOCIAL_MUTATION = gql`
   }
 `;
 
-
 export const UPDATE_DISPLAY_NAME_MUTATION = gql`
   mutation appUpdateUserDisplayname($user_id: ID!, $displayname: String!) {
     appUpdateUserDisplayname(user_id: $user_id, displayname: $displayname)
   }
-`
+`;
 
 export const INVITE_USER_MUTATION = gql`
   mutation ($input: InviteInput!) {

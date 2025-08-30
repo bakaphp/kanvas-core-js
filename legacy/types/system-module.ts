@@ -1,4 +1,4 @@
-import { AppUserInterface } from './app';
+import { AppUserInterface } from "./app";
 
 export interface SystemModuleInterface {
   id: string;

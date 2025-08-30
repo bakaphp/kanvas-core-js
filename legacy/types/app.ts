@@ -1,5 +1,5 @@
-import { CustomFieldInput } from './custom-fields';
-import { PaginatorInfo } from './paginator';
+import { CustomFieldInput } from "./custom-fields";
+import { PaginatorInfo } from "./paginator";
 
 export interface AppUpdatePasswordInterface {
   appUserUpdatePassword: boolean;
@@ -157,12 +157,12 @@ export interface CreateAppInput {
 }
 
 export interface ShopifyInput {
-  client_id: string,
-  client_secret: string,
-  shop_url: string,
-  region_id: number,
-  company_id: number
-};
+  client_id: string;
+  client_secret: string;
+  shop_url: string;
+  region_id: number;
+  company_id: number;
+}
 
 export interface CreateAppResponse {
   createApp: {

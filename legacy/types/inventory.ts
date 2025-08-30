@@ -1,4 +1,4 @@
-import { PaginatorInfo } from './paginator';
+import { PaginatorInfo } from "./paginator";
 
 export interface ProductAttributes {
   name: string;
@@ -36,7 +36,7 @@ export interface StatusInterface {
 
 export interface OrderBy {
   column: string;
-  order: 'ASC' | 'DESC';
+  order: "ASC" | "DESC";
 }
 
 export interface AttributesInterface {
@@ -152,7 +152,7 @@ export interface VariantInterface {
     html_description: string;
     language: {
       code: string;
-    };  
+    };
   };
 }
 
@@ -271,9 +271,9 @@ export interface InputVariantParams {
       warehouses_id: string | number;
       price: string | number;
       is_published: boolean;
-      channels_id: number,
+      channels_id: number;
       discounted_price?: string | number;
-    }[]
+    }[];
     warehouse?: {
       warehouse_id: number;
       status?: {

@@ -6,7 +6,7 @@ import {
   AppSettingsQuery,
   ConfigInput,
   USERS_SETTINGS_QUERY,
-} from '../../queries';
+} from "../../queries";
 import {
   AdminAppSettingsQueryResponse,
   AppSettingsResponse,
@@ -15,7 +15,7 @@ import {
   SettingsResponse,
   ShopifyInput,
   UserSettingsResponse,
-} from '../../__index';
+} from "../../__index";
 import {
   DELETE_APP_SETTINGS_MUTATION,
   DELETE_COMPANY_SETTINGS_MUTATION,
@@ -24,16 +24,16 @@ import {
   SET_COMPANY_SETTINGS_MUTATION,
   SET_USER_SETTINGS_MUTATION,
   SHOPIFY_SETUP,
-} from '../../mutations';
+} from "../../mutations";
 
 export default class Settings {
-  constructor(protected client: ClientType, protected key: string) { }
+  constructor(protected client: ClientType, protected key: string) {}
 
   async appSettings(): Promise<AdminAppSettingsQueryResponse | undefined> {
     try {
       const { data } = await this.client.query({
         query: APP_SETTINGS_QUERY,
-        fetchPolicy: 'network-only',
+        fetchPolicy: "network-only",
         partialRefetch: true,
       });
       return data;
@@ -49,7 +49,7 @@ export default class Settings {
         variables: {
           key: name,
         },
-        fetchPolicy: 'network-only',
+        fetchPolicy: "network-only",
         partialRefetch: true,
       });
 
@@ -73,7 +73,7 @@ export default class Settings {
       } = await this.client.query<AppSettingsResponse>({
         query: AppSettingsQuery,
         variables: { appKey: this.key },
-        fetchPolicy: 'no-cache',
+        fetchPolicy: "no-cache",
       });
       return getAppSettings;
     } catch {
@@ -82,13 +82,13 @@ export default class Settings {
   }
 
   async getCompanySettings(
-    entity_uuid: string
+    entity_uuid: string,
   ): Promise<CompanySettingsResponse | undefined> {
     return this.companySettings(entity_uuid);
   }
 
   async companySettings(
-    entity_uuid: string
+    entity_uuid: string,
   ): Promise<CompanySettingsResponse | undefined> {
     try {
       const { data } = await this.client.query<CompanySettingsResponse>({
@@ -96,7 +96,7 @@ export default class Settings {
         variables: {
           entityUUID: entity_uuid,
         },
-        fetchPolicy: 'network-only',
+        fetchPolicy: "network-only",
         partialRefetch: true,
       });
       return data;
@@ -107,16 +107,16 @@ export default class Settings {
 
   async companySetting(
     entity_uuid: string,
-    key: string
+    key: string,
   ): Promise<any | undefined> {
     try {
       const { data } = await this.client.query({
         query: ADMIN_COMPANY_SETTING_QUERY,
         variables: {
           entityUUID: entity_uuid,
-          key: key
+          key: key,
         },
-        fetchPolicy: 'network-only',
+        fetchPolicy: "network-only",
         partialRefetch: true,
       });
 
@@ -127,12 +127,12 @@ export default class Settings {
   }
 
   async getUserSettings(
-    entity_uuid: string
+    entity_uuid: string,
   ): Promise<UserSettingsResponse | undefined> {
     try {
       const { data } = await this.client.query({
         query: USERS_SETTINGS_QUERY,
-        fetchPolicy: 'network-only',
+        fetchPolicy: "network-only",
         partialRefetch: true,
         variables: {
           entityUUID: entity_uuid,
@@ -189,7 +189,7 @@ export default class Settings {
       const { data } = await this.client.mutate({
         mutation: DELETE_APP_SETTINGS_MUTATION,
         variables: {
-          key: key
+          key: key,
         },
       });
       return data.deleteAppSetting;
@@ -199,7 +199,6 @@ export default class Settings {
   }
 
   /**
-   * 
    * @deprecated
    */
   async setAppSettings(input: ConfigInput): Promise<boolean | undefined> {
@@ -221,7 +220,7 @@ export default class Settings {
   }
 
   async deleteCompanySettings(
-    input: ConfigInput
+    input: ConfigInput,
   ): Promise<boolean | undefined> {
     try {
       const response = await this.client.mutate({

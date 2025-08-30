@@ -1,20 +1,20 @@
-import { ClientType } from '../../__index';
+import { ClientType } from "../../__index";
 import {
   MessageCommentInputInterface,
   MessageCommentsInterface,
   WhereCondition,
-} from '../../types/';
+} from "../../types/";
 import {
+  MESSAGE_COMMENT_DELETE_MUTATION,
   MESSAGE_COMMENT_MUTATION,
   MESSAGE_COMMENT_UPDATE_MUTATION,
-  MESSAGE_COMMENT_DELETE_MUTATION,
-} from '../../mutations/';
-import { COMMENTS_QUERY } from '../../queries/';
+} from "../../mutations/";
+import { COMMENTS_QUERY } from "../../queries/";
 export class MessagesComments {
-  constructor(protected client: ClientType) { }
+  constructor(protected client: ClientType) {}
 
   public async addComment(
-    input: MessageCommentInputInterface
+    input: MessageCommentInputInterface,
   ): Promise<MessageCommentsInterface> {
     const response = await this.client.mutate({
       mutation: MESSAGE_COMMENT_MUTATION,
@@ -26,7 +26,7 @@ export class MessagesComments {
 
   public async updateComment(
     id: string,
-    input: MessageCommentInputInterface
+    input: MessageCommentInputInterface,
   ): Promise<MessageCommentsInterface> {
     const response = await this.client.mutate({
       mutation: MESSAGE_COMMENT_UPDATE_MUTATION,
@@ -48,14 +48,13 @@ export class MessagesComments {
   public async getComments(
     where: WhereCondition,
     first: number,
-    page?: number
+    page?: number,
   ): Promise<MessageCommentsInterface[]> {
     const response = await this.client.query({
       query: COMMENTS_QUERY,
       variables: { where, first, page },
-      fetchPolicy: 'no-cache',
-    },
-    );
+      fetchPolicy: "no-cache",
+    });
 
     return response.data.comments.data as MessageCommentsInterface[];
   }

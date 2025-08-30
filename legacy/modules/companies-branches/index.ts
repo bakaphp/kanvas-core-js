@@ -1,23 +1,23 @@
-import { ClientType } from '__index';
+import { ClientType } from "__index";
 
 import {
-  CREATE_COMPANY_BRANCH,
-  UPDATE_COMPANY_BRANCH,
-  DELETE_COMPANY_BRANCH,
   ADD_USER_TO_BRANCH,
+  CREATE_COMPANY_BRANCH,
+  DELETE_COMPANY_BRANCH,
   REMOVE_USER_FROM_BRANCH,
-} from '../../mutations';
+  UPDATE_COMPANY_BRANCH,
+} from "../../mutations";
 import {
-  UserInterface,
   CompanyBranchInput,
   CompanyBranchInterface,
   QueryBranchesOrderByOrderByClause,
+  UserInterface,
   WhereCondition,
-} from '../../types';
+} from "../../types";
 import {
   COMPANIES_BRANCHES_QUERY,
   COMPANIES_BRANCHES_USER_QUERY,
-} from '../../queries';
+} from "../../queries";
 
 export class CompaniesBranches {
   constructor(protected client: ClientType) {}
@@ -29,17 +29,17 @@ export class CompaniesBranches {
       where?: WhereCondition;
       orderBy?: QueryBranchesOrderByOrderByClause[];
       search?: string;
-    } = {}
+    } = {},
   ): Promise<CompanyBranchInterface> {
     const { first, page, where, orderBy, search } = options;
 
     const response = await this.client.query({
       query: COMPANIES_BRANCHES_QUERY,
       variables: { where, orderBy, first, page, search },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
-    return response.data 
+    return response.data;
   }
 
   public async getCompanyBranchUsers(
@@ -47,21 +47,21 @@ export class CompaniesBranches {
       first?: number;
       page?: number;
       where?: WhereCondition;
-    } = {}
+    } = {},
   ): Promise<UserInterface> {
     const { first, page, where } = options;
 
     const response = await this.client.query({
       query: COMPANIES_BRANCHES_USER_QUERY,
       variables: { where, first, page },
-      fetchPolicy: 'no-cache',
+      fetchPolicy: "no-cache",
       partialRefetch: true,
     });
     return response.data as UserInterface;
   }
 
   public async createCompanyBranch(
-    input: CompanyBranchInput
+    input: CompanyBranchInput,
   ): Promise<CompanyBranchInterface> {
     const response = await this.client.mutate({
       mutation: CREATE_COMPANY_BRANCH,
@@ -72,7 +72,7 @@ export class CompaniesBranches {
 
   public async updateCompanyBranch(
     id: string,
-    input: CompanyBranchInput
+    input: CompanyBranchInput,
   ): Promise<CompanyBranchInterface> {
     const response = await this.client.mutate({
       mutation: UPDATE_COMPANY_BRANCH,
@@ -99,7 +99,7 @@ export class CompaniesBranches {
 
   public async removeUserFromBranch(
     id: string,
-    user_id: string
+    user_id: string,
   ): Promise<Boolean> {
     const response = await this.client.mutate({
       mutation: REMOVE_USER_FROM_BRANCH,

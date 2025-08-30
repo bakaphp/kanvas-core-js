@@ -1,4 +1,4 @@
-import { PaginatorInfo } from './paginator';
+import { PaginatorInfo } from "./paginator";
 
 interface User {
   displayname?: string;

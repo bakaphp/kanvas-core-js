@@ -1,4 +1,4 @@
-import { ClientType } from '../../__index';
+import { ClientType } from "../../__index";
 import {
   CHANGE_PASSWORD_MUTATION,
   LOGIN_MUTATION,
@@ -6,7 +6,7 @@ import {
   REFRESH_TOKEN_MUTATION,
   RESET_PASSWORD_MUTATION,
   SOCIAL_LOGIN_MUTATION,
-} from '../../mutations';
+} from "../../mutations";
 import {
   AuthenticationInterface,
   ChangePasswordInterface,
@@ -14,14 +14,14 @@ import {
   RefreshTokenInterface,
   ResetPasswordInterface,
   SocialLoginInputInterface,
-} from '../../types';
+} from "../../types";
 
 export class Auth {
   constructor(protected client: ClientType) {}
 
   public async login(
     email: string,
-    password: string
+    password: string,
   ): Promise<AuthenticationInterface> {
     const data = { email, password };
     const response = await this.client.mutate({
@@ -51,7 +51,7 @@ export class Auth {
   public async resetPassword(
     hash_key: string,
     new_password: string,
-    verify_password: string
+    verify_password: string,
   ): Promise<ResetPasswordInterface> {
     const data = { hash_key, new_password, verify_password };
 
@@ -68,7 +68,7 @@ export class Auth {
   public async changePassword(
     current_password: string,
     new_password: string,
-    new_password_confirmation: string
+    new_password_confirmation: string,
   ): Promise<ChangePasswordInterface> {
     const data = {
       current_password,
@@ -87,7 +87,7 @@ export class Auth {
   }
 
   public async socialLogin(
-    data: SocialLoginInputInterface
+    data: SocialLoginInputInterface,
   ): Promise<AuthenticationInterface> {
     const response = await this.client.mutate({
       mutation: SOCIAL_LOGIN_MUTATION,
