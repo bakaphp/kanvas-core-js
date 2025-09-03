@@ -1,3 +1,5 @@
+import { ApolloClient } from "@apollo/client";
+
 type AsyncResponse<T = any> = T | Promise<T>;
 
 export type HeaderConstructor = Record<string, () => string | Promise<string>>;
@@ -19,3 +21,22 @@ export interface CreateClientAdminOptions {
   headers?: HeaderConstructor;
   credentials?: "same-origin" | "omit" | "include";
 }
+
+export type Client = Omit<
+  ApolloClient,
+  | "__actionHookForDevTools"
+  | "__requestRaw"
+  | "cache"
+  | "defaultContext"
+  | "defaultOptions"
+  | "devtoolsConfig"
+  | "documentTransform"
+  | "getMemoryInternals"
+  | "link"
+  | "localState"
+  | "disableNetworkFetches"
+  | "reFetchObservableQueries"
+  | "version"
+  | "queryDeduplication"
+  | "prioritizeCacheValues"
+>;

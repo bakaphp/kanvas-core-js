@@ -6,11 +6,15 @@ import {
 } from "@apollo/client";
 
 import { SetContextLink } from "@apollo/client/link/context";
-import { HeaderConstructor } from "@/types/app";
+import { Client, HeaderConstructor } from "@/types/app";
 
 export const CreateApolloClient = (
   options: ApolloClient.Options,
-) => new ApolloClient(options);
+) => {
+  const client: Client = new ApolloClient(options);
+
+  return client;
+};
 
 export const CreateMemoryCache = (config?: InMemoryCacheConfig | undefined) =>
   new InMemoryCache(config);
