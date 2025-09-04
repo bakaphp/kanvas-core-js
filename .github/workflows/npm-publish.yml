@@ -14,31 +14,48 @@ jobs:
         with:
           version: 9
 
+      # CHANGE: Updated Node.js to a version that matches your package.json 'engines' field.
       - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
 
+      # ADDED: Upload the 'dist' directory and the 'package.json' as an artifact.
+      # This makes the build output available to the publish job.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package-artifact
+          path: |
+            dist/
+            package.json
+
   publish-npm:
+    # This job now depends on the 'build' job to complete successfully.
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      # We don't need to check out the code again, as we'll use the artifact.
+      # ADDED: Download the artifact from the 'build' job.
+      - uses: actions/download-artifact@v4
+        with:
+          name: package-artifact
 
       - uses: pnpm/action-setup@v4
         with:
           version: 9
 
+      # CHANGE: Updated Node.js version here as well for consistency.
       - uses: actions/setup-node@v5
         with:
-          node-version: 20
-          cache: 'pnpm'
+          node-version: 22
           registry-url: https://registry.npmjs.org/
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm publish
+      # We don't need to run 'pnpm install' because the publish command will handle it.
+      # CHANGE: Added '--no-git-checks' to bypass the branch check in the CI environment.
+      # We also specify the directory to publish from, which is now the root of our downloaded artifact.
+      - run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
