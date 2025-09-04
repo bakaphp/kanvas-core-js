@@ -14,8 +14,8 @@ export default defineConfig([
     bundle: true,
     cjsInterop: true,
     clean: true,
-    noExternal: [/.*/],
     treeshake: true,
+    platform: "neutral",
   },
   {
     dts: true,
@@ -30,8 +30,8 @@ export default defineConfig([
     bundle: true,
     cjsInterop: true,
     clean: true,
-    noExternal: [/.*/],
     treeshake: true,
+    platform: "neutral",
   },
   {
     dts: true,
@@ -46,8 +46,8 @@ export default defineConfig([
     bundle: true,
     cjsInterop: true,
     clean: true,
-    noExternal: [/.*/],
     treeshake: true,
+    platform: "neutral",
   },
   {
     dts: true,
@@ -62,8 +62,8 @@ export default defineConfig([
     bundle: true,
     cjsInterop: true,
     clean: true,
-    noExternal: [/.*/],
     treeshake: true,
+    platform: "neutral",
   },
   {
     dts: true,
@@ -78,8 +78,8 @@ export default defineConfig([
     bundle: true,
     cjsInterop: true,
     clean: true,
-    noExternal: [/.*/],
     treeshake: true,
+    platform: "neutral",
   },
   {
     dts: true,
@@ -94,8 +94,8 @@ export default defineConfig([
     bundle: true,
     cjsInterop: true,
     clean: true,
-    noExternal: [/.*/],
     treeshake: true,
+    platform: "neutral",
   },
   {
     dts: true,
@@ -110,8 +110,8 @@ export default defineConfig([
     bundle: true,
     cjsInterop: true,
     clean: true,
-    noExternal: [/.*/],
     treeshake: true,
+    platform: "neutral",
   },
   {
     dts: true,
@@ -126,8 +126,8 @@ export default defineConfig([
     bundle: true,
     cjsInterop: true,
     clean: true,
-    noExternal: [/.*/],
     treeshake: true,
+    platform: "neutral",
   },
   {
     dts: true,
@@ -142,8 +142,8 @@ export default defineConfig([
     bundle: true,
     cjsInterop: true,
     clean: true,
-    noExternal: [/.*/],
     treeshake: true,
+    platform: "neutral",
   },
   {
     dts: true,
@@ -158,7 +158,7 @@ export default defineConfig([
     bundle: true,
     cjsInterop: true,
     clean: true,
-    noExternal: [/.*/],
     treeshake: true,
+    platform: "neutral",
   },
 ]);
