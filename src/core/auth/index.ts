@@ -20,16 +20,16 @@ import {
 import { Client } from "@/types/app";
 
 class Auth {
-  #apolloClient: Client;
+  #client: Client;
 
   constructor(client: Client) {
-    this.#apolloClient = client;
+    this.#client = client;
   }
 
   public async login(
     options: { email: string; password: string },
   ) {
-    const response = await this.#apolloClient.mutate({
+    const response = await this.#client.mutate({
       mutation: LOGIN_MUTATION,
       variables: { data: options },
     });
@@ -38,7 +38,7 @@ class Auth {
   }
 
   public async logout() {
-    const response = await this.#apolloClient.mutate({
+    const response = await this.#client.mutate({
       mutation: LOGOUT_MUTATION,
     });
 
@@ -46,7 +46,7 @@ class Auth {
   }
 
   public async refreshToken(token: string) {
-    const response = await this.#apolloClient.mutate({
+    const response = await this.#client.mutate({
       mutation: REFRESH_TOKEN_MUTATION,
       variables: {
         refresh_token: token,
@@ -69,7 +69,7 @@ class Auth {
       verify_password: options.verifyPassword,
     };
 
-    const response = await this.#apolloClient.mutate({
+    const response = await this.#client.mutate({
       mutation: RESET_PASSWORD_MUTATION,
       variables: {
         data,
@@ -92,7 +92,7 @@ class Auth {
       new_password: options.newPassword,
     };
 
-    const response = await this.#apolloClient.mutate({
+    const response = await this.#client.mutate({
       mutation: CHANGE_PASSWORD_MUTATION,
       variables: {
         ...data,
@@ -105,7 +105,7 @@ class Auth {
   public async socialLogin(
     data: AuthSocialLoginInput,
   ) {
-    const response = await this.#apolloClient.mutate({
+    const response = await this.#client.mutate({
       mutation: SOCIAL_LOGIN_MUTATION,
       variables: {
         data,

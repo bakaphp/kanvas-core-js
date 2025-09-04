@@ -19,15 +19,15 @@ import {
 import { Client } from "@/types/app";
 
 class Settings {
-  #apolloClient: Client;
+  #client: Client;
 
   constructor(client: Client) {
-    this.#apolloClient = client;
+    this.#client = client;
   }
 
   async appSettings<T extends any = any>() {
     try {
-      const { data } = await this.#apolloClient.query({
+      const { data } = await this.#client.query({
         query: APP_SETTINGS_QUERY,
         fetchPolicy: "network-only",
       });
@@ -40,7 +40,7 @@ class Settings {
 
   async appSetting<T extends any = any>(name: string) {
     try {
-      const { data } = await this.#apolloClient.query({
+      const { data } = await this.#client.query({
         query: APP_SETTING_QUERY,
         variables: {
           key: name,
@@ -58,7 +58,7 @@ class Settings {
     entity_uuid: string,
   ) {
     try {
-      const { data } = await this.#apolloClient.query({
+      const { data } = await this.#client.query({
         query: ADMIN_COMPANY_SETTINGS_QUERY,
         variables: {
           entityUUID: entity_uuid,
@@ -76,7 +76,7 @@ class Settings {
     key: string,
   ) {
     try {
-      const { data } = await this.#apolloClient.query({
+      const { data } = await this.#client.query({
         query: ADMIN_COMPANY_SETTING_QUERY,
         variables: {
           entityUUID: entity_uuid,
@@ -95,7 +95,7 @@ class Settings {
     entity_uuid: string,
   ) {
     try {
-      const { data } = await this.#apolloClient.query({
+      const { data } = await this.#client.query({
         query: USERS_SETTINGS_QUERY,
         fetchPolicy: "network-only",
         variables: {
@@ -111,7 +111,7 @@ class Settings {
 
   async setUserSettings(input: ConfigInput) {
     try {
-      await this.#apolloClient.mutate({
+      await this.#client.mutate({
         mutation: SET_USER_SETTINGS_MUTATION,
         variables: {
           input,
@@ -126,7 +126,7 @@ class Settings {
 
   async setAppSetting(input: ConfigInput) {
     try {
-      await this.#apolloClient.mutate({
+      await this.#client.mutate({
         mutation: SET_APP_SETTINGS_MUTATION,
         variables: {
           input,
@@ -141,7 +141,7 @@ class Settings {
 
   async deleteAppSetting<T extends any = any>(key: String) {
     try {
-      const { data } = await this.#apolloClient.mutate({
+      const { data } = await this.#client.mutate({
         mutation: DELETE_APP_SETTINGS_MUTATION,
         variables: {
           key: key,
@@ -156,7 +156,7 @@ class Settings {
 
   async setCompanySettings(input: ConfigInput): Promise<boolean | null> {
     try {
-      await this.#apolloClient.mutate({
+      await this.#client.mutate({
         mutation: SET_COMPANY_SETTINGS_MUTATION,
         variables: {
           input,
@@ -173,7 +173,7 @@ class Settings {
     input: ConfigInput,
   ) {
     try {
-      const response = await this.#apolloClient.mutate({
+      const response = await this.#client.mutate({
         mutation: DELETE_COMPANY_SETTINGS_MUTATION,
         variables: {
           input,
@@ -187,7 +187,7 @@ class Settings {
   }
   async deleteUserSettings<T extends any = any>(input: ConfigInput) {
     try {
-      const response = await this.#apolloClient.mutate({
+      const response = await this.#client.mutate({
         mutation: DELETE_USER_SETTINGS_MUTATION,
         variables: {
           input,
