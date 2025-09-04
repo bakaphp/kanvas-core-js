@@ -14,7 +14,6 @@ jobs:
         with:
           version: 9
 
-      # CHANGE: Updated Node.js to a version that matches your package.json 'engines' field.
       - uses: actions/setup-node@v5
         with:
           node-version: 22
@@ -23,22 +22,19 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
 
-      # ADDED: Upload the 'dist' directory and the 'package.json' as an artifact.
-      # This makes the build output available to the publish job.
+      # CHANGE: Also upload the lockfile to ensure consistent dependencies in the next job.
       - uses: actions/upload-artifact@v4
         with:
           name: package-artifact
           path: |
             dist/
             package.json
+            pnpm-lock.yaml
 
   publish-npm:
-    # This job now depends on the 'build' job to complete successfully.
     needs: build
     runs-on: ubuntu-latest
     steps:
-      # We don't need to check out the code again, as we'll use the artifact.
-      # ADDED: Download the artifact from the 'build' job.
       - uses: actions/download-artifact@v4
         with:
           name: package-artifact
@@ -47,15 +43,15 @@ jobs:
         with:
           version: 9
 
-      # CHANGE: Updated Node.js version here as well for consistency.
       - uses: actions/setup-node@v5
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
 
-      # We don't need to run 'pnpm install' because the publish command will handle it.
-      # CHANGE: Added '--no-git-checks' to bypass the branch check in the CI environment.
-      # We also specify the directory to publish from, which is now the root of our downloaded artifact.
+      # ADDED: Install dependencies using the lockfile from the build job.
+      # This makes commands like 'tsup' available to the 'prepare' script that runs before publishing.
+      - run: pnpm install --frozen-lockfile
+
       - run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
