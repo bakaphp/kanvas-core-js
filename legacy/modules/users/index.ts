@@ -299,6 +299,7 @@ export class Users {
       mutation: SOCIAL_LOGIN_MUTATTION,
       variables: { input },
     });
+
     return response.data;
   }
 

@@ -6,12 +6,13 @@ import {
 } from "@apollo/client";
 
 import { SetContextLink } from "@apollo/client/link/context";
-import { Client, HeaderConstructor } from "@/types/app";
+import { HeaderConstructor } from "@/types/app";
+import { getHeadersFromBuilder } from "@/utils";
 
 export const CreateApolloClient = (
   options: ApolloClient.Options,
 ) => {
-  const client: Client = new ApolloClient(options);
+  const client = new ApolloClient(options);
 
   return client;
 };
@@ -26,11 +27,7 @@ export function CreateHeaders(
   headers: HeaderConstructor,
 ) {
   return new SetContextLink(async (prevContext) => {
-    const newHeaders = Object.fromEntries(
-      await Promise.all(
-        Object.entries(headers).map(async ([key, fn]) => [key, await fn()]),
-      ),
-    );
+    const newHeaders = await getHeadersFromBuilder(headers);
 
     return {
       ...prevContext,

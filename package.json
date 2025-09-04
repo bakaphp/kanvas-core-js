@@ -4,14 +4,47 @@
   "version": "1.0.0-beta.1",
   "license": "MIT",
   "files": [
-    "dist",
-    "src"
+    "dist/**/*.{js,mjs,d.ts,d.mts,css}"
   ],
   "engines": {
-    "node": ">=20"
+    "node": ">=21.0.0"
   },
   "scripts": {
-    "build": "tsup --env.NODE_ENV production"
+    "prepare": "pnpm build",
+    "build": "tsup --env.NODE_ENV production && node -e \"require('fs').copyFileSync('package.json', 'dist/package.json')\"",
+    "watch": "NODE_OPTIONS='--max-old-space-size=16384' tsup --watch"
+  },
+  "exports": {
+    "./app": {
+      "import": {
+        "types": "./dist/app/index.d.mts",
+        "default": "./dist/app/index.mjs"
+      },
+      "require": {
+        "types": "./dist/app/index.d.ts",
+        "default": "./dist/app/index.js"
+      }
+    },
+    "./auth": {
+      "import": {
+        "types": "./dist/auth/index.d.mts",
+        "default": "./dist/auth/index.mjs"
+      },
+      "require": {
+        "types": "./dist/auth/index.d.ts",
+        "default": "./dist/auth/index.js"
+      }
+    },
+    "./settings": {
+      "import": {
+        "types": "./dist/settings/index.d.mts",
+        "default": "./dist/settings/index.mjs"
+      },
+      "require": {
+        "types": "./dist/settings/index.d.ts",
+        "default": "./dist/settings/index.js"
+      }
+    }
   },
   "dependencies": {
     "@apollo/client": "^4.0.3",

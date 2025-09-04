@@ -17,12 +17,12 @@ import {
   AuthSocialLoginResponse,
 } from "@/types/auth";
 
-import { ApolloClient } from "@apollo/client";
+import { Client } from "@/types/app";
 
 class Auth {
-  #apolloClient: ApolloClient;
+  #apolloClient: Client;
 
-  constructor(client: ApolloClient) {
+  constructor(client: Client) {
     this.#apolloClient = client;
   }
 
@@ -117,7 +117,7 @@ class Auth {
 }
 
 export function createAuth(
-  client: ApolloClient,
+  client: Client,
 ) {
   return new Auth(client);
 }
