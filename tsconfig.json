@@ -1,43 +1,21 @@
 {
   // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
-  "include": [
-    "src",
-    "types"
-  ],
-  "exclude": [
-    "test",
-    "node_modules"
-  ],
+  "include": ["src/**/*"],
+  "exclude": ["test", "node_modules"],
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "paths": {
-      "core/*": [
-        "core/*"
-      ],
-      "modules/*": [
-        "modules/*"
-      ],
-      "types/*": [
-        "types/*"
-      ],
-      "mutations/*": [
-        "mutations/*"
-      ],
-      "queries/*": [
-        "queries/*"
-      ],
+      "@/*": ["./*"]
     },
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["dom", "esnext"],
     "importHelpers": true,
     // output .d.ts declaration files for consumers
     "declaration": true,
     // output .js.map sourcemap files for consumers
     "sourceMap": true,
+    "outDir": "./dist",
     // match output dir to input dir. e.g. dist/index instead of dist/src/index
     "rootDir": "./src",
     // stricter type-checking for stronger correctness. Recommended by TS
@@ -51,7 +29,7 @@
     // use Node's module resolution algorithm, instead of the legacy TS one
     "moduleResolution": "node",
     // transpile JSX to React.createElement
-    "jsx": "react",
+    "jsx": "react-jsx",
     // interop between ESM and CJS modules. Recommended by TS
     "esModuleInterop": true,
     // significant perf increase by skipping checking .d.ts files, particularly those in node_modules. Recommended by TS
@@ -61,14 +39,10 @@
     // Note: In order to transform *both* js and d.ts files, you need to add both of the below lines to plugins
     "plugins": [
       // Transform paths in output .js files
-      {
-        "transform": "typescript-transform-paths"
-      },
+      { "transform": "typescript-transform-paths" },
+
       // Transform paths in output .d.ts files (Include this line if you output declarations files)
-      {
-        "transform": "typescript-transform-paths",
-        "afterDeclarations": true
-      }
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
     ]
   }
 }

@@ -8,32 +8,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+
+      - uses: pnpm/action-setup@v4
         with:
-          node-version: 18
-      - run: yarn install --frozen-lockfile
+          node-version: 24
+
+      - run: pnpm install --lockfile-only
+      - run: pnpm run build
 
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 18
+          node-version: 24
           registry-url: https://registry.npmjs.org/
 
-      - name: Set up environment variables
-        run: |
-          echo "KANVAS_URL=${{ secrets.KANVAS_URL }}" >> $GITHUB_ENV
-          echo "KANVAS_APP_KEY=${{ secrets.KANVAS_APP_KEY }}" >> $GITHUB_ENV
-          echo "KANVAS_TEST_USER=${{ secrets.KANVAS_TEST_USER }}" >> $GITHUB_ENV
-          echo "KANVAS_TEST_PASSWORD=${{ secrets.KANVAS_TEST_PASSWORD }}" >> $GITHUB_ENV
-          echo "KANVAS_APP_SECRET=${{ secrets.KANVAS_APP_SECRET }}" >> $GITHUB_ENV
-
-      - run: yarn install --frozen-lockfile
-      
-      - run: yarn publish
+      - run: pnpm install --lockfile-only
+      - run: pnpm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
