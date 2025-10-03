@@ -1,4 +1,4 @@
-import { ReceiverDataInput, ReceiverResponse } from "@/types/receiver";
+import { ReceiverResponse } from "@/types/receiver";
 import { Client } from "@/types/app";
 
 class Receiver {
