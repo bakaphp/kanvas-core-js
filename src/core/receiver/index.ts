@@ -1,4 +1,4 @@
-import { ReceiverDataInput, ReceiverResponse } from "@/types/receiver";
+import { ReceiverResponse } from "@/types/receiver";
 import { Client } from "@/types/app";
 
 class Receiver {
@@ -16,7 +16,7 @@ class Receiver {
    */
   public async submitReceiverData(
     uuid: string,
-    data: ReceiverDataInput,
+    data: any,
   ): Promise<ReceiverResponse> {
     const url = `/v1/receiver/${uuid}`;
 
@@ -47,7 +47,7 @@ class Receiver {
    */
   public async submitReceiverDataWithHeaders(
     uuid: string,
-    data: ReceiverDataInput,
+    data: any,
     headers: Record<string, string> = {},
   ): Promise<ReceiverResponse> {
     const url = `/v1/receiver/${uuid}`;

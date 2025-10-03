@@ -11,14 +11,15 @@ import {
   CreateClientOptions,
 } from "@/types/app";
 
-import { getHeadersFromBuilder, pathJoin } from "@/utils";
 import { isBrowser } from "@/utils/check-environment";
 import { CreateAxiosClient } from "@/setup/axios";
+import { getHeadersFromBuilder } from "@/utils";
+import { pathJoin } from "@/utils/path";
 
 export function createClient(options: CreateClientOptions): Client {
   options.apiVersion ??= "graphql";
 
-  const uri = pathJoin([options.baseUrl, options.apiVersion]);
+  const uri = pathJoin(options.baseUrl, options.apiVersion);
 
   const httpLink = CreateUrl({
     credentials: options.credentials,
@@ -71,7 +72,7 @@ export function createAdminClient(options: CreateClientAdminOptions): Client {
 
   options.apiVersion ??= "graphql";
 
-  const uri = pathJoin([options.baseUrl, options.apiVersion]);
+  const uri = pathJoin(options.baseUrl, options.apiVersion);
 
   const httpLink = CreateUrl({
     credentials: options.credentials,
