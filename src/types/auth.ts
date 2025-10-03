@@ -1,8 +1,10 @@
 export interface AuthLoginResponse {
-  token: string;
-  refresh_token: string;
-  token_expires: string;
-  refresh_token_expires: string;
+  login: {
+    token: string;
+    refresh_token: string;
+    token_expires: string;
+    refresh_token_expires: string;
+  };
 }
 
 export interface AuthLogoutResponse {

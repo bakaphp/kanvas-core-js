@@ -22,7 +22,6 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
 
-      # CHANGE: Also upload the lockfile to ensure consistent dependencies in the next job.
       - uses: actions/upload-artifact@v4
         with:
           name: package-artifact
@@ -48,9 +47,8 @@ jobs:
           node-version: 22
           registry-url: https://registry.npmjs.org/
 
-      # ADDED: Install dependencies using the lockfile from the build job.
-      # This makes commands like 'tsup' available to the 'prepare' script that runs before publishing.
-      - run: pnpm install --frozen-lockfile
+      # Install dependencies but skip prepare script since build already completed
+      - run: pnpm install --frozen-lockfile --ignore-scripts
 
       - run: pnpm publish --no-git-checks
         env:
