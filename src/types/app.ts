@@ -6,7 +6,7 @@ type AsyncResponse<T = any> = T | Promise<T>;
 export type HeaderConstructor = Record<string, () => AsyncResponse<string>>;
 
 export interface CreateClientOptions {
-  appKey: string;
+  appKey: string | (() => AsyncResponse<string>);
   baseUrl: string;
   ssrMode?: boolean;
   apiVersion?: string;
