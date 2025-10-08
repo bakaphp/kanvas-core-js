@@ -125,6 +125,58 @@ export class Messages {
     return response;
   }
 
+  public async createMessageWithMultiFiles(
+    files: File[],
+    input: MessageWithFileInputInterface,
+    token?: string // Optional token parameter
+  ): Promise<any> {
+    if (!this.options || !this.axiosClient)
+      throw new Error('FileSystem module not initialized');
+
+    const formData = new FormData();
+
+    formData.append(
+      'operations',
+      JSON.stringify({
+        query: CREATE_MESSAGE_WITH_FILE_MUTATION,
+        variables: {
+          input: {
+            ...input,
+            files: null,
+          },
+        },
+      })
+    );
+
+    // Build the map object for multiple files
+    const map: Record<string, string[]> = {};
+    files.forEach((_, index) => {
+      map[index.toString()] = [`variables.input.files.${index}`];
+    });
+
+    formData.append('map', JSON.stringify(map));
+
+    // Append each file to the formData
+    files.forEach((file, index) => {
+      formData.append(index.toString(), file, file.name);
+    });
+
+    // Create headers object
+    const headers: Record<string, string> = {
+      'Content-Type': 'multipart/form-data',
+    };
+
+    // Add Authorization header if token is provided
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    // Make the request with our headers
+    const response = await this.axiosClient.post('', formData, { headers });
+
+    return response;
+  }
+
   public async updateMessage(
     id: string,
     input: MessageUpdateInputInterface
@@ -412,7 +464,7 @@ export class Messages {
       };
     } = {}
   ): Promise<AllLikedMessagesByUser> {
-    const { where, orderBy, first, page , childrenOptions = {}} = options;
+    const { where, orderBy, first, page, childrenOptions = {} } = options;
 
     const { alias = 'children', first: childrenFirst } = childrenOptions;
 
