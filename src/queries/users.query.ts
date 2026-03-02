@@ -19,6 +19,7 @@ export const GET_USER_BY_DISPLAYNAME = gql`
         id
         name
         phone
+        uuid
       }
       companies {
         id
